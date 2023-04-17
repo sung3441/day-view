@@ -1,27 +1,21 @@
 import { memo, useRef, useState } from 'react';
-import { YYMMType } from '@/types/calendat';
 import CalendarDates from '@/component/calendar/CalendarDates';
 import styled from 'styled-components';
 import DayLabels from '@/component/calendar/DayLabels';
 import CalendarHeader from '@/component/calendar/CalendarHeader';
-import { useDispatch, useSelector } from 'react-redux';
+import { useRecoilState } from 'recoil';
+import { selectedYYMMState } from '@/state/calendar';
 
 interface Props {}
 
 const CalendarSection = ({}: Props) => {
-  const selectedYYMM = useSelector(
-    (root: RootState) => root.calendar.selectedYYMM
-  );
-
-  const dispatch = useDispatch();
+  const [selectedYYMM, setSelectedYYMM] = useRecoilState(selectedYYMMState);
 
   const handleMoveMonth = (flag: 'prev' | 'next') => {
     let { year, month } = selectedYYMM;
     month = flag === 'prev' ? --month : ++month;
     const d = new Date(year, month, 0);
-    dispatch(
-      setSelectedYYMM({ year: d.getFullYear(), month: d.getMonth() + 1 })
-    );
+    setSelectedYYMM({ year: d.getFullYear(), month: d.getMonth() + 1 });
   };
 
   // console.log(monthRef.current);
