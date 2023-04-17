@@ -1,12 +1,10 @@
-import { memo, useRef, useState } from "react";
-import { YYMMType } from "@/types/calendat";
-import CalendarDates from "@/component/calendar/CalendarDates";
-import styled from "styled-components";
-import DayLabels from "@/component/calendar/DayLabels";
-import CalendarHeader from "@/component/calendar/CalendarHeader";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux";
-import { setSelectedYYMM } from "@/redux/calendarReducer";
+import { memo, useRef, useState } from 'react';
+import { YYMMType } from '@/types/calendat';
+import CalendarDates from '@/component/calendar/CalendarDates';
+import styled from 'styled-components';
+import DayLabels from '@/component/calendar/DayLabels';
+import CalendarHeader from '@/component/calendar/CalendarHeader';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface Props {}
 
@@ -17,9 +15,9 @@ const CalendarSection = ({}: Props) => {
 
   const dispatch = useDispatch();
 
-  const handleMoveMonth = (flag: "prev" | "next") => {
+  const handleMoveMonth = (flag: 'prev' | 'next') => {
     let { year, month } = selectedYYMM;
-    month = flag === "prev" ? --month : ++month;
+    month = flag === 'prev' ? --month : ++month;
     const d = new Date(year, month, 0);
     dispatch(
       setSelectedYYMM({ year: d.getFullYear(), month: d.getMonth() + 1 })
