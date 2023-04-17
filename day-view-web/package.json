@@ -1,0 +1,41 @@
+{
+  "name": "shared_calendar",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
+    "@types/node": "18.15.11",
+    "@types/react": "18.0.31",
+    "@types/react-dom": "18.0.11",
+    "@types/react-query": "^1.2.9",
+    "@types/redux-logger": "^3.0.9",
+    "@types/redux-persist": "^4.3.1",
+    "@types/styled-components": "^5.1.26",
+    "babel-plugin-styled-components": "^2.0.7",
+    "eslint": "8.37.0",
+    "eslint-config-next": "13.2.4",
+    "next": "13.2.4",
+    "next-redux-wrapper": "^8.1.0",
+    "next-seo": "^5.15.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.8.0",
+    "react-query": "^3.39.3",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.9",
+    "typescript": "5.0.3"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.6.0",
+    "prettier": "2.8.4"
+  }
+}
