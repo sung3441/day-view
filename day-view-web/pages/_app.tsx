@@ -8,6 +8,7 @@ import { getClient } from '@/queryClient';
 import { useCallback, useState } from 'react';
 import { darkTheme, lightTheme } from '@/styles/theme';
 import Layout from '@/component/Layout';
+import { RecoilRoot } from 'recoil';
 
 function App({ Component, pageProps }: AppProps) {
   const queryClient = getClient();
@@ -20,15 +21,17 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-          <GlobalStyle />
-          <Gnb handleChangeTheme={handleChangeTheme} />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ThemeProvider>
-      </Hydrate>
+      <RecoilRoot>
+        <Hydrate state={pageProps.dehydratedState}>
+          <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+            <GlobalStyle />
+            <Gnb handleChangeTheme={handleChangeTheme} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ThemeProvider>
+        </Hydrate>
+      </RecoilRoot>
     </QueryClientProvider>
   );
 }
