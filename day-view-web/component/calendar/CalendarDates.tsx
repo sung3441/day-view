@@ -11,9 +11,8 @@ import Day from '@/component/calendar/Day';
 import { DateFlag, DatType } from '@/types/calendat';
 import { number } from 'prop-types';
 import day from '@/component/calendar/Day';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/redux';
-import { setSelectedDay } from '@/redux/calendarReducer';
+import { useRecoilState } from 'recoil';
+import { selectedDayState, selectedYYMMState } from '@/state/calendar';
 
 function getDateAndDay(year: number, month: number, date: number = 0) {
   const d = new Date(year, month, date);
@@ -38,10 +37,7 @@ interface Props {
 }
 
 const CalendarDates = ({ year, month }: Props) => {
-  const selectedDay = useSelector(
-    (root: RootState) => root.calendar.selectedDay
-  );
-  const dispatch = useDispatch();
+  const [selectedDay, setSelectedDay] = useRecoilState(selectedDayState);
 
   // 캘린더 Ui 데이터는 서버데이터와 따로 관리한다.
   const generatedDays = useMemo(() => {
@@ -64,7 +60,7 @@ const CalendarDates = ({ year, month }: Props) => {
   }, [year, month]);
 
   const handleSelectDay = useCallback((day: string) => {
-    dispatch(setSelectedDay(day));
+    setSelectedDay(day);
   }, []);
 
   return (
