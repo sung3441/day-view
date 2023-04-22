@@ -18,8 +18,6 @@ const CalendarSection = ({}: Props) => {
     setSelectedYYMM({ year: d.getFullYear(), month: d.getMonth() + 1 });
   };
 
-  // console.log(monthRef.current);
-
   return (
     <CalderWrap>
       <CalendarHeader

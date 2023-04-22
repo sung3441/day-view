@@ -1,12 +1,4 @@
-import {
-  ForwardedRef,
-  forwardRef,
-  memo,
-  ReactElement,
-  useCallback,
-  useEffect,
-  useMemo,
-} from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import Day from '@/component/calendar/Day';
 import { DateFlag, DatType } from '@/types/calendat';
 import { number } from 'prop-types';
@@ -44,7 +36,7 @@ const CalendarDates = ({ year, month }: Props) => {
     const days: DatType[] = [];
     const { date: prevDate, day: prevDay } = getDateAndDay(year, month - 1);
     const { date: thisDate, day: thisDay } = getDateAndDay(year, month);
-    const remainingDay = 7 - thisDay == 7 ? 0 : 7 - thisDay;
+    const remainingDay = 7 - thisDay === 7 ? 0 : 7 - thisDay;
     let dayIdx = 1;
 
     // 이전달 데이터를 생성한다.
