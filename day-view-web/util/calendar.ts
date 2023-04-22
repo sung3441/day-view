@@ -1,4 +1,5 @@
-import { YYMMType } from "@/types/calendat";
+import { YYMMType } from '@/types/calendar';
+import { number } from 'prop-types';
 
 export function getTodayYYMM(): YYMMType {
   const today = new Date();
@@ -11,4 +12,9 @@ export function getStrToday() {
   const month = today.getMonth() + 1;
   const date = today.getDate();
   return `${year.toString()}-${month.toString()}-${date.toString()}`;
+}
+
+export function getDateAndDay(year: number, month: number, date: number = 0) {
+  const d = new Date(year, month, date);
+  return { date: d.getDate(), day: d.getDay() };
 }

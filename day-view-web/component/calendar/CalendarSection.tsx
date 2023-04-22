@@ -1,15 +1,15 @@
-import { memo, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import CalendarDates from '@/component/calendar/CalendarDates';
 import styled from 'styled-components';
 import DayLabels from '@/component/calendar/DayLabels';
 import CalendarHeader from '@/component/calendar/CalendarHeader';
-import { useRecoilState } from 'recoil';
-import { selectedYYMMState } from '@/state/calendar';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { selectedDayAtom, selectedYYMMAtom, todayAtom } from '@/state/calendar';
 
 interface Props {}
 
 const CalendarSection = ({}: Props) => {
-  const [selectedYYMM, setSelectedYYMM] = useRecoilState(selectedYYMMState);
+  const [selectedYYMM, setSelectedYYMM] = useRecoilState(selectedYYMMAtom);
 
   const handleMoveMonth = (flag: 'prev' | 'next') => {
     let { year, month } = selectedYYMM;
@@ -35,7 +35,7 @@ const CalendarSection = ({}: Props) => {
 export default memo(CalendarSection);
 
 const CalderWrap = styled.div`
-  height: 100%;
+  //height: 100%;
   width: 100%;
 `;
 

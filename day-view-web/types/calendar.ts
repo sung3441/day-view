@@ -14,7 +14,7 @@ export type SelectedYYMMDayInfoType = {
   endDayInfo: DateType;
 };
 
-export type DateFlag = "prev" | "next" | "this";
+export type DateFlag = 'prev' | 'next' | 'this';
 
 export type DatType = {
   date: number;

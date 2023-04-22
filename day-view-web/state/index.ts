@@ -1,17 +1,17 @@
-// export const sessionStorage =
-//   typeof window === 'undefined' ? undefined : window.sessionStorage;
+export const sessionStorage =
+  typeof window === 'undefined' ? undefined : window.sessionStorage;
 
-// export const localStorage =
-//   typeof window === 'undefined' ? undefined : window.localStorage;
+export const localStorage =
+  typeof window === 'undefined' ? undefined : window.localStorage;
 
 // https://tech.osci.kr/2022/07/05/recoil-react-js-state-management/
-const localStorageEffect =
+export const localStorageEffect =
   (key: string) =>
   ({ setSelf, onSet }: any) => {
-    if (typeof window === undefined) return undefined;
+    if (!localStorage) return undefined;
+
     const savedValue = localStorage.getItem(key);
     if (savedValue !== null) setSelf(JSON.parse(savedValue));
-
     onSet((newValue: any, _: any, isReset: boolean) => {
       isReset
         ? localStorage.removeItem(key)
@@ -19,13 +19,13 @@ const localStorageEffect =
     });
   };
 
-const sessionStorageEffect =
+export const sessionStorageEffect =
   (key: string) =>
   ({ setSelf, onSet }: any) => {
-    if (typeof window === undefined) return undefined;
+    if (!sessionStorage) return undefined;
+
     const savedValue = sessionStorage.getItem(key);
     if (savedValue !== null) setSelf(JSON.parse(savedValue));
-
     onSet((newValue: any, _: any, isReset: any) => {
       const confirm = newValue.length === 0;
       confirm
