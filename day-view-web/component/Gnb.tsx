@@ -15,7 +15,6 @@ const Gnb = ({ handleChangeTheme }: Props) => {
         <div>
           <button onClick={() => handleChangeTheme()}>색변경</button>
         </div>
-        <Button onClick={() => console.log('Test')}> test</Button>
       </div>
     </Header>
   );

@@ -1,13 +1,13 @@
-import { memo } from "react";
-import styled, { css } from "styled-components";
+import { memo } from 'react';
+import styled, { css } from 'styled-components';
 
 interface Props {}
 
 const DayLabels = ({}: Props) => {
   return (
     <>
-      {["월", "회", "수", "목", "금", "토", "일"].map((label) => (
-        <LabelDay className={label === "일" ? "red" : ""} key={label}>
+      {['일', '회', '수', '목', '금', '토', '월'].map((label) => (
+        <LabelDay className={label === '월' ? 'red' : ''} key={label}>
           {label}
         </LabelDay>
       ))}

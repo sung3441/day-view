@@ -46,16 +46,16 @@ const CalendarDates = ({ year, month }: Props) => {
   const generatedDays = useMemo(() => {
     key.current = `${year}-${month}`;
     if (cacheDays[key.current]) return cacheDays[key.current];
-    console.log('타니?');
 
     const days: DatType[] = [];
     const { date: prevDate, day: prevDay } = getDateAndDay(year, month - 1);
     const { date: thisDate, day: thisDay } = getDateAndDay(year, month);
-    const remainingDay = 7 - thisDay === 7 ? 0 : 7 - thisDay;
-    let dayIdx = 1;
+
+    const remainingDay = thisDay === 6 ? 0 : 6 - thisDay;
+    let dayIdx = 0;
 
     // 이전달 데이터를 생성한다.
-    for (let i = prevDate - prevDay + 1; i <= prevDate; i++)
+    for (let i = prevDate - prevDay; i <= prevDate && prevDay !== 6; i++)
       pushData({
         year,
         list: days,
