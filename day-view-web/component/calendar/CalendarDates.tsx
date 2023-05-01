@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import Day from '@/component/calendar/Day';
-import { DateFlag, DatType } from '@/types/calendar';
+import { DateFlag, DatType } from '@/shared/types/calendar';
 import { number } from 'prop-types';
 import day from '@/component/calendar/Day';
 import { useRecoilState } from 'recoil';
@@ -9,7 +9,7 @@ import {
   selectedDayAtom,
   selectedYYMMAtom,
 } from '@/state/calendar';
-import { getDateAndDay } from '@/util/calendar';
+import { getDateAndDay } from '@/shared/util/calendar';
 
 type PushDataType = {
   list: DatType[];
@@ -92,8 +92,6 @@ const CalendarDates = ({ year, month }: Props) => {
     if (!cacheDays[key.current])
       setCacheDays((prev) => ({ ...prev, [key.current]: generatedDays }));
   }, [generatedDays]);
-
-  console.log(cacheDays);
 
   return (
     <>

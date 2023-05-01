@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { YYMMType } from '@/types/calendar';
+import { YYMMType } from '@/shared/types/calendar';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import { selectedDayAtom, selectedYYMMAtom, todayAtom } from '@/state/calendar';
 

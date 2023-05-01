@@ -1,14 +1,13 @@
-// import '@/styles/globals.css'
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import Gnb from '@/component/Gnb';
-import GlobalStyle from '@/styles/globalStyle';
 import { Hydrate, QueryClientProvider } from 'react-query';
-import { getClient } from '@/queryClient';
+import { getClient } from '@/shared/queryClient';
 import { useCallback, useState } from 'react';
-import { darkTheme, lightTheme } from '@/styles/theme';
 import Layout from '@/component/Layout';
 import { RecoilRoot } from 'recoil';
+import { darkTheme, lightTheme } from '@/shared/styles/theme';
+import GlobalStyle from '@/shared/styles/globalStyle';
 
 function App({ Component, pageProps }: AppProps) {
   const queryClient = getClient();
