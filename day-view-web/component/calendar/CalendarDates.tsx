@@ -45,13 +45,12 @@ const CalendarDates = ({ year, month }: Props) => {
   // 캘린더 Ui 데이터는 서버데이터와 따로 관리한다.
   const generatedDays = useMemo(() => {
     key.current = `${year}-${month}`;
-    // if (cacheDays[key.current]) return cacheDays[key.current];
-    console.log('타니?');
+    if (cacheDays[key.current]) return cacheDays[key.current];
 
     const days: DatType[] = [];
     const { date: prevDate, day: prevDay } = getDateAndDay(year, month - 1);
     const { date: thisDate, day: thisDay } = getDateAndDay(year, month);
-    console.log('prevDate', prevDate, prevDay);
+
     const remainingDay = thisDay === 6 ? 0 : 6 - thisDay;
     let dayIdx = 0;
 
