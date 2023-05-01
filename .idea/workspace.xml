@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6cf875ad-60b2-4d23-8d7f-40f27602ce2f" name="변경" comment="feat(khg):Test push" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2OYZZRJ9Yt5FmqYpWTa6ip2d9W5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;khg&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/khg/Desktop/workspace/day-view/day-view-web&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/khg/Desktop/workspace/day-view/day-view-web/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/day-view-web" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="day-view" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="day-view" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="6cf875ad-60b2-4d23-8d7f-40f27602ce2f" name="변경" comment="" />
+      <created>1681739530662</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1681739530662</updated>
+      <workItem from="1681739532814" duration="3706000" />
+      <workItem from="1681743249789" duration="626000" />
+      <workItem from="1682165549051" duration="6693000" />
+      <workItem from="1682916994656" duration="1510000" />
+      <workItem from="1682918509911" duration="133000" />
+      <workItem from="1682918645375" duration="13000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat(main):프로젝트 세팅">
+      <created>1681740221263</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1681740221263</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat(khg):리덕스 삭제">
+      <created>1681741045447</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681741045447</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat(khg):리덕스 삭제">
+      <created>1681741068875</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1681741068875</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat(khg):recoil 세팅 및 atom 생성 테스트">
+      <created>1681742559664</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681742559664</updated>
+    </task>
+    <task id="LOCAL-00005" summary="test">
+      <created>1681743024887</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1681743024887</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat(main):localStorageEffect 및 sessionStorageEffect 생성">
+      <created>1682167246495</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1682167246495</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat(main):오늘선택 버튼 로직/Days 캐시로직 개발 및 코드정리">
+      <created>1682171991600</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682171991600</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat(khg):Test push">
+      <created>1682917505668</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682917505668</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat(khg):Test push">
+      <created>1682917658389</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682917658389</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat(khg):Test push">
+      <created>1682918414803</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1682918414803</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="khg" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(main):프로젝트 세팅" />
+    <MESSAGE value="feat(khg):리덕스 삭제" />
+    <MESSAGE value="feat(khg):recoil 세팅 및 atom 생성 테스트" />
+    <MESSAGE value="test" />
+    <MESSAGE value="feat(main):localStorageEffect 및 sessionStorageEffect 생성" />
+    <MESSAGE value="feat(main):오늘선택 버튼 로직/Days 캐시로직 개발 및 코드정리" />
+    <MESSAGE value="feat(khg):Test push" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(khg):Test push" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
