@@ -6,6 +6,7 @@ import CalendarHeader from '@/component/calendar/CalendarHeader';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { selectedDayAtom, selectedYYMMAtom, todayAtom } from '@/state/calendar';
 console.log('test');
+console.log('test22');
 
 interface Props {}
 
