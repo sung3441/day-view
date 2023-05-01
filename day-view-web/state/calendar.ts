@@ -1,13 +1,10 @@
 import { atom } from 'recoil';
-import { getStrToday, getTodayYYMM } from '@/util/calendar';
-import { DatType, YYMMType } from '@/types/calendar';
-import { sessionStorageEffect } from '@/state/index';
+import { getStrToday, getTodayYYMM } from '@/shared/util/calendar';
+import { DatType, YYMMType } from '@/shared/types/calendar';
 
 export const todayAtom = atom<string>({
   key: 'today',
   default: getStrToday(),
-  // test용
-  // effects: [sessionStorageEffect('today')],
 });
 
 export const selectedYYMMAtom = atom<YYMMType>({
