@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { Button } from '@/shared/component/Atom ';
-import { log } from 'util';
 
 interface Props {
   handleChangeTheme: () => void;
