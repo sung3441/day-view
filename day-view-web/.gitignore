@@ -36,8 +36,10 @@ yarn-error.log*
 next-env.d.ts
 
 .xml
+/.xml
 
 ### IntelliJ IDEA ###
+/.idea
 .idea
 *.iws
 *.iml

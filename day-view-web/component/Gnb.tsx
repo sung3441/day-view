@@ -67,7 +67,7 @@ const Tab = styled.div`
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
   }
-  > button:nth-child(4) {
+  > button:nth-child(3) {
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
   }
