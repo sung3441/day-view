@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   
@@ -26,6 +26,18 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
+
+  @media ( width <= 400px ){
+    html{
+      font-size:65% ;
+    }
+  }
+  @media (400px < width <= 720px){
+    html{
+      font-size:70% ;
+    }
+  }
+  
 
   /* http://meyerweb.com/eric/tools/css/reset/
      v2.0 | 20110126
@@ -147,6 +159,11 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     font-family: inherit;
   }
+  
+  img{
+    user-select : none;
+  }
+  
 `;
 
 export default GlobalStyle;
