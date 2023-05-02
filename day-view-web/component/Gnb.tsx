@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import IconButton from '@/shared/component/Molecule/IconButton';
-import { Icon } from '@/shared/component/Atom';
+
 import { memo, useState } from 'react';
 import { pixelToRemUnit } from '@/shared/util/common';
+import { IconButton } from '@/shared/component/Molecule';
 
 type ActiveTabType = '월' | '일정' | '카테고리';
 

@@ -1,17 +1,6 @@
-import { Button } from '@/shared/component/Atom';
+import { Button, Icon } from '@/shared/component/Atom';
 import { CSSProperties, SyntheticEvent } from 'react';
-import Icon from '@/shared/component/Atom/Icon';
-
-type IconType =
-  | 'close'
-  | 'left'
-  | 'menu'
-  | 'right'
-  | 'search'
-  | 'select'
-  | 'trash'
-  | 'user'
-  | 'write';
+import { IconType } from '@/shared/component/Atom/Icon';
 
 const defaultStyle: CSSProperties = {
   width: '40px',
