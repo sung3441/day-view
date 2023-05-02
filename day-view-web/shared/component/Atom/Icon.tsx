@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-type IconType =
+export type IconType =
   | 'close'
   | 'left'
   | 'menu'
