@@ -1,43 +1,100 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import IconButton from '@/shared/component/Molecule/IconButton';
+import { Icon } from '@/shared/component/Atom';
+import { memo, useState } from 'react';
+import { pixelToRemUnit } from '@/shared/util/common';
 
+type ActiveTabType = '월' | '일정' | '카테고리';
+
+const tabList: ActiveTabType[] = ['월', '일정', '카테고리'];
 interface Props {
   handleChangeTheme: () => void;
 }
 
 const Gnb = ({ handleChangeTheme }: Props) => {
+  const [activeTab, setActiveTab] = useState<ActiveTabType>('월');
+
   return (
     <Header>
-      <div>
-        <div>LOGO</div>
-        <div>menu</div>
-        <div>
-          <button onClick={() => handleChangeTheme()}>색변경</button>
-        </div>
-      </div>
+      <IconButton type="menu" />
+      <RightBox>
+        <Tab>
+          {tabList.map((label) => (
+            <TabLabel
+              isActive={label === activeTab}
+              onClick={() => setActiveTab(label)}
+            >
+              {label}
+            </TabLabel>
+          ))}
+        </Tab>
+        <IconButton type="search" />
+        <IconButton type="user" />
+      </RightBox>
     </Header>
   );
 };
-export default Gnb;
+export default memo(Gnb);
 
 const Header = styled.header`
   position: fixed;
-  height: 40px;
+
+  height: 100px;
   width: 100%;
-  & > div {
-    padding: 14px;
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 100px 1fr 1fr;
-    justify-content: center;
-    align-items: center;
-    color: ${({ theme }) => theme.color.textColor};
-    background-color: ${({ theme }) => theme.color.bgColor};
-    box-shadow: 0px 3px 2px 1px ${({ theme }) => theme.color.shadowColor};
-    > div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  padding: ${pixelToRemUnit(30)};
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #ffffff;
+`;
+
+const RightBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  > * {
+    margin-left: 28px;
   }
+`;
+
+const Tab = styled.div`
+  display: flex;
+  align-items: center;
+
+  > button:nth-child(1) {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+  }
+  > button:nth-child(4) {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+`;
+
+const TabLabel = styled.button<{ isActive?: boolean }>`
+  background: #f3f3f3;
+  width: 91px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 400;
+  font-size: 16px;
+  color: #767676;
+
+  border: 1px solid #dbdbdb;
+  transition: all 0.2s ease-out 0.05s;
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      background: #000000;
+      color: #ffffff;
+      border: 1px solid #000000;
+      z-index: 1;
+    `}
 `;
