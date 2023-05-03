@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import styled from 'styled-components';
 
 export type IconType =
   | 'close'
@@ -17,13 +18,19 @@ interface Props {
 
 const Icon = ({ type }: Props) => {
   return (
-    <Image
-      src={`images/middleIcon/${type}.svg`}
-      width={40}
-      height={40}
-      alt={type}
-    />
+    <Wrap>
+      <Image
+        src={`images/middleIcon/${type}.svg`}
+        width={40}
+        height={40}
+        alt={type}
+      />
+    </Wrap>
   );
 };
 
 export default Icon;
+
+const Wrap = styled.div`
+  position: relative;
+`;
