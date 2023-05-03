@@ -3,7 +3,7 @@ import Day from '@/component/calendar/Day';
 import { DateFlag, DatType } from '@/shared/types/calendar';
 import { number } from 'prop-types';
 import day from '@/component/calendar/Day';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   cacheDaysAtom,
   selectedDayAtom,
@@ -37,7 +37,8 @@ interface Props {
   month: number;
 }
 
-const CalendarDates = ({ year, month }: Props) => {
+const CalendarDates = () => {
+  const { year, month } = useRecoilValue(selectedYYMMAtom);
   const [selectedDay, setSelectedDay] = useRecoilState(selectedDayAtom);
   const [cacheDays, setCacheDays] = useRecoilState(cacheDaysAtom);
   const key = useRef<string>('');

@@ -1,5 +1,20 @@
 import React, { ComponentProps, ReactNode, memo } from 'react';
-import styled, { StyledComponentPropsWithRef } from 'styled-components';
+import styled, {
+  keyframes,
+  StyledComponentPropsWithRef,
+} from 'styled-components';
+
+const pulseKeyframe = keyframes`
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 // https://velog.io/@dongkyun/TS-HTMLElement%EC%9D%98-type-%EC%83%81%EC%86%8D%EB%B0%9B%EA%B8%B0https://velog.io/@dongkyun/TS-HTMLElement%EC%9D%98-type-%EC%83%81%EC%86%8D%EB%B0%9B%EA%B8%B0
 const ButtonStyle = styled.button`
@@ -19,6 +34,13 @@ const ButtonStyle = styled.button`
   /* G_300 */
   border: 1px solid #ffffff;
   border-radius: 4px;
+
+  // :active {
+  //   border: 1px solid black;
+  //   border-radius: 50%;
+  //   animation: ${pulseKeyframe} 1.5s ease-in-out 0.5s;
+  //   //transform: scale(1.5);
+  // }
 `;
 type ButtonType = StyledComponentPropsWithRef<typeof ButtonStyle>;
 
@@ -27,6 +49,8 @@ interface Props extends ButtonType {
 }
 
 const Button = ({ children, ...props }: Props) => {
+  if (props.onClick) console.log('???????');
+
   return <ButtonStyle {...props}>{children}</ButtonStyle>;
 };
 

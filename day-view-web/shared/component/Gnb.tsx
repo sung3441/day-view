@@ -21,6 +21,7 @@ const Gnb = ({ handleChangeTheme }: Props) => {
         <Tab>
           {tabList.map((label) => (
             <TabLabel
+              key={label}
               isActive={label === activeTab}
               onClick={() => setActiveTab(label)}
             >
@@ -37,8 +38,6 @@ const Gnb = ({ handleChangeTheme }: Props) => {
 export default memo(Gnb);
 
 const Header = styled.header`
-  position: fixed;
-
   height: 100px;
   width: 100%;
   padding: ${pixelToRemUnit(30)};
@@ -48,6 +47,7 @@ const Header = styled.header`
   justify-content: space-between;
 
   background-color: #ffffff;
+  border-bottom: 1px solid #dbdbdb;
 `;
 
 const RightBox = styled.div`

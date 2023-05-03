@@ -1,10 +1,10 @@
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
-import Gnb from '@/component/Gnb';
+import Gnb from '@/shared/component/Gnb';
 import { Hydrate, QueryClientProvider } from 'react-query';
 import { getClient } from '@/shared/queryClient';
 import { useCallback, useState } from 'react';
-import Layout from '@/component/Layout';
+import Layout from '@/shared/component/Layout';
 import { RecoilRoot } from 'recoil';
 import { darkTheme, lightTheme } from '@/shared/styles/theme';
 import GlobalStyle from '@/shared/styles/globalStyle';
