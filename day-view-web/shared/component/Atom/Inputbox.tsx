@@ -7,7 +7,7 @@ const Inputbox = (
   { type, ...props }: InputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
-  return <InputStyle type="text" ref={ref} {...props} />;
+  return <InputStyle type={type} ref={ref} {...props} />;
 };
 
 export default React.memo(React.forwardRef(Inputbox));
