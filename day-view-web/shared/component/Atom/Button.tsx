@@ -1,22 +1,13 @@
-import React, { ComponentProps, ReactNode, memo } from 'react';
-import styled, {
-  keyframes,
-  StyledComponentPropsWithRef,
-} from 'styled-components';
+import { ComponentPropsWithoutRef, memo } from 'react';
+import styled from 'styled-components';
 
-const pulseKeyframe = keyframes`
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 1;
-  }
-`;
+type ButtonType = ComponentPropsWithoutRef<'button'>;
+interface Props extends ButtonType {}
 
-// https://velog.io/@dongkyun/TS-HTMLElement%EC%9D%98-type-%EC%83%81%EC%86%8D%EB%B0%9B%EA%B8%B0https://velog.io/@dongkyun/TS-HTMLElement%EC%9D%98-type-%EC%83%81%EC%86%8D%EB%B0%9B%EA%B8%B0
+const Button = ({ children, ...props }: Props) => {
+  return <ButtonStyle {...props}>{children}</ButtonStyle>;
+};
+
 const ButtonStyle = styled.button`
   display: flex;
   justify-content: center;
@@ -25,8 +16,6 @@ const ButtonStyle = styled.button`
   width: 90px;
   height: 40px;
 
-  border-radius: 4px;
-
   font-size: 16px;
   font-weight: 700;
 
@@ -34,24 +23,15 @@ const ButtonStyle = styled.button`
   /* G_300 */
   border: 1px solid #ffffff;
   border-radius: 4px;
+  transition: all 0.1s ease-out 0.02s;
 
-  // :active {
-  //   border: 1px solid black;
-  //   border-radius: 50%;
-  //   animation: ${pulseKeyframe} 1.5s ease-in-out 0.5s;
-  //   //transform: scale(1.5);
-  // }
+  :active,
+  :hover {
+    border: 1px solid #dbdbdb;
+    border-radius: 50%;
+    background: #f3f3f3 !important;
+    opacity: 0.8;
+  }
 `;
-type ButtonType = StyledComponentPropsWithRef<typeof ButtonStyle>;
-
-interface Props extends ButtonType {
-  children?: ReactNode;
-}
-
-const Button = ({ children, ...props }: Props) => {
-  if (props.onClick) console.log('???????');
-
-  return <ButtonStyle {...props}>{children}</ButtonStyle>;
-};
 
 export default memo(Button);

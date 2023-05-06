@@ -1,34 +1,28 @@
-import styled, { css } from 'styled-components';
-
-import { memo, useState } from 'react';
+import styled from 'styled-components';
+import { memo, useCallback } from 'react';
 import { pixelToRemUnit } from '@/shared/util/common';
 import { IconButton } from '@/shared/component/Molecule';
+import { useSetRecoilState } from 'recoil';
+import { G_isOpenChannel } from '@/shared/atom/globalCalendar';
+import Tab from '@/shared/component/GnbTab';
 
-type ActiveTabType = '월' | '일정' | '카테고리';
-
-const tabList: ActiveTabType[] = ['월', '일정', '카테고리'];
 interface Props {
   handleChangeTheme: () => void;
 }
 
 const Gnb = ({ handleChangeTheme }: Props) => {
-  const [activeTab, setActiveTab] = useState<ActiveTabType>('월');
+  const setIsOpenChannel = useSetRecoilState(G_isOpenChannel);
+
+  const handleClickMenu = useCallback(
+    () => setIsOpenChannel((prev) => !prev),
+    []
+  );
 
   return (
     <Header>
-      <IconButton type="menu" />
+      <IconButton type="menu" onClick={handleClickMenu} />
       <RightBox>
-        <Tab>
-          {tabList.map((label) => (
-            <TabLabel
-              key={label}
-              isActive={label === activeTab}
-              onClick={() => setActiveTab(label)}
-            >
-              {label}
-            </TabLabel>
-          ))}
-        </Tab>
+        <Tab />
         <IconButton type="search" />
         <IconButton type="user" />
       </RightBox>
@@ -57,44 +51,4 @@ const RightBox = styled.div`
   > * {
     margin-left: 28px;
   }
-`;
-
-const Tab = styled.div`
-  display: flex;
-  align-items: center;
-
-  > button:nth-child(1) {
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-  }
-  > button:nth-child(3) {
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-  }
-`;
-
-const TabLabel = styled.button<{ isActive?: boolean }>`
-  background: #f3f3f3;
-  width: 91px;
-  height: 40px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-weight: 400;
-  font-size: 16px;
-  color: #767676;
-
-  border: 1px solid #dbdbdb;
-  transition: all 0.2s ease-out 0.05s;
-
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      background: #000000;
-      color: #ffffff;
-      border: 1px solid #000000;
-      z-index: 1;
-    `}
 `;
