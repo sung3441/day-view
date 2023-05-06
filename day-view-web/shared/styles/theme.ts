@@ -1,6 +1,65 @@
 import { DefaultTheme } from 'styled-components';
 
-export const common = {};
+export const common = {
+  colors: {
+    main: '#FF836D',
+    G_100: '#FCFCFC',
+    G_200: '#F3F3F3',
+    G_300: '#DBDBDB',
+    G_500: '#999999',
+    G_700: '#767676',
+    Black: '#222222',
+    White: '#FFFFFF',
+    Red: '#CF0F0F',
+  },
+  fonts: {
+    title1: {
+      fontWeight: '700',
+      fontSize: '32px',
+      lineHeight: '120%',
+    },
+    title2: {
+      fontWeight: '700',
+      fontSize: '24px',
+      lineHeight: '120%',
+    },
+    title3: {
+      fontWeight: '400',
+      fontSize: '24px',
+      lineHeight: '120%',
+    },
+    body1: {
+      fontWeight: 'black',
+      fontSize: '20px',
+      lineHeight: '200%',
+    },
+    body2: {
+      fontWeight: '700',
+      fontSize: '20px',
+      lineHeight: '200%',
+    },
+    body3: {
+      fontWeight: '400',
+      fontSize: '20px',
+      lineHeight: '200%',
+    },
+    caption1: {
+      fontWeight: '700',
+      fontSize: '16px',
+      lineHeight: '200%',
+    },
+    caption2: {
+      fontWeight: '400',
+      fontSize: '16px',
+      lineHeight: '200%',
+    },
+    caption3: {
+      fontWeight: '700',
+      fontSize: '12px',
+      lineHeight: '200%',
+    },
+  },
+};
 
 export const lightTheme: DefaultTheme = {
   ...common,
