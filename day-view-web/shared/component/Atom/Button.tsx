@@ -16,7 +16,8 @@ const pulseKeyframe = keyframes`
   }
 `;
 
-// https://velog.io/@dongkyun/TS-HTMLElement%EC%9D%98-type-%EC%83%81%EC%86%8D%EB%B0%9B%EA%B8%B0https://velog.io/@dongkyun/TS-HTMLElement%EC%9D%98-type-%EC%83%81%EC%86%8D%EB%B0%9B%EA%B8%B0
+// https://velog.io/@dongkyun/TS-HTMLElement%EC%9D%98-type-%EC%83%81%EC%86%8D%EB%B0%9B%EA%B8%B0
+
 const ButtonStyle = styled.button`
   display: flex;
   justify-content: center;
