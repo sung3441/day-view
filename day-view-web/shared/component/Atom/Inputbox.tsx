@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 type InputProps = React.ComponentPropsWithoutRef<'input'>;
 
-const Inputbox = (
+const InputBox = (
   { type, ...props }: InputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
   return <InputStyle type={type} ref={ref} {...props} />;
 };
 
-export default React.memo(React.forwardRef(Inputbox));
+export default React.memo(React.forwardRef(InputBox));
 
 const InputStyle = styled.input`
   display: flex;

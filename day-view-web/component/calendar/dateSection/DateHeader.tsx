@@ -1,13 +1,12 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { YYMMType } from '@/shared/types/calendar';
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
-import { selectedDayAtom, selectedYYMMAtom, todayAtom } from '@/state/calendar';
+import { useRecoilState, useResetRecoilState } from 'recoil';
+import { selectedDayAtom, selectedYYMMAtom } from '@/state/calendar';
 import { IconButton } from '@/shared/component/Molecule';
 
 interface Props {}
 
-const CalendarHeader = ({}: Props) => {
+const DateHeader = ({}: Props) => {
   const [selectedYYMM, setSelectedYYMM] = useRecoilState(selectedYYMMAtom);
   const resetYYMM = useResetRecoilState(selectedYYMMAtom);
   const resetDay = useResetRecoilState(selectedDayAtom);
@@ -38,7 +37,7 @@ const CalendarHeader = ({}: Props) => {
   );
 };
 
-export default memo(CalendarHeader);
+export default memo(DateHeader);
 
 const Wrap = styled.div`
   width: 100%;

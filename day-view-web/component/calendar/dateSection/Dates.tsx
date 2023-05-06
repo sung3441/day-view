@@ -1,8 +1,6 @@
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
-import Day from '@/component/calendar/Day';
+import Day from '@/component/calendar/dateSection/Day';
 import { DateFlag, DatType } from '@/shared/types/calendar';
-import { number } from 'prop-types';
-import day from '@/component/calendar/Day';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   cacheDaysAtom,
@@ -37,7 +35,7 @@ interface Props {
   month: number;
 }
 
-const CalendarDates = () => {
+const Dates = () => {
   const { year, month } = useRecoilValue(selectedYYMMAtom);
   const [selectedDay, setSelectedDay] = useRecoilState(selectedDayAtom);
   const [cacheDays, setCacheDays] = useRecoilState(cacheDaysAtom);
@@ -108,4 +106,4 @@ const CalendarDates = () => {
   );
 };
 
-export default memo(CalendarDates);
+export default memo(Dates);

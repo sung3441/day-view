@@ -3,8 +3,8 @@ import { CSSProperties, SyntheticEvent } from 'react';
 import { IconType } from '@/shared/component/Atom/Icon';
 
 const defaultStyle: CSSProperties = {
-  width: '40px',
-  height: '40px',
+  width: '55px',
+  height: '55px',
   position: 'relative',
   pointerEvents: 'auto',
   backgroundColor: 'transparent',
