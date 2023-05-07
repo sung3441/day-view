@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { Inputbox, Icon } from '@/shared/component/Atom';
+import { Icon, Inputbox } from '@/shared/component/Atom';
 import { IconButton } from '@/shared/component/Molecule';
 
 interface Props {

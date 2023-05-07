@@ -18,14 +18,12 @@ interface Props {
 
 const Icon = ({ type }: Props) => {
   return (
-    <Wrap>
-      <Image
-        src={`images/middleIcon/${type}.svg`}
-        width={40}
-        height={40}
-        alt={type}
-      />
-    </Wrap>
+    <Image
+      src={`images/middleIcon/${type}.svg`}
+      width={40}
+      height={40}
+      alt={type}
+    />
   );
 };
 

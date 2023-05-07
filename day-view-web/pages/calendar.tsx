@@ -1,12 +1,7 @@
-import styled from "styled-components";
-import CalendarSection from "@/component/calendar/CalendarSection";
+import Calendar from '@/component/calendar';
 
-function Calendar() {
-  return (
-    <>
-      <CalendarSection />
-    </>
-  );
+function CalendarPage() {
+  return <Calendar />;
 }
 
-export default Calendar;
+export default CalendarPage;
