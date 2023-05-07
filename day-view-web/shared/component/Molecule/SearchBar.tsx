@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { Icon, Inputbox } from '@/shared/component/Atom';
 import { IconButton } from '@/shared/component/Molecule';
+import { common } from '@/shared/styles/theme';
 
 interface Props {
   placeholder?: string;
@@ -19,7 +20,7 @@ const SearchBar = ({ placeholder }: Props) => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsEmpty(e.target.value === '');
   };
 
@@ -48,9 +49,8 @@ const DivStyle = styled.div`
   padding-left: 22px;
   padding-right: 10px;
 
-  background: #ffffff;
+  background: ${common.colors.White};
 
-  /* G_500 */
-  border: 1px solid #999999;
+  border: 1px solid ${common.colors.G_500};
   border-radius: 7px;
 `;
