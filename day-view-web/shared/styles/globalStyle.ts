@@ -35,6 +35,7 @@ const GlobalStyle = createGlobalStyle`
     url("/fonts/NotoSansKR-Bold.woff2") format("woff2"),
     url("/fonts/NotoSansKR-Bold.woff") format("woff");
   font-display: swap;
+}
 
 @font-face {
   font-family: "Noto Sans KR";
