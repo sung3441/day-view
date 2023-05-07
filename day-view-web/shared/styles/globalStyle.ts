@@ -22,15 +22,7 @@ const GlobalStyle = createGlobalStyle`
   font-style: normal;
   font-weight: 900;
   src: local("NotoSansKR"),
-    url("/fonts/NotoSansKR-Black.woff2") format("woff2");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 900;
-  src: local("NotoSansKR"),
+    url("/fonts/NotoSansKR-Black.woff2") format("woff2"),
     url("/fonts/NotoSansKR-Black.woff") format("woff");
   font-display: swap;
 }
@@ -40,37 +32,20 @@ const GlobalStyle = createGlobalStyle`
   font-style: normal;
   font-weight: 700;
   src: local("NotoSansKR"),
-    url("/fonts/NotoSansKR-Bold.woff2") format("woff2");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 700;
-  src: local("NotoSansKR"),
+    url("/fonts/NotoSansKR-Bold.woff2") format("woff2"),
     url("/fonts/NotoSansKR-Bold.woff") format("woff");
   font-display: swap;
-}
 
 @font-face {
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 400;
   src: local("NotoSansKR"),
-    url("/fonts/NotoSansKR-Regular.woff2") format("woff2");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 400;
-  src: local("NotoSansKR"),
+    url("/fonts/NotoSansKR-Regular.woff2") format("woff2"),
     url("/fonts/NotoSansKR-Regular.woff") format("woff");
   font-display: swap;
 }
-  
+
   div#__next {
     width: 100%;
     height: 100%;
