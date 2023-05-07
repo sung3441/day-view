@@ -181,7 +181,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ol,
-  ul {
+  ul,
+  li {
     list-style: none;
   }
 
