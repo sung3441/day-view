@@ -1,16 +1,22 @@
-import React from 'react';
+import {
+  ComponentPropsWithoutRef,
+  memo,
+  forwardRef,
+  ForwardedRef,
+} from 'react';
 import styled from 'styled-components';
+import { common } from '@/shared/styles/theme';
 
-type InputProps = React.ComponentPropsWithoutRef<'input'>;
+type InputProps = ComponentPropsWithoutRef<'input'>;
 
 const InputBox = (
   { type, ...props }: InputProps,
-  ref: React.ForwardedRef<HTMLInputElement>
+  ref: ForwardedRef<HTMLInputElement>
 ) => {
   return <InputStyle type={type} ref={ref} {...props} />;
 };
 
-export default React.memo(React.forwardRef(InputBox));
+export default memo(forwardRef(InputBox));
 
 const InputStyle = styled.input`
   display: flex;
@@ -19,19 +25,15 @@ const InputStyle = styled.input`
   width: 277px;
   height: 40px;
 
-  color: #222222;
-  background: #ffffff;
+  color: ${common.colors.Black};
+  background: ${common.colors.White};
 
   border: none;
   outline: none;
 
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 200%;
+  ${common.fonts.body3};
 
   ::placeholder {
-    /* G_700 */
-    color: #767676;
+    color: ${common.colors.G_700};
   }
 `;
