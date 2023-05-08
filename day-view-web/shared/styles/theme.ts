@@ -1,6 +1,7 @@
 import { DefaultTheme } from 'styled-components';
+import { CommonTheme } from './styled';
 
-export const common = {
+export const common: CommonTheme = {
   colors: {
     main: '#FF836D',
     G_100: '#FCFCFC',
