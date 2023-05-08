@@ -13,8 +13,21 @@ type FontKey =
 
 type Fonts = Record<
   FontKey,
-  { fontWeight: string; fontSize: strin; lineHeight: string }
+  { fontWeight: string; fontSize: string; lineHeight: string }
 >;
+
+type ColorKey =
+  | 'main'
+  | 'G_200'
+  | 'G_100'
+  | 'G_300'
+  | 'G_500'
+  | 'G_700'
+  | 'Black'
+  | 'White'
+  | 'Red';
+
+type Colors = Record<ColorKey, string>;
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -25,9 +38,7 @@ declare module 'styled-components' {
       borderColor: string;
       redColor: string;
     };
-    colors: {
-      [name: stirng]: string;
-    };
+    colors: Colors;
     fonts: Fonts;
     name: 'light' | 'dark';
   }
