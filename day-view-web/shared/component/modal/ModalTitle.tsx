@@ -1,18 +1,18 @@
 import { ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 
-type headerType = ComponentPropsWithoutRef<'h2'>;
+type HeaderType = ComponentPropsWithoutRef<'h2'>;
 
-interface Props extends headerType {}
+interface Props extends HeaderType {}
 
 const ModalTitle = ({ children, ...props }: Props) => {
-  return <S.TitleStyle {...props}>{children}</S.TitleStyle>;
+  return <S.Title {...props}>{children}</S.Title>;
 };
 
 export default ModalTitle;
 
 const S = {
-  TitleStyle: styled.h2`
+  Title: styled.h2`
     color: ${({ theme }) => theme.colors.Black};
     ${({ theme }) => theme.fonts.title2};
   `,
