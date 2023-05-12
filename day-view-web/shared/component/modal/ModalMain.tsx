@@ -15,9 +15,6 @@ const ModalMain = ({ children, isOpen, isDimmed }: Props) => {
   useEffect(() => {
     setIsMounted(true);
     ref.current = document.querySelector<HTMLElement>('#portal');
-    return () => {
-      setIsMounted(false);
-    };
   }, []);
 
   return isMounted && ref.current
@@ -51,8 +48,11 @@ const S = {
   Container: styled.div<{ isDimmed?: boolean }>`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    gap: 22px;
+
+    padding: 60px 50px;
 
     ${({ isDimmed }) =>
       isDimmed
@@ -65,7 +65,6 @@ const S = {
 
     background-color: ${({ theme }) => theme.colors.White};
     border-radius: 11px;
-    padding: 60px 50px;
     z-index: 200;
   `,
   Dim: styled.div`
