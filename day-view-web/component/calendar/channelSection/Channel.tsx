@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { pixelToRemUnit } from '@/shared/util/common';
 import { memo } from 'react';
+import { IconButton } from '@/shared/component/Molecule';
 
 interface Props {
   label: string;
@@ -13,6 +14,7 @@ const Channel = ({ label }: Props) => {
     <Wrap>
       <Label>
         <span>{label}</span>
+        <IconButton type="sm_plus" iconSize="sm" />
       </Label>
       <List>
         <Item>11</Item>
@@ -46,4 +48,8 @@ const List = styled.ul`
   padding: ${pixelToRemUnit([30, 6])};
 `;
 
-const Item = styled.li``;
+const Item = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;

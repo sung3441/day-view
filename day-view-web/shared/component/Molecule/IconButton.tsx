@@ -1,5 +1,5 @@
 import { Button, Icon } from '@/shared/component/Atom';
-import { CSSProperties, memo, SyntheticEvent } from 'react';
+import { CSSProperties, memo, ReactNode, SyntheticEvent } from 'react';
 import type { IconSize, Props as IconProps } from '../Atom/Icon';
 import { defaultIconSizes } from '../Atom/Icon';
 
@@ -22,15 +22,20 @@ function conversionSize(iconSize: IconSize) {
 }
 
 interface Props extends IconProps {
+  children?: ReactNode;
+
   customStyle?: CSSProperties;
   onClick?: (e?: SyntheticEvent) => void;
+  isActiveFnc?: boolean;
 }
 
 const IconButton = ({
+  children,
   customStyle,
   onClick,
   type,
   iconSize = 'mid',
+  isActiveFnc = true,
 }: Props) => {
   const sizes = conversionSize(iconSize);
 
@@ -39,8 +44,10 @@ const IconButton = ({
       style={{ ...defaultStyle, ...sizes, ...customStyle }}
       onClick={onClick}
       aria-label={`${type} button`}
+      isActiveFnc={isActiveFnc}
     >
       <Icon {...{ iconSize, type }} />
+      {children}
     </Button>
   );
 };

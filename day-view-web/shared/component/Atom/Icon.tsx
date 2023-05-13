@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { memo } from 'react';
+import { CSSProperties, memo } from 'react';
 
 export type IconType =
   | 'close'
@@ -28,13 +28,19 @@ export const defaultIconSizes = {
 export interface Props {
   type: IconType;
   iconSize?: IconSize;
+  style?: CSSProperties;
 }
 
-const Icon = ({ type, iconSize = 'mid' }: Props) => {
+const Icon = ({ type, style, iconSize = 'mid' }: Props) => {
   const sizes = defaultIconSizes[iconSize];
 
   return (
-    <Image src={`images/${iconSize}_Icon/${type}.svg`} alt={type} {...sizes} />
+    <Image
+      style={style}
+      src={`images/icon/${type}.svg`}
+      alt={type}
+      {...sizes}
+    />
   );
 };
 

@@ -1,4 +1,44 @@
+import { CSSProperties } from 'react';
 import { DefaultTheme } from 'styled-components';
+
+type BoxKeys = 'flexBetweenBox' | string;
+
+const box: { [key: BoxKeys]: CSSProperties } = {
+  flexBetweenBox: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+};
+
+type FontKey =
+  | 'title1'
+  | 'title2'
+  | 'title3'
+  | 'body1'
+  | 'body2'
+  | 'body3'
+  | 'caption1'
+  | 'caption2'
+  | 'caption3';
+
+type Fonts = Record<
+  FontKey,
+  { fontWeight: string; fontSize: string; lineHeight: string }
+>;
+
+type ColorKey =
+  | 'main'
+  | 'G_200'
+  | 'G_100'
+  | 'G_300'
+  | 'G_500'
+  | 'G_700'
+  | 'Black'
+  | 'White'
+  | 'Red';
+
+type Colors = Record<ColorKey, string>;
 
 export const common = {
   colors: {
@@ -59,10 +99,7 @@ export const common = {
       lineHeight: '200%',
     },
   },
-};
-
-export const lightTheme: DefaultTheme = {
-  ...common,
+  box,
   color: {
     bgColor: '#fff',
     textColor: '#000',
@@ -72,14 +109,23 @@ export const lightTheme: DefaultTheme = {
   },
   name: 'light' as const,
 };
-export const darkTheme: DefaultTheme = {
+
+export const commonTheme: DefaultTheme = {
   ...common,
-  color: {
-    bgColor: '#252525',
-    textColor: '#fff',
-    shadowColor: '#000',
-    borderColor: 'rgb(222, 226, 230)',
-    redColor: '#CF0F0F',
-  },
-  name: 'dark' as const,
 };
+
+// export const lightTheme: DefaultTheme = {
+//   ...common,
+
+// };
+// export const darkTheme: DefaultTheme = {
+//   ...common,
+//   color: {
+//     bgColor: '#252525',
+//     textColor: '#fff',
+//     shadowColor: '#000',
+//     borderColor: 'rgb(222, 226, 230)',
+//     redColor: '#CF0F0F',
+//   },
+//   name: 'dark' as const,
+// };

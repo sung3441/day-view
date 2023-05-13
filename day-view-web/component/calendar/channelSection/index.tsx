@@ -1,17 +1,28 @@
-import { memo } from 'react';
+import { CSSProperties, memo } from 'react';
 import styled, { css } from 'styled-components';
 import { pixelToRemUnit } from '@/shared/util/common';
 import { useRecoilValue } from 'recoil';
 import { G_isOpenChannel } from '@/shared/atom/globalCalendar';
-import { Button } from '@/shared/component/Atom';
 import Channel from '@/component/calendar/channelSection/Channel';
+import { Button, Icon } from '@/shared/component/Atom';
+
+const buttonStyle: CSSProperties = {
+  width: pixelToRemUnit(323),
+  height: pixelToRemUnit(60),
+  background: '#FF836D',
+  borderRadius: '7px',
+  color: '#FFFFFF',
+};
 
 const ChannelSection = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannel);
   return (
     <Wrap isOpenChannel={isOpenChannel}>
       <Channel label="내채널" />
-      <Button>321</Button>
+      <Button style={buttonStyle}>
+        <Icon type={'sm_plus'} iconSize="sm" style={{ marginRight: '5px' }} />
+        <span>일정추가</span>
+      </Button>
     </Wrap>
   );
 };
