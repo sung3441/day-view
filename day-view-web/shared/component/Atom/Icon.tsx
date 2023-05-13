@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import styled from 'styled-components';
 
 export type IconType =
   | 'close'
@@ -10,25 +9,32 @@ export type IconType =
   | 'select'
   | 'trash'
   | 'user'
-  | 'write';
+  | 'write'
+  | 'sm_close'
+  | 'sm_config'
+  | 'sm_more'
+  | 'sm_plus'
+  | 'sm_trash'
+  | 'sm_up';
+
+export type IconSize = keyof typeof defaultIconSizes;
+
+export const defaultIconSizes = {
+  sm: { width: 28, height: 28 },
+  mid: { width: 40, height: 40 },
+};
 
 interface Props {
   type: IconType;
+  iconSize: IconSize;
 }
 
-const Icon = ({ type }: Props) => {
+const Icon = ({ type, iconSize = 'mid' }: Props) => {
+  const sizes = defaultIconSizes[iconSize];
+
   return (
-    <Image
-      src={`images/middleIcon/${type}.svg`}
-      width={40}
-      height={40}
-      alt={type}
-    />
+    <Image src={`images/${iconSize}_Icon/${type}.svg`} alt={type} {...sizes} />
   );
 };
 
 export default Icon;
-
-const Wrap = styled.div`
-  position: relative;
-`;
