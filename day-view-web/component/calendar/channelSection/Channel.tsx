@@ -17,7 +17,12 @@ const Channel = ({ label }: Props) => {
         <IconButton type="sm_plus" iconSize="sm" />
       </Label>
       <List>
-        <Item>11</Item>
+        <Item>
+          {/*https://okayoon.tistory.com/entry/input-%ED%83%9C%EA%B7%B8-%ED%83%80%EC%9E%85-checkbox-radio-%EC%8A%A4%ED%83%80%EC%9D%BC-%EC%BB%A4%EC%8A%A4%ED%85%80%ED%95%98%EA%B8%B0*/}
+          <input type="checkbox" />
+          {/*<CheckBox label="test" />*/}
+          <IconButton type="sm_more" iconSize="sm" />
+        </Item>
       </List>
     </Wrap>
   );
@@ -49,7 +54,9 @@ const List = styled.ul`
 `;
 
 const Item = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
+  ${({ theme }) =>
+    css`
+      ${theme.box.flexBetweenBox}
+    `}
 `;

@@ -1,9 +1,9 @@
+import { DefaultTheme, Interpolation } from 'styled-components';
 import { CSSProperties } from 'react';
-import { DefaultTheme } from 'styled-components';
 
 type BoxKeys = 'flexBetweenBox' | string;
 
-const box: { [key: BoxKeys]: CSSProperties } = {
+const box: Record<BoxKeys, Interpolation<CSSProperties>> = {
   flexBetweenBox: {
     display: 'flex',
     justifyContent: 'space-between',
