@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { memo } from 'react';
 
 export type IconType =
   | 'close'
@@ -24,9 +25,9 @@ export const defaultIconSizes = {
   mid: { width: 40, height: 40 },
 };
 
-interface Props {
+export interface Props {
   type: IconType;
-  iconSize: IconSize;
+  iconSize?: IconSize;
 }
 
 const Icon = ({ type, iconSize = 'mid' }: Props) => {
@@ -37,4 +38,4 @@ const Icon = ({ type, iconSize = 'mid' }: Props) => {
   );
 };
 
-export default Icon;
+export default memo(Icon);

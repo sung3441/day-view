@@ -1,17 +1,33 @@
 import styled, { css } from 'styled-components';
 import { PropsWithChildren } from 'react';
+import Gnb from '@/shared/component/Gnb';
+import { useRouter } from 'next/router';
 
 interface Props {}
 
 const Layout = ({ children }: PropsWithChildren<Props>) => {
-  return <Main>{children}</Main>;
+  const router = useRouter();
+
+  return (
+    <StyledLayout>
+      {router.pathname !== '/' && <Gnb />}
+      <Main>{children}</Main>;
+    </StyledLayout>
+  );
 };
 
 export default Layout;
 
+const StyledLayout = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`;
+
 const Main = styled.main`
   width: 100%;
-  min-height: calc(100% - 100px);
+  height: calc(100% - 100px);
   ${({ theme }) =>
     css`
       background-color: ${theme.color.bgColor};

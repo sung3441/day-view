@@ -1,6 +1,7 @@
 import { Button, Icon } from '@/shared/component/Atom';
-import { CSSProperties, SyntheticEvent } from 'react';
-import { IconType } from '@/shared/component/Atom/Icon';
+import { CSSProperties, memo, SyntheticEvent } from 'react';
+import type { IconSize, Props as IconProps } from '../Atom/Icon';
+import { defaultIconSizes } from '../Atom/Icon';
 
 const defaultStyle: CSSProperties = {
   width: '55px',
@@ -10,22 +11,38 @@ const defaultStyle: CSSProperties = {
   backgroundColor: 'transparent',
 };
 
-interface Props {
-  type: IconType;
+const UPSIZE = 12;
+function conversionSize(iconSize: IconSize) {
+  const { width, height } = defaultIconSizes[iconSize];
+
+  return {
+    width: width + UPSIZE,
+    height: width + UPSIZE,
+  };
+}
+
+interface Props extends IconProps {
   customStyle?: CSSProperties;
   onClick?: (e?: SyntheticEvent) => void;
 }
 
-const IconButton = ({ type, customStyle, onClick }: Props) => {
+const IconButton = ({
+  customStyle,
+  onClick,
+  type,
+  iconSize = 'mid',
+}: Props) => {
+  const sizes = conversionSize(iconSize);
+
   return (
     <Button
-      style={{ ...defaultStyle, ...customStyle }}
+      style={{ ...defaultStyle, ...sizes, ...customStyle }}
       onClick={onClick}
       aria-label={`${type} button`}
     >
-      <Icon type={type} />
+      <Icon {...{ iconSize, type }} />
     </Button>
   );
 };
 
-export default IconButton;
+export default memo(IconButton);

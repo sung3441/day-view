@@ -1,6 +1,5 @@
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
-import Gnb from '@/shared/component/Gnb';
 import { Hydrate, QueryClientProvider } from 'react-query';
 import { getClient } from '@/shared/queryClient';
 import { useCallback, useState } from 'react';
@@ -24,7 +23,6 @@ function App({ Component, pageProps }: AppProps) {
         <Hydrate state={pageProps.dehydratedState}>
           <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
             <GlobalStyle />
-            <Gnb handleChangeTheme={handleChangeTheme} />
             <Layout>
               <Component {...pageProps} />
             </Layout>
