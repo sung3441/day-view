@@ -7,7 +7,7 @@ import { G_isOpenChannel } from '@/shared/atom/globalCalendar';
 import Tab from '@/shared/component/GnbTab';
 
 interface Props {
-  handleChangeTheme: () => void;
+  handleChangeTheme?: () => void;
 }
 
 const Gnb = ({ handleChangeTheme }: Props) => {

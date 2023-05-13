@@ -1,6 +1,7 @@
 import { Button, Icon } from '@/shared/component/Atom';
-import { CSSProperties, SyntheticEvent } from 'react';
-import { IconType } from '@/shared/component/Atom/Icon';
+import { CSSProperties, memo, ReactNode, SyntheticEvent } from 'react';
+import type { IconSize, Props as IconProps } from '../Atom/Icon';
+import { defaultIconSizes } from '../Atom/Icon';
 
 const defaultStyle: CSSProperties = {
   width: '55px',
@@ -10,22 +11,45 @@ const defaultStyle: CSSProperties = {
   backgroundColor: 'transparent',
 };
 
-interface Props {
-  type: IconType;
-  customStyle?: CSSProperties;
-  onClick?: (e?: SyntheticEvent) => void;
+const UPSIZE = 12;
+function conversionSize(iconSize: IconSize) {
+  const { width, height } = defaultIconSizes[iconSize];
+
+  return {
+    width: width + UPSIZE,
+    height: width + UPSIZE,
+  };
 }
 
-const IconButton = ({ type, customStyle, onClick }: Props) => {
+interface Props extends IconProps {
+  children?: ReactNode;
+
+  customStyle?: CSSProperties;
+  onClick?: (e?: SyntheticEvent) => void;
+  isActiveFnc?: boolean;
+}
+
+const IconButton = ({
+  children,
+  customStyle,
+  onClick,
+  type,
+  iconSize = 'mid',
+  isActiveFnc = true,
+}: Props) => {
+  const sizes = conversionSize(iconSize);
+
   return (
     <Button
-      style={{ ...defaultStyle, ...customStyle }}
+      style={{ ...defaultStyle, ...sizes, ...customStyle }}
       onClick={onClick}
       aria-label={`${type} button`}
+      isActiveFnc={isActiveFnc}
     >
-      <Icon type={type} />
+      <Icon {...{ iconSize, type }} />
+      {children}
     </Button>
   );
 };
 
-export default IconButton;
+export default memo(IconButton);

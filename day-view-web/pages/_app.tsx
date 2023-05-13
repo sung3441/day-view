@@ -1,30 +1,27 @@
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
-import Gnb from '@/shared/component/Gnb';
 import { Hydrate, QueryClientProvider } from 'react-query';
 import { getClient } from '@/shared/queryClient';
-import { useCallback, useState } from 'react';
 import Layout from '@/shared/component/Layout';
 import { RecoilRoot } from 'recoil';
-import { darkTheme, lightTheme } from '@/shared/styles/theme';
+import { commonTheme } from '@/shared/styles/theme';
 import GlobalStyle from '@/shared/styles/globalStyle';
 
 function App({ Component, pageProps }: AppProps) {
   const queryClient = getClient();
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-  const handleChangeTheme = useCallback(
-    () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light')),
-    []
-  );
+  // const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  //
+  // const handleChangeTheme = useCallback(
+  //   () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light')),
+  //   []
+  // );
 
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <Hydrate state={pageProps.dehydratedState}>
-          <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+          <ThemeProvider theme={commonTheme}>
             <GlobalStyle />
-            <Gnb handleChangeTheme={handleChangeTheme} />
             <Layout>
               <Component {...pageProps} />
             </Layout>
