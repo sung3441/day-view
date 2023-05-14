@@ -5,7 +5,7 @@ interface Props {
   children: ReactNode;
 }
 
-const CategoryButton = ({ children }: Props) => {
+const CategoryHeaderButton = ({ children }: Props) => {
   const [isSelected, setIsSelected] = useState(false);
 
   const toggleHandler = () => {
@@ -19,7 +19,7 @@ const CategoryButton = ({ children }: Props) => {
   );
 };
 
-export default CategoryButton;
+export default CategoryHeaderButton;
 
 const Btn = styled.button<{ isSelected: boolean }>`
   display: flex;
