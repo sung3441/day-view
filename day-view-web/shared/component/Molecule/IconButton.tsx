@@ -7,7 +7,7 @@ const defaultStyle: CSSProperties = {
   width: '55px',
   height: '55px',
   position: 'relative',
-  pointerEvents: 'auto',
+  // pointerEvents: 'auto',
   backgroundColor: 'transparent',
 };
 
@@ -23,7 +23,6 @@ function conversionSize(iconSize: IconSize) {
 
 interface Props extends IconProps {
   children?: ReactNode;
-
   customStyle?: CSSProperties;
   onClick?: (e?: SyntheticEvent) => void;
   isActiveFnc?: boolean;

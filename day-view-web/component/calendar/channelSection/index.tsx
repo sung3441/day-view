@@ -1,10 +1,10 @@
 import { CSSProperties, memo } from 'react';
 import styled, { css } from 'styled-components';
-import { pixelToRemUnit } from '@/shared/util/common';
 import { useRecoilValue } from 'recoil';
 import { G_isOpenChannel } from '@/shared/atom/globalCalendar';
 import Channel from '@/component/calendar/channelSection/Channel';
 import { Button, Icon } from '@/shared/component/Atom';
+import { pixelToRemUnit } from '@/shared/styles/util';
 
 const buttonStyle: CSSProperties = {
   width: pixelToRemUnit(323),

@@ -1,15 +1,25 @@
 import styled, { css } from 'styled-components';
-import { pixelToRemUnit } from '@/shared/util/common';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { CheckBox, IconButton } from '@/shared/component/Molecule';
+import { pixelToRemUnit } from '@/shared/styles/util';
+import dynamic from 'next/dynamic';
+// import ColorBoard from '@/component/calendar/channelSection/ColorBoard';
 
+const ColorBoard = dynamic(
+  () => import('@/component/calendar/channelSection/ColorBoard'),
+  { ssr: false }
+);
 interface Props {
   label: string;
-
-  // handelClickLabel: () => void;
 }
 
 const Channel = ({ label }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const testFn = () => {
+    setIsOpen(true);
+  };
+
   return (
     <Wrap>
       <Label>
@@ -19,7 +29,15 @@ const Channel = ({ label }: Props) => {
       <List>
         <Item>
           <CheckBox id="test" label="test" />
-          <IconButton type="sm_more" iconSize="sm" />
+          <div style={{ position: 'relative' }}>
+            <IconButton type="sm_more" iconSize="sm" onClick={testFn} />
+            {isOpen ? (
+              <ColorBoard
+                isShow={isOpen}
+                closeColorBoard={() => setIsOpen(false)}
+              />
+            ) : null}
+          </div>
         </Item>
       </List>
     </Wrap>
