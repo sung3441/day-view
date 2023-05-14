@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { pixelToRemUnit } from '@/shared/util/common';
 import { memo } from 'react';
-import { IconButton } from '@/shared/component/Molecule';
+import { CheckBox, IconButton } from '@/shared/component/Molecule';
 
 interface Props {
   label: string;
@@ -18,9 +18,7 @@ const Channel = ({ label }: Props) => {
       </Label>
       <List>
         <Item>
-          {/*https://okayoon.tistory.com/entry/input-%ED%83%9C%EA%B7%B8-%ED%83%80%EC%9E%85-checkbox-radio-%EC%8A%A4%ED%83%80%EC%9D%BC-%EC%BB%A4%EC%8A%A4%ED%85%80%ED%95%98%EA%B8%B0*/}
-          <input type="checkbox" />
-          {/*<CheckBox label="test" />*/}
+          <CheckBox id="test" label="test" />
           <IconButton type="sm_more" iconSize="sm" />
         </Item>
       </List>
