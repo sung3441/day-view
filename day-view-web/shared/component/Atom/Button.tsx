@@ -30,6 +30,7 @@ const ButtonStyle = styled.button<{ isActiveFnc?: boolean }>`
   border: 1px solid #ffffff;
   border-radius: 4px;
   transition: all 0.1s ease-out 0.02s;
+
   ${({ isActiveFnc }) =>
     isActiveFnc &&
     css`

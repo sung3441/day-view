@@ -1,15 +1,25 @@
 import styled, { css } from 'styled-components';
-import { pixelToRemUnit } from '@/shared/util/common';
-import { memo } from 'react';
-import { IconButton } from '@/shared/component/Molecule';
+import { memo, useState } from 'react';
+import { CheckBox, IconButton } from '@/shared/component/Molecule';
+import { pixelToRemUnit } from '@/shared/styles/util';
+import dynamic from 'next/dynamic';
+// import ColorBoard from '@/component/calendar/channelSection/ColorBoard';
 
+const ColorBoard = dynamic(
+  () => import('@/component/calendar/channelSection/ColorBoard'),
+  { ssr: false }
+);
 interface Props {
   label: string;
-
-  // handelClickLabel: () => void;
 }
 
 const Channel = ({ label }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const testFn = () => {
+    setIsOpen(true);
+  };
+
   return (
     <Wrap>
       <Label>
@@ -18,10 +28,16 @@ const Channel = ({ label }: Props) => {
       </Label>
       <List>
         <Item>
-          {/*https://okayoon.tistory.com/entry/input-%ED%83%9C%EA%B7%B8-%ED%83%80%EC%9E%85-checkbox-radio-%EC%8A%A4%ED%83%80%EC%9D%BC-%EC%BB%A4%EC%8A%A4%ED%85%80%ED%95%98%EA%B8%B0*/}
-          <input type="checkbox" />
-          {/*<CheckBox label="test" />*/}
-          <IconButton type="sm_more" iconSize="sm" />
+          <CheckBox id="test" label="test" />
+          <div style={{ position: 'relative' }}>
+            <IconButton type="sm_more" iconSize="sm" onClick={testFn} />
+            {isOpen ? (
+              <ColorBoard
+                isShow={isOpen}
+                closeColorBoard={() => setIsOpen(false)}
+              />
+            ) : null}
+          </div>
         </Item>
       </List>
     </Wrap>

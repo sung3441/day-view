@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { memo, useCallback } from 'react';
-import { pixelToRemUnit } from '@/shared/util/common';
 import { IconButton } from '@/shared/component/Molecule';
 import { useSetRecoilState } from 'recoil';
 import { G_isOpenChannel } from '@/shared/atom/globalCalendar';
 import Tab from '@/shared/component/GnbTab';
+import { pixelToRemUnit } from '@/shared/styles/util';
 
 interface Props {
   handleChangeTheme?: () => void;

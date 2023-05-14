@@ -1,19 +1,32 @@
 import styled, { css } from 'styled-components';
 import Channel from '@/component/calendar/channelSection';
 import DateSection from '@/component/calendar/dateSection/DateSection';
-import { pixelToRemUnit } from '@/shared/util/common';
 import { useRecoilValue } from 'recoil';
-import { G_isOpenChannel } from '@/shared/atom/globalCalendar';
+import { G_isOpenChannel, G_tabAtom } from '@/shared/atom/globalCalendar';
+import { pixelToRemUnit } from '@/shared/styles/util';
+import { useMemo } from 'react';
 
 const Calendar = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannel);
+  const tabLabel = useRecoilValue(G_tabAtom);
+
+  const curTabElement = useMemo(() => {
+    switch (tabLabel) {
+      case '월':
+        return <DateSection />;
+      case '일정':
+        return <div>ㅎㅇ2</div>;
+      case '카테고리':
+        return <div>ㅎㅇ3</div>;
+      default:
+        return <DateSection />;
+    }
+  }, [tabLabel]);
 
   return (
     <CalderWrap>
       <Channel />
-      <TabWrap isOpenChannel={isOpenChannel}>
-        <DateSection />
-      </TabWrap>
+      <TabWrap isOpenChannel={isOpenChannel}>{curTabElement}</TabWrap>
     </CalderWrap>
   );
 };

@@ -38,6 +38,10 @@ const Wrap = styled.div<{
   isNotThis: boolean;
 }>`
   padding: 4px 0 0 18px;
+  z-index: 0;
+  background-color: #fff;
+  cursor: pointer;
+
   ${({ theme }) =>
     css`
       color: ${theme.color.textColor};
@@ -52,6 +56,9 @@ const Wrap = styled.div<{
     css`
       opacity: 0.4;
     `}
+  :hover: {
+    z-index: -1;
+  }
 `;
 
 const Date = styled.div<{ isSelectedDay: boolean }>`
@@ -70,16 +77,6 @@ const Date = styled.div<{ isSelectedDay: boolean }>`
     css`
       color: #fff;
       background-color: #ff7f69;
-      //::after {
-      //  content: '';
-      //  position: absolute;
-      //  width: 24px;
-      //  height: 24px;
-      //  border-radius: 50%;
-      //  top: -1px;
-      //  left: -7px;
-      //}
-      //opacity: 0.7;
     `}
   }
 `;
