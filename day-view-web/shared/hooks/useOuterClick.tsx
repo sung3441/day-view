@@ -7,6 +7,11 @@ interface Props {
   exceptionNodeId?: string;
 }
 
+/**
+ * 부착 컴포넌트를 show 하는 click 함수의 이벤트 버블링을 방지하여야함
+ * @param callback: closeFunction
+ * @param exceptionNodeId: 예외처리 Node
+ */
 const useOuterClick = <T extends HTMLElement>({
   callback,
   exceptionNodeId,
@@ -14,19 +19,19 @@ const useOuterClick = <T extends HTMLElement>({
   const { current: stableCallback } = useRef(callback);
   const targetRef = useRef<T | null>(null); //
 
-  function handleClick(e: MouseEvent) {
-    if (!targetRef?.current) return;
-    const el = e.target as T;
-
-    if (
-      !targetRef.current.contains(e.target as Node) ||
-      el.id === exceptionNodeId
-    ) {
-      stableCallback();
-    }
-  }
-
   useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (!targetRef?.current) return;
+      const el = e.target as T;
+
+      if (
+        !targetRef.current.contains(e.target as Node) ||
+        el.id === exceptionNodeId
+      ) {
+        stableCallback();
+      }
+    }
+
     window.addEventListener('click', handleClick);
     return () => {
       window.removeEventListener('click', handleClick);

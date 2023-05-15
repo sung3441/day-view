@@ -1,5 +1,5 @@
 export const rbgInfo = {
-  Ellipse_25: 'rgb(173, 20, 87)',
+  Ellipse_25: 'rgba(173, 20, 87)',
   Ellipse_26: 'rgba(213, 0, 0)',
   Ellipse_27: 'rgba(216, 27, 96)',
   Ellipse_28: 'rgba(255, 131, 109)',
@@ -31,3 +31,9 @@ export const rbgInfo = {
 };
 
 export const colorEntries = Object.entries(rbgInfo);
+
+export function toRGBA(rgb: string, to: 1 | 0.26) {
+  const [s, e] = rgb.split(')');
+
+  return `${s}, ${to.toString()})`;
+}
