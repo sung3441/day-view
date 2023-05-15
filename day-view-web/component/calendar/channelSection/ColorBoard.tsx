@@ -1,61 +1,31 @@
 import { memo } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Icon } from '@/shared/component/Atom';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
-import useOuterClick from '../../../shared/hooks/useOuterClick';
-
-const rbgInfo = {
-  Ellipse_25: 'rgb(173, 20, 87)',
-  Ellipse_26: 'rgba(213, 0, 0)',
-  Ellipse_27: 'rgba(216, 27, 96)',
-  Ellipse_28: 'rgba(255, 131, 109)',
-
-  Ellipse_30: 'rgba(244, 81, 30)',
-  Ellipse_32: 'rgba(239, 108, 0)',
-  Ellipse_31: 'rgba(240, 147, 0)',
-  Ellipse_33: 'rgba(255, 199, 74)',
-
-  Ellipse_35: 'rgba(228, 196, 65)',
-  Ellipse_39: 'rgba(192, 202, 51)',
-  Ellipse_37: 'rgba(124, 179, 66)',
-  Ellipse_41: 'rgba(39, 183, 111)',
-
-  Ellipse_36: 'rgba(11, 128, 67)',
-  Ellipse_40: 'rgba(0, 150, 136)',
-  Ellipse_38: 'rgba(3, 155, 229)',
-  Ellipse_42: 'rgba(66, 133, 244)',
-
-  Ellipse_45: 'rgba(63, 81, 181)',
-  Ellipse_47: 'rgba(121, 134, 203)',
-  Ellipse_46: 'rgba(179, 157, 219)',
-  Ellipse_48: 'rgba(158, 105, 175)',
-
-  Ellipse_49: 'rgba(142, 36, 170)',
-  Ellipse_51: 'rgba(121, 85, 72)',
-  Ellipse_50: 'rgba(97, 97, 97)',
-  Ellipse_52: 'rgba(167, 155, 142)',
-};
+import { fadeIn, fadeOut } from '@/shared/styles/keyframes';
+import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
+import { colorEntries } from '@/shared/util/colorInfo';
 
 interface Props {
   closeColorBoard: () => void;
-  isShow: boolean;
+  isOpen: boolean;
 }
 
-const ColorBoard = ({ isShow, closeColorBoard }: Props) => {
-  const colors = Object.entries(rbgInfo);
+const ColorBoard = ({ isOpen, closeColorBoard }: Props) => {
+  const { isShow, handleIsShow, handelOnAnimationEnd } =
+    useAnimationHandler(closeColorBoard);
   const ref = useOuterClick<HTMLDivElement>({
-    callback: closeColorBoard,
-    isFlag: isShow,
+    callback: handleIsShow,
   });
 
   return (
-    <Box ref={ref}>
+    <Box ref={ref} isShow={isShow} onAnimationEnd={handelOnAnimationEnd}>
       <BoxTitle>
         <Icon type="sm_config" iconSize="sm" />
         <span>관리</span>
       </BoxTitle>
       <ColorWrap>
-        {colors.map(([key, value]) => (
+        {colorEntries.map(([key, value]) => (
           <ColorCircle key={key} rgb={value} />
         ))}
       </ColorWrap>
@@ -65,7 +35,7 @@ const ColorBoard = ({ isShow, closeColorBoard }: Props) => {
 
 export default memo(ColorBoard);
 
-const Box = styled.div`
+const Box = styled.div<{ isShow: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -75,6 +45,15 @@ const Box = styled.div`
   border: 1px solid rgba(219, 219, 219, 1);
   border-radius: 11px;
   background-color: #fff;
+
+  ${({ isShow }) =>
+    isShow
+      ? css`
+          animation: ${fadeIn} 0.15s ease-in-out 0s forwards;
+        `
+      : css`
+          animation: ${fadeOut} 0.15s ease-in-out 0s forwards;
+        `}
 `;
 
 const BoxTitle = styled.div`

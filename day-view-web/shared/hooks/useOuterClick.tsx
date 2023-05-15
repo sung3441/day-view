@@ -4,33 +4,32 @@ import { useEffect, useRef } from 'react';
 
 interface Props {
   callback: () => void;
-  isFlag?: boolean;
   exceptionNodeId?: string;
 }
 
 const useOuterClick = <T extends HTMLElement>({
   callback,
   exceptionNodeId,
-  isFlag,
 }: Props) => {
-  const callbackRef = useRef(callback);
-  const targetRef = useRef<T>(null); //
+  const { current: stableCallback } = useRef(callback);
+  const targetRef = useRef<T | null>(null); //
 
   function handleClick(e: MouseEvent) {
-    const el = e.target as HTMLDivElement;
-    if (!targetRef || !targetRef?.current || !el.className) return;
+    if (!targetRef?.current) return;
+    const el = e.target as T;
 
-    if (!targetRef.current.contains(e.target as Node)) {
-      callbackRef.current();
-    } else if (exceptionNodeId && el.id === exceptionNodeId) {
-      console.log('el', el);
+    if (
+      !targetRef.current.contains(e.target as Node) ||
+      el.id === exceptionNodeId
+    ) {
+      stableCallback();
     }
   }
 
   useEffect(() => {
-    document.addEventListener('click', handleClick);
+    window.addEventListener('click', handleClick);
     return () => {
-      document.removeEventListener('click', handleClick);
+      window.removeEventListener('click', handleClick);
     };
   }, []);
 
