@@ -2,6 +2,8 @@ package com.side.dayv.global.util;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.Enumeration;
+
 public class HeaderUtil {
 
     private final static String HEADER_AUTHORIZATION = "Authorization";
@@ -9,7 +11,6 @@ public class HeaderUtil {
 
     public static String getAccessToken(HttpServletRequest request){
         String headerValue = request.getHeader(HEADER_AUTHORIZATION);
-
         if(headerValue == null){
             return null;
         }

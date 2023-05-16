@@ -35,15 +35,16 @@ public class AuthTokenProvider {
         return new AuthToken(id, role, expiry, key);
     }
 
-    public AuthToken convertAutoToken(String token){
+    public AuthToken convertAuthToken(String token){
         return new AuthToken(token, key);
     }
 
     public Authentication getAuthentication(AuthToken authToken){
         if(authToken.validate()){
-            Claims claims = authToken.getExpiredTokenClaims();
+            Claims claims = authToken.getTokenClaims();
+
             Collection<? extends GrantedAuthority> authorities =
-                    Arrays.stream(new String[]{claims.get(AUTHORITIES_KEY).toString()})
+                    Arrays.stream(new String[]{})
                             .map(SimpleGrantedAuthority::new)
                             .collect(Collectors.toList());
             log.debug("claims subject := [{}]", claims.getSubject());

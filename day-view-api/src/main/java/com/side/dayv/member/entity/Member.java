@@ -1,55 +1,57 @@
 package com.side.dayv.member.entity;
 
 import com.side.dayv.oauth.entity.ProviderType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "member")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id
     @Column(name = "member_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
     @Column(name = "provider")
-    @NonNull
+    @NotNull
     private ProviderType provider;
 
     @Column(name = "email")
-    @NonNull
+    @NotNull
     private String email;
 
     @Column(name = "nickname")
-    @NonNull
+    @NotNull
     private String nickname;
 
     @Column(name = "create_date")
-    @NonNull
+    @NotNull
     private LocalDateTime createdDate;
 
     @Column(name = "last_modified_date")
-    @NonNull
+    @NotNull
     private LocalDateTime lastModifiedDate;
 
     @Column(name = "profile_image_url")
-    @NonNull
+    @NotNull
     private String profileImageUrl;
 
     @Column(name = "birthday")
-    @NonNull
     private LocalDate birthday;
 
     @Column(name = "refresh_token")
-    @NonNull
     private String refreshToken;
 
     @Builder
@@ -60,7 +62,7 @@ public class Member {
             , LocalDateTime lastModifiedDate
             , String profileImageUrl
             , LocalDate birthday
-            , String refreshToken) {
+            , String refreshToken){
         this.email = email;
         this.nickname = nickname;
         this.createdDate = createdDate;
@@ -68,6 +70,7 @@ public class Member {
         this.profileImageUrl = profileImageUrl;
         this.birthday = birthday;
         this.refreshToken = refreshToken;
+        this.provider = provider;
     }
 
     public void changeNickName(String nickname){
