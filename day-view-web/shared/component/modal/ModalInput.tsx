@@ -1,41 +1,22 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithRef } from 'react';
 import styled from 'styled-components';
 
-type InputType = ComponentPropsWithoutRef<'input'>;
+type InputType = ComponentPropsWithRef<'input'>;
 
-interface Props extends InputType {
-  subTitle?: string;
-}
+interface Props extends InputType {}
 
-const ModalInput = ({ subTitle, ...props }: Props) => {
+const ModalInput = ({ ...props }: Props) => {
   return (
-    <S.Section>
-      {subTitle && <S.SubTitle>{subTitle}</S.SubTitle>}
-      <S.InputWrapper>
-        <S.Input type="text" {...props} />
-      </S.InputWrapper>
-    </S.Section>
+    <S.Wrapper>
+      <S.Input type="text" {...props} />
+    </S.Wrapper>
   );
 };
 
 export default ModalInput;
 
 const S = {
-  Section: styled.section`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-
-    width: 100%;
-  `,
-
-  SubTitle: styled.div`
-    ${({ theme }) => theme.fonts.caption2};
-    color: ${({ theme }) => theme.colors.G_700};
-  `,
-
-  InputWrapper: styled.div`
+  Wrapper: styled.div`
     background: ${({ theme }) => theme.colors.White};
 
     border: 1px solid ${({ theme }) => theme.colors.G_300};
