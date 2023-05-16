@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, memo } from 'react';
 import styled, { css } from 'styled-components';
 import { fadeIn } from '@/shared/styles/keyframes';
+import { toRGBA } from '@/shared/util/colorInfo';
 
 type InputType = ComponentPropsWithoutRef<'input'>;
 
@@ -10,6 +11,7 @@ interface props extends InputType {
 }
 
 const CheckBox = ({ id, label, ...props }: props) => {
+  const t = toRGBA('rgba(173, 20, 87)', 1);
   return (
     <>
       <CheckBoxInput id={id} type="checkbox" {...props} />
@@ -43,17 +45,18 @@ export const CheckBoxInput = styled.input`
     border-radius: 7px;
     background-color: #fff;
 
-    transition: all 0.15s ease-in-out 0s;
+    transition: background-color 0.2s ease-in-out 0s;
 
-    border: 1px solid rgb(212, 212, 212);
+    border: 2px solid ${toRGBA('rgba(173, 20, 87)', 0.26)};
   }
 
   :checked + label::before {
-    background: #1a73e8;
+    background-color: ${toRGBA('rgba(173, 20, 87)', 0.26)};
+    border-style: none;
   }
 
   :checked + label::after {
-    animation: ${fadeIn} 0.15s ease-in-out 0s;
+    animation: ${fadeIn} 0.15s ease-in-out 0s forwards;
 
     content: '';
     position: absolute;
@@ -67,6 +70,7 @@ export const CheckBoxInput = styled.input`
     border-style: solid;
     border-image: initial;
     border-width: 0 4px 4px 0;
+    border-color: rgba(173, 20, 87, 1);
   }
 `;
 
@@ -74,9 +78,7 @@ export const CheckBoxLabel = styled.label`
   position: relative;
   cursor: pointer;
   z-index: 1;
-
   padding-left: 36px;
-
   ${({ theme }) =>
     css`
       ${theme.fonts.body3};

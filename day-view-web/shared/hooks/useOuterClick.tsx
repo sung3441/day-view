@@ -4,33 +4,37 @@ import { useEffect, useRef } from 'react';
 
 interface Props {
   callback: () => void;
-  isFlag?: boolean;
   exceptionNodeId?: string;
 }
 
+/**
+ * 부착 컴포넌트를 show 하는 click 함수의 이벤트 버블링을 방지하여야함
+ * @param callback: closeFunction
+ * @param exceptionNodeId: 예외처리 Node
+ */
 const useOuterClick = <T extends HTMLElement>({
   callback,
   exceptionNodeId,
-  isFlag,
 }: Props) => {
-  const callbackRef = useRef(callback);
-  const targetRef = useRef<T>(null); //
-
-  function handleClick(e: MouseEvent) {
-    const el = e.target as HTMLDivElement;
-    if (!targetRef || !targetRef?.current || !el.className) return;
-
-    if (!targetRef.current.contains(e.target as Node)) {
-      callbackRef.current();
-    } else if (exceptionNodeId && el.id === exceptionNodeId) {
-      console.log('el', el);
-    }
-  }
+  const { current: stableCallback } = useRef(callback);
+  const targetRef = useRef<T | null>(null); //
 
   useEffect(() => {
-    document.addEventListener('click', handleClick);
+    function handleClick(e: MouseEvent) {
+      if (!targetRef?.current) return;
+      const el = e.target as T;
+
+      if (
+        !targetRef.current.contains(e.target as Node) ||
+        el.id === exceptionNodeId
+      ) {
+        stableCallback();
+      }
+    }
+
+    window.addEventListener('click', handleClick);
     return () => {
-      document.removeEventListener('click', handleClick);
+      window.removeEventListener('click', handleClick);
     };
   }, []);
 

@@ -24,7 +24,7 @@ function conversionSize(iconSize: IconSize) {
 interface Props extends IconProps {
   children?: ReactNode;
   customStyle?: CSSProperties;
-  onClick?: (e?: SyntheticEvent) => void;
+  onClick?: (e: SyntheticEvent) => void;
   isActiveFnc?: boolean;
 }
 

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { memo, useState } from 'react';
+import { memo, SyntheticEvent, useState } from 'react';
 import { CheckBox, IconButton } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import dynamic from 'next/dynamic';
@@ -16,7 +16,8 @@ interface Props {
 const Channel = ({ label }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const testFn = () => {
+  const handelOpen = (e: SyntheticEvent) => {
+    e.stopPropagation();
     setIsOpen(true);
   };
 
@@ -30,13 +31,13 @@ const Channel = ({ label }: Props) => {
         <Item>
           <CheckBox id="test" label="test" />
           <div style={{ position: 'relative' }}>
-            <IconButton type="sm_more" iconSize="sm" onClick={testFn} />
-            {isOpen ? (
+            <IconButton type="sm_more" iconSize="sm" onClick={handelOpen} />
+            {isOpen && (
               <ColorBoard
-                isShow={isOpen}
+                isOpen={isOpen}
                 closeColorBoard={() => setIsOpen(false)}
               />
-            ) : null}
+            )}
           </div>
         </Item>
       </List>
