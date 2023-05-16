@@ -6,13 +6,13 @@ interface Props {
 }
 
 const ModalControl = ({ children }: Props) => {
-  return <S.Section>{children}</S.Section>;
+  return <S.Control>{children}</S.Control>;
 };
 
 export default ModalControl;
 
 const S = {
-  Section: styled.section`
+  Control: styled.section`
     display: flex;
     align-items: center;
     justify-content: flex-end;
