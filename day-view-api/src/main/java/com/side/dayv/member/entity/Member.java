@@ -25,6 +25,7 @@ public class Member {
     private Long memberId;
 
     @Column(name = "provider")
+    @Enumerated(EnumType.STRING)
     @NotNull
     private ProviderType provider;
 
