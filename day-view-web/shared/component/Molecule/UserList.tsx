@@ -12,18 +12,7 @@ interface Props {
  */
 const UserList = ({ users }: Props) => {
   const MAX_LENGTH = 5;
-  if (users.length < MAX_LENGTH) {
-    return (
-      <S.Layout>
-        {users.map((user) => (
-          <S.User key={user.id}>
-            <UserImage src="" size="small" />
-            <div>{user.name}</div>
-          </S.User>
-        ))}
-      </S.Layout>
-    );
-  }
+
   return (
     <S.Layout>
       {users.slice(0, MAX_LENGTH).map((user) => (
