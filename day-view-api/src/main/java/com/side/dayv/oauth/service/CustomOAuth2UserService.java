@@ -73,7 +73,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 null,
                 null
         );
-
         return memberRepository.saveAndFlush(user);
     }
 
