@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Icon, Inputbox } from '@/shared/component/Atom';
 import { IconButton } from '@/shared/component/Molecule';
-import { common } from '@/shared/styles/theme';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 
 interface Props {
   placeholder?: string;
@@ -43,14 +43,14 @@ const DivStyle = styled.div`
   display: flex;
   align-items: center;
 
-  width: 415px;
-  height: 56px;
+  width: ${pixelToRemUnit(415)};
+  height: ${pixelToRemUnit(56)};
 
-  padding-left: 22px;
-  padding-right: 10px;
+  padding-left: ${pixelToRemUnit(22)};
+  padding-right: ${pixelToRemUnit(10)};
 
-  background: ${common.colors.White};
+  background: ${getStyledThemProperty('colors', 'White')};
 
-  border: 1px solid ${common.colors.G_500};
+  border: 1px solid ${getStyledThemProperty('colors', 'G_500')};
   border-radius: 7px;
 `;
