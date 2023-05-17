@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, memo } from 'react';
 import styled from 'styled-components';
 
 type TextareaType = ComponentPropsWithoutRef<'textarea'>;
@@ -11,7 +11,7 @@ const Textarea = ({ id, ...props }: Props) => {
   return <S.Textarea id={id} {...props} />;
 };
 
-export default Textarea;
+export default memo(Textarea);
 
 const S = {
   Textarea: styled.textarea`

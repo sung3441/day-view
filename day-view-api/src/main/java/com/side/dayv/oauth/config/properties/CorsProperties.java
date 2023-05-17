@@ -13,3 +13,4 @@ public class CorsProperties {
     private String allowedHeaders;
     private Long maxAge;
 }
+

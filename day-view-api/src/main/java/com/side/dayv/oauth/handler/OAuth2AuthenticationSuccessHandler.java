@@ -3,6 +3,7 @@ package com.side.dayv.oauth.handler;
 import com.side.dayv.global.util.CookieUtil;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
+import com.side.dayv.member.service.MemberService;
 import com.side.dayv.oauth.config.properties.AppProperties;
 import com.side.dayv.oauth.entity.ProviderType;
 import com.side.dayv.oauth.info.OAuth2UserInfo;
@@ -14,7 +15,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -59,13 +62,11 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         Optional<String> redirectUri = CookieUtil.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
                 .map(Cookie::getValue);
-
         if(redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {
             throw new IllegalArgumentException("Sorry! We've got an Unauthorized Redirect URI and can't proceed with the authentication");
         }
 
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
-
         OAuth2AuthenticationToken authToken = (OAuth2AuthenticationToken) authentication;
         ProviderType providerType = ProviderType.valueOf(authToken.getAuthorizedClientRegistrationId().toUpperCase());
 
@@ -77,8 +78,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         Date now = new Date();
         AuthToken accessToken = tokenProvider.createAuthToken(
-                userInfo.getId(),
-                null,
+                userInfo.getEmail(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
 
@@ -89,20 +89,18 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 appProperties.getAuth().getTokenSecret(),
                 new Date(now.getTime() + refreshTokenExpiry)
         );
-
         // DB 저장
-        Member member = memberRepository.findByEmail(userInfo.getId());
+        Member member = memberRepository.findByEmail(userInfo.getEmail());
         if (member != null) {
             member.changeRefreshToken(refreshToken.getToken());
         } else {
-            throw new UsernameNotFoundException("Can not find username.");
+            throw new UsernameNotFoundException("Can not find member.");
         }
 
         int cookieMaxAge = (int) refreshTokenExpiry / 60;
 
         CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
         CookieUtil.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
-
         return UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", accessToken.getToken())
                 .build().toUriString();

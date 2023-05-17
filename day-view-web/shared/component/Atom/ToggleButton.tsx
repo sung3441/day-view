@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef } from 'react';
+import { ComponentPropsWithRef, memo } from 'react';
 import styled, { css } from 'styled-components';
 
 type InputType = ComponentPropsWithRef<'input'>;
@@ -16,7 +16,7 @@ const ToggleButton = ({ id, ...props }: Props) => {
   );
 };
 
-export default ToggleButton;
+export default memo(ToggleButton);
 
 const Label = styled.label`
   gap: 10px;

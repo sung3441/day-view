@@ -46,7 +46,7 @@ public class AuthToken {
         return this.getTokenClaims() != null;
     }
 
-    private Claims getTokenClaims() {
+    public Claims getTokenClaims() {
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(key)

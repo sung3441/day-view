@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled, { css } from 'styled-components';
+import { pixelToRemUnit } from '@/shared/styles/util';
 
 interface Props {
   children?: ReactNode;
@@ -52,7 +53,7 @@ const S = {
     align-items: center;
     gap: 22px;
 
-    padding: 60px 50px;
+    padding: ${pixelToRemUnit([60, 50])};
 
     ${({ isDimmed }) =>
       isDimmed
