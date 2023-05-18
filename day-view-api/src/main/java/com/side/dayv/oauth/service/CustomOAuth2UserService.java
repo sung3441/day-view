@@ -70,7 +70,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 now,
                 now,
                 userInfo.getImageUrl(),
-                null,
+                userInfo.getBirthday(),
                 null
         );
         return memberRepository.saveAndFlush(user);
