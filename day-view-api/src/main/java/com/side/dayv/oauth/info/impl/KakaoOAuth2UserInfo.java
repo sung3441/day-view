@@ -27,7 +27,13 @@ public class KakaoOAuth2UserInfo extends OAuth2UserInfo {
 
     @Override
     public String getEmail() {
-        return (String) attributes.get("account_email");
+        Map<String, Object> properties = (Map<String, Object>) attributes.get("kakao_account");
+
+        if (properties == null) {
+            return null;
+        }
+
+        return (String) properties.get("email");
     }
 
     @Override
@@ -39,5 +45,16 @@ public class KakaoOAuth2UserInfo extends OAuth2UserInfo {
         }
 
         return (String) properties.get("thumbnail_image");
+    }
+
+    @Override
+    public String getBirthday() {
+        Map<String, Object> properties = (Map<String, Object>) attributes.get("kakao_account");
+
+        if (properties == null) {
+            return null;
+        }
+
+        return (String) properties.get("birthday");
     }
 }

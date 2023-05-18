@@ -30,7 +30,6 @@ public class Member {
     private ProviderType provider;
 
     @Column(name = "email")
-    @NotNull
     private String email;
 
     @Column(name = "nickname")
@@ -50,7 +49,7 @@ public class Member {
     private String profileImageUrl;
 
     @Column(name = "birthday")
-    private LocalDate birthday;
+    private String birthday;
 
     @Column(name = "refresh_token")
     private String refreshToken;
@@ -62,7 +61,7 @@ public class Member {
             , LocalDateTime createdDate
             , LocalDateTime lastModifiedDate
             , String profileImageUrl
-            , LocalDate birthday
+            , String birthday
             , String refreshToken){
         this.email = email;
         this.nickname = nickname;
