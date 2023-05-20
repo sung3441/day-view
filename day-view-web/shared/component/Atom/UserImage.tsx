@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { memo } from 'react';
+import styled from 'styled-components';
 
 type SizeType = 'small' | 'large';
 
@@ -18,17 +19,21 @@ const imageSizes = {
  */
 const UserImage = ({ src, size = 'small' }: Props) => {
   return (
-    <Image
+    <StyledImage
       src={`images/icon/user.svg`}
       alt="UserImage"
       width={imageSizes[size].width}
       height={imageSizes[size].height}
-      style={{
-        backgroundColor: 'gray',
-        borderRadius: '50%',
-      }}
     />
   );
 };
 
 export default memo(UserImage);
+
+const StyledImage = styled(Image)`
+  border-radius: 50%;
+
+  :hover {
+    background-color: gray;
+  }
+`;
