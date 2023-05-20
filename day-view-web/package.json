@@ -9,14 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
     "@types/react-query": "^1.2.9",
     "@types/styled-components": "^5.1.26",
+    "axios": "^1.4.0",
     "babel-plugin-styled-components": "^2.0.7",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
+    "msw": "^1.2.1",
     "next": "13.2.4",
     "next-seo": "^5.15.0",
     "react": "18.2.0",
@@ -32,5 +35,8 @@
   "devDependencies": {
     "eslint-config-prettier": "^8.6.0",
     "prettier": "2.8.4"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
