@@ -1,5 +1,5 @@
-import { ComponentPropsWithRef, memo } from 'react';
-import styled, { css } from 'styled-components';
+import { ComponentPropsWithRef, memo, useState } from 'react';
+import styled from 'styled-components';
 
 type InputType = ComponentPropsWithRef<'input'>;
 
@@ -7,10 +7,20 @@ interface Props extends InputType {
   id?: string;
 }
 
-const ToggleButton = ({ id, ...props }: Props) => {
+const ToggleButton = ({ id, checked = false, ...props }: Props) => {
+  const [isChecked, setIsChecked] = useState(checked);
+
   return (
-    <Label>
-      <Input id={id} type="checkbox" {...props} />
+    <Label htmlFor={id}>
+      <Input
+        id={id}
+        type="checkbox"
+        checked={isChecked}
+        onClick={() => {
+          setIsChecked(!isChecked);
+        }}
+        {...props}
+      />
       <Switch />
     </Label>
   );

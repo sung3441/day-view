@@ -1,7 +1,10 @@
-import styled from 'styled-components';
-import { Icon, UserImage } from '@/shared/component/Atom/';
-import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { memo } from 'react';
+import styled from 'styled-components';
+
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
+import { Icon, UserImage } from '@/shared/component/Atom/';
+
+const MAX_LENGTH = 5;
 
 interface Props {
   users: { id: string; name: string; src: string }[];
@@ -11,15 +14,13 @@ interface Props {
  * TODO: Refactor
  */
 const UserList = ({ users }: Props) => {
-  const MAX_LENGTH = 5;
-
   return (
     <S.Layout>
       {users.slice(0, MAX_LENGTH).map((user) => (
-        <S.User key={user.id}>
+        <S.UserWrap key={user.id}>
           <UserImage src="" size="small" />
-          <div>{user.name}</div>
-        </S.User>
+          <S.Name>{user.name}</S.Name>
+        </S.UserWrap>
       ))}
       <S.Circle>
         {users.length <= MAX_LENGTH ? (
@@ -40,7 +41,7 @@ const S = {
     gap: 10px;
   `,
 
-  User: styled.div`
+  UserWrap: styled.div`
     text-align: center;
   `,
 
