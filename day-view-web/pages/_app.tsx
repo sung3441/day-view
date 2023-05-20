@@ -7,14 +7,12 @@ import { RecoilRoot } from 'recoil';
 import { commonTheme } from '@/shared/styles/theme';
 import GlobalStyle from '@/shared/styles/globalStyle';
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  import('../mocks');
+}
+
 function App({ Component, pageProps }: AppProps) {
   const queryClient = getClient();
-  // const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  //
-  // const handleChangeTheme = useCallback(
-  //   () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light')),
-  //   []
-  // );
 
   return (
     <QueryClientProvider client={queryClient}>
