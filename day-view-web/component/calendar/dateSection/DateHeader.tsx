@@ -1,22 +1,17 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { selectedDayAtom, selectedYYMMAtom } from '@/state/calendar';
 import { IconButton } from '@/shared/component/Molecule';
 
-interface Props {}
+interface Props {
+  handleMoveMonth: (flag: 'prev' | 'next') => void;
+}
 
-const DateHeader = ({}: Props) => {
-  const [selectedYYMM, setSelectedYYMM] = useRecoilState(selectedYYMMAtom);
+const DateHeader = ({ handleMoveMonth }: Props) => {
+  const { year, month } = useRecoilValue(selectedYYMMAtom);
   const resetYYMM = useResetRecoilState(selectedYYMMAtom);
   const resetDay = useResetRecoilState(selectedDayAtom);
-
-  const handleMoveMonth = (flag: 'prev' | 'next') => {
-    let { year, month } = selectedYYMM;
-    month = flag === 'prev' ? --month : ++month;
-    const d = new Date(year, month, 0);
-    setSelectedYYMM({ year: d.getFullYear(), month: d.getMonth() + 1 });
-  };
 
   const handelClickToday = () => {
     resetYYMM();
@@ -26,7 +21,7 @@ const DateHeader = ({}: Props) => {
   return (
     <Wrap>
       <CalendarLabel>
-        {selectedYYMM.year}년 {selectedYYMM.month}월
+        {year}년 {month}월
       </CalendarLabel>
       <RightBox>
         <IconButton type="left" onClick={() => handleMoveMonth('prev')} />

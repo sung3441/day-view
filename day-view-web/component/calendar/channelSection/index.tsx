@@ -1,7 +1,7 @@
 import { CSSProperties, memo } from 'react';
 import styled, { css } from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { G_isOpenChannel } from '@/shared/atom/globalCalendar';
+import { G_isOpenChannelAtom } from '@/shared/atom/globalCalendar';
 import Channel from '@/component/calendar/channelSection/Channel';
 import { Button, Icon } from '@/shared/component/Atom';
 import { pixelToRemUnit } from '@/shared/styles/util';
@@ -15,7 +15,7 @@ const buttonStyle: CSSProperties = {
 };
 
 const ChannelSection = () => {
-  const isOpenChannel = useRecoilValue(G_isOpenChannel);
+  const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
   return (
     <Wrap isOpenChannel={isOpenChannel}>
       <Channel label="내채널" />

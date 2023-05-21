@@ -2,13 +2,13 @@ import styled, { css } from 'styled-components';
 import Channel from '@/component/calendar/channelSection';
 import DateSection from '@/component/calendar/dateSection/DateSection';
 import { useRecoilValue } from 'recoil';
-import { G_isOpenChannel, G_tabAtom } from '@/shared/atom/globalCalendar';
+import { G_isOpenChannelAtom, G_tabAtom } from '@/shared/atom/globalCalendar';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useMemo } from 'react';
 import Category from '../category';
 
 const Calendar = () => {
-  const isOpenChannel = useRecoilValue(G_isOpenChannel);
+  const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
   const tabLabel = useRecoilValue(G_tabAtom);
 
   const curTabElement = useMemo(() => {
