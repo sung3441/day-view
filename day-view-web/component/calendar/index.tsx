@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { G_isOpenChannel, G_tabAtom } from '@/shared/atom/globalCalendar';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useMemo } from 'react';
+import Category from '../category';
 
 const Calendar = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannel);
@@ -17,7 +18,7 @@ const Calendar = () => {
       case '일정':
         return <div>ㅎㅇ2</div>;
       case '카테고리':
-        return <div>ㅎㅇ3</div>;
+        return <Category />;
       default:
         return <DateSection />;
     }

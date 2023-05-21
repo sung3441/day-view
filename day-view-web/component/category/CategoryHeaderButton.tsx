@@ -31,6 +31,8 @@ const Btn = styled.button<{ isSelected: boolean }>`
   height: 30px;
   border-radius: 20px;
 
+  white-space: nowrap;
+
   ${({ theme, isSelected }) =>
     isSelected
       ? css`
