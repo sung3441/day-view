@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import { selectedYYMMAtom } from '@/state/calendar';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 
 interface Props {}
 
@@ -23,6 +24,8 @@ const ScheduleHeader = ({}: Props) => {
 export default ScheduleHeader;
 
 const Wrap = styled.div`
-  ${({ theme }) => theme.fonts.title1}
   display: flex;
+  align-items: center;
+  ${getStyledThemProperty('layout', 'pageHeader')};
+  ${getStyledThemProperty('fonts', 'title1')};
 `;

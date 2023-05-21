@@ -5,7 +5,8 @@ import { useRecoilValue } from 'recoil';
 import { G_isOpenChannelAtom, G_tabAtom } from '@/shared/atom/globalCalendar';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useMemo } from 'react';
-import Category from '../category';
+import CategoryHeader from '../category/CategoryHeader';
+import ScheduleHeader from '../schedule/ScheduleHeader';
 
 const Calendar = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
@@ -16,9 +17,17 @@ const Calendar = () => {
       case '월':
         return <DateSection />;
       case '일정':
-        return <div>ㅎㅇ2</div>;
+        return (
+          <>
+            <ScheduleHeader />
+          </>
+        );
       case '카테고리':
-        return <Category />;
+        return (
+          <>
+            <CategoryHeader />
+          </>
+        );
       default:
         return <DateSection />;
     }
@@ -36,7 +45,6 @@ export default Calendar;
 const CalderWrap = styled.div`
   position: relative;
   display: flex;
-  align-items: center;
   width: 100%;
   height: calc(100vh - 100px);
 `;
