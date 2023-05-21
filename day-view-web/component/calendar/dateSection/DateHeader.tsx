@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { selectedDayAtom, selectedYYMMAtom } from '@/state/calendar';
 import { IconButton } from '@/shared/component/Molecule';
+import { getStyledThemProperty } from '@/shared/styles/util';
 
 interface Props {
   handleMoveMonth: (flag: 'prev' | 'next') => void;
@@ -35,19 +36,12 @@ const DateHeader = ({ handleMoveMonth }: Props) => {
 export default memo(DateHeader);
 
 const Wrap = styled.div`
-  width: 100%;
-  height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 17px 40px;
-  border-bottom: 1px solid #dbdbdb;
+  ${getStyledThemProperty('box', 'flexBetweenBox')}
+  ${getStyledThemProperty('layout', 'pageHeader')}
 `;
 
 const CalendarLabel = styled.div`
-  font-weight: 500;
-  font-size: 32px;
-  color: #222;
+  ${getStyledThemProperty('fonts', 'title1')}
 `;
 
 const TodayButton = styled.button`
