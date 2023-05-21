@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
-import { TabType } from '@/shared/atom/tab';
+
+export type TabType = '월' | '일정' | '카테고리';
 
 export const G_isOpenChannel = atom<boolean>({
   key: 'G_isOpenChannel',

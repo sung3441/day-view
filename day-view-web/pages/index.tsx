@@ -1,26 +1,29 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
-import styled from 'styled-components';
 import axios from 'axios';
+import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
+import { mswStatusAtom } from '@/shared/atom/global';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
+  const mswStatus = useRecoilValue(mswStatusAtom);
+
   const handleGetReview = async () => {
     try {
-      const res = await axios.get('people', {});
+      const res = await axios.get('test', {});
       console.log('res', res);
-    } catch (e) {
-      console.log('e', e);
-    }
+    } catch (e) {}
   };
 
-  // useEffect(() => {
-  //   if (typeof window === 'undefined') return;
-  //
-  //   (async () => await handleGetReview())();
-  // }, [typeof window === 'undefined']);
+  useEffect(() => {
+    if (mswStatus !== 'browser') return;
 
+    (async () => await handleGetReview())();
+  }, [mswStatus]);
+
+  // console.log(navigator.serviceWorkere);
   return (
     <>
       <Head>
@@ -35,7 +38,3 @@ export default function Home() {
     </>
   );
 }
-
-const Main = styled.main`
-  height: 100%;
-`;
