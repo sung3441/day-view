@@ -19,8 +19,8 @@ const DateSection = ({}: Props) => {
   };
 
   const handelOnWheel = (e: WheelEvent<HTMLDivElement>) => {
-    if (e.deltaY > 0) return handleMoveMonth('prev');
-    return handleMoveMonth('next');
+    if (e.deltaY > 0) return handleMoveMonth('next');
+    return handleMoveMonth('prev');
   };
 
   return (
