@@ -14,6 +14,15 @@ const SubTitle = styled.div`
   color: ${({ theme }) => theme.colors.G_700};
 `;
 
+const Divider = styled.div`
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 2px;
+  left: 50%;
+  background: #dbdbdb;
+`;
+
 const Modal = Object.assign(ModalMain, {
   Input: ModalInput,
   Control: ModalControl,
@@ -24,6 +33,7 @@ const Modal = Object.assign(ModalMain, {
   Textarea,
   UserList,
   Button,
+  Divider,
 });
 
 export default Modal;
