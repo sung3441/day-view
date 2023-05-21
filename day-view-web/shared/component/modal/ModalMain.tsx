@@ -46,12 +46,12 @@ const S = {
     right: 0;
     z-index: 100;
   `,
+
   Container: styled.div<{ isDimmed?: boolean }>`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 22px;
+    gap: 40px;
+    position: relative;
 
     padding: ${pixelToRemUnit([60, 50])};
 
