@@ -28,15 +28,16 @@ public class Channel {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "create_date")
     @NotNull
+    @Column(name = "create_date")
     private LocalDateTime createdDate;
 
-    @Column(name = "last_modified_date")
     @NotNull
+    @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
+    @Column(name = "member_id")
     private Member createMember;
 }
