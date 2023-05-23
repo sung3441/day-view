@@ -40,6 +40,5 @@ public class Record {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "channel_id")
-    @Column(name = "channel_id")
     private Channel channel;
 }

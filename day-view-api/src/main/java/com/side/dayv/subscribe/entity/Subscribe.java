@@ -33,12 +33,10 @@ public class Subscribe {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    @Column(name = "member_id")
     private Member subscriber;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "channel_id")
-    @Column(name = "channel_id")
     private Channel channel;
 }
