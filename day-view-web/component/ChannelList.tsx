@@ -1,4 +1,4 @@
-import { pixelToRemUnit } from '@/shared/styles/util';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import styled, { css } from 'styled-components';
 
 interface Props {
@@ -6,30 +6,34 @@ interface Props {
     id: number;
     title: string;
     created: string;
+    subscriber: string;
+    date: string;
     isSubscribed: boolean;
   }[];
 }
 
 const ChannelList = ({ channels }: Props) => {
   return (
-    <div>
-      <Wrap>
-        <Head>
-          <span>제목</span>
-          <span>개설자</span>
-          <span>구독</span>
-        </Head>
-        <Ul>
-          {channels?.map((channel) => (
-            <Li key={channel.id}>
-              <Span>{channel.title}</Span>
-              <Span>{channel.created}</Span>
-              <Span>{channel.isSubscribed ? '구독중' : '구독'}</Span>
-            </Li>
-          ))}
-        </Ul>
-      </Wrap>
-    </div>
+    <Wrap>
+      <Head>
+        <Span>제목</Span>
+        <Span>개설자</Span>
+        <Span>구독자 수</Span>
+        <Span>개설일</Span>
+        <Span>구독</Span>
+      </Head>
+      <Ul>
+        {channels?.map((channel) => (
+          <Li key={channel.id}>
+            <Span>{channel.title}</Span>
+            <Span>{channel.created}</Span>
+            <Span>{channel.subscriber}</Span>
+            <Span>{channel.date}</Span>
+            <Span>{channel.isSubscribed ? '구독중' : '구독'}</Span>
+          </Li>
+        ))}
+      </Ul>
+    </Wrap>
   );
 };
 
@@ -38,57 +42,31 @@ export default ChannelList;
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: ${pixelToRemUnit([20, 80])};
 
-  width: ${pixelToRemUnit(467)};
   height: 100%;
-
-  border-right: 1px solid #dbdbdb;
-  background-color: #fff;
-  position: absolute;
-`;
-
-const Head = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 415px;
-  min-height: 80px;
-
-  span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1 1 0;
-
-    ${({ theme }) =>
-      css`
-        ${theme.fonts.caption1};
-      `};
-  }
 `;
 
 const Ul = styled.ul`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
+  gap: 20px;
 
-  overflow-y: scroll;
+  overflow-y: overlay;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Li = styled.li`
   display: flex;
-  justify-content: center;
   align-items: center;
 
-  border: 1px solid #dbdbdb;
+  border: 1px solid ${getStyledThemProperty('colors', 'G_300')};
   border-radius: 11px;
 
-  width: 415px;
-  min-height: 80px;
+  min-height: ${pixelToRemUnit(100)};
 
   &:hover {
     ${({ theme }) => css`
@@ -103,8 +81,16 @@ const Span = styled.span`
   justify-content: center;
   flex: 1 1 0;
 
-  ${({ theme }) =>
-    css`
-      ${theme.fonts.caption2};
-    `};
+  ${getStyledThemProperty('fonts', 'body3')}
+`;
+
+const Head = styled.div`
+  display: flex;
+  align-items: center;
+
+  min-height: ${pixelToRemUnit(88)};
+
+  ${Span} {
+    ${getStyledThemProperty('fonts', 'body2')}
+  }
 `;

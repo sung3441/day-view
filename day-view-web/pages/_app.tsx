@@ -6,15 +6,14 @@ import Layout from '@/shared/component/Layout';
 import { RecoilRoot } from 'recoil';
 import { commonTheme } from '@/shared/styles/theme';
 import GlobalStyle from '@/shared/styles/globalStyle';
+import useMswStatus from '@/mocks';
+
+// if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+//   import('../mocks');
+// }
 
 function App({ Component, pageProps }: AppProps) {
   const queryClient = getClient();
-  // const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  //
-  // const handleChangeTheme = useCallback(
-  //   () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light')),
-  //   []
-  // );
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -22,14 +21,20 @@ function App({ Component, pageProps }: AppProps) {
         <Hydrate state={pageProps.dehydratedState}>
           <ThemeProvider theme={commonTheme}>
             <GlobalStyle />
-            <Layout>
+            <APPWithConfig>
               <Component {...pageProps} />
-            </Layout>
+            </APPWithConfig>
           </ThemeProvider>
         </Hydrate>
       </RecoilRoot>
     </QueryClientProvider>
   );
 }
+
+const APPWithConfig = ({ children }: { children: any }) => {
+  useMswStatus();
+
+  return <Layout>{children}</Layout>;
+};
 
 export default App;

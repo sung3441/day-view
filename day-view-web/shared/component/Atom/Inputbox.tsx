@@ -5,7 +5,7 @@ import {
   ForwardedRef,
 } from 'react';
 import styled from 'styled-components';
-import { common } from '@/shared/styles/theme';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 
 type InputProps = ComponentPropsWithoutRef<'input'>;
 
@@ -22,18 +22,17 @@ const InputStyle = styled.input`
   display: flex;
   align-items: center;
 
-  width: 277px;
-  height: 40px;
-
-  color: ${common.colors.Black};
-  background: ${common.colors.White};
+  width: ${pixelToRemUnit(277)};
+  height: ${pixelToRemUnit(40)};
+  color: ${getStyledThemProperty('colors', 'Black')};
+  background: ${getStyledThemProperty('colors', 'White')};
 
   border: none;
   outline: none;
 
-  ${common.fonts.body3};
+  ${getStyledThemProperty('fonts', 'body3')};
 
   ::placeholder {
-    color: ${common.colors.G_700};
+    color: ${getStyledThemProperty('colors', 'G_700')};
   }
 `;

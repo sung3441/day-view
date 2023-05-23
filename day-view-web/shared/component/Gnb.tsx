@@ -2,16 +2,16 @@ import styled from 'styled-components';
 import { memo, useCallback } from 'react';
 import { IconButton } from '@/shared/component/Molecule';
 import { useSetRecoilState } from 'recoil';
-import { G_isOpenChannel } from '@/shared/atom/globalCalendar';
 import Tab from '@/shared/component/GnbTab';
 import { pixelToRemUnit } from '@/shared/styles/util';
+import { G_isOpenChannelAtom } from '@/shared/atom/globalCalendar';
 
 interface Props {
   handleChangeTheme?: () => void;
 }
 
 const Gnb = ({ handleChangeTheme }: Props) => {
-  const setIsOpenChannel = useSetRecoilState(G_isOpenChannel);
+  const setIsOpenChannel = useSetRecoilState(G_isOpenChannelAtom);
 
   const handleClickMenu = useCallback(
     () => setIsOpenChannel((prev) => !prev),

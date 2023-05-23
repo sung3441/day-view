@@ -1,10 +1,14 @@
 import { ComponentPropsWithRef } from 'react';
 import styled from 'styled-components';
+import { pixelToRemUnit } from '@/shared/styles/util';
 
 type InputType = ComponentPropsWithRef<'input'>;
 
 interface Props extends InputType {}
 
+/**
+ * TODO: Refactor
+ */
 const ModalInput = ({ ...props }: Props) => {
   return (
     <S.Wrapper>
@@ -22,9 +26,9 @@ const S = {
     border: 1px solid ${({ theme }) => theme.colors.G_300};
     border-radius: 7px;
 
-    width: 380px;
+    width: ${pixelToRemUnit(380)};
 
-    padding: 8px 18px;
+    padding: ${pixelToRemUnit([8, 18])};
   `,
 
   Input: styled.input`

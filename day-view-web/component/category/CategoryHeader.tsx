@@ -1,8 +1,9 @@
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import styled from 'styled-components';
 import CategoryButton from './CategoryHeaderButton';
 
 interface Props {
-  categories: { name: string; id: number }[];
+  categories?: { name: string; id: number }[];
 }
 
 // '카테고리' 탭 누르면 실행
@@ -20,7 +21,8 @@ export default CategoryHeader;
 
 const Wrap = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
+
+  ${getStyledThemProperty('layout', 'pageHeader')}
 `;

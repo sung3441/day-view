@@ -1,5 +1,6 @@
 import { DefaultTheme, Interpolation } from 'styled-components';
 import { CSSProperties } from 'react';
+import { pixelToRemUnit } from './util';
 
 type BoxKeys = 'flexBetweenBox';
 
@@ -11,36 +12,15 @@ const box: { [p in BoxKeys]: Interpolation<CSSProperties> } = {
   },
 };
 
-type FontKey =
-  | 'title1'
-  | 'title2'
-  | 'title3'
-  | 'body1'
-  | 'body2'
-  | 'body3'
-  | 'caption1'
-  | 'caption2'
-  | 'caption3';
-
-type Fonts = Record<
-  FontKey,
-  { fontWeight: string; fontSize: string; lineHeight: string }
->;
-
-type ColorKey =
-  | 'main'
-  | 'G_200'
-  | 'G_100'
-  | 'G_300'
-  | 'G_500'
-  | 'G_700'
-  | 'Black'
-  | 'White'
-  | 'Red';
-
-type Colors = Record<ColorKey, string>;
-
 export const common = {
+  layout: {
+    pageHeader: {
+      width: '100%',
+      height: `${pixelToRemUnit(76)}`,
+      padding: `${pixelToRemUnit([17, 40])}`,
+      borderBottom: '1px solid #dbdbdb',
+    },
+  },
   colors: {
     main: '#FF836D',
     G_100: '#FCFCFC',
@@ -69,7 +49,7 @@ export const common = {
       lineHeight: '120%',
     },
     body1: {
-      fontWeight: 'black',
+      fontWeight: '900',
       fontSize: '20px',
       lineHeight: '200%',
     },

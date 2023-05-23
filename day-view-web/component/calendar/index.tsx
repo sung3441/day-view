@@ -2,12 +2,14 @@ import styled, { css } from 'styled-components';
 import Channel from '@/component/calendar/channelSection';
 import DateSection from '@/component/calendar/dateSection/DateSection';
 import { useRecoilValue } from 'recoil';
-import { G_isOpenChannel, G_tabAtom } from '@/shared/atom/globalCalendar';
+import { G_isOpenChannelAtom, G_tabAtom } from '@/shared/atom/globalCalendar';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useMemo } from 'react';
+import CategoryHeader from '../category/CategoryHeader';
+import ScheduleHeader from '../schedule/ScheduleHeader';
 
 const Calendar = () => {
-  const isOpenChannel = useRecoilValue(G_isOpenChannel);
+  const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
   const tabLabel = useRecoilValue(G_tabAtom);
 
   const curTabElement = useMemo(() => {
@@ -15,9 +17,17 @@ const Calendar = () => {
       case '월':
         return <DateSection />;
       case '일정':
-        return <div>ㅎㅇ2</div>;
+        return (
+          <>
+            <ScheduleHeader />
+          </>
+        );
       case '카테고리':
-        return <div>ㅎㅇ3</div>;
+        return (
+          <>
+            <CategoryHeader />
+          </>
+        );
       default:
         return <DateSection />;
     }
@@ -35,7 +45,6 @@ export default Calendar;
 const CalderWrap = styled.div`
   position: relative;
   display: flex;
-  align-items: center;
   width: 100%;
   height: calc(100vh - 100px);
 `;
