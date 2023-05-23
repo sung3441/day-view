@@ -9,6 +9,11 @@ import ModalBody from './ModalBody';
 import { ToggleButton, Textarea, Button } from '@/shared/component/Atom/';
 import UserList from '@/component/modal/UserList';
 
+const Title = styled.h2`
+  ${({ theme }) => theme.fonts.title2};
+  color: ${({ theme }) => theme.colors.Black};
+`;
+
 const SubTitle = styled.div`
   ${({ theme }) => theme.fonts.caption2};
   color: ${({ theme }) => theme.colors.G_700};
@@ -28,6 +33,7 @@ const Modal = Object.assign(ModalMain, {
   Control: ModalControl,
   Header: ModalHeader,
   Body: ModalBody,
+  Title,
   SubTitle,
   ToggleButton,
   Textarea,
