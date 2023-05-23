@@ -1,5 +1,9 @@
 package com.side.dayv.oauth.service;
 
+import com.side.dayv.channel.entity.Channel;
+import com.side.dayv.channel.entity.ChannelType;
+import com.side.dayv.channel.entity.SecretYn;
+import com.side.dayv.channel.repository.ChannelRepository;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.oauth.entity.MemberPrincipal;
@@ -16,7 +20,6 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -24,6 +27,7 @@ import java.time.LocalDateTime;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final MemberRepository memberRepository;
+    private final ChannelRepository channelRepository;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException{
@@ -55,9 +59,28 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             updateUser(savedUser, userInfo);
         } else {
             savedUser = createUser(userInfo, providerType);
+            createChannel(savedUser);
         }
 
         return MemberPrincipal.create(savedUser, user.getAttributes());
+    }
+
+    private void createChannel(Member member){
+        LocalDateTime now = LocalDateTime.now();
+
+        ChannelType myChannelType = ChannelType.valueOf("MY");
+        SecretYn secretYn = SecretYn.valueOf("N");
+
+        Channel myChannel = Channel.builder()
+                .channelType(myChannelType)
+                .secretYn(secretYn)
+                .password(null)
+                .createdDate(now)
+                .lastModifiedDate(now)
+                .member(member)
+                .build();
+
+        channelRepository.saveAndFlush(myChannel);
     }
 
     private Member createUser(OAuth2UserInfo userInfo, ProviderType providerType) {

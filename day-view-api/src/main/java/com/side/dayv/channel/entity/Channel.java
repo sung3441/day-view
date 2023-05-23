@@ -3,6 +3,7 @@ package com.side.dayv.channel.entity;
 import com.side.dayv.member.entity.Member;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -39,4 +40,16 @@ public class Channel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member createMember;
+
+    @Builder
+    public Channel(ChannelType channelType, SecretYn secretYn,
+                   String password, LocalDateTime createdDate,
+                   LocalDateTime lastModifiedDate, Member member){
+        this.type = channelType;
+        this.secretYn = secretYn;
+        this.password = password;
+        this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate;
+        this.createMember = member;
+    }
 }
