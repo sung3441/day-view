@@ -1,13 +1,14 @@
-import { Children, ComponentPropsWithRef } from 'react';
+import { Children, ReactNode } from 'react';
 import styled from 'styled-components';
 
-type InputType = ComponentPropsWithRef<'div'>;
+interface Props {
+  children?: ReactNode;
+  gap?: number;
+}
 
-interface Props extends InputType {}
-
-const ModalBody = ({ children }: Props) => {
+const ModalBody = ({ children, ...props }: Props) => {
   return (
-    <S.Body>
+    <S.Body {...props}>
       {Children.map(children, (child) => (
         <S.Section>{child}</S.Section>
       ))}
@@ -18,22 +19,15 @@ const ModalBody = ({ children }: Props) => {
 export default ModalBody;
 
 const S = {
-  Body: styled.div`
+  Body: styled.div<{ gap?: number }>`
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: ${({ gap }) => (gap ? `${gap}px` : '22px')};
   `,
   Section: styled.section`
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-
-    & section {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
   `,
 };
