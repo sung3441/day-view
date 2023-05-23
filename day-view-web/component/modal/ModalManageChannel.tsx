@@ -1,5 +1,7 @@
 import Modal from '@/shared/component/modal';
+import { pixelToRemUnit } from '@/shared/styles/util';
 import { ModalOptions } from '@/shared/types/modal';
+import styled from 'styled-components';
 
 const testUsers = [
   { id: '1', name: 'asd', src: 'a' },
@@ -19,26 +21,34 @@ const testUsers = [
 const ModalManageChannel = ({ isOpen, isDimmed = true }: ModalOptions) => {
   return (
     <Modal isOpen={isOpen} isDimmed={isDimmed}>
-      <Modal.Body>
+      <Modal.Body gap={40}>
         <>
           <Modal.SubTitle>카테고리 이름</Modal.SubTitle>
           <Modal.Input placeholder="이름을 입력하세요." />
         </>
         <>
           <Modal.SubTitle>편집자 목록</Modal.SubTitle>
-          <Modal.UserList users={testUsers.slice(0, 2)} />
+          <Wrap>
+            <Modal.UserList users={testUsers.slice(0, 2)} />
+          </Wrap>
         </>
         <>
           <Modal.SubTitle>구독자 목록</Modal.SubTitle>
-          <Modal.UserList users={testUsers} />
+          <Wrap>
+            <Modal.UserList users={testUsers} />
+          </Wrap>
         </>
       </Modal.Body>
       <Modal.Control>
-        <Modal.Button>취소</Modal.Button>
-        <Modal.Button>완료</Modal.Button>
+        <Modal.Button variant="primary">삭제</Modal.Button>
+        <Modal.Button variant="accent">수정</Modal.Button>
       </Modal.Control>
     </Modal>
   );
 };
 
 export default ModalManageChannel;
+
+const Wrap = styled.div`
+  width: ${pixelToRemUnit(380)};
+`;
