@@ -1,11 +1,11 @@
-<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="black"/>
-<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="black"/>
-<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="black"/>
-<rect x="8" y="13" width="12" height="2" fill="black"/>
-<rect x="8" y="13" width="12" height="2" fill="black"/>
-<rect x="8" y="13" width="12" height="2" fill="black"/>
-<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="black"/>
-<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="black"/>
-<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="black"/>
+<svg width="current" height="current" viewBox="0 0 28 28" fill="none"  xmlns="http://www.w3.org/2000/svg">
+<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="currentColor"/>
+<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="currentColor"/>
+<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="currentColor"/>
+<rect x="8" y="13" width="12" height="2" fill="currentColor"/>
+<rect x="8" y="13" width="12" height="2" fill="currentColor"/>
+<rect x="8" y="13" width="12" height="2" fill="currentColor"/>
+<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="currentColor"/>
+<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="currentColor"/>
+<rect x="15" y="8" width="12" height="2" transform="rotate(90 15 8)" fill="currentColor"/>
 </svg>
