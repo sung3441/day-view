@@ -5,9 +5,7 @@ import com.side.dayv.subscribe.dto.request.SubscribeRequestDto;
 import com.side.dayv.subscribe.service.SubscribeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -18,8 +16,14 @@ public class SubscribeController {
     private final SubscribeService subscribeService;
 
     @PostMapping
-    public ApiResponse subscribe(SubscribeRequestDto subscribeRequestDto) {
+    public ApiResponse subscribe(@RequestBody SubscribeRequestDto subscribeRequestDto) {
         subscribeService.subscribe(subscribeRequestDto);
+        return ApiResponse.success();
+    }
+
+    @DeleteMapping
+    public ApiResponse unsubscribe(@RequestBody SubscribeRequestDto subscribeRequestDto) {
+        subscribeService.unsubscribe(subscribeRequestDto);
         return ApiResponse.success();
     }
 }

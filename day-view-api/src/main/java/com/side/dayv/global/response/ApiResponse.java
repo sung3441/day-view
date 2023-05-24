@@ -37,6 +37,10 @@ public class ApiResponse<T> {
         return new ApiResponse(new ApiResponseHeader(FAILED, FAILED_MESSAGE), null);
     }
 
+    public static <T> ApiResponse<T> fail(int code, String msg) {
+        return new ApiResponse(new ApiResponseHeader(code, msg), null);
+    }
+
     public static <T> ApiResponse<T> invalidAccessToken() {
         return new ApiResponse(new ApiResponseHeader(FAILED, INVALID_ACCESS_TOKEN), null);
     }
