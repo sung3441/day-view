@@ -5,13 +5,13 @@ import com.side.dayv.member.entity.Member;
 import com.side.dayv.subscribe.entity.Subscribe;
 import com.side.dayv.subscribe.entity.SubscribeAuth;
 import com.side.dayv.subscribe.entity.SubscribeColor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Data
-@Builder
+@ToString
 public class SubscribeRequestDto {
 
     private Long memberId;
