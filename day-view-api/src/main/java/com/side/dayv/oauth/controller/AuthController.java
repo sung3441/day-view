@@ -5,6 +5,7 @@ import com.side.dayv.global.util.CookieUtil;
 import com.side.dayv.global.util.HeaderUtil;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
+import com.side.dayv.member.service.MemberService;
 import com.side.dayv.oauth.config.properties.AppProperties;
 import com.side.dayv.oauth.entity.AuthReqModel;
 import com.side.dayv.oauth.entity.MemberPrincipal;
@@ -34,6 +35,7 @@ public class AuthController {
     private final AuthTokenProvider tokenProvider;
     private final AuthenticationManager authenticationManager;
     private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     private final static long THREE_DAYS_MSEC = 259200000;
     private final static String REFRESH_TOKEN = "refresh_token";
@@ -76,6 +78,18 @@ public class AuthController {
         CookieUtil.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
 
         return ApiResponse.success("token", accessToken.getToken());
+    }
+
+    @PostMapping("/logout")
+    public ApiResponse logout(HttpServletRequest request, HttpServletResponse response) {
+
+        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userId = principal.getUsername();
+
+        memberService.removeRefreshToken(userId);
+        CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
+
+        return ApiResponse.success();
     }
 
     @GetMapping("/refresh")
