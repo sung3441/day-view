@@ -1,8 +1,8 @@
-<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="20.3643" y="9.05078" width="16" height="2" transform="rotate(135 20.3643 9.05078)" fill="black"/>
-<rect x="20.3643" y="9.05078" width="16" height="2" transform="rotate(135 20.3643 9.05078)" fill="black"/>
-<rect x="20.3643" y="9.05078" width="16" height="2" transform="rotate(135 20.3643 9.05078)" fill="black"/>
-<rect x="18.9502" y="20.3643" width="16" height="2" transform="rotate(-135 18.9502 20.3643)" fill="black"/>
-<rect x="18.9502" y="20.3643" width="16" height="2" transform="rotate(-135 18.9502 20.3643)" fill="black"/>
-<rect x="18.9502" y="20.3643" width="16" height="2" transform="rotate(-135 18.9502 20.3643)" fill="black"/>
+<svg width="current" height="current" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="20.3643" y="9.05078" width="16" height="2" transform="rotate(135 20.3643 9.05078)" fill="currentColor"/>
+<rect x="20.3643" y="9.05078" width="16" height="2" transform="rotate(135 20.3643 9.05078)" fill="currentColor"/>
+<rect x="20.3643" y="9.05078" width="16" height="2" transform="rotate(135 20.3643 9.05078)" fill="currentColor"/>
+<rect x="18.9502" y="20.3643" width="16" height="2" transform="rotate(-135 18.9502 20.3643)" fill="currentColor"/>
+<rect x="18.9502" y="20.3643" width="16" height="2" transform="rotate(-135 18.9502 20.3643)" fill="currentColor"/>
+<rect x="18.9502" y="20.3643" width="16" height="2" transform="rotate(-135 18.9502 20.3643)" fill="currentColor"/>
 </svg>
