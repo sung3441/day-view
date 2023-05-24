@@ -22,6 +22,10 @@ public class ApiResponse<T> {
     private final ApiResponseHeader header;
     private final Map<String, T> body;
 
+
+    public static <T> ApiResponse<T> success(){
+        return new ApiResponse(new ApiResponseHeader(SUCCESS, SUCCESS_MESSAGE), null);
+    }
     public static <T> ApiResponse<T> success(String name, T body) {
         Map<String, T> map = new HashMap<>();
         map.put(name, body);
