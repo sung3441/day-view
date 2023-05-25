@@ -29,7 +29,7 @@ public class SubscribeServiceImpl implements SubscribeService {
     private final ChannelRepository channelRepository;
 
     @Override
-    public void subscribe(final SubscribeRequestDto subscribeRequestDto) {
+    public Subscribe subscribe(final SubscribeRequestDto subscribeRequestDto) {
         Member findMember = memberRepository.findById(subscribeRequestDto.getMemberId())
                 .orElseThrow(() -> new NotFoundException(MEMBER_NOT_FOUND));
 
@@ -43,21 +43,25 @@ public class SubscribeServiceImpl implements SubscribeService {
             throw new AlreadyExistsException(SUBSCRIBE_ALREADY_EXISTS);
         }
 
-        subscribeRepository.save(subscribeRequestDto
+        return subscribeRepository.save(subscribeRequestDto
                 .toEntity(findMember, findChannel));
     }
 
     @Override
-    public void unsubscribe(final SubscribeRequestDto subscribeRequestDto) {
-        Member findMember = memberRepository.findById(subscribeRequestDto.getMemberId())
-                .orElseThrow(() -> new NotFoundException(MEMBER_NOT_FOUND));
+    public void unsubscribe(final Long subscribeId, final String email) {
 
-        Channel findChannel = channelRepository.findById(subscribeRequestDto.getChannelId())
-                .orElseThrow(() -> new NotFoundException(CHANNEL_NOT_FOUNT));
+        Member findMember = memberRepository.findByEmail(email);
+        if (findMember == null) {
+            throw new NotFoundException(MEMBER_NOT_FOUND);
+        }
 
-        Subscribe findSubscribe = subscribeRepository.findBySubscriberAndChannel(findMember, findChannel)
-                .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
+        Optional<Subscribe> subscribeOptional = subscribeRepository.findById(subscribeId);
 
-        subscribeRepository.delete(findSubscribe);
+        // 다른 사람의 구독 정보 접근 시 없는 구독 정보로 판단
+        if (subscribeOptional.isEmpty() || findMember != subscribeOptional.get().getSubscriber()) {
+            throw new NotFoundException(SUBSCRIBE_NOT_FOUND);
+        }
+
+        subscribeRepository.delete(subscribeOptional.get());
     }
 }
