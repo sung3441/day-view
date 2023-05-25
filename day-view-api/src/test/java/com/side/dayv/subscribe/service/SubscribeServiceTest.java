@@ -110,9 +110,9 @@ class SubscribeServiceTest {
 
     @Test
     void 구독_취소() {
-        subscribeService.subscribe(subscribeRequestDto);
+        Subscribe subscribe = subscribeService.subscribe(subscribeRequestDto);
 
-        subscribeService.unsubscribe(subscribeRequestDto);
+        subscribeService.unsubscribe(subscribe.getId(), member.getEmail());
 
         Optional<Subscribe> subscribeOptional = subscribeRepository.findBySubscriberAndChannel(member, channel);
 
@@ -121,29 +121,16 @@ class SubscribeServiceTest {
 
     @Test
     void 구독_취소_실패_회원_없음() {
-        subscribeService.subscribe(subscribeRequestDto);
+        Subscribe subscribe = subscribeService.subscribe(subscribeRequestDto);
 
-        subscribeRequestDto.setMemberId(99L);
-
-        assertThatThrownBy(() -> subscribeService.unsubscribe(subscribeRequestDto))
+        assertThatThrownBy(() -> subscribeService.unsubscribe(subscribe.getId(), "NOT FOUND EMAIL"))
                 .isInstanceOf(NotFoundException.class)
                 .hasMessageContaining(MEMBER_NOT_FOUND);
     }
 
     @Test
-    void 구독_취소_실패_채널_없음() {
-        subscribeService.subscribe(subscribeRequestDto);
-
-        subscribeRequestDto.setChannelId(99L);
-
-        assertThatThrownBy(() -> subscribeService.unsubscribe(subscribeRequestDto))
-                .isInstanceOf(NotFoundException.class)
-                .hasMessageContaining(CHANNEL_NOT_FOUNT);
-    }
-
-    @Test
     void 구독_취소_실패_구독정보_없음() {
-        assertThatThrownBy(() -> subscribeService.unsubscribe(subscribeRequestDto))
+        assertThatThrownBy(() -> subscribeService.unsubscribe(99L, member.getEmail()))
                 .isInstanceOf(NotFoundException.class)
                 .hasMessageContaining(SUBSCRIBE_NOT_FOUND);
     }

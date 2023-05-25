@@ -5,6 +5,8 @@ import com.side.dayv.subscribe.dto.request.SubscribeRequestDto;
 import com.side.dayv.subscribe.service.SubscribeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -21,9 +23,9 @@ public class SubscribeController {
         return ApiResponse.success();
     }
 
-    @DeleteMapping
-    public ApiResponse unsubscribe(@RequestBody SubscribeRequestDto subscribeRequestDto) {
-        subscribeService.unsubscribe(subscribeRequestDto);
+    @DeleteMapping("/{subscribeId}")
+    public ApiResponse unsubscribe(@AuthenticationPrincipal User user, @PathVariable final Long subscribeId) {
+        subscribeService.unsubscribe(subscribeId, user.getUsername());
         return ApiResponse.success();
     }
 }
