@@ -1,25 +1,31 @@
 import { Icon } from '@/shared/component/Atom';
+import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
+import { fadeIn, fadeOut } from '@/shared/styles/keyframes';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const DropDown = () => {
+interface Props {
+  item: string[];
+}
+
+const DropDown = ({ item }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // ? TODO
-  // 1) list 따로 : children, object.assign
-  // 2) css 코드정리, 반응형 rem
-  // 3) 마우스 hover
-  // 4) 클릭하면 select 변경
+  const [list, setList] = useState(item[0]);
+
+  const ref = useOuterClick<HTMLDivElement>({
+    callback: () => setIsOpen(false),
+  });
 
   return (
-    <Wrapper>
+    <Wrapper ref={ref}>
       <Select
         onClick={() => {
           setIsOpen(!isOpen);
         }}
       >
-        최신순
+        {list}
         <Icon
           type="right"
           style={{
@@ -29,10 +35,18 @@ const DropDown = () => {
         ></Icon>
       </Select>
       {isOpen && (
-        <Ul>
-          <Li>최신순</Li>
-          <Li>오래된순</Li>
-          <Li>구독자수</Li>
+        <Ul isOpen={isOpen}>
+          {item.map((v, i) => (
+            <Li
+              key={i}
+              onClick={() => {
+                setList(v);
+                setIsOpen(false);
+              }}
+            >
+              {v}
+            </Li>
+          ))}
         </Ul>
       )}
     </Wrapper>
@@ -53,7 +67,7 @@ const Select = styled.div`
 
   height: ${pixelToRemUnit(40)};
 
-  padding: ${pixelToRemUnit([0, 20, 0, 10])};
+  padding: ${pixelToRemUnit([0, 10])};
 
   border: 1px solid ${getStyledThemProperty('colors', 'G_300')};
   border-radius: 7px;
@@ -63,11 +77,13 @@ const Select = styled.div`
   cursor: pointer;
 `;
 
-const Ul = styled.ul`
+const Ul = styled.ul<{ isOpen: boolean }>`
   display: flex;
   flex-direction: column;
 
-  padding: ${pixelToRemUnit([10, 18])};
+  width: ${pixelToRemUnit(128)};
+
+  padding: ${pixelToRemUnit([10, 0])};
   gap: 10px;
 
   border: 1px solid ${getStyledThemProperty('colors', 'G_700')};
@@ -78,6 +94,15 @@ const Ul = styled.ul`
   top: ${pixelToRemUnit(126)};
 
   cursor: pointer;
+
+  ${({ isOpen }) =>
+    isOpen
+      ? css`
+          animation: ${fadeIn} 0.15s ease-in-out 0s forwards;
+        `
+      : css`
+          animation: ${fadeOut} 0.15s ease-in-out 0s forwards;
+        `}
 `;
 
 const Li = styled.li`
@@ -87,5 +112,11 @@ const Li = styled.li`
   min-width: ${pixelToRemUnit(92)};
   height: ${pixelToRemUnit(32)};
 
+  padding: ${pixelToRemUnit(10)};
+
   white-space: nowrap;
+
+  &:hover {
+    background-color: #eee;
+  }
 `;
