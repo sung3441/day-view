@@ -1,15 +1,13 @@
+import styled from 'styled-components';
 import Modal from '@/shared/component/modal';
 import { pixelToRemUnit } from '@/shared/styles/util';
-import { ModalOptions } from '@/shared/types/modal';
-import styled from 'styled-components';
+import { useModal } from '@/shared/hooks';
 
-/**
- * TODO: Reafactor 🤔
- */
+const ModalCreateChannel = () => {
+  const { closeModal } = useModal();
 
-const ModalCreateChannel = ({ isOpen, isDimmed = true }: ModalOptions) => {
   return (
-    <Modal isOpen={isOpen} isDimmed={isDimmed}>
+    <Modal isDimmed={true}>
       <Modal.Header>
         <Modal.Title>새 카테고리 만들기</Modal.Title>
       </Modal.Header>
@@ -26,7 +24,9 @@ const ModalCreateChannel = ({ isOpen, isDimmed = true }: ModalOptions) => {
         </>
       </Modal.Body>
       <Modal.Control>
-        <Modal.Button variant="primary">취소</Modal.Button>
+        <Modal.Button variant="primary" onClick={closeModal}>
+          취소
+        </Modal.Button>
         <Modal.Button variant="accent">완료</Modal.Button>
       </Modal.Control>
     </Modal>

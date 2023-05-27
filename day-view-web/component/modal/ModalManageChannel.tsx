@@ -1,7 +1,7 @@
+import styled from 'styled-components';
 import Modal from '@/shared/component/modal';
 import { pixelToRemUnit } from '@/shared/styles/util';
-import { ModalOptions } from '@/shared/types/modal';
-import styled from 'styled-components';
+import { useModal } from '@/shared/hooks';
 
 const testUsers = [
   { id: '1', name: 'asd', src: 'a' },
@@ -15,12 +15,11 @@ const testUsers = [
   { id: '9', name: 'Gdhr', src: 'a' },
 ];
 
-/**
- * TODO: Reafactor 🤔
- */
-const ModalManageChannel = ({ isOpen, isDimmed = true }: ModalOptions) => {
+const ModalManageChannel = () => {
+  const { closeModal } = useModal();
+
   return (
-    <Modal isOpen={isOpen} isDimmed={isDimmed}>
+    <Modal isDimmed={true}>
       <Modal.Body gap={40}>
         <>
           <Modal.SubTitle>카테고리 이름</Modal.SubTitle>
@@ -41,7 +40,9 @@ const ModalManageChannel = ({ isOpen, isDimmed = true }: ModalOptions) => {
       </Modal.Body>
       <Modal.Control>
         <Modal.Button variant="primary">삭제</Modal.Button>
-        <Modal.Button variant="accent">수정</Modal.Button>
+        <Modal.Button variant="accent" onClick={closeModal}>
+          수정
+        </Modal.Button>
       </Modal.Control>
     </Modal>
   );

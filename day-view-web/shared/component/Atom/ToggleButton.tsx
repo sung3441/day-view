@@ -15,7 +15,7 @@ const ToggleButton = ({ id, checked = false, ...props }: Props) => {
       <Input
         id={id}
         type="checkbox"
-        checked={isChecked}
+        defaultChecked={isChecked}
         onClick={() => {
           setIsChecked(!isChecked);
         }}
