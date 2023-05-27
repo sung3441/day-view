@@ -25,9 +25,8 @@ public class Channel {
     private ChannelType type;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
     @Column(name = "secret_yn")
-    private SecretYn secretYn;
+    private boolean secretYn;
 
     @Column(name = "password")
     private String password;
@@ -45,7 +44,7 @@ public class Channel {
     private Member createMember;
 
     @Builder
-    public Channel(ChannelType channelType, SecretYn secretYn,
+    public Channel(ChannelType channelType, boolean secretYn,
                    String password, LocalDateTime createdDate,
                    LocalDateTime lastModifiedDate, Member member){
         this.type = channelType;

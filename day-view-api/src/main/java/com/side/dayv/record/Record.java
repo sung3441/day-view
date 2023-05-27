@@ -25,9 +25,8 @@ public class Record {
     private String imageUrl;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
     @Column(name = "complete")
-    private RecordComplete complete;
+    private boolean complete;
 
     @NotNull
     @Column(name = "start_date")
