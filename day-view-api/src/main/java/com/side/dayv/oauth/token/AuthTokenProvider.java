@@ -1,6 +1,7 @@
 package com.side.dayv.oauth.token;
 
 
+import com.side.dayv.oauth.entity.CustomUser;
 import com.side.dayv.oauth.exception.TokenValidFailedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
@@ -31,8 +32,8 @@ public class AuthTokenProvider {
         return new AuthToken(id, expiry, key);
     }
 
-    public AuthToken createAuthToken(String id, String role, Date expiry){
-        return new AuthToken(id, role, expiry, key);
+    public AuthToken createAuthToken(String id, Long memberId, Date expiry){
+        return new AuthToken(id, memberId, expiry, key);
     }
 
     public AuthToken convertAuthToken(String token){
@@ -48,7 +49,8 @@ public class AuthTokenProvider {
                             .map(SimpleGrantedAuthority::new)
                             .collect(Collectors.toList());
             log.debug("claims subject := [{}]", claims.getSubject());
-            User principal = new User(claims.getSubject(), "", authorities);
+            Long memberId = claims.get("member_id", Long.class);
+            CustomUser principal = new CustomUser(claims.getSubject(), "", authorities, memberId);
 
             return new UsernamePasswordAuthenticationToken(principal, authToken, authorities);
         }
