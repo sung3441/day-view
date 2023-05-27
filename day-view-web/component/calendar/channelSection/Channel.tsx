@@ -3,6 +3,7 @@ import { memo, SyntheticEvent, useState } from 'react';
 import { CheckBox, IconButton } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import dynamic from 'next/dynamic';
+import { useModal } from '@/shared/hooks';
 // import ColorBoard from '@/component/calendar/channelSection/ColorBoard';
 
 const ColorBoard = dynamic(
@@ -15,6 +16,7 @@ interface Props {
 
 const Channel = ({ label }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { openModal } = useModal();
 
   const handelOpen = (e: SyntheticEvent) => {
     e.stopPropagation();
@@ -25,7 +27,11 @@ const Channel = ({ label }: Props) => {
     <Wrap>
       <Label>
         <span>{label}</span>
-        <IconButton type="sm_plus" iconSize="sm" />
+        <IconButton
+          type="sm_plus"
+          iconSize="sm"
+          onClick={() => openModal('Create')}
+        />
       </Label>
       <List>
         <Item>
