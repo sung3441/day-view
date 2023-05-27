@@ -5,11 +5,10 @@ import { pixelToRemUnit } from '@/shared/styles/util';
 
 interface Props {
   children?: ReactNode;
-  isOpen?: boolean;
   isDimmed?: boolean;
 }
 
-const ModalMain = ({ children, isOpen, isDimmed }: Props) => {
+const ModalMain = ({ children, isDimmed }: Props) => {
   const ref = useRef<Element | null>(null);
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
@@ -20,14 +19,10 @@ const ModalMain = ({ children, isOpen, isDimmed }: Props) => {
 
   return isMounted && ref.current
     ? createPortal(
-        <>
-          {isOpen && (
-            <S.Layout>
-              <S.Container isDimmed={isDimmed}>{children}</S.Container>
-              {isDimmed && <S.Dim />}
-            </S.Layout>
-          )}
-        </>,
+        <S.Layout>
+          <S.Container isDimmed={isDimmed}>{children}</S.Container>
+          {isDimmed && <S.Dim />}
+        </S.Layout>,
         ref.current!
       )
     : null;
