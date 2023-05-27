@@ -28,6 +28,10 @@ public class Channel {
     @Column(name = "secret_yn")
     private boolean secretYn;
 
+    @NotNull
+    @Column(name = "default_yn")
+    private boolean defaultYn;
+
     @Column(name = "password")
     private String password;
 
@@ -45,10 +49,12 @@ public class Channel {
 
     @Builder
     public Channel(ChannelType channelType, boolean secretYn,
-                   String password, LocalDateTime createdDate,
-                   LocalDateTime lastModifiedDate, Member member){
+                   boolean defaultYn, String password,
+                   LocalDateTime createdDate, LocalDateTime lastModifiedDate,
+                   Member member){
         this.type = channelType;
         this.secretYn = secretYn;
+        this.defaultYn = defaultYn;
         this.password = password;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
