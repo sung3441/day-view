@@ -79,10 +79,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         //RoleType roleType = hasAuthority(authorities, RoleType.ADMIN.getCode()) ? RoleType.ADMIN : RoleType.USER;
 
         Date now = new Date();
-        AuthToken accessToken = tokenProvider.createAuthToken(
-                userInfo.getEmail(),
-                new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
-        );
 
         // refresh 토큰 설정
         long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
@@ -98,6 +94,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         } else {
             throw new UsernameNotFoundException("Can not find member.");
         }
+
+        AuthToken accessToken = tokenProvider.createAuthToken(
+                userInfo.getEmail(),
+                member.getMemberId(),
+                new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
+        );
 
         int cookieMaxAge = (int) refreshTokenExpiry / 60;
 
