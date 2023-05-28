@@ -1,10 +1,10 @@
 import { memo } from 'react';
 import styled, { css } from 'styled-components';
-import { Icon } from '@/shared/component/Atom';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { fadeIn, fadeOut } from '@/shared/styles/keyframes';
 import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import { colorEntries } from '@/shared/util/colorInfo';
+import { Icon } from '@/shared/component/Atom';
 
 interface Props {
   closeColorBoard: () => void;
@@ -21,7 +21,7 @@ const ColorBoard = ({ isOpen, closeColorBoard }: Props) => {
   return (
     <Box ref={ref} isShow={isShow} onAnimationEnd={handelOnAnimationEnd}>
       <BoxTitle>
-        <Icon type="sm_config" iconSize="sm" />
+        <Icon type="sm_config" />
         <span>관리</span>
       </BoxTitle>
       <ColorWrap>
@@ -57,13 +57,14 @@ const Box = styled.div<{ isShow: boolean }>`
 `;
 
 const BoxTitle = styled.div`
-  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid #d9d9d9;
   padding: ${pixelToRemUnit(10)};
 
   ${getStyledThemProperty('box', 'flexBetweenBox')};
   > span {
     margin-left: ${pixelToRemUnit(7)};
     ${getStyledThemProperty('fonts', 'caption3')};
+  }
 `;
 
 const ColorWrap = styled.div`
