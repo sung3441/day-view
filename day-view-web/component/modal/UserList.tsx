@@ -1,6 +1,5 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { Icon, UserImage } from '@/shared/component/Atom/';
 

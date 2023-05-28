@@ -29,7 +29,7 @@ const Channel = ({ label }: Props) => {
         <span>{label}</span>
         <IconButton
           type="sm_plus"
-          iconSize="sm"
+          size="small"
           onClick={() => openModal('Create')}
         />
       </Label>
@@ -37,7 +37,7 @@ const Channel = ({ label }: Props) => {
         <Item>
           <CheckBox id="test" label="test" />
           <div style={{ position: 'relative' }}>
-            <IconButton type="sm_more" iconSize="sm" onClick={handelOpen} />
+            <IconButton type="sm_more" size="small" onClick={handelOpen} />
             {isOpen && (
               <ColorBoard
                 isOpen={isOpen}

@@ -20,7 +20,7 @@ const ChannelSection = () => {
     <Wrap isOpenChannel={isOpenChannel}>
       <Channel label="내채널" />
       <Button style={buttonStyle}>
-        <Icon type={'sm_plus'} iconSize="sm" style={{ marginRight: '5px' }} />
+        <Icon type="sm_plus" style={{ marginRight: '5px' }} />
         <span>일정추가</span>
       </Button>
     </Wrap>

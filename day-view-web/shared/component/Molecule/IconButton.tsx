@@ -1,6 +1,9 @@
 import { Button, Icon } from '@/shared/component/Atom';
 import { CSSProperties, memo, ReactNode, SyntheticEvent } from 'react';
-import type { IconSize, Props as IconProps } from '../Atom/Icon';
+// import type { IconSize, Props as IconProps } from '../Atom/Icon';
+// import { defaultIconSizes } from '../Atom/Icon';
+
+import type { IconSizeType, Props as IconProps } from '../Atom/Icon';
 import { defaultIconSizes } from '../Atom/Icon';
 
 const defaultStyle: CSSProperties = {
@@ -12,12 +15,12 @@ const defaultStyle: CSSProperties = {
 };
 
 const UPSIZE = 12;
-function conversionSize(iconSize: IconSize) {
+function conversionSize(iconSize: IconSizeType) {
   const { width, height } = defaultIconSizes[iconSize];
 
   return {
     width: width + UPSIZE,
-    height: width + UPSIZE,
+    height: height + UPSIZE,
   };
 }
 
@@ -33,10 +36,10 @@ const IconButton = ({
   customStyle,
   onClick,
   type,
-  iconSize = 'mid',
+  size = 'mid',
   isActiveFnc = true,
 }: Props) => {
-  const sizes = conversionSize(iconSize);
+  const sizes = conversionSize(size);
 
   return (
     <Button
@@ -45,7 +48,8 @@ const IconButton = ({
       aria-label={`${type} button`}
       isActiveFnc={isActiveFnc}
     >
-      <Icon {...{ iconSize, type }} />
+      {/* <Icon {...{ iconSize, type }} /> */}
+      <Icon type={type} size={size} fill="#fff" />
       {children}
     </Button>
   );

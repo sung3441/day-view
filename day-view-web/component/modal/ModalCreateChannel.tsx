@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Modal from '@/shared/component/modal';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useModal } from '@/shared/hooks';
+import Icon from '@/shared/component/Atom/Icon';
 
 const ModalCreateChannel = () => {
   const { closeModal } = useModal();

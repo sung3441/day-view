@@ -25,7 +25,7 @@ const ButtonStyle = styled.button<{ isActiveFnc?: boolean; variant?: Variant }>`
   width: ${pixelToRemUnit(90)};
   height: ${pixelToRemUnit(40)};
 
-  padding: ${pixelToRemUnit([4, 20])};
+  /* padding: ${pixelToRemUnit([4, 20])}; */
 
   background: #ffffff;
   ${getStyledThemProperty('fonts', 'caption1')};

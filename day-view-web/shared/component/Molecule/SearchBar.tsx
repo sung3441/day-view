@@ -1,7 +1,7 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { Icon, Inputbox } from '@/shared/component/Atom';
+import { Inputbox, Icon } from '@/shared/component/Atom';
 import { IconButton } from '@/shared/component/Molecule';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 

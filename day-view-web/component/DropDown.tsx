@@ -1,9 +1,9 @@
-import { Icon } from '@/shared/component/Atom';
-import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
-import { fadeIn, fadeOut } from '@/shared/styles/keyframes';
-import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
+import { fadeIn, fadeOut } from '@/shared/styles/keyframes';
+import { useOuterClick } from '@/shared/hooks';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
+import { Icon } from '@/shared/component/Atom';
 
 interface Props {
   item: string[];
@@ -28,11 +28,8 @@ const DropDown = ({ item }: Props) => {
         {list}
         <Icon
           type="right"
-          style={{
-            transform: 'rotate(90deg)',
-            padding: '10px',
-          }}
-        ></Icon>
+          style={{ transform: 'rotate(90deg)', padding: '10px' }}
+        />
       </Select>
       {isOpen && (
         <Ul isOpen={isOpen}>
