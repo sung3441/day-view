@@ -16,19 +16,9 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubscribeRequestDto {
+public class SubscribeUpdateDto {
 
-    private Long memberId;
+    private SubscribeColor color;
 
-    private Long channelId;
-
-    public Subscribe toEntity(Member member, Channel channel) {
-        return Subscribe.builder()
-                .channel(channel)
-                .subscriber(member)
-                .color(SubscribeColor.YELLOW)
-                .auth(SubscribeAuth.SUBSCRIBE)
-                .subscribeDate(LocalDateTime.now())
-                .build();
-    }
+    private boolean showYn;
 }
