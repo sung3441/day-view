@@ -2,7 +2,6 @@ package com.side.dayv.oauth.service;
 
 import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.channel.entity.ChannelType;
-import com.side.dayv.channel.entity.SecretYn;
 import com.side.dayv.channel.repository.ChannelRepository;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;

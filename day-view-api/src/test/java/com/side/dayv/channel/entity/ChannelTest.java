@@ -36,7 +36,7 @@ class ChannelTest {
 
         Channel saveChannel = Channel.builder()
                 .channelType(ChannelType.MY)
-                .secretYn(SecretYn.N)
+                .secretYn(false)
                 .password(null)
                 .createdDate(LocalDateTime.now())
                 .lastModifiedDate(LocalDateTime.now())
