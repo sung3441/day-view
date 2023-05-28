@@ -13,3 +13,6 @@ export { default as IconSmUp } from './sm_up.svg';
 export { default as IconTrash } from './trash.svg';
 export { default as IconUser } from './user.svg';
 export { default as IconWrite } from './write.svg';
+export { default as MainLogo } from './mainLogo.svg.svg';
+export { default as Logo } from './logo.svg';
+export { default as Google } from './google.svg.svg';

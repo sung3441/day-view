@@ -1,29 +1,22 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
-import axios from 'axios';
-import { useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
-import { mswStatusAtom } from '@/shared/atom/global';
+import { GetServerSidePropsContext } from 'next';
+import Script from 'next/script';
+import KakaoLogin from '@/component/main/KakaoLogin';
 
 const inter = Inter({ subsets: ['latin'] });
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
 export default function Home() {
-  const mswStatus = useRecoilValue(mswStatusAtom);
+  function kakaoInit() {
+    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID);
+  }
 
-  const handleGetReview = async () => {
-    try {
-      const res = await axios.get('test', {});
-      console.log('res', res);
-    } catch (e) {}
-  };
-
-  useEffect(() => {
-    if (mswStatus !== 'browser') return;
-
-    (async () => await handleGetReview())();
-  }, [mswStatus]);
-
-  // console.log(navigator.serviceWorkere);
   return (
     <>
       <Head>
@@ -32,9 +25,23 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Script
+        src="https://developers.kakao.com/sdk/js/kakao.js"
+        onLoad={kakaoInit}
+      ></Script>
       <>
-        <button onClick={handleGetReview}>123</button>
+        <KakaoLogin />
       </>
     </>
   );
 }
+
+const getServerSideProps = ({
+  req,
+  res,
+  ...rest
+}: GetServerSidePropsContext) => {
+  return {
+    props: {},
+  };
+};
