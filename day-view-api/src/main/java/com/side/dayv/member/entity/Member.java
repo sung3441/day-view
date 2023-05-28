@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -22,7 +21,7 @@ public class Member {
     @Id
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private Long id;
 
     @Column(name = "provider")
     @Enumerated(EnumType.STRING)
@@ -62,7 +61,7 @@ public class Member {
             , LocalDateTime lastModifiedDate
             , String profileImageUrl
             , String birthday
-            , String refreshToken){
+            , String refreshToken) {
         this.email = email;
         this.nickname = nickname;
         this.createdDate = createdDate;
@@ -73,11 +72,11 @@ public class Member {
         this.provider = provider;
     }
 
-    public void changeNickName(String nickname){
+    public void changeNickName(String nickname) {
         this.nickname = nickname;
     }
 
-    public void changeProfileImageUrl(String profileImageUrl){
+    public void changeProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
     }
 

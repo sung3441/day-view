@@ -3,7 +3,6 @@ package com.side.dayv.oauth.handler;
 import com.side.dayv.global.util.CookieUtil;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
-import com.side.dayv.member.service.MemberService;
 import com.side.dayv.oauth.config.properties.AppProperties;
 import com.side.dayv.oauth.entity.ProviderType;
 import com.side.dayv.oauth.info.OAuth2UserInfo;
@@ -17,7 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,7 +29,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Date;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static com.side.dayv.oauth.repository.OAuth2AuthorizationRequestBasedOnCookieRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
@@ -97,7 +94,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         AuthToken accessToken = tokenProvider.createAuthToken(
                 userInfo.getEmail(),
-                member.getMemberId(),
+                member.getId(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
 
