@@ -2,7 +2,6 @@ package com.side.dayv.subscribe.service;
 
 import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.channel.entity.ChannelType;
-import com.side.dayv.channel.entity.SecretYn;
 import com.side.dayv.channel.repository.ChannelRepository;
 import com.side.dayv.global.exception.AlreadyExistsException;
 import com.side.dayv.global.exception.NotFoundException;
@@ -60,7 +59,7 @@ class SubscribeServiceTest {
 
         channel = channelRepository.save(Channel.builder()
                 .channelType(ChannelType.MY)
-                .secretYn(SecretYn.N)
+                .secretYn(false)
                 .password(null)
                 .createdDate(LocalDateTime.now())
                 .lastModifiedDate(LocalDateTime.now())
