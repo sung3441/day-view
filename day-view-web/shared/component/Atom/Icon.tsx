@@ -1,6 +1,8 @@
 import {
   IconClose,
   IconLeft,
+  IconLogo,
+  IconMainLogo,
   IconMenu,
   IconRight,
   IconSearch,
@@ -40,6 +42,8 @@ const iconComponents = {
   trash: IconTrash,
   user: IconUser,
   write: IconWrite,
+  mainLogo: IconMainLogo,
+  logo: IconLogo,
 } satisfies Record<string, ElementType>;
 
 type IconType = keyof typeof iconComponents;

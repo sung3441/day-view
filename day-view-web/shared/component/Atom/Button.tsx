@@ -39,10 +39,6 @@ const ButtonStyle = styled.button<{ isActiveFnc?: boolean; variant?: Variant }>`
     background-color: ${getStyledThemProperty('colors', 'main')};
   }
 
-  &:hover {
-    filter: saturate(210%);
-  }
-
   ${({ isActiveFnc }) =>
     isActiveFnc &&
     css`
@@ -52,6 +48,7 @@ const ButtonStyle = styled.button<{ isActiveFnc?: boolean; variant?: Variant }>`
         border-radius: 50%;
         background: #f3f3f3 !important;
         opacity: 0.8;
+        filter: saturate(210%);
       }
     `}
 

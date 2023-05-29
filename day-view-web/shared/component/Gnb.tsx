@@ -3,14 +3,17 @@ import { memo, useCallback } from 'react';
 import { IconButton } from '@/shared/component/Molecule';
 import { useSetRecoilState } from 'recoil';
 import Tab from '@/shared/component/GnbTab';
-import { pixelToRemUnit } from '@/shared/styles/util';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { G_isOpenChannelAtom } from '@/shared/atom/globalCalendar';
+import { useRouter } from 'next/router';
 
 interface Props {
   handleChangeTheme?: () => void;
 }
 
 const Gnb = ({ handleChangeTheme }: Props) => {
+  const { pathname } = useRouter();
+
   const setIsOpenChannel = useSetRecoilState(G_isOpenChannelAtom);
 
   const handleClickMenu = useCallback(
@@ -20,12 +23,44 @@ const Gnb = ({ handleChangeTheme }: Props) => {
 
   return (
     <Header>
-      <IconButton type="menu" onClick={handleClickMenu} />
-      <RightBox>
-        <Tab />
-        <IconButton type="search" />
-        <IconButton type="user" />
-      </RightBox>
+      {pathname === '/calendar' ? (
+        <>
+          <LeftBox>
+            <IconButton
+              type="menu"
+              onClick={handleClickMenu}
+              customStyle={{ marginRight: '20px' }}
+            />
+            <IconButton
+              type="logo"
+              width={96}
+              height={40}
+              isActiveFnc={false}
+              customStyle={{
+                width: '96px',
+                height: '40px',
+                marginLeft: '20px',
+              }}
+            />
+          </LeftBox>
+          <RightBox>
+            <Tab />
+            <IconButton type="search" />
+            <IconButton type="user" />
+          </RightBox>
+        </>
+      ) : (
+        <IconButton
+          type="logo"
+          width={96}
+          height={40}
+          isActiveFnc={false}
+          customStyle={{
+            width: '96px',
+            height: '40px',
+          }}
+        />
+      )}
     </Header>
   );
 };
@@ -42,6 +77,10 @@ const Header = styled.header`
 
   background-color: #ffffff;
   border-bottom: 1px solid #dbdbdb;
+`;
+
+const LeftBox = styled.div`
+  ${getStyledThemProperty('box', 'flexBetweenBox')}
 `;
 
 const RightBox = styled.div`
