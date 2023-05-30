@@ -63,6 +63,7 @@ class SubscribeServiceTest {
                 .build());
 
         CHANNEL = channelRepository.save(Channel.builder()
+                .name("test")
                 .channelType(ChannelType.MY)
                 .secretYn(false)
                 .password(null)

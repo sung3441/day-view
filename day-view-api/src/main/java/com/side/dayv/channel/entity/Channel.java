@@ -6,8 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -20,6 +18,10 @@ public class Channel {
     private Long id;
 
     @NotNull
+    @Column(name = "name", length = 50)
+    private String name;
+
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "channel_type")
     private ChannelType type;
@@ -28,7 +30,7 @@ public class Channel {
     @Column(name = "secret_yn")
     private boolean secretYn;
 
-    @Column(name = "password")
+    @Column(name = "password", length = 1_000)
     private String password;
 
     @NotNull
@@ -44,8 +46,9 @@ public class Channel {
     private Member createMember;
 
     @Builder
-    public Channel(ChannelType channelType, boolean secretYn, String password,
+    public Channel(String name, ChannelType channelType, boolean secretYn, String password,
                    LocalDateTime createdDate, LocalDateTime lastModifiedDate, Member member){
+        this.name = name;
         this.type = channelType;
         this.secretYn = secretYn;
         this.password = password;
