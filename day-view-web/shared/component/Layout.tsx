@@ -10,7 +10,7 @@ const Layout = ({ children }: PropsWithChildren<Props>) => {
 
   return (
     <StyledLayout>
-      {router.pathname !== '/' && <Gnb />}
+      <Gnb />
       <Main>{children}</Main>;
     </StyledLayout>
   );

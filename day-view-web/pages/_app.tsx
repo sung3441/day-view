@@ -32,7 +32,7 @@ function App({ Component, pageProps }: AppProps) {
 }
 
 const APPWithConfig = ({ children }: { children: any }) => {
-  useMswStatus();
+  // useMswStatus();
 
   return <Layout>{children}</Layout>;
 };

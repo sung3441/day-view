@@ -38,7 +38,6 @@ const Wrap = styled.div<{ isOpenChannel: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  //align-items: center;
 
   background-color: #fcfcfc;
   border-right: 1px solid #dbdbdb;
