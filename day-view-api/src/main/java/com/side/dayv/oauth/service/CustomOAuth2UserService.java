@@ -67,12 +67,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private void createChannel(Member member){
         LocalDateTime now = LocalDateTime.now();
 
-        ChannelType myChannelType = ChannelType.valueOf("MY");
-
         Channel myChannel = Channel.builder()
-                .channelType(myChannelType)
+                .channelType(ChannelType.MY)
                 .secretYn(false)
-                .defaultYn(true)
                 .password(null)
                 .createdDate(now)
                 .lastModifiedDate(now)
