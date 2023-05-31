@@ -1,5 +1,8 @@
-import { modalState } from '@/shared/atom/modalState';
+import { useRef, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useRecoilValue } from 'recoil';
+
+import { modalState } from '@/shared/atom/modalState';
 import ModalCreateChannel from './ModalCreateChannel';
 import ModalManageChannel from './ModalManageChannel';
 
@@ -12,10 +15,21 @@ export type ModalType = keyof typeof ModalComponents | '';
 
 const ModalRenderer = () => {
   const modalType = useRecoilValue(modalState);
+
+  const ref = useRef<Element | null>(null);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    ref.current = document.querySelector<HTMLElement>('#portal');
+  }, []);
+
   if (!modalType) return null;
 
   const ModalComponent = ModalComponents[modalType];
-  return <ModalComponent />;
+  return isMounted && ref.current
+    ? createPortal(<ModalComponent />, ref.current!)
+    : null;
 };
 
 export default ModalRenderer;
