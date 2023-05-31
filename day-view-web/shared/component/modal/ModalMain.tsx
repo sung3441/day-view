@@ -1,6 +1,5 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode } from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import { createPortal } from 'react-dom';
 import { pixelToRemUnit } from '@/shared/styles/util';
 
 interface Props {
@@ -9,23 +8,12 @@ interface Props {
 }
 
 const ModalMain = ({ children, isDimmed }: Props) => {
-  const ref = useRef<Element | null>(null);
-  const [isMounted, setIsMounted] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-    ref.current = document.querySelector<HTMLElement>('#portal');
-  }, []);
-
-  return isMounted && ref.current
-    ? createPortal(
-        <S.Layout>
-          <S.Container isDimmed={isDimmed}>{children}</S.Container>
-          {isDimmed && <S.Dim />}
-        </S.Layout>,
-        ref.current!
-      )
-    : null;
+  return (
+    <S.Layout>
+      <S.Container isDimmed={isDimmed}>{children}</S.Container>
+      {isDimmed && <S.Dim />}
+    </S.Layout>
+  );
 };
 
 const dimFade = keyframes`
