@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
+import styled, { css, keyframes } from 'styled-components';
 import { createPortal } from 'react-dom';
-import styled, { css } from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
 
 interface Props {
@@ -28,6 +28,37 @@ const ModalMain = ({ children, isDimmed }: Props) => {
     : null;
 };
 
+const dimFade = keyframes`
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.8;
+    }
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+`;
+
 const S = {
   Layout: styled.div`
     display: flex;
@@ -49,7 +80,6 @@ const S = {
     position: relative;
 
     padding: ${pixelToRemUnit([60, 50])};
-
     ${({ isDimmed }) =>
       isDimmed
         ? css`
@@ -62,7 +92,10 @@ const S = {
     background-color: ${({ theme }) => theme.colors.White};
     border-radius: 11px;
     z-index: 200;
+
+    animation: ${fadeIn} 0.3s ease forwards;
   `,
+
   Dim: styled.div`
     position: absolute;
     top: 0;
@@ -71,7 +104,7 @@ const S = {
     right: 0;
 
     background-color: ${({ theme }) => theme.colors.Black};
-    opacity: 0.6;
+    animation: ${dimFade} 0.3s ease forwards;
   `,
 };
 
