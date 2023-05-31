@@ -43,10 +43,13 @@ const Wrap = styled.div<{ isOpenChannel: boolean }>`
   border-right: 1px solid #dbdbdb;
 
   transition: all 0.3s ease-out 0.05s;
+
   ${({ isOpenChannel }) =>
-    !isOpenChannel &&
-    css`
-      width: 0;
-      display: none;
-    `}
+    isOpenChannel
+      ? css`
+          transform: translateX(0);
+        `
+      : css`
+          transform: translateX(${pixelToRemUnit(-373)});
+        `}
 `;
