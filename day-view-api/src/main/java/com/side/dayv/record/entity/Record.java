@@ -1,4 +1,4 @@
-package com.side.dayv.record;
+package com.side.dayv.record.entity;
 
 import com.side.dayv.channel.entity.Channel;
 import jakarta.persistence.*;
