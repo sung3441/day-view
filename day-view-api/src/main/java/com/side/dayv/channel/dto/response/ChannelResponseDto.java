@@ -15,8 +15,6 @@ public class ChannelResponseDto {
 
     private boolean secretYn;
 
-    private String password;
-
     private ChannelType channelType;
 
     private Long creatorId;
@@ -24,11 +22,10 @@ public class ChannelResponseDto {
     private String creatorNickname;
 
     @Builder
-    public ChannelResponseDto(Long id, String name, boolean secretYn, String password, ChannelType channelType, Long creatorId, String creatorNickname) {
+    public ChannelResponseDto(Long id, String name, boolean secretYn, ChannelType channelType, Long creatorId, String creatorNickname) {
         this.id = id;
         this.name = name;
         this.secretYn = secretYn;
-        this.password = password;
         this.channelType = channelType;
         this.creatorId = creatorId;
         this.creatorNickname = creatorNickname;
@@ -39,7 +36,6 @@ public class ChannelResponseDto {
                 .id(channel.getId())
                 .name(channel.getName())
                 .secretYn(channel.isSecretYn())
-                .password(channel.getPassword())
                 .channelType(channel.getType())
                 .creatorId(member.getId())
                 .creatorNickname(member.getNickname())

@@ -49,7 +49,6 @@ class ChannelServiceTest {
         CREATE_REQUEST = ChannelCreateDto.builder()
                 .name("테스트 채널")
                 .secretYn(false)
-                .password(null)
                 .build();
     }
 
@@ -61,7 +60,6 @@ class ChannelServiceTest {
         assertThat(saveChannel.getName()).isEqualTo(CREATE_REQUEST.getName());
         assertThat(saveChannel.getCreateMember()).isEqualTo(MEMBER);
         assertThat(saveChannel.isSecretYn()).isFalse();
-        assertThat(saveChannel.getPassword()).isNull();
     }
 
     @Test
@@ -69,12 +67,10 @@ class ChannelServiceTest {
         ChannelCreateDto secret = ChannelCreateDto.builder()
                 .name("비밀 채널 테스트")
                 .secretYn(true)
-                .password("1234")
                 .build();
 
         Channel secretChannel = channelService.save(MEMBER.getId(), secret);
 
         assertThat(secretChannel.isSecretYn()).isTrue();
-        assertThat(secretChannel.getPassword()).isEqualTo("1234");
     }
 }
