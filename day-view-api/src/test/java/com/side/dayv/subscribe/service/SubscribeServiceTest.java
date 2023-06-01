@@ -66,7 +66,6 @@ class SubscribeServiceTest {
                 .name("test")
                 .channelType(ChannelType.MY)
                 .secretYn(false)
-                .password(null)
                 .createdDate(LocalDateTime.now())
                 .lastModifiedDate(LocalDateTime.now())
                 .member(MEMBER)
