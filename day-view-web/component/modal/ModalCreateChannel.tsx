@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Modal from '@/shared/component/modal';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useModal } from '@/shared/hooks';
+import { memo } from 'react';
 
 const ModalCreateChannel = () => {
   const { closeModal } = useModal();
@@ -24,7 +25,10 @@ const ModalCreateChannel = () => {
         </>
       </Modal.Body>
       <Modal.Control>
-        <Modal.Button variant="primary" onClick={closeModal}>
+        <Modal.Button
+          variant="primary"
+          onClick={() => closeModal('CreateCategory')}
+        >
           취소
         </Modal.Button>
         <Modal.Button variant="accent">완료</Modal.Button>
@@ -33,7 +37,7 @@ const ModalCreateChannel = () => {
   );
 };
 
-export default ModalCreateChannel;
+export default memo(ModalCreateChannel);
 
 const WrapButton = styled.div`
   width: ${pixelToRemUnit(380)};

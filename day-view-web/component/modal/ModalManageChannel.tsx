@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Modal from '@/shared/component/modal';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useModal } from '@/shared/hooks';
+import { memo } from 'react';
 
 const testUsers = [
   { id: '1', name: 'asd', src: 'a' },
@@ -40,7 +41,10 @@ const ModalManageChannel = () => {
       </Modal.Body>
       <Modal.Control>
         <Modal.Button variant="primary">삭제</Modal.Button>
-        <Modal.Button variant="accent" onClick={closeModal}>
+        <Modal.Button
+          variant="accent"
+          onClick={() => closeModal('ManageCategory')}
+        >
           수정
         </Modal.Button>
       </Modal.Control>
@@ -48,7 +52,7 @@ const ModalManageChannel = () => {
   );
 };
 
-export default ModalManageChannel;
+export default memo(ModalManageChannel);
 
 const Wrap = styled.div`
   width: ${pixelToRemUnit(380)};
