@@ -1,5 +1,6 @@
 package com.side.dayv.channel.dto.response;
 
+import com.querydsl.core.annotations.QueryProjection;
 import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.channel.entity.ChannelType;
 import com.side.dayv.member.entity.Member;
@@ -31,14 +32,13 @@ public class ChannelResponseDto {
         this.creatorNickname = creatorNickname;
     }
 
-    public static ChannelResponseDto create(Channel channel, Member member) {
-        return ChannelResponseDto.builder()
-                .id(channel.getId())
-                .name(channel.getName())
-                .secretYn(channel.isSecretYn())
-                .channelType(channel.getType())
-                .creatorId(member.getId())
-                .creatorNickname(member.getNickname())
-                .build();
+    @QueryProjection
+    public ChannelResponseDto(Channel channel, Member member) {
+        this.id = channel.getId();
+        this.name = channel.getName();
+        this.secretYn = channel.isSecretYn();
+        this.channelType = getChannelType();
+        this.creatorId = member.getId();
+        this.creatorNickname = member.getNickname();
     }
 }
