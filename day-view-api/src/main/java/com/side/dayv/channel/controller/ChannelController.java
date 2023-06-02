@@ -39,7 +39,7 @@ public class ChannelController {
                                                                 @PathVariable final ChannelSelectType channelSelectType) {
 
         return ApiResponse.success(
-                channelSelectType.getFindSuccessMessage(),
+                channelSelectType.getKey(),
                 channelService.findMyChannels(user.getMemberId(), channelSelectType)
         );
     }
