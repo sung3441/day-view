@@ -10,6 +10,7 @@ import com.side.dayv.oauth.exception.OAuthProviderMissMatchException;
 import com.side.dayv.oauth.info.OAuth2UserInfo;
 import com.side.dayv.oauth.entity.ProviderType;
 import com.side.dayv.oauth.info.OAuth2UserInfoFactory;
+import com.side.dayv.subscribe.service.SubscribeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -27,6 +28,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final MemberRepository memberRepository;
     private final ChannelRepository channelRepository;
+    private final SubscribeService subscribeService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException{
@@ -58,13 +60,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             updateUser(savedUser, userInfo);
         } else {
             savedUser = createUser(userInfo, providerType);
-            createChannel(savedUser);
+            Channel myChannel = createChannel(savedUser);
+            subscribeService.subscribe(savedUser.getId(), myChannel.getId());
         }
 
         return MemberPrincipal.create(savedUser, user.getAttributes());
     }
 
-    private void createChannel(Member member){
+    private Channel createChannel(Member member){
         LocalDateTime now = LocalDateTime.now();
 
         Channel myChannel = Channel.builder()
@@ -75,7 +78,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .member(member)
                 .build();
 
-        channelRepository.saveAndFlush(myChannel);
+        return channelRepository.saveAndFlush(myChannel);
     }
 
     private Member createUser(OAuth2UserInfo userInfo, ProviderType providerType) {
