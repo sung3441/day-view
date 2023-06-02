@@ -65,7 +65,6 @@ class SubscribeServiceTest {
         CHANNEL = channelRepository.save(Channel.builder()
                 .name("test")
                 .channelType(ChannelType.MY)
-                .secretYn(false)
                 .createdDate(LocalDateTime.now())
                 .lastModifiedDate(LocalDateTime.now())
                 .member(MEMBER)

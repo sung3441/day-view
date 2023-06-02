@@ -1,10 +1,13 @@
 package com.side.dayv.channel.repository;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.side.dayv.channel.dto.response.ChannelResponseDto;
 import com.side.dayv.channel.dto.response.QChannelResponseDto;
 import com.side.dayv.channel.entity.ChannelType;
 import com.side.dayv.member.entity.QMember;
+import com.side.dayv.subscribe.entity.QSubscribe;
 import com.side.dayv.subscribe.entity.SubscribeAuth;
 import jakarta.persistence.EntityManager;
 
@@ -23,35 +26,22 @@ public class ChannelRepositoryImpl implements ChannelRepositoryCustom {
     }
 
     @Override
-    public List<ChannelResponseDto> findManageChannels(Long memberId) {
+    public List<ChannelResponseDto> findMyChannels(Long memberId, BooleanExpression where, BooleanExpression on) {
         return queryFactory
-                .select(new QChannelResponseDto(channel, member))
-                .innerJoin(subscribe.channel, channel)
-                .leftJoin(channel.createMember, member)
-                .where(
-                        channel.type.eq(ChannelType.MY) // 내 채널
-                                .or(channel.type.eq(ChannelType.CUSTOM).and(subscribe.auth.eq(SubscribeAuth.MANAGE))) // 편집자 권한
-                )
-                .fetch();
-    }
-
-    @Override
-    public List<ChannelResponseDto> findSubscribeChannels(Long memberId) {
-        return queryFactory
-                .select(new QChannelResponseDto(channel, member))
-                .innerJoin(subscribe.channel, channel)
-                .leftJoin(channel.createMember, member)
-                .where(channel.type.eq(ChannelType.CUSTOM).and(subscribe.auth.eq(SubscribeAuth.SUBSCRIBE))) // 구독 권한
-                .fetch();
-    }
-
-    @Override
-    public List<ChannelResponseDto> findGoogleChannels(Long memberId) {
-        return queryFactory
-                .select(new QChannelResponseDto(channel, member))
-                .innerJoin(subscribe.channel, channel)
-                .leftJoin(channel.createMember, member)
-                .where(channel.type.eq(ChannelType.GOOGLE))
+                .select(new QChannelResponseDto(
+                        channel,
+                        member,
+                        JPAExpressions
+                                .select(subscribe.count())
+                                .from(subscribe)
+                                .where(subscribe.channel.id.eq(channel.id))
+                ))
+                .from(channel)
+                .innerJoin(subscribe)
+                .on(on)
+                .join(member)
+                .on(member.id.eq(memberId))
+                .where(where)
                 .fetch();
     }
 }

@@ -3,6 +3,7 @@ package com.side.dayv.channel.service;
 import com.side.dayv.channel.dto.request.ChannelCreateDto;
 import com.side.dayv.channel.dto.response.ChannelResponseDto;
 import com.side.dayv.channel.entity.Channel;
+import com.side.dayv.channel.entity.ChannelSelectType;
 import com.side.dayv.channel.repository.ChannelRepository;
 import com.side.dayv.global.exception.BadRequestException;
 import com.side.dayv.global.exception.NotFoundException;
@@ -33,17 +34,12 @@ public class ChannelService {
         return channelRepository.save(request.toEntity(member));
     }
 
-    public List<ChannelResponseDto> findManageChannels(final Long memberId) {
-        return channelRepository.findManageChannels(memberId);
-    }
+    public List<ChannelResponseDto> findMyChannels(final Long memberId, ChannelSelectType selectType) {
+        if (selectType == ChannelSelectType.GOOGLE) {
+            memberRepository.findByIdAndProvider(memberId, ProviderType.GOOGLE)
+                    .orElseThrow(() -> new BadRequestException(BAD_REQUEST_GOOGLE_PERMISSION));
+        }
 
-    public List<ChannelResponseDto> findSubscribeChannels(final Long memberId) {
-        return channelRepository.findSubscribeChannels(memberId);
-    }
-
-    public List<ChannelResponseDto> findGoogleChannels(final Long memberId) {
-        memberRepository.findByIdAndProvider(memberId, ProviderType.GOOGLE)
-                .orElseThrow(() -> new BadRequestException(BAD_REQUEST_GOOGLE_PERMISSION));
-        return channelRepository.findGoogleChannels(memberId);
+        return channelRepository.findMyChannels(memberId, selectType.whereQuery(), selectType.subscribeJoinOnQuery());
     }
 }
