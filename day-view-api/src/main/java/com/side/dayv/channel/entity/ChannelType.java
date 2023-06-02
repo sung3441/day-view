@@ -1,5 +1,5 @@
 package com.side.dayv.channel.entity;
 
 public enum ChannelType {
-    MY, CUSTOM, GOOGLE
+    MY, CUSTOM, GOOGLE, SECRET
 }

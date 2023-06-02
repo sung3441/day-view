@@ -70,7 +70,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         Channel myChannel = Channel.builder()
                 .name("내 일정")
                 .channelType(ChannelType.MY)
-                .secretYn(false)
                 .createdDate(now)
                 .lastModifiedDate(now)
                 .member(member)

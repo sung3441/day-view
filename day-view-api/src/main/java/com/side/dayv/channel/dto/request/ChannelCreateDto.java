@@ -25,12 +25,12 @@ public class ChannelCreateDto {
 
     public Channel toEntity(Member member) {
         LocalDateTime now = LocalDateTime.now();
+        ChannelType channelType = secretYn ? ChannelType.SECRET : ChannelType.CUSTOM;
 
         return Channel.builder()
                 .name(this.name)
                 .member(member)
-                .channelType(ChannelType.CUSTOM)
-                .secretYn(this.secretYn)
+                .channelType(channelType)
                 .createdDate(now)
                 .lastModifiedDate(now)
                 .build();
