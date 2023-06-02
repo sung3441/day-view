@@ -2,19 +2,19 @@ import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useRecoilValue } from 'recoil';
 
-import { modalState } from '@/shared/atom/modalState';
+import { modalListAtom } from '@/shared/atom/modalState';
 import ModalCreateChannel from './ModalCreateChannel';
 import ModalManageChannel from './ModalManageChannel';
 
-const ModalComponents = {
-  Create: ModalCreateChannel,
-  Manage: ModalManageChannel,
-} satisfies Record<string, () => React.ReactElement>;
+const modalComponents = {
+  CreateCategory: ModalCreateChannel,
+  ManageCategory: ModalManageChannel,
+} satisfies Record<string, React.MemoExoticComponent<() => React.ReactElement>>;
 
-export type ModalType = keyof typeof ModalComponents | '';
+export type ModalType = keyof typeof modalComponents;
 
 const ModalRenderer = () => {
-  const modalType = useRecoilValue(modalState);
+  const modalList = useRecoilValue(modalListAtom);
 
   const ref = useRef<Element | null>(null);
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -24,11 +24,17 @@ const ModalRenderer = () => {
     ref.current = document.querySelector<HTMLElement>('#portal');
   }, []);
 
-  if (!modalType) return null;
+  if (modalList.length === 0) return null;
 
-  const ModalComponent = ModalComponents[modalType];
   return isMounted && ref.current
-    ? createPortal(<ModalComponent />, ref.current!)
+    ? createPortal(
+        modalList.map((modalType) => {
+          const ModalComponent = modalComponents[modalType];
+
+          return <ModalComponent key={modalType} />;
+        }),
+        ref.current!
+      )
     : null;
 };
 

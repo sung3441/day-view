@@ -17,13 +17,10 @@ public class ChannelCreateDto {
 
     private boolean secretYn;
 
-    private String password;
-
     @Builder
-    public ChannelCreateDto(String name, boolean secretYn, String password) {
+    public ChannelCreateDto(String name, boolean secretYn) {
         this.name = name;
         this.secretYn = secretYn;
-        this.password = password;
     }
 
     public Channel toEntity(Member member) {
@@ -34,7 +31,6 @@ public class ChannelCreateDto {
                 .member(member)
                 .channelType(ChannelType.CUSTOM)
                 .secretYn(this.secretYn)
-                .password(this.password)
                 .createdDate(now)
                 .lastModifiedDate(now)
                 .build();

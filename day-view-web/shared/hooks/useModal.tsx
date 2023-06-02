@@ -1,18 +1,24 @@
 import { useSetRecoilState } from 'recoil';
-import { modalState } from '@/shared/atom/modalState';
+import { modalListAtom } from '@/shared/atom/modalState';
 import { ModalType } from '@/component/modal/ModalRenderer';
+import { useCallback } from 'react';
 
-/**
- * TODO: Refactor
- */
 const useModal = () => {
-  const setType = useSetRecoilState(modalState);
-  const openModal = (type: ModalType) => {
-    setType(type);
-  };
-  const closeModal = () => {
-    setType('');
-  };
+  const setModalList = useSetRecoilState(modalListAtom);
+
+  const openModal = useCallback(
+    (modalType: ModalType) => {
+      setModalList((modals) => [...modals, modalType]);
+    },
+    [setModalList]
+  );
+
+  const closeModal = useCallback(
+    (modalType: ModalType) => {
+      setModalList((modals) => modals.filter((modal) => modal !== modalType));
+    },
+    [setModalList]
+  );
 
   return { openModal, closeModal };
 };

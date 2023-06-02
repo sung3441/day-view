@@ -71,7 +71,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .name("내 일정")
                 .channelType(ChannelType.MY)
                 .secretYn(false)
-                .password(null)
                 .createdDate(now)
                 .lastModifiedDate(now)
                 .member(member)

@@ -30,9 +30,6 @@ public class Channel {
     @Column(name = "secret_yn")
     private boolean secretYn;
 
-    @Column(name = "password", length = 1_000)
-    private String password;
-
     @NotNull
     @Column(name = "create_date")
     private LocalDateTime createdDate;
@@ -46,12 +43,11 @@ public class Channel {
     private Member createMember;
 
     @Builder
-    public Channel(String name, ChannelType channelType, boolean secretYn, String password,
+    public Channel(String name, ChannelType channelType, boolean secretYn,
                    LocalDateTime createdDate, LocalDateTime lastModifiedDate, Member member){
         this.name = name;
         this.type = channelType;
         this.secretYn = secretYn;
-        this.password = password;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
         this.createMember = member;
