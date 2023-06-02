@@ -2,6 +2,7 @@ import { memo } from 'react';
 import styled from 'styled-components';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { Icon, UserImage } from '@/shared/component/Atom/';
+import { useModal } from '@/shared/hooks';
 
 const MAX_LENGTH = 5;
 
@@ -9,10 +10,9 @@ interface Props {
   users: { id: string; name: string; src: string }[];
 }
 
-/**
- * TODO: Refactor
- */
 const UserList = ({ users }: Props) => {
+  const { openModal } = useModal();
+
   return (
     <S.Layout>
       {users.slice(0, MAX_LENGTH).map((user) => (
@@ -21,7 +21,7 @@ const UserList = ({ users }: Props) => {
           <S.Name>{user.name}</S.Name>
         </S.UserWrap>
       ))}
-      <S.Circle>
+      <S.Circle onClick={() => openModal('EditorList')}>
         {users.length <= MAX_LENGTH ? (
           <Icon type="sm_plus" />
         ) : (
@@ -44,7 +44,7 @@ const S = {
     text-align: center;
   `,
 
-  Circle: styled.div`
+  Circle: styled.button`
     display: flex;
     justify-content: center;
     align-items: center;

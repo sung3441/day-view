@@ -8,7 +8,7 @@ const ModalCreateChannel = () => {
   const { closeModal } = useModal();
 
   return (
-    <Modal isDimmed={true}>
+    <Modal>
       <Modal.Header>
         <Modal.Title>새 카테고리 만들기</Modal.Title>
       </Modal.Header>
@@ -33,6 +33,7 @@ const ModalCreateChannel = () => {
         </Modal.Button>
         <Modal.Button variant="accent">완료</Modal.Button>
       </Modal.Control>
+      <Modal.Dim />
     </Modal>
   );
 };

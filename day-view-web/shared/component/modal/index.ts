@@ -5,6 +5,7 @@ import ModalInput from './ModalInput';
 import ModalMain from './ModalMain';
 import ModalHeader from './ModalHeader';
 import ModalBody from './ModalBody';
+import ModalDim from './ModalDim';
 
 import { ToggleButton, Textarea, Button } from '@/shared/component/Atom/';
 import UserList from '@/component/modal/UserList';
@@ -33,6 +34,7 @@ const Modal = Object.assign(ModalMain, {
   Control: ModalControl,
   Header: ModalHeader,
   Body: ModalBody,
+  Dim: ModalDim,
   Title,
   SubTitle,
   ToggleButton,

@@ -3,12 +3,16 @@ import { createPortal } from 'react-dom';
 import { useRecoilValue } from 'recoil';
 
 import { modalListAtom } from '@/shared/atom/modalState';
-import ModalCreateChannel from './ModalCreateChannel';
-import ModalManageChannel from './ModalManageChannel';
+import {
+  ModalCreateChannel,
+  ModalManageChannel,
+  ModalEditorList,
+} from '@/component/modal';
 
 const modalComponents = {
   CreateCategory: ModalCreateChannel,
   ManageCategory: ModalManageChannel,
+  EditorList: ModalEditorList,
 } satisfies Record<string, React.MemoExoticComponent<() => React.ReactElement>>;
 
 export type ModalType = keyof typeof modalComponents;
