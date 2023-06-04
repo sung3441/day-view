@@ -2,7 +2,7 @@ import { memo } from 'react';
 import styled, { css } from 'styled-components';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { fadeIn, fadeOut } from '@/shared/styles/keyframes';
-import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
+import { useAnimationHandler, useModal, useOuterClick } from '@/shared/hooks';
 import { colorEntries } from '@/shared/util/colorInfo';
 import { Icon } from '@/shared/component/Atom';
 
@@ -12,6 +12,7 @@ interface Props {
 }
 
 const ColorBoard = ({ isOpen, closeColorBoard }: Props) => {
+  const { openModal } = useModal();
   const { isShow, handleIsShow, handelOnAnimationEnd } =
     useAnimationHandler(closeColorBoard);
   const ref = useOuterClick<HTMLDivElement>({
@@ -20,7 +21,7 @@ const ColorBoard = ({ isOpen, closeColorBoard }: Props) => {
 
   return (
     <Box ref={ref} isShow={isShow} onAnimationEnd={handelOnAnimationEnd}>
-      <BoxTitle>
+      <BoxTitle onClick={() => openModal('ManageCategory')}>
         <Icon type="sm_config" />
         <span>관리</span>
       </BoxTitle>
