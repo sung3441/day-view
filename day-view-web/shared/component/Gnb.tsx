@@ -21,46 +21,57 @@ const Gnb = ({ handleChangeTheme }: Props) => {
     []
   );
 
+  const renderContent = () =>{
+    switch (pathname){
+      case "/calendar" :{
+        return  (
+            <>
+              <LeftBox>
+                <IconButton
+                    type="menu"
+                    onClick={handleClickMenu}
+                    customStyle={{ marginRight: '20px' }}
+                />
+                <IconButton
+                    type="logo"
+                    width={96}
+                    height={40}
+                    isActiveFnc={false}
+                    customStyle={{
+                      width: '96px',
+                      height: '40px',
+                      marginLeft: '20px',
+                    }}
+                />
+              </LeftBox>
+              <RightBox>
+                <Tab />
+                <IconButton type="search" />
+                <IconButton type="user" />
+              </RightBox>
+            </>
+
+        )
+      }
+      default :
+        return  (
+            <IconButton
+                type="logo"
+                width={96}
+                height={40}
+                isActiveFnc={false}
+                customStyle={{
+                  width: '96px',
+                  height: '40px',
+                }}
+            />
+        )
+    }
+  }
+
   return (
     <Header>
-      {pathname === '/calendar' ? (
-        <>
-          <LeftBox>
-            <IconButton
-              type="menu"
-              onClick={handleClickMenu}
-              customStyle={{ marginRight: '20px' }}
-            />
-            <IconButton
-              type="logo"
-              width={96}
-              height={40}
-              isActiveFnc={false}
-              customStyle={{
-                width: '96px',
-                height: '40px',
-                marginLeft: '20px',
-              }}
-            />
-          </LeftBox>
-          <RightBox>
-            <Tab />
-            <IconButton type="search" />
-            <IconButton type="user" />
-          </RightBox>
-        </>
-      ) : (
-        <IconButton
-          type="logo"
-          width={96}
-          height={40}
-          isActiveFnc={false}
-          customStyle={{
-            width: '96px',
-            height: '40px',
-          }}
-        />
-      )}
+      {renderContent()}
     </Header>
   );
 };

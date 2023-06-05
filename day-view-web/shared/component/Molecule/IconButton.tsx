@@ -1,7 +1,5 @@
 import { Button, Icon } from '@/shared/component/Atom';
 import { CSSProperties, memo, ReactNode, SyntheticEvent } from 'react';
-// import type { IconSize, Props as IconProps } from '../Atom/Icon';
-// import { defaultIconSizes } from '../Atom/Icon';
 import type { IconSizeType, Props as IconProps } from '../Atom/Icon';
 import { defaultIconSizes } from '../Atom/Icon';
 

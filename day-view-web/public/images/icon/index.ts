@@ -15,3 +15,5 @@ export { default as IconUser } from './user.svg';
 export { default as IconWrite } from './write.svg';
 export { default as IconLogo } from './logo.svg';
 export { default as IconMainLogo } from './mainLogo.svg';
+export { default as IconGoogle } from './google.svg';
+export { default as IconKakao } from './kakao.svg';
