@@ -2,9 +2,14 @@ import { DefaultTheme, Interpolation } from 'styled-components';
 import { CSSProperties } from 'react';
 import { pixelToRemUnit } from './util';
 
-type BoxKeys = 'flexBetweenBox';
+type BoxKeys = 'flexBetweenBox' | "flexCenterBox";
 
 const box: { [p in BoxKeys]: Interpolation<CSSProperties> } = {
+  flexCenterBox: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   flexBetweenBox: {
     display: 'flex',
     justifyContent: 'space-between',

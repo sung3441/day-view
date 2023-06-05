@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import { GetServerSidePropsContext } from 'next';
-import Script from 'next/script';
-import KakaoLogin from '@/component/main/KakaoLogin';
+import Main from "@/component/main";
+import styled from "styled-components";
+import {getStyledThemProperty} from "@/shared/styles/util";
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -13,9 +15,9 @@ declare global {
 }
 
 export default function Home() {
-  function kakaoInit() {
-    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID);
-  }
+  // function kakaoInit() {
+  //   window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID);
+  // }
 
   return (
     <>
@@ -25,16 +27,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Script
-        src="https://developers.kakao.com/sdk/js/kakao.js"
-        onLoad={kakaoInit}
-      ></Script>
-      <>
-        <KakaoLogin />
-      </>
+      <MainWrap>
+        <Main/>
+      </MainWrap>
     </>
   );
 }
+
+const MainWrap = styled.div`
+  height: 100%;
+ ${getStyledThemProperty("box","flexCenterBox" )};
+  flex-direction: column;
+`
 
 const getServerSideProps = ({
   req,

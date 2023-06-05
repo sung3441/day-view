@@ -16,6 +16,8 @@ import {
   IconTrash,
   IconUser,
   IconWrite,
+  IconGoogle,
+  IconKakao,
 } from '@/public/images/icon';
 import { CSSProperties, ElementType, memo } from 'react';
 
@@ -44,6 +46,8 @@ const iconComponents = {
   write: IconWrite,
   mainLogo: IconMainLogo,
   logo: IconLogo,
+  google: IconGoogle,
+  kakao: IconKakao,
 } satisfies Record<string, ElementType>;
 
 type IconType = keyof typeof iconComponents;
@@ -51,8 +55,8 @@ type IconType = keyof typeof iconComponents;
 export interface Props {
   type: IconType;
   size?: IconSizeType;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
   fill?: string;
   color?: string;
   style?: CSSProperties;
