@@ -1,5 +1,6 @@
 package com.side.dayv.member.service;
 
+import com.side.dayv.member.dto.MemberResponse;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
@@ -13,8 +14,24 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public Member getMember(String email){
-        return memberRepository.findByEmail(email);
+    @Transactional
+    public MemberResponse getMember(String email){
+        Member member = memberRepository.findByEmail(email);
+        if( member == null ){
+            throw new UsernameNotFoundException("not found username.");
+        }
+
+        return MemberResponse.builder()
+                .memberId(member.getId())
+                .provider(member.getProvider())
+                .email(member.getEmail())
+                .nickname(member.getNickname())
+                .createdDate(member.getCreatedDate())
+                .lastModifiedDate(member.getLastModifiedDate())
+                .profileImageUrl(member.getProfileImageUrl())
+                .birthday(member.getBirthday())
+                .refreshToken(member.getRefreshToken())
+                .build();
     }
 
     @Transactional
