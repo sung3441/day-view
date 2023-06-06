@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/axios": "^0.14.0",
     "@types/node": "18.15.11",
+    "@types/qs": "^6.9.7",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
     "@types/react-query": "^1.2.9",
@@ -22,6 +23,7 @@
     "msw": "^1.2.1",
     "next": "13.2.4",
     "next-seo": "^5.15.0",
+    "qs": "^6.11.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
