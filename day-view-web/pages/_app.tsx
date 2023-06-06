@@ -3,9 +3,12 @@ import { ThemeProvider } from 'styled-components';
 import { Hydrate, QueryClientProvider } from 'react-query';
 import { getClient } from '@/shared/queryClient';
 import Layout from '@/shared/component/Layout';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, RecoilEnv } from 'recoil';
 import { commonTheme } from '@/shared/styles/theme';
 import GlobalStyle from '@/shared/styles/globalStyle';
+
+RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+
 import useMswStatus from '@/mocks';
 
 // if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
@@ -33,7 +36,6 @@ function App({ Component, pageProps }: AppProps) {
 
 const APPWithConfig = ({ children }: { children: any }) => {
   // useMswStatus();
-
   return <Layout>{children}</Layout>;
 };
 

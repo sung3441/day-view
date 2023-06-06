@@ -1,10 +1,9 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import { GetServerSidePropsContext } from 'next';
-import Main from "@/component/main";
-import styled from "styled-components";
-import {getStyledThemProperty} from "@/shared/styles/util";
-
+import Main from '@/component/main';
+import styled from 'styled-components';
+import { getStyledThemProperty } from '@/shared/styles/util';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,7 +27,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainWrap>
-        <Main/>
+        <Main />
       </MainWrap>
     </>
   );
@@ -36,11 +35,11 @@ export default function Home() {
 
 const MainWrap = styled.div`
   height: 100%;
- ${getStyledThemProperty("box","flexCenterBox" )};
+  ${getStyledThemProperty('box', 'flexCenterBox')};
   flex-direction: column;
-`
+`;
 
-const getServerSideProps = ({
+export const getServerSideProps = async ({
   req,
   res,
   ...rest
