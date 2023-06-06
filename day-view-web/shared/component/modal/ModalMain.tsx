@@ -1,4 +1,4 @@
-import { Children, ReactNode, isValidElement } from 'react';
+import { Children, ReactNode, isValidElement, memo } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
 
@@ -7,31 +7,31 @@ interface Props {
 }
 
 const ModalMain = ({ children }: Props) => {
-  const childrenArray = Children.toArray(children);
+  const splitComponents = (children: ReactNode) => {
+    const remainComponents: ReactNode[] = [];
+    const filteredComponents: ReactNode[] = [];
 
-  const { filteredChildren, selectedComponents } = childrenArray.reduce(
-    (result, child) => {
+    Children.forEach(children, (child) => {
       if (
         isValidElement(child) &&
         typeof child.type === 'function' &&
-        child.type.name === 'ModalDim'
+        ['ModalDim'].includes(child.type.name)
       ) {
-        result.selectedComponents.push(child);
+        filteredComponents.push(child);
       } else {
-        result.filteredChildren.push(child);
+        remainComponents.push(child);
       }
-      return result;
-    },
-    {
-      filteredChildren: [] as ReactNode[],
-      selectedComponents: [] as ReactNode[],
-    }
-  );
+    });
+
+    return [remainComponents, filteredComponents];
+  };
+
+  const [remainComponents, filteredComponents] = splitComponents(children);
 
   return (
     <S.Layout>
-      <S.Container>{filteredChildren}</S.Container>
-      {selectedComponents}
+      <S.Container>{remainComponents}</S.Container>
+      {filteredComponents}
     </S.Layout>
   );
 };
@@ -88,4 +88,4 @@ const S = {
   `,
 };
 
-export default ModalMain;
+export default memo(ModalMain);
