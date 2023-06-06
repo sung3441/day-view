@@ -6,6 +6,7 @@ import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.member.service.MemberService;
 import com.side.dayv.oauth.entity.CustomUser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
     private final MemberService memberService;
-    @GetMapping("/test")
-    public ApiResponse getUser() {
-        CustomUser principal = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Member member = memberService.getMember(principal.getUsername());
+    @GetMapping
+    public ApiResponse getUser(@AuthenticationPrincipal final CustomUser user) {
+        Member member = memberService.getMember(user.getUsername());
 
         return ApiResponse.success("member", member);
     }
