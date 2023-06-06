@@ -63,6 +63,3 @@ export class Client {
     return params;
   }
 }
-
-const test = new Client('test');
-const res = test.post<{ t: string }>({ t: 'tt' });
