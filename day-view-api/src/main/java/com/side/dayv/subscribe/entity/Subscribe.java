@@ -104,4 +104,15 @@ public class Subscribe {
         changeColor(color);
         changeShowYn(showYn);
     }
+
+    public static Subscribe createManageChannelSubscribe(final Member member, final Channel channel) {
+        return Subscribe.builder()
+                .color(SubscribeColor.YELLOW)
+                .auth(SubscribeAuth.MANAGE)
+                .showYn(true)
+                .subscribeDate(LocalDateTime.now())
+                .member(member)
+                .channel(channel)
+                .build();
+    }
 }

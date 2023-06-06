@@ -68,6 +68,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         LocalDateTime now = LocalDateTime.now();
 
         Channel myChannel = Channel.builder()
+                .name("내 일정")
                 .channelType(ChannelType.MY)
                 .createdDate(now)
                 .lastModifiedDate(now)

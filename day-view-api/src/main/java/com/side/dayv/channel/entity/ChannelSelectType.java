@@ -8,7 +8,7 @@ import static com.side.dayv.subscribe.entity.QSubscribe.subscribe;
 
 public enum ChannelSelectType {
 
-    MANAGE("manage", "manageChannels") {
+    MANAGE("manageChannels") {
         @Override
         public BooleanExpression whereQuery() {
             return channel.type.eq(ChannelType.MY) // 내 채널
@@ -21,7 +21,7 @@ public enum ChannelSelectType {
             return subscribe.channel.eq(channel).and(subscribe.auth.eq(SubscribeAuth.MANAGE)); // 관리 권한
         }
     }, // 관리 채널
-    SUBSCRIBE("subscribe", "subscribeChannels") {
+    SUBSCRIBE("subscribeChannels") {
         @Override
         public BooleanExpression whereQuery() {
             return channel.type.eq(ChannelType.CUSTOM) // 일반 채널
@@ -33,7 +33,7 @@ public enum ChannelSelectType {
             return subscribe.channel.eq(channel).and(subscribe.auth.eq(SubscribeAuth.SUBSCRIBE)); // 구독 권한
         }
     }, // 구독 채널
-    GOOGLE("google", "googleChannels") {
+    GOOGLE("googleChannels") {
         @Override
         public BooleanExpression whereQuery() {
             return channel.type.eq(ChannelType.GOOGLE);
@@ -45,12 +45,9 @@ public enum ChannelSelectType {
         }
     }; // 구글 채널;
 
-    private final String value;
-
     private final String key;
 
-    ChannelSelectType(String value, String key) {
-        this.value = value;
+    ChannelSelectType(final String key) {
         this.key = key;
     }
 

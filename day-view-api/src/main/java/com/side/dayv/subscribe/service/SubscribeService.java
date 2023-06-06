@@ -41,12 +41,10 @@ public class SubscribeService {
         return subscribeRepository.save(new Subscribe(member, channel));
     }
 
-    public void unsubscribe(final Long memberId, final Long subscribeId) {
+    public void unsubscribe(final Long memberId, final Long channelId) {
 
-        Subscribe subscribe = subscribeRepository.findById(subscribeId)
+        Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, channelId)
                 .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
-
-        subscribe.checkPermission(memberId);
 
         subscribe.checkUnsubscribeAuth();
 
@@ -61,5 +59,12 @@ public class SubscribeService {
         subscribe.checkPermission(memberId);
 
         subscribe.update(request.getColor(), request.isShowYn());
+    }
+
+    public Subscribe manageChannelSubscribe(final Member member, final Channel channel) {
+
+        Subscribe manageChannelSubscribe = Subscribe.createManageChannelSubscribe(member, channel);
+
+        return subscribeRepository.save(manageChannelSubscribe);
     }
 }

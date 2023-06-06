@@ -23,9 +23,9 @@ public class SubscribeController {
         return ApiResponse.success();
     }
 
-    @DeleteMapping("/subscribes/{subscribeId}")
-    public ApiResponse unsubscribe(@AuthenticationPrincipal final CustomUser user, @PathVariable final Long subscribeId) {
-        subscribeService.unsubscribe(user.getMemberId(), subscribeId);
+    @DeleteMapping("/channels/{channelId}/subscribes")
+    public ApiResponse unsubscribe(@AuthenticationPrincipal final CustomUser user, @PathVariable final Long channelId) {
+        subscribeService.unsubscribe(user.getMemberId(), channelId);
         return ApiResponse.success();
     }
 

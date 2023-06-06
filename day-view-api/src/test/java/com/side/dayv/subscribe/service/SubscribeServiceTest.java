@@ -110,20 +110,11 @@ class SubscribeServiceTest {
     void 구독_취소() {
         Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
 
-        subscribeService.unsubscribe(MEMBER.getId(), subscribe.getId());
+        subscribeService.unsubscribe(MEMBER.getId(), CHANNEL.getId());
 
         Optional<Subscribe> subscribeOptional = subscribeRepository.findById(subscribe.getId());
 
         assertThat(subscribeOptional.isEmpty()).isTrue();
-    }
-
-    @Test
-    void 구독_취소_실패_권한_없음() {
-        Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
-
-        assertThatThrownBy(() -> subscribeService.unsubscribe(99L, subscribe.getId()))
-                .isInstanceOf(BadRequestException.class)
-                .hasMessageContaining(BAD_REQUEST_PERMISSION);
     }
 
     @Test
@@ -141,7 +132,7 @@ class SubscribeServiceTest {
         subscribe.changeAuthToManage();
         subscribeRepository.save(subscribe);
 
-        assertThatThrownBy(() -> subscribeService.unsubscribe(MEMBER.getId(), subscribe.getId()))
+        assertThatThrownBy(() -> subscribeService.unsubscribe(MEMBER.getId(), CHANNEL.getId()))
                 .isInstanceOf(BadRequestException.class)
                 .hasMessageContaining(BAD_REQUEST_MANAGE_UNSUBSCRIBE);
     }
