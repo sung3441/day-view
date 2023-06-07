@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class MemberResponse {
+public class ResponseMemberDTO {
 
     private Long memberId;
     private ProviderType provider;
@@ -28,7 +28,7 @@ public class MemberResponse {
     private String refreshToken;
 
     @Builder
-    public MemberResponse(Long memberId, ProviderType provider,
+    public ResponseMemberDTO(Long memberId, ProviderType provider,
                           String email, String nickname,
                           LocalDateTime createdDate, LocalDateTime lastModifiedDate,
                           String profileImageUrl, String birthday,
