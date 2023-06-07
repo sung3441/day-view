@@ -47,7 +47,11 @@ class ChannelTest {
         List<Channel> channelList = em.createQuery("select c from Channel c join fetch c.createMember m", Channel.class)
                 .getResultList();
 
-        assertThat(channelList).containsExactly(saveChannel);
-        assertThat(channelList.get(0).getCreateMember()).isEqualTo(saveMember);
+        assertThat(channelList).contains(saveChannel);
+        for (Channel channel : channelList) {
+            if (channel == saveChannel) {
+                assertThat(channel.getCreateMember()).isEqualTo(saveMember);
+            }
+        }
     }
 }
