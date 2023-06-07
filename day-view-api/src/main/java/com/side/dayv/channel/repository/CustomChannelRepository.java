@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public interface ChannelRepositoryCustom {
+public interface CustomChannelRepository {
     List<ManageChannelResponseDto> findMyChannels(Long memberId, BooleanExpression where, BooleanExpression on);
 
     Page<ChannelResponseDto> findChannels(Long memberId, Pageable pageable, ChannelSearchDto search);

@@ -16,6 +16,7 @@ import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,11 +24,12 @@ import static com.side.dayv.channel.entity.QChannel.*;
 import static com.side.dayv.member.entity.QMember.*;
 import static com.side.dayv.subscribe.entity.QSubscribe.*;
 
-public class ChannelRepositoryImpl implements ChannelRepositoryCustom {
+@Transactional
+public class CustomChannelRepositoryImpl implements CustomChannelRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public ChannelRepositoryImpl(final EntityManager em) {
+    public CustomChannelRepositoryImpl(final EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
