@@ -16,8 +16,6 @@ public class ChannelResponseDto {
 
     private String name;
 
-    private boolean secretYn;
-
     private ChannelType channelType;
 
     private Long creatorId;
