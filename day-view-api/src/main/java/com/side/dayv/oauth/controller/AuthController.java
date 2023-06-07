@@ -40,46 +40,6 @@ public class AuthController {
     private final static long THREE_DAYS_MSEC = 259200000;
     private final static String REFRESH_TOKEN = "refresh_token";
 
-    @PostMapping("/login")
-    public ApiResponse login(HttpServletRequest request, HttpServletResponse response, @RequestBody AuthReqModel authReqModel) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        authReqModel.getId(),
-                        authReqModel.getPassword()
-                )
-        );
-
-        String userId = authReqModel.getId();
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        Date now = new Date();
-        AuthToken accessToken = tokenProvider.createAuthToken(
-                userId,
-                new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
-        );
-
-        long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
-        AuthToken refreshToken = tokenProvider.createAuthToken(
-                appProperties.getAuth().getTokenSecret(),
-                new Date(now.getTime() + refreshTokenExpiry)
-        );
-
-        // userId refresh token 으로 DB 확인
-        //UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserId(userId);
-        Member member = memberRepository.findByEmail(userId);
-        if (member != null) {
-            member.changeRefreshToken(refreshToken.getToken());
-        } else {
-            throw new UsernameNotFoundException("not found username.");
-        }
-
-        int cookieMaxAge = (int) refreshTokenExpiry / 60;
-        CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
-        CookieUtil.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
-
-        return ApiResponse.success("token", accessToken.getToken());
-    }
-
     @PostMapping("/logout")
     public ApiResponse logout(HttpServletRequest request, HttpServletResponse response) {
 
