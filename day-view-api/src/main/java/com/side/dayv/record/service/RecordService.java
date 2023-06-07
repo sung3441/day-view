@@ -4,6 +4,7 @@ import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.channel.repository.ChannelRepository;
 import com.side.dayv.global.exception.NotFoundException;
 import com.side.dayv.record.dto.RequestCreateRecordDTO;
+import com.side.dayv.record.dto.ResponseRecordDTO;
 import com.side.dayv.record.entity.Record;
 import com.side.dayv.record.repository.RecordRepository;
 import com.side.dayv.subscribe.entity.Subscribe;
@@ -24,7 +25,7 @@ public class RecordService {
     private final SubscribeRepository subscribeRepository;
 
     @Transactional
-    public void createRecord(RequestCreateRecordDTO recordDTO, Long channelId, Long memberId){
+    public ResponseRecordDTO createRecord(RequestCreateRecordDTO recordDTO, Long channelId, Long memberId){
         Channel channel = channelRepository.findById(channelId)
                 .orElseThrow(() -> new NotFoundException(CHANNEL_NOT_FOUNT));
 
@@ -34,6 +35,8 @@ public class RecordService {
         subscribe.checkPermission(memberId);
         subscribe.checkUnsubscribeAuth();
 
-        recordRepository.save(recordDTO.toEntity(channel));
+        Record record = recordRepository.save(recordDTO.toEntity(channel));
+
+        return new ResponseRecordDTO(record);
     }
 }

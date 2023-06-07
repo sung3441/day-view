@@ -56,4 +56,5 @@ public class Record {
         this.endDate = endDate;
         this.channel = channel;
     }
+
 }
