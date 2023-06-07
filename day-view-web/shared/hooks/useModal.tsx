@@ -1,5 +1,5 @@
-import { useSetRecoilState } from 'recoil';
-import { modalListAtom } from '@/shared/atom/modalState';
+import { useRecoilCallback, useSetRecoilState } from 'recoil';
+import { modalListAtom } from '../atom/modalState';
 import { ModalType } from '@/component/modal/ModalRenderer';
 import { useCallback } from 'react';
 
@@ -19,6 +19,14 @@ const useModal = () => {
     },
     [setModalList]
   );
+
+  // const openModal = useCallback((id: ModalType, params) => {}, []);
+
+  // const closeModal = useRecoilCallback(
+  //   ({ reset }) =>
+  //     (id: ModalType) => {},
+  //   []
+  // );
 
   return { openModal, closeModal };
 };
