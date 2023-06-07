@@ -4,11 +4,9 @@ import Modal from '@/shared/component/modal';
 import { getStyledThemProperty } from '@/shared/styles/util';
 import { Button, UserImage } from '@/shared/component/Atom';
 
-interface Props {
-  type: 'EditorList' | 'SubscriberList';
-}
+const ModalEditorList = () => {
+  const type = 'EditorList';
 
-const ModalEditorList = ({ type = 'EditorList' }: Props) => {
   const modalConfig = {
     EditorList: {
       title: '편집자 목록',

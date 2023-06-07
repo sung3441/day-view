@@ -13,7 +13,6 @@ import {
 const modalComponents = {
   CreateCategory: ModalCreateChannel,
   ManageCategory: ModalManageChannel,
-  // @ts-ignore
   EditorList: ModalEditorList,
   AddSchedule: ModalAddSchedule,
 } satisfies Record<string, React.MemoExoticComponent<() => React.ReactElement>>;
@@ -43,7 +42,6 @@ const ModalRenderer = () => {
         modalList.map((modalType) => {
           const ModalComponent = modalComponents[modalType];
 
-          // @ts-ignore
           return <ModalComponent key={modalType} />;
         }),
         ref.current!
