@@ -42,6 +42,7 @@ public class ManageChannelResponseDto {
     @QueryProjection
     public ManageChannelResponseDto(Channel channel, Subscribe subscribe) {
         this.channelId = channel.getId();
+        this.subscribeId = subscribe.getId();
         this.name = channel.getName();
         this.showYn = subscribe.isShowYn();
         this.color = subscribe.getColor();
