@@ -5,6 +5,7 @@ import com.side.dayv.member.dto.ResponseMemberDTO;
 import com.side.dayv.member.service.MemberService;
 import com.side.dayv.oauth.entity.CustomUser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
