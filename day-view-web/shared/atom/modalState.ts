@@ -6,7 +6,17 @@ export const modalListAtom = atom<ModalType[]>({
   default: [],
 });
 
-export const modalState = atomFamily({
+export type ModalParams = {
+  clientX?: number;
+  clientY?: number;
+} | null;
+
+export type ModalState = {
+  id: ModalType;
+  params?: ModalParams;
+};
+
+export const modalState = atomFamily<ModalState, ModalType>({
   key: 'modalState',
   default: (id: ModalType) => ({
     id,
@@ -23,6 +33,7 @@ export const modalSelector = selectorFamily({
   set:
     (id: ModalType) =>
     ({ get, set, reset }, newValue) => {
+      // reset
       if (newValue instanceof DefaultValue) {
         set(modalListAtom, (prev) => prev.filter((modalId) => modalId !== id));
         reset(modalState(id));
@@ -31,6 +42,7 @@ export const modalSelector = selectorFamily({
 
       set(modalState(id), newValue);
 
+      // modalList 중복제거
       if (get(modalListAtom).find((id) => id === newValue.id)) return;
       set(modalListAtom, (prev) => [...prev, newValue.id]);
     },
