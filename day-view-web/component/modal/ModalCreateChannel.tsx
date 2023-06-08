@@ -33,7 +33,7 @@ const ModalCreateChannel = () => {
         </Modal.Button>
         <Modal.Button variant="accent">완료</Modal.Button>
       </Modal.Control>
-      <Modal.Dim />
+      <Modal.Dim onClick={() => closeModal('CreateCategory')} />
     </Modal>
   );
 };

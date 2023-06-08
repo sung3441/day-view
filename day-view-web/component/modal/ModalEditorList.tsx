@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import Modal from '@/shared/component/modal';
 import { getStyledThemProperty } from '@/shared/styles/util';
 import { Button, UserImage } from '@/shared/component/Atom';
+import { useModal } from '@/shared/hooks';
 
 const ModalEditorList = () => {
+  const { closeModal } = useModal();
   const type = 'EditorList';
 
   const modalConfig = {
@@ -42,7 +44,7 @@ const ModalEditorList = () => {
           <Button variant="accent">{buttonLabel}</Button>
         </>
       </Modal.Body>
-      <Modal.Dim />
+      <Modal.Dim onClick={() => closeModal('EditorList')} />
     </Modal>
   );
 };
