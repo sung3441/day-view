@@ -1,9 +1,12 @@
+import { MouseEventHandler } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-interface Props {}
+interface Props {
+  onClick?: MouseEventHandler<HTMLDivElement>;
+}
 
-const ModalDim = ({}: Props) => {
-  return <S.Dim />;
+const ModalDim = ({ onClick }: Props) => {
+  return <S.Dim onClick={onClick} />;
 };
 
 export default ModalDim;

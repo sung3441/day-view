@@ -48,7 +48,7 @@ const ModalManageChannel = () => {
           수정
         </Modal.Button>
       </Modal.Control>
-      <Modal.Dim />
+      <Modal.Dim onClick={() => closeModal('ManageCategory')} />
     </Modal>
   );
 };

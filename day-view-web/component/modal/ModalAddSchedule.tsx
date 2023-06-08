@@ -1,8 +1,11 @@
 import React, { memo } from 'react';
 import Modal from '@/shared/component/modal';
 import { CheckBox } from '@/shared/component/Molecule';
+import { useModal } from '@/shared/hooks';
 
 const ModalAddSchedule = () => {
+  const { closeModal } = useModal();
+
   return (
     <Modal>
       <Modal.Body>
@@ -22,7 +25,7 @@ const ModalAddSchedule = () => {
           <Modal.Textarea placeholder="메모를 입력하세요." />
         </>
       </Modal.Body>
-      <Modal.Dim />
+      <Modal.Dim onClick={() => closeModal('AddSchedule')} />
     </Modal>
   );
 };
