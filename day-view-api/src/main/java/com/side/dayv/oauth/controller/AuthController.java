@@ -1,13 +1,16 @@
 package com.side.dayv.oauth.controller;
 
+import com.side.dayv.global.exception.NotFoundException;
 import com.side.dayv.global.response.ApiResponse;
 import com.side.dayv.global.util.CookieUtil;
 import com.side.dayv.global.util.HeaderUtil;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.member.service.MemberService;
+import com.side.dayv.oauth.TokenResponse;
 import com.side.dayv.oauth.config.properties.AppProperties;
 import com.side.dayv.oauth.entity.AuthReqModel;
+import com.side.dayv.oauth.entity.CustomUser;
 import com.side.dayv.oauth.entity.MemberPrincipal;
 import com.side.dayv.oauth.token.AuthToken;
 import com.side.dayv.oauth.token.AuthTokenProvider;
@@ -16,9 +19,11 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
@@ -41,48 +46,30 @@ public class AuthController {
     private final static String REFRESH_TOKEN = "refresh_token";
 
     @PostMapping("/logout")
-    public ApiResponse logout(HttpServletRequest request, HttpServletResponse response) {
-
-        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String userId = principal.getUsername();
+    public ResponseEntity logout(@AuthenticationPrincipal final CustomUser user,
+                                 HttpServletRequest request, HttpServletResponse response) {
+        String userId = user.getUsername();
 
         memberService.removeRefreshToken(userId);
         CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
 
-        return ApiResponse.success();
+        return ResponseEntity.ok("");
     }
 
     @GetMapping("/refresh")
-    public ApiResponse refreshToken (HttpServletRequest request, HttpServletResponse response) {
-        // access token 확인
-        String accessToken = HeaderUtil.getAccessToken(request);
-        AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
-        if (!authToken.validate()) {
-            return ApiResponse.invalidAccessToken();
-        }
-
-        // expired access token 인지 확인
-        Claims claims = authToken.getExpiredTokenClaims();
-        if (claims == null) {
-            return ApiResponse.notExpiredTokenYet();
-        }
-
-        String userId = claims.getSubject();
-
+    public ResponseEntity refreshToken(HttpServletRequest request, HttpServletResponse response) {
         // refresh token
         String refreshToken = CookieUtil.getCookie(request, REFRESH_TOKEN)
                 .map(Cookie::getValue)
                 .orElse((null));
         AuthToken authRefreshToken = tokenProvider.convertAuthToken(refreshToken);
-
-        if (authRefreshToken.validate()) {
-            return ApiResponse.invalidRefreshToken();
-        }
+        Claims claims = authRefreshToken.getTokenClaims();
+        String userId = claims.getSubject();
 
         // userId refresh token 으로 DB 확인
         Member member = memberRepository.findByEmailAndRefreshToken(userId, refreshToken);
         if (member == null) {
-            return ApiResponse.invalidRefreshToken();
+            throw new NotFoundException("사용자를 찾을 수 없습니다.");
         }
 
         Date now = new Date();
@@ -91,7 +78,9 @@ public class AuthController {
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
 
-        long validTime = authRefreshToken.getTokenClaims().getExpiration().getTime() - now.getTime();
+        long validTime = authRefreshToken.getTokenClaims()
+                .getExpiration()
+                .getTime() - now.getTime();
 
         // refresh 토큰 기간이 3일 이하로 남은 경우, refresh 토큰 갱신
         if (validTime <= THREE_DAYS_MSEC) {
@@ -111,6 +100,6 @@ public class AuthController {
             CookieUtil.addCookie(response, REFRESH_TOKEN, authRefreshToken.getToken(), cookieMaxAge);
         }
 
-        return ApiResponse.success("token", newAccessToken.getToken());
+        return ResponseEntity.ok(new TokenResponse(newAccessToken.getToken()));
     }
 }
