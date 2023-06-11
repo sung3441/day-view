@@ -3,14 +3,11 @@ import { CSSProperties } from 'react';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { string } from 'prop-types';
 
-export const StyleLoginButton = styled.button<{ name?: 'google' | 'kakao' }>`
+export const StyleLoginButton = styled.button<{ name: 'google' | 'kakao' }>`
   position: relative;
   height: 60px;
   width: 100%;
-
   border-radius: 7px;
-  display: flex;
-  align-items: center;
 
   ${getStyledThemProperty('fonts', 'body3')};
   ${getStyledThemProperty('box', 'flexCenterBox')};
