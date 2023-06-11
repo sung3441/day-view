@@ -5,8 +5,9 @@ import { StyleLoginButton } from '@/component/main/styles';
 import { Icon } from '@/shared/component/Atom';
 
 const KakaoLoginButton = () => {
-  const url =
-    'http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:3000/auth/kakaoLogin';
+  const params = new URLSearchParams();
+  params.append('redirect_uri', 'http://localhost:3000/auth/kakaoLogin');
+  const url = `http://localhost:8080/oauth2/authorization/kakao?${params.toString()}`;
 
   return (
     <a href={url}>

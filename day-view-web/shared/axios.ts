@@ -1,5 +1,14 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 import qs from 'qs';
+
+type ErrorResponse = {
+  config?: {};
+  data?: {};
+  headers?: {};
+  request?: {};
+  status: number;
+  statusText: string;
+};
 
 const BASE_URL = 'http://localhost:8080';
 
@@ -14,6 +23,7 @@ export class Client {
   protected readonly instance: AxiosInstance = Auth;
   private readonly url: string;
   constructor(url: string) {
+    console.log('test', this.instance.defaults.headers.common);
     this.url = url;
   }
 
@@ -22,16 +32,20 @@ export class Client {
       const res = await this.instance.get(this.url, {
         params: this.makeParams(params),
       });
+      console.log('res', res);
+
       const { data, status } = res;
-
       if (data.errors?.length && data.errors) throw data?.errors[0];
-
       return {
         data: data as T,
         status,
       };
     } catch (error) {
-      console.log(error);
+      // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
+      if (axios.isAxiosError<ErrorResponse, any>(error)) {
+        // console.log(error);
+        console.log(error.response?.status);
+      }
     }
   }
 

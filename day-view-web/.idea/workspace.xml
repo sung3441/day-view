@@ -5,13 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d7640da-7f49-4b5a-932f-82af975bf380" name="변경" comment="feat(shared): axios 클래스 개발">
+      <change afterPath="$PROJECT_DIR$/shared/api/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/atom/api" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/types/api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/util/axios.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../day-view-api/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../day-view-api/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/main/KakaoLoginButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/main/KakaoLoginButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/main/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/main/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/auth/kakaoLogin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/kakaoLogin.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/calendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/calendar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shared/axios.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/axios.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/types/type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/types/type.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +65,7 @@
       <updated>1681739618671</updated>
       <workItem from="1681739619891" duration="6000" />
       <workItem from="1686034004667" duration="4592000" />
+      <workItem from="1686462209255" duration="6761000" />
     </task>
     <task id="LOCAL-00001" summary="feat(shared): axios 클래스 생성 및 테스트">
       <created>1685960220642</created>
