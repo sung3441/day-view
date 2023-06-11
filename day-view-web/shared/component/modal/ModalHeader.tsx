@@ -1,12 +1,13 @@
-import { ComponentPropsWithRef } from 'react';
 import styled from 'styled-components';
+import { ReactNode, CSSProperties } from 'react';
 
-type InputType = ComponentPropsWithRef<'div'>;
+interface Props {
+  children?: ReactNode;
+  style?: CSSProperties;
+}
 
-interface Props extends InputType {}
-
-const ModalHeader = ({ children }: Props) => {
-  return <S.Header>{children}</S.Header>;
+const ModalHeader = ({ children, style }: Props) => {
+  return <S.Header style={style}>{children}</S.Header>;
 };
 
 export default ModalHeader;

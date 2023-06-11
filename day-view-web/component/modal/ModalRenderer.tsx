@@ -3,16 +3,25 @@ import { createPortal } from 'react-dom';
 import { useRecoilValue } from 'recoil';
 
 import { modalListAtom } from '@/shared/atom/modalState';
-import ModalCreateChannel from './ModalCreateChannel';
-import ModalManageChannel from './ModalManageChannel';
+import {
+  ModalCreateChannel,
+  ModalManageChannel,
+  ModalEditorList,
+  ModalAddSchedule,
+} from '@/component/modal';
 
 const modalComponents = {
   CreateCategory: ModalCreateChannel,
   ManageCategory: ModalManageChannel,
+  EditorList: ModalEditorList,
+  AddSchedule: ModalAddSchedule,
 } satisfies Record<string, React.MemoExoticComponent<() => React.ReactElement>>;
 
 export type ModalType = keyof typeof modalComponents;
 
+/**
+ * TODO: 클릭 지점에 모달 위치시키기
+ */
 const ModalRenderer = () => {
   const modalList = useRecoilValue(modalListAtom);
 

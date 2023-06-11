@@ -20,7 +20,7 @@ const ModalManageChannel = () => {
   const { closeModal } = useModal();
 
   return (
-    <Modal isDimmed={true}>
+    <Modal>
       <Modal.Body gap={40}>
         <>
           <Modal.SubTitle>카테고리 이름</Modal.SubTitle>
@@ -48,6 +48,7 @@ const ModalManageChannel = () => {
           수정
         </Modal.Button>
       </Modal.Control>
+      <Modal.Dim onClick={() => closeModal('ManageCategory')} />
     </Modal>
   );
 };

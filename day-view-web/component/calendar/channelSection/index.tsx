@@ -5,6 +5,7 @@ import { G_isOpenChannelAtom } from '@/shared/atom/globalCalendar';
 import Channel from '@/component/calendar/channelSection/Channel';
 import { Button, Icon } from '@/shared/component/Atom';
 import { pixelToRemUnit } from '@/shared/styles/util';
+import { useModal } from '@/shared/hooks';
 
 const buttonStyle: CSSProperties = {
   width: pixelToRemUnit(323),
@@ -16,10 +17,11 @@ const buttonStyle: CSSProperties = {
 
 const ChannelSection = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
+  const { openModal } = useModal();
   return (
     <Wrap isOpenChannel={isOpenChannel}>
       <Channel label="내채널" />
-      <Button style={buttonStyle}>
+      <Button style={buttonStyle} onClick={() => openModal('AddSchedule')}>
         <Icon type="sm_plus" style={{ marginRight: '5px' }} />
         <span>일정추가</span>
       </Button>
