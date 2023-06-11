@@ -88,6 +88,12 @@ public class Subscribe {
         this.channel = channel;
     }
 
+    public void checkManagerAuth(){
+        if(this.auth != SubscribeAuth.MANAGE){
+            throw new BadRequestException(MODIFY_NO_PERMISSION);
+        }
+    }
+
     public void checkUnsubscribeAuth() {
         if (this.auth == SubscribeAuth.MANAGE) {
             throw new BadRequestException(BAD_REQUEST_MANAGE_UNSUBSCRIBE);

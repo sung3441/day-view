@@ -30,4 +30,13 @@ public class RecordController {
         return ResponseEntity.ok(new CommonResponse(responseRecordDTO));
     }
 
+    @DeleteMapping(value = "/channels/{channelId}/records/{recordsId}")
+    public ResponseEntity removeRecord(@AuthenticationPrincipal final CustomUser user,
+                                       @PathVariable final Long channelId,
+                                       @PathVariable final Long recordsId){
+        recordService.removeRecord(user.getMemberId(), channelId, recordsId);
+
+        return ResponseEntity.ok("");
+    }
+
 }
