@@ -8,10 +8,14 @@ import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.subscribe.dto.request.SubscribeUpdateDto;
 import com.side.dayv.subscribe.entity.Subscribe;
+import com.side.dayv.subscribe.entity.SubscribeAuth;
+import com.side.dayv.subscribe.entity.SubscribeColor;
 import com.side.dayv.subscribe.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 import static com.side.dayv.global.util.ErrorMessage.*;
 
@@ -38,7 +42,12 @@ public class SubscribeService {
         Channel channel = channelRepository.findById(channelId)
                 .orElseThrow(() -> new NotFoundException(CHANNEL_NOT_FOUNT));
 
-        return subscribeRepository.save(new Subscribe(member, channel));
+        return subscribeRepository.save(new Subscribe(SubscribeColor.YELLOW,
+                SubscribeAuth.MANAGE,
+                true,
+                LocalDateTime.now(),
+                member,
+                channel));
     }
 
     public void unsubscribe(final Long memberId, final Long channelId) {
