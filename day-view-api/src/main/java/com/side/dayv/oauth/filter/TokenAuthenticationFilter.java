@@ -27,6 +27,12 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
+        if (excludePath(request)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String tokenStr = HeaderUtil.getAccessToken(request);
         AuthToken token = tokenProvider.convertAuthToken(tokenStr);
 
@@ -47,5 +53,14 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             log.info("JWT token compact of handler are invalid.");
         }
         response.setStatus(HttpStatus.FORBIDDEN.value());
+    }
+
+    private boolean excludePath(HttpServletRequest request) {
+        String requestPath = request.getServletPath();
+        String requestMethod = request.getMethod();
+
+        log.info("[TokenAuthenticationFilter] path: {}, method: {}", requestPath, requestMethod);
+
+        return requestPath.matches("/api/v1/auth.*");
     }
 }
