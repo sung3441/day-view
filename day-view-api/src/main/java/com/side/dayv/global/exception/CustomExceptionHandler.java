@@ -32,4 +32,15 @@ public class CustomExceptionHandler {
         ExceptionResponse response = new ExceptionResponse("지원하지 않는 HTTP 메소드 요청입니다.");
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(response);
     }
+
+    @ExceptionHandler({SecurityException.class,
+            MalformedJwtException.class,
+            ExpiredJwtException.class,
+            UnsupportedJwtException.class,
+            IllegalArgumentException.class
+    })
+    public ResponseEntity tokenException(Exception e){
+        ExceptionResponse response = new ExceptionResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+    }
 }
