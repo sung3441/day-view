@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import Modal from '@/shared/component/modal';
 import { getStyledThemProperty } from '@/shared/styles/util';
 import { Button, UserImage } from '@/shared/component/Atom';
-import { useModal } from '@/shared/hooks';
+import { ModalProps } from './ModalRenderer';
 
-const ModalEditorList = () => {
-  const { closeModal } = useModal();
+const ModalEditorList = ({ closeModal }: ModalProps) => {
   const type = 'EditorList';
 
   const modalConfig = {

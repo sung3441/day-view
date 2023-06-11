@@ -1,11 +1,9 @@
 import React, { memo } from 'react';
 import Modal from '@/shared/component/modal';
 import { CheckBox } from '@/shared/component/Molecule';
-import { useModal } from '@/shared/hooks';
+import { ModalProps } from '@/component/modal/ModalRenderer';
 
-const ModalAddSchedule = () => {
-  const { closeModal } = useModal();
-
+const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   return (
     <Modal>
       <Modal.Body>
