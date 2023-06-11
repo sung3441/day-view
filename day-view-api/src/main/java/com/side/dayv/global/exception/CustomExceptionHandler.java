@@ -43,4 +43,10 @@ public class CustomExceptionHandler {
         ExceptionResponse response = new ExceptionResponse(e.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
     }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity badRequestException(Exception e){
+        ExceptionResponse response = new ExceptionResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
 }
