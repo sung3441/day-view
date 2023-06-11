@@ -1,11 +1,16 @@
 import { Icon } from '@/shared/component/Atom';
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import KakaoLoginButton from '@/component/main/KakaoLoginButton';
 import GoogleLoginButton from '@/component/main/GoogleLoginButton';
+import { getUser } from '@/shared/api';
 
 const Main = () => {
+  // useEffect(() => {
+  //   (async () => await getUser())();
+  // }, []);
+
   return (
     <>
       <IconWrap>
