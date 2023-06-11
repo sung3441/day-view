@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
     private final MemberService memberService;
-    @GetMapping
+    @GetMapping("/me")
     public ResponseEntity<CommonResponse> getUser(@AuthenticationPrincipal final CustomUser user) {
         ResponseMemberDTO memberResponse = memberService.getMember(user.getUsername());
 
