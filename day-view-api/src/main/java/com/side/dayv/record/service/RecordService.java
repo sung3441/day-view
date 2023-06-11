@@ -14,8 +14,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.side.dayv.global.util.ErrorMessage.CHANNEL_NOT_FOUNT;
-import static com.side.dayv.global.util.ErrorMessage.SUBSCRIBE_NOT_FOUND;
+import static com.side.dayv.global.util.ErrorMessage.*;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +24,19 @@ public class RecordService {
     private final SubscribeRepository subscribeRepository;
 
     @Transactional
+    public void removeRecord(Long memberId, Long channelId, Long recordId){
+        Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, channelId)
+                .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
+
+        subscribe.checkManagerAuth();
+
+        Record record = recordRepository.findByIdAndChannelId(recordId, channelId)
+                .orElseThrow(() -> new NotFoundException(RECORD_NOT_FOUND));
+
+        recordRepository.delete(record);
+    }
+
+    @Transactional
     public ResponseRecordDTO createRecord(RequestCreateRecordDTO recordDTO, Long channelId, Long memberId){
         Channel channel = channelRepository.findById(channelId)
                 .orElseThrow(() -> new NotFoundException(CHANNEL_NOT_FOUNT));
@@ -32,8 +44,7 @@ public class RecordService {
         Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, channelId)
                 .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
 
-        subscribe.checkPermission(memberId);
-        subscribe.checkUnsubscribeAuth();
+        subscribe.checkManagerAuth();
 
         Record record = recordRepository.save(recordDTO.toEntity(channel));
 
