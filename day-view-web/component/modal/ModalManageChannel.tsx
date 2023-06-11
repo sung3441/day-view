@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import Modal from '@/shared/component/modal';
 import { pixelToRemUnit } from '@/shared/styles/util';
-import { useModal } from '@/shared/hooks';
 import { memo } from 'react';
+import { ModalProps } from './ModalRenderer';
 
 const testUsers = [
   { id: '1', name: 'asd', src: 'a' },
@@ -16,9 +16,7 @@ const testUsers = [
   { id: '9', name: 'Gdhr', src: 'a' },
 ];
 
-const ModalManageChannel = () => {
-  const { closeModal } = useModal();
-
+const ModalManageChannel = ({ closeModal }: ModalProps) => {
   return (
     <Modal>
       <Modal.Body gap={40}>

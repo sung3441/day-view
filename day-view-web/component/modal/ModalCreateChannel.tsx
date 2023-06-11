@@ -1,14 +1,17 @@
+import { memo } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+
 import Modal from '@/shared/component/modal';
 import { pixelToRemUnit } from '@/shared/styles/util';
-import { useModal } from '@/shared/hooks';
-import { memo } from 'react';
+import { ModalProps, ModalType } from '@/component/modal/ModalRenderer';
+import { modalState } from '@/shared/atom/modalState';
 
-const ModalCreateChannel = () => {
-  const { closeModal } = useModal();
+const ModalCreateChannel = ({ modalType, closeModal }: ModalProps) => {
+  const { params } = useRecoilValue(modalState(modalType as ModalType));
 
   return (
-    <Modal>
+    <Modal clientX={params?.clientX} clientY={params?.clientY}>
       <Modal.Header>
         <Modal.Title>새 카테고리 만들기</Modal.Title>
       </Modal.Header>

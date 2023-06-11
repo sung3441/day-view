@@ -1,12 +1,14 @@
-import { Children, ReactNode, isValidElement, memo } from 'react';
+import { Children, ReactNode, isValidElement, memo, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
 
 interface Props {
   children?: ReactNode;
+  clientX?: number;
+  clientY?: number;
 }
 
-const ModalMain = ({ children }: Props) => {
+const ModalMain = ({ children, clientX, clientY }: Props) => {
   const splitComponents = (children: ReactNode) => {
     const remainComponents: ReactNode[] = [];
     const filteredComponents: ReactNode[] = [];
@@ -30,7 +32,9 @@ const ModalMain = ({ children }: Props) => {
 
   return (
     <S.Layout>
-      <S.Container>{remainComponents}</S.Container>
+      <S.Container clientX={clientX} clientY={clientY}>
+        {remainComponents}
+      </S.Container>
       {filteredComponents}
     </S.Layout>
   );
@@ -72,11 +76,11 @@ const S = {
     z-index: 100;
   `,
 
-  Container: styled.div`
+  Container: styled.div<{ clientX?: number; clientY?: number }>`
     display: flex;
     flex-direction: column;
     gap: 40px;
-    position: relative;
+    position: absolute;
 
     padding: ${pixelToRemUnit([60, 50])};
 
@@ -85,6 +89,11 @@ const S = {
     z-index: 200;
 
     animation: ${fadeIn} 0.3s ease forwards;
+
+    /* 위치 조정 */
+    transform: translate(-50%, -50%);
+    top: ${({ clientY }) => clientY && `${clientY}px`};
+    left: ${({ clientX }) => clientX && `${clientX}px`};
   `,
 };
 

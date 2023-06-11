@@ -1,25 +1,25 @@
 import { DefaultValue, atom, atomFamily, selectorFamily } from 'recoil';
 import { ModalType } from '@/component/modal/ModalRenderer';
 
-export const modalListAtom = atom<ModalType[]>({
-  key: 'modalList',
-  default: [],
-});
-
 export type ModalParams = {
   clientX?: number;
   clientY?: number;
 } | null;
 
 export type ModalState = {
-  id: ModalType;
+  modalType: ModalType;
   params?: ModalParams;
 };
 
+export const modalListAtom = atom<ModalType[]>({
+  key: 'modalList',
+  default: [],
+});
+
 export const modalState = atomFamily<ModalState, ModalType>({
   key: 'modalState',
-  default: (id: ModalType) => ({
-    id,
+  default: (modalType: ModalType) => ({
+    modalType,
     params: null,
   }),
 });
@@ -27,23 +27,28 @@ export const modalState = atomFamily<ModalState, ModalType>({
 export const modalSelector = selectorFamily({
   key: 'modalSelector',
   get:
-    (id: ModalType) =>
+    (modalType: ModalType) =>
     ({ get }) =>
-      get(modalState(id)),
+      get(modalState(modalType)),
   set:
-    (id: ModalType) =>
+    (modalType: ModalType) =>
     ({ get, set, reset }, newValue) => {
       // reset
       if (newValue instanceof DefaultValue) {
-        set(modalListAtom, (prev) => prev.filter((modalId) => modalId !== id));
-        reset(modalState(id));
+        set(modalListAtom, (prev) =>
+          prev.filter((modalId) => modalId !== modalType)
+        );
+        reset(modalState(modalType));
         return;
       }
 
-      set(modalState(id), newValue);
+      set(modalState(modalType), newValue);
 
       // modalList 중복제거
-      if (get(modalListAtom).find((id) => id === newValue.id)) return;
-      set(modalListAtom, (prev) => [...prev, newValue.id]);
+      if (
+        get(modalListAtom).find((modalType) => modalType === newValue.modalType)
+      )
+        return;
+      set(modalListAtom, (prev) => [...prev, newValue.modalType]);
     },
 });
