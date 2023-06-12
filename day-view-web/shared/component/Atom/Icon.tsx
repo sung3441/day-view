@@ -18,6 +18,12 @@ import {
   IconWrite,
   IconGoogle,
   IconKakao,
+  IconBell,
+  IconLock,
+  IconSmHamburgerMenu,
+  IconSmLetter,
+  IconSmSearch,
+  IconSmUser,
 } from '@/public/images/icon';
 import { CSSProperties, ElementType, memo } from 'react';
 
@@ -48,6 +54,12 @@ const iconComponents = {
   logo: IconLogo,
   google: IconGoogle,
   kakao: IconKakao,
+  bell: IconBell,
+  lock: IconLock,
+  sm_hamburgerMenu: IconSmHamburgerMenu,
+  sm_letter: IconSmLetter,
+  sm_search: IconSmSearch,
+  sm_user: IconSmUser,
 } satisfies Record<string, ElementType>;
 
 type IconType = keyof typeof iconComponents;
