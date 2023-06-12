@@ -1,5 +1,6 @@
 import { ComponentPropsWithRef, memo, useState } from 'react';
 import styled from 'styled-components';
+import { getStyledThemProperty } from '@/shared/styles/util';
 
 type InputType = ComponentPropsWithRef<'input'>;
 
@@ -37,7 +38,7 @@ const Switch = styled.div`
   position: relative;
   width: 42px;
   height: 22px;
-  background: #b3b3b3;
+  background: ${getStyledThemProperty('colors', 'G_300')};
   border-radius: 32px;
   padding: 4px;
   transition: 250ms all;
