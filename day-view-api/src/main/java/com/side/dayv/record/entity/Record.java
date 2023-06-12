@@ -1,11 +1,13 @@
 package com.side.dayv.record.entity;
 
 import com.side.dayv.channel.entity.Channel;
+import com.side.dayv.record.dto.RequestUpdateRecordDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -59,4 +61,12 @@ public class Record {
         this.channel = channel;
     }
 
+    public void update(RequestUpdateRecordDTO recordDTO){
+        this.title = recordDTO.getTitle();
+        this.content = recordDTO.getContent();
+        this.complete = recordDTO.isComplete();
+        this.startDate = recordDTO.getStartDate();
+        this.endDate = recordDTO.getEndDate();
+        this.imageUrl = recordDTO.getRecordImageUrl();
+    }
 }

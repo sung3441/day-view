@@ -4,6 +4,7 @@ import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.channel.repository.ChannelRepository;
 import com.side.dayv.global.exception.NotFoundException;
 import com.side.dayv.record.dto.RequestCreateRecordDTO;
+import com.side.dayv.record.dto.RequestUpdateRecordDTO;
 import com.side.dayv.record.dto.ResponseRecordDTO;
 import com.side.dayv.record.entity.Record;
 import com.side.dayv.record.repository.RecordRepository;
@@ -22,6 +23,7 @@ public class RecordService {
     private final RecordRepository recordRepository;
     private final ChannelRepository channelRepository;
     private final SubscribeRepository subscribeRepository;
+    private final SubscribeService subscribeService;
 
     @Transactional
     public void removeRecord(Long memberId, Long channelId, Long recordId){
@@ -50,4 +52,16 @@ public class RecordService {
 
         return new ResponseRecordDTO(record);
     }
+
+    @Transactional
+    public ResponseRecordDTO updateRecord(RequestUpdateRecordDTO recordDTO, Long channelId, Long recordId){
+
+        Record record = recordRepository.findByIdAndChannelId(recordId, channelId)
+                .orElseThrow(() -> new NotFoundException(RECORD_NOT_FOUND));
+
+        record.update(recordDTO);
+        return new ResponseRecordDTO(record);
+    }
+
+
 }
