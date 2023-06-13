@@ -10,7 +10,10 @@ import com.side.dayv.oauth.exception.OAuthProviderMissMatchException;
 import com.side.dayv.oauth.info.OAuth2UserInfo;
 import com.side.dayv.oauth.entity.ProviderType;
 import com.side.dayv.oauth.info.OAuth2UserInfoFactory;
-import com.side.dayv.subscribe.service.SubscribeService;
+import com.side.dayv.subscribe.entity.Subscribe;
+import com.side.dayv.subscribe.entity.SubscribeAuth;
+import com.side.dayv.subscribe.entity.SubscribeColor;
+import com.side.dayv.subscribe.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -28,7 +31,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final MemberRepository memberRepository;
     private final ChannelRepository channelRepository;
-    private final SubscribeService subscribeService;
+    private final SubscribeRepository subscribeRepository;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException{
@@ -61,10 +64,21 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         } else {
             savedUser = createUser(userInfo, providerType);
             Channel myChannel = createChannel(savedUser);
-            subscribeService.subscribe(savedUser.getId(), myChannel.getId());
+            saveMyChannelSubscribe(savedUser, myChannel);
         }
 
         return MemberPrincipal.create(savedUser, user.getAttributes());
+    }
+
+    private void saveMyChannelSubscribe(Member savedUser, Channel myChannel) {
+        subscribeRepository.save(Subscribe.builder()
+                .color(SubscribeColor.YELLOW)
+                .auth(SubscribeAuth.MANAGE)
+                .showYn(true)
+                .subscribeDate(LocalDateTime.now())
+                .member(savedUser)
+                .channel(myChannel)
+                .build());
     }
 
     private Channel createChannel(Member member){
