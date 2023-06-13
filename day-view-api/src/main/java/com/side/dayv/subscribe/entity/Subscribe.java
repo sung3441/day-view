@@ -92,16 +92,8 @@ public class Subscribe {
         return this.auth == SubscribeAuth.MANAGE;
     }
 
-    public void checkUnsubscribeAuth() {
-        if (this.auth == SubscribeAuth.MANAGE) {
-            throw new BadRequestException(BAD_REQUEST_MANAGE_UNSUBSCRIBE);
-        }
-    }
-
-    public void checkPermission(final Long memberId) {
-        if (this.member.getId() != memberId) {
-            throw new BadRequestException(BAD_REQUEST_PERMISSION);
-        }
+    public boolean isSameMember(final Long memberId) {
+        return this.member.getId() == memberId;
     }
 
     public void update(final SubscribeColor color, final boolean showYn) {
