@@ -3,6 +3,7 @@ package com.side.dayv.subscribe.service;
 import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.channel.repository.ChannelRepository;
 import com.side.dayv.global.exception.AlreadyExistsException;
+import com.side.dayv.global.exception.BadRequestException;
 import com.side.dayv.global.exception.NotFoundException;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
@@ -46,7 +47,9 @@ public class SubscribeService {
         Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, channelId)
                 .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
 
-        subscribe.checkUnsubscribeAuth();
+        if (subscribe.isManageAuth()) {
+            throw new BadRequestException(BAD_REQUEST_MANAGE_UNSUBSCRIBE);
+        }
 
         subscribeRepository.delete(subscribe);
     }
@@ -56,7 +59,9 @@ public class SubscribeService {
         Subscribe subscribe = subscribeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
 
-        subscribe.checkPermission(memberId);
+        if (!subscribe.isSameMember(memberId)) {
+            throw new BadRequestException(BAD_REQUEST_PERMISSION);
+        }
 
         subscribe.update(request.getColor(), request.isShowYn());
     }
