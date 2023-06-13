@@ -77,11 +77,4 @@ public class SubscribeService {
         return subscribeRepository.save(manageChannelSubscribe);
     }
 
-
-    public void checkManageAuth(Long memberId, Long channelId){
-        Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, channelId)
-                .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
-
-        subscribe.checkManagerAuth();
-    }
 }

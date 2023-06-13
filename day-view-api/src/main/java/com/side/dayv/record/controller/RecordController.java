@@ -26,29 +26,25 @@ public class RecordController {
                                        @RequestBody final RequestCreateRecordDTO recordDTO,
                                        @PathVariable final Long channelId){
 
-        ResponseRecordDTO responseRecordDTO = recordService.createRecord(recordDTO, channelId, user.getMemberId());
+        ResponseRecordDTO responseRecordDTO = recordService.createRecord(recordDTO, user.getMemberId(), channelId);
 
         return ResponseEntity.ok(new CommonResponse(responseRecordDTO));
     }
 
-    @DeleteMapping(value = "/channels/{channelId}/records/{recordsId}")
+    @DeleteMapping(value = "/records/{recordId}")
     public ResponseEntity removeRecord(@AuthenticationPrincipal final CustomUser user,
-                                       @PathVariable final Long channelId,
-                                       @PathVariable final Long recordsId){
-        recordService.removeRecord(user.getMemberId(), channelId, recordsId);
+                                       @PathVariable final Long recordId){
+        recordService.removeRecord(user.getMemberId(), recordId);
 
         return ResponseEntity.ok("");
     }
 
-    @PatchMapping(value = "/channels/{channelId}/records/{recordId}")
+    @PatchMapping(value = "/records/{recordId}")
     public ResponseEntity updateRecord(@AuthenticationPrincipal final CustomUser user,
-                                       @PathVariable final Long channelId,
                                        @PathVariable final Long recordId,
                                        @RequestBody RequestUpdateRecordDTO recordDTO){
 
-        subscribeService.checkManageAuth(user.getMemberId(), channelId);
-
-        ResponseRecordDTO responseRecordDTO = recordService.updateRecord(recordDTO, channelId, recordId);
+        ResponseRecordDTO responseRecordDTO = recordService.updateRecord(recordDTO, user.getMemberId(), recordId);
         return ResponseEntity.ok(new CommonResponse(responseRecordDTO));
     }
 

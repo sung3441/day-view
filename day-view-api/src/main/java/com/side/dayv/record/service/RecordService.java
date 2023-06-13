@@ -2,6 +2,7 @@ package com.side.dayv.record.service;
 
 import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.channel.repository.ChannelRepository;
+import com.side.dayv.global.exception.BadRequestException;
 import com.side.dayv.global.exception.NotFoundException;
 import com.side.dayv.record.dto.RequestCreateRecordDTO;
 import com.side.dayv.record.dto.RequestUpdateRecordDTO;
@@ -23,30 +24,33 @@ public class RecordService {
     private final RecordRepository recordRepository;
     private final ChannelRepository channelRepository;
     private final SubscribeRepository subscribeRepository;
-    private final SubscribeService subscribeService;
 
     @Transactional
-    public void removeRecord(Long memberId, Long channelId, Long recordId){
-        Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, channelId)
+    public void removeRecord(Long memberId, Long recordId){
+        Record record = recordRepository.findById(recordId)
+                .orElseThrow(() -> new NotFoundException(RECORD_NOT_FOUND));
+
+        Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, record.getChannel().getId())
                 .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
 
-        subscribe.checkManagerAuth();
-
-        Record record = recordRepository.findByIdAndChannelId(recordId, channelId)
-                .orElseThrow(() -> new NotFoundException(RECORD_NOT_FOUND));
+        if( !subscribe.isManageAuth() ){
+            throw new BadRequestException(MODIFY_NO_PERMISSION);
+        }
 
         recordRepository.delete(record);
     }
 
     @Transactional
-    public ResponseRecordDTO createRecord(RequestCreateRecordDTO recordDTO, Long channelId, Long memberId){
+    public ResponseRecordDTO createRecord(RequestCreateRecordDTO recordDTO, Long memberId, Long channelId){
         Channel channel = channelRepository.findById(channelId)
                 .orElseThrow(() -> new NotFoundException(CHANNEL_NOT_FOUNT));
 
         Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, channelId)
                 .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
 
-        subscribe.checkManagerAuth();
+        if( !subscribe.isManageAuth() ){
+            throw new BadRequestException(MODIFY_NO_PERMISSION);
+        }
 
         Record record = recordRepository.save(recordDTO.toEntity(channel));
 
@@ -54,14 +58,20 @@ public class RecordService {
     }
 
     @Transactional
-    public ResponseRecordDTO updateRecord(RequestUpdateRecordDTO recordDTO, Long channelId, Long recordId){
+    public ResponseRecordDTO updateRecord(RequestUpdateRecordDTO recordDTO, Long memberId, Long recordId){
 
-        Record record = recordRepository.findByIdAndChannelId(recordId, channelId)
+        Record record = recordRepository.findById(recordId)
                 .orElseThrow(() -> new NotFoundException(RECORD_NOT_FOUND));
+
+        Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, record.getChannel().getId())
+                .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
+
+        if( !subscribe.isManageAuth() ){
+            throw new BadRequestException(MODIFY_NO_PERMISSION);
+        }
 
         record.update(recordDTO);
         return new ResponseRecordDTO(record);
     }
-
 
 }
