@@ -1,9 +1,9 @@
-import { Children, ReactNode, isValidElement, memo } from 'react';
+import { Children, ReactNode, isValidElement, memo, useRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
 
 import ModalDim from './ModalDim';
-
+import { getAdjustPosition } from '@/shared/util/getAdjustPosition';
 interface Props {
   children?: ReactNode;
   clientX?: number;
@@ -13,6 +13,9 @@ interface Props {
 const FILTER = [(<ModalDim />).type];
 
 const ModalMain = ({ children, ...props }: Props) => {
+  const ref = useRef(null);
+
+  /** 컴포넌트 분리 */
   const splitComponents = (children: ReactNode) => {
     const remainComponents: ReactNode[] = [];
     const filteredComponents: ReactNode[] = [];
@@ -30,17 +33,19 @@ const ModalMain = ({ children, ...props }: Props) => {
 
   const [remainComponents, filteredComponents] = splitComponents(children);
 
+  /** dim 체크 */
   const isDimmed = filteredComponents.some(
     (child) => isValidElement(child) && FILTER.includes(child.type)
   );
 
+  /** TEST */
+  const clientX = props.clientX ? props.clientX : 0;
+  const clientY = props.clientY ? props.clientY : 0;
+  const [x, y] = getAdjustPosition(clientX, clientY, ref);
+
   return (
     <S.Layout>
-      <S.Container
-        clientX={props.clientX}
-        clientY={props.clientY}
-        isDimmed={isDimmed}
-      >
+      <S.Container ref={ref} clientX={x} clientY={y} isDimmed={isDimmed}>
         {remainComponents}
       </S.Container>
       {filteredComponents}

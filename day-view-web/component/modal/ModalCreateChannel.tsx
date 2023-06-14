@@ -4,10 +4,14 @@ import styled from 'styled-components';
 import Modal from '@/shared/component/modal';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { ModalProps } from '@/component/modal/ModalRenderer';
+import useModalState from '@/shared/hooks/useModalState';
 
 const ModalCreateChannel = ({ closeModal }: ModalProps) => {
+  /** TEST */
+  const { params } = useModalState('CreateCategory');
+
   return (
-    <Modal>
+    <Modal clientX={params?.clientX} clientY={params?.clientY}>
       <Modal.Header>
         <Modal.Title>새 카테고리 만들기</Modal.Title>
       </Modal.Header>
