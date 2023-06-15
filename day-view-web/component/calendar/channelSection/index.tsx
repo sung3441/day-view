@@ -19,13 +19,8 @@ const ChannelSection = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
   const { openModal } = useModal();
 
-  /** TEST */
-  const handleOpenModal = (e: React.MouseEvent) => {
-    openModal('CreateCategory', { clientX: e.clientX, clientY: e.clientY });
-  };
-
   return (
-    <Wrap isOpenChannel={isOpenChannel} onClick={handleOpenModal}>
+    <Wrap isOpenChannel={isOpenChannel}>
       <Channel label="내채널" />
       <Button style={buttonStyle} onClick={() => openModal('AddSchedule')}>
         <Icon type="sm_plus" style={{ marginRight: '5px' }} />
