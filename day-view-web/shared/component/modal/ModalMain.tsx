@@ -1,4 +1,12 @@
-import { Children, ReactNode, isValidElement, memo, useRef } from 'react';
+import {
+  Children,
+  ReactNode,
+  isValidElement,
+  memo,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
 
@@ -14,6 +22,15 @@ const FILTER = [(<ModalDim />).type];
 
 const ModalMain = ({ children, ...props }: Props) => {
   const ref = useRef(null);
+  const { clientX, clientY } = props;
+  const [position, setPosition] = useState<{ x: number; y: number }>();
+
+  useEffect(() => {
+    if (!clientX || !clientY) return;
+
+    const [x, y] = getAdjustPosition(clientX, clientY, ref);
+    setPosition({ x, y });
+  }, [clientX, clientY]);
 
   /** 컴포넌트 분리 */
   const splitComponents = (children: ReactNode) => {
@@ -38,14 +55,14 @@ const ModalMain = ({ children, ...props }: Props) => {
     (child) => isValidElement(child) && FILTER.includes(child.type)
   );
 
-  /** TEST */
-  const clientX = props.clientX ? props.clientX : 0;
-  const clientY = props.clientY ? props.clientY : 0;
-  const [x, y] = getAdjustPosition(clientX, clientY, ref);
-
   return (
     <S.Layout>
-      <S.Container ref={ref} clientX={x} clientY={y} isDimmed={isDimmed}>
+      <S.Container
+        ref={ref}
+        clientX={position && position.x}
+        clientY={position && position.y}
+        isDimmed={isDimmed}
+      >
         {remainComponents}
       </S.Container>
       {filteredComponents}
@@ -116,9 +133,9 @@ const S = {
 
     animation: ${fadeIn} 0.3s ease forwards;
 
-    transform: translate(-50%, -50%);
     top: ${({ clientY }) => clientY && `${clientY}px`};
     left: ${({ clientX }) => clientX && `${clientX}px`};
+    transform: translate(-50%, -50%);
   `,
 };
 

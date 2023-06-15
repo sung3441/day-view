@@ -26,9 +26,5 @@ export const getAdjustPosition = (
     }
   }
 
-  console.log(
-    `params: ${clientX}, ${clientY}\ncomponentSize: ${componentRef.current?.offsetWidth}, ${componentRef.current?.offsetHeight}\nreturn:${adjustedX}, ${adjustedY}`
-  );
-
   return [adjustedX, adjustedY];
 };

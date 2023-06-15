@@ -7,7 +7,6 @@ import { ModalProps } from '@/component/modal/ModalRenderer';
 import useModalState from '@/shared/hooks/useModalState';
 
 const ModalCreateChannel = ({ closeModal }: ModalProps) => {
-  /** TEST */
   const { params } = useModalState('CreateCategory');
 
   return (
