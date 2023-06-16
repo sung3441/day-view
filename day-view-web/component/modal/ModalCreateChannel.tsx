@@ -6,6 +6,9 @@ import { pixelToRemUnit } from '@/shared/styles/util';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 import useModalState from '@/shared/hooks/useModalState';
 
+/**
+ * 카테고리 생성
+ */
 const ModalCreateChannel = ({ closeModal }: ModalProps) => {
   /**
    * ? 예시
@@ -19,16 +22,16 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
         <Modal.Title>새 카테고리 만들기</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <>
+        <Modal.Section>
           <Modal.SubTitle>카테고리 이름</Modal.SubTitle>
           <Modal.Input placeholder="이름을 입력하세요." />
-        </>
-        <>
+        </Modal.Section>
+        <Modal.Section>
           <Modal.SubTitle>비공개</Modal.SubTitle>
           <WrapButton>
             <Modal.ToggleButton id="toggle" checked />
           </WrapButton>
-        </>
+        </Modal.Section>
       </Modal.Body>
       <Modal.Control>
         <Modal.Button
