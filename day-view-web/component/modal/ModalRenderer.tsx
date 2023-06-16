@@ -2,25 +2,17 @@ import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useRecoilValue } from 'recoil';
 
-import {
-  ModalCreateChannel,
-  ModalManageChannel,
-  ModalEditorList,
-  ModalAddSchedule,
-} from '@/component/modal';
+import { ModalCreateChannel, ModalAddSchedule } from '@/component/modal';
 import { useModal } from '@/shared/hooks';
 import { modalListAtom } from '@/shared/atom/modalState';
 
 export interface ModalProps {
-  modalType: string;
   openModal: (modalType: ModalType) => void;
   closeModal: (modalType: ModalType) => void;
 }
 
 const modalComponents = {
   CreateCategory: ModalCreateChannel,
-  ManageCategory: ModalManageChannel,
-  EditorList: ModalEditorList,
   AddSchedule: ModalAddSchedule,
 } satisfies Record<
   string,
@@ -51,7 +43,6 @@ const ModalRenderer = () => {
           return (
             <ModalComponent
               key={modalType}
-              modalType={modalType}
               openModal={openModal}
               closeModal={closeModal}
             />

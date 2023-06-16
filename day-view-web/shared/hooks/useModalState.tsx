@@ -5,7 +5,7 @@ import { modalState } from '../atom/modalState';
 const useModalState = (modalType: ModalType) => {
   const { params } = useRecoilValue(modalState(modalType));
 
-  return { params };
+  return { ...params };
 };
 
 export default useModalState;
