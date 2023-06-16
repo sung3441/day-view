@@ -7,10 +7,14 @@ import { ModalProps } from '@/component/modal/ModalRenderer';
 import useModalState from '@/shared/hooks/useModalState';
 
 const ModalCreateChannel = ({ closeModal }: ModalProps) => {
-  const { params } = useModalState('CreateCategory');
+  /**
+   * ? 예시
+   */
+  const modalprops = useModalState('CreateCategory');
+  const { clientX, clientY } = useModalState('CreateCategory');
 
   return (
-    <Modal clientX={params?.clientX} clientY={params?.clientY}>
+    <Modal {...modalprops}>
       <Modal.Header>
         <Modal.Title>새 카테고리 만들기</Modal.Title>
       </Modal.Header>

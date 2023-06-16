@@ -12,7 +12,6 @@ import { useModal } from '@/shared/hooks';
 import { modalListAtom } from '@/shared/atom/modalState';
 
 export interface ModalProps {
-  modalType: string;
   openModal: (modalType: ModalType) => void;
   closeModal: (modalType: ModalType) => void;
 }
@@ -51,7 +50,6 @@ const ModalRenderer = () => {
           return (
             <ModalComponent
               key={modalType}
-              modalType={modalType}
               openModal={openModal}
               closeModal={closeModal}
             />

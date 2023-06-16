@@ -9,13 +9,12 @@ import {
 } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
+import { getAdjustPosition } from '@/shared/util/getAdjustPosition';
+import { ModalParams } from '@/shared/atom/modalState';
 
 import ModalDim from './ModalDim';
-import { getAdjustPosition } from '@/shared/util/getAdjustPosition';
-interface Props {
+interface Props extends ModalParams {
   children?: ReactNode;
-  clientX?: number;
-  clientY?: number;
 }
 
 const FILTER = [(<ModalDim />).type];
