@@ -1,4 +1,7 @@
 import { number, string } from 'prop-types';
+export type Token = {
+  token: string;
+};
 
 export type UserType = {
   memberId: number;

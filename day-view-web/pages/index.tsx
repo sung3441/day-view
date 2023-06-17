@@ -4,7 +4,8 @@ import { GetServerSidePropsContext } from 'next';
 import Main from '@/component/main';
 import styled from 'styled-components';
 import { getStyledThemProperty } from '@/shared/styles/util';
-import { getUser } from '@/shared/api';
+import { getAccessToken, getUser } from '@/shared/api';
+import { setAccessToken, setCookie } from '@/shared/util/axios';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -41,6 +42,14 @@ export const getServerSideProps = async ({
   res,
   ...rest
 }: GetServerSidePropsContext) => {
+  try {
+    setCookie(req.headers.cookie);
+    const token = await getAccessToken();
+    setAccessToken(token!.data.token);
+    const userData = await getUser();
+    console.log('userData', userData);
+  } catch (e) {}
+
   return {
     props: {},
   };

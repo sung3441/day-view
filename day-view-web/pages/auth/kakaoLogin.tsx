@@ -15,7 +15,7 @@ const Index = () => {
       const res = await getUser();
       console.log(res);
     })();
-    // router.replace('/calendar');
+    router.replace('/calendar');
   }, [token]);
 
   return <div>카카오 로그인 처리중입니다.</div>;
