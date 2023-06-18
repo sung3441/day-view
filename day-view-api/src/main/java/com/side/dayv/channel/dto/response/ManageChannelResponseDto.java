@@ -5,7 +5,6 @@ import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.channel.entity.ChannelType;
 import com.side.dayv.subscribe.entity.Subscribe;
 import com.side.dayv.subscribe.entity.SubscribeAuth;
-import com.side.dayv.subscribe.entity.SubscribeColor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
@@ -22,14 +21,14 @@ public class ManageChannelResponseDto {
 
     private boolean showYn;
 
-    private SubscribeColor color;
+    private String color;
 
     private ChannelType channelType;
 
     private SubscribeAuth subscribeAuth;
 
     @Builder
-    public ManageChannelResponseDto(Long channelId, Long subscribeId, String name, boolean showYn, SubscribeColor color, ChannelType channelType, SubscribeAuth subscribeAuth) {
+    public ManageChannelResponseDto(Long channelId, Long subscribeId, String name, boolean showYn, String color, ChannelType channelType, SubscribeAuth subscribeAuth) {
         this.channelId = channelId;
         this.subscribeId = subscribeId;
         this.name = name;

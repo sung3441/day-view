@@ -11,7 +11,6 @@ import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.oauth.entity.ProviderType;
 import com.side.dayv.subscribe.dto.request.SubscribeUpdateDto;
 import com.side.dayv.subscribe.entity.Subscribe;
-import com.side.dayv.subscribe.entity.SubscribeColor;
 import com.side.dayv.subscribe.repository.SubscribeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -141,19 +140,19 @@ class SubscribeServiceTest {
     void 구독_수정() {
         Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
 
-        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(SubscribeColor.BLUE, false);
+        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(Subscribe.DEFAULT_COLOR, false);
 
         subscribeService.update(subscribe.getId(), MEMBER.getId(), subscribeUpdateDto);
 
         Subscribe updateSubscribe = subscribeRepository.findById(subscribe.getId()).get();
 
-        assertThat(updateSubscribe.getColor()).isEqualTo(SubscribeColor.BLUE);
+        assertThat(updateSubscribe.getColor()).isEqualTo(Subscribe.DEFAULT_COLOR);
         assertThat(updateSubscribe.isShowYn()).isFalse();
     }
 
     @Test
     void 구독_수정_실패_구독_없음() {
-        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(SubscribeColor.BLUE, false);
+        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(Subscribe.DEFAULT_COLOR, false);
 
         assertThatThrownBy(() -> subscribeService.update(99L, MEMBER.getId(), subscribeUpdateDto))
                 .isInstanceOf(NotFoundException.class)
@@ -164,7 +163,7 @@ class SubscribeServiceTest {
     void 구독_수정_실패_권한_없음() {
         Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
 
-        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(SubscribeColor.BLUE, false);
+        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(Subscribe.DEFAULT_COLOR, false);
 
         assertThatThrownBy(() -> subscribeService.update(subscribe.getId(), 99L, subscribeUpdateDto))
                 .isInstanceOf(BadRequestException.class)
