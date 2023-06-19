@@ -33,6 +33,7 @@ export class Client {
       const res = await this.instance.get<T>(this.url, {
         params: this.makeParams(params),
       });
+      console.log('Res', res);
       const { data, status } = res;
 
       return {
@@ -42,6 +43,7 @@ export class Client {
     } catch (error) {
       // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
       if (axios.isAxiosError<ErrorResponse, any>(error)) {
+        console.log('error', error);
         throw new Error(error?.response?.status.toString());
       }
     }

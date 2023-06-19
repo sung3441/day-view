@@ -3,7 +3,7 @@ export type Token = {
   token: string;
 };
 
-export type UserType = {
+export type UserRes = {
   memberId: number;
   provider: string;
   email: string;
@@ -18,7 +18,7 @@ export type UserType = {
 
 export type ChannelSelectType = 'MANAGE' | 'SUBSCRIBE' | 'GOOGLE';
 
-export type ChannelType = {
+export type ChannelRes = {
   channelId: number;
   subscribeId: number;
   name: string;
