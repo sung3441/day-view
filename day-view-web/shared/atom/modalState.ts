@@ -20,6 +20,7 @@ export const modalState = atomFamily<ModalState, ModalType>({
   key: 'modalState',
   default: (modalType: ModalType) => ({
     modalType,
+    params: {},
   }),
 });
 
