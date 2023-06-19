@@ -2,13 +2,9 @@ import dynamic from 'next/dynamic';
 import Calendar from '@/component/calendar';
 import { GetServerSidePropsContext } from 'next';
 import { getAccessToken, getUser } from '@/shared/api';
-import * as cookie from 'cookie';
 
-import { cookies } from 'next/headers';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
-import Auth from '@/shared/axios';
 import { setAccessToken, setCookie } from '@/shared/util/axios';
-import axios from 'axios';
 import { QueryKeys } from '@/shared/queryClient';
 
 const ModalRenderer = dynamic(() => import('@/component/modal/ModalRenderer'), {
@@ -17,7 +13,6 @@ const ModalRenderer = dynamic(() => import('@/component/modal/ModalRenderer'), {
 
 function CalendarPage() {
   const { data } = useQuery([QueryKeys.USER], getUser);
-  console.log(data);
 
   return (
     <>
