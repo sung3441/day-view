@@ -16,6 +16,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.side.dayv.global.util.ErrorMessage.*;
 
 @Service
@@ -74,4 +77,19 @@ public class RecordService {
         return new ResponseRecordDTO(record);
     }
 
+    @Transactional
+    public ResponseRecordDTO getRecord(Long recordId){
+        Record record = recordRepository.findById(recordId)
+                .orElseThrow(() -> new NotFoundException(RECORD_NOT_FOUND));
+
+        return new ResponseRecordDTO(record);
+    }
+
+    @Transactional
+    public List<ResponseRecordDTO> getChannelRecord(Long channelId) {
+        return recordRepository.findByChannelId(channelId)
+                .stream()
+                .map(record -> new ResponseRecordDTO(record))
+                .collect(Collectors.toList());
+    }
 }

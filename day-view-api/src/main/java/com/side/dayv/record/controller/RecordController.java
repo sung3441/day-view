@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api")
@@ -46,6 +48,20 @@ public class RecordController {
 
         ResponseRecordDTO responseRecordDTO = recordService.updateRecord(recordDTO, user.getMemberId(), recordId);
         return ResponseEntity.ok(new CommonResponse(responseRecordDTO));
+    }
+
+    @GetMapping(value = "/records/{recordId}")
+    public ResponseEntity getRecord(@PathVariable final Long recordId){
+
+        ResponseRecordDTO responseRecordDTO = recordService.getRecord(recordId);
+        return ResponseEntity.ok(new CommonResponse<>(responseRecordDTO));
+    }
+
+    @GetMapping(value = "/channels/{channelId}/records")
+    public ResponseEntity getChannelRecords(@PathVariable final Long channelId){
+
+        List<ResponseRecordDTO> responseRecordDTOS = recordService.getChannelRecord(channelId);
+        return ResponseEntity.ok(new CommonResponse<>(responseRecordDTOS));
     }
 
 }
