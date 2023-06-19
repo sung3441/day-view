@@ -3,13 +3,16 @@ import { ThemeProvider } from 'styled-components';
 import { Hydrate, QueryClientProvider } from 'react-query';
 import { getClient } from '@/shared/queryClient';
 import Layout from '@/shared/component/Layout';
-import { RecoilRoot, RecoilEnv } from 'recoil';
+import { RecoilRoot, RecoilEnv, useSetRecoilState } from 'recoil';
 import { commonTheme } from '@/shared/styles/theme';
 import GlobalStyle from '@/shared/styles/globalStyle';
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
-import useMswStatus from '@/mocks';
+import { isSetAccessToken, setAccessToken } from '@/shared/util/axios';
+import { getAccessToken } from '@/shared/api';
+import { useEffect } from 'react';
+import { isLogin, isLoginAtom } from '@/shared/atom/global';
 
 // if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
 //   import('../mocks');
@@ -35,7 +38,19 @@ function App({ Component, pageProps }: AppProps) {
 }
 
 const APPWithConfig = ({ children }: { children: any }) => {
-  // useMswStatus();
+  const setIsLogin = useSetRecoilState(isLoginAtom);
+  useEffect(() => {
+    (async () => {
+      try {
+        const token = await getAccessToken();
+        setAccessToken(token!.data.token);
+        setIsLogin(true);
+      } catch (e) {
+        console.log('e', e);
+      }
+    })();
+  }, []);
+
   return <Layout>{children}</Layout>;
 };
 

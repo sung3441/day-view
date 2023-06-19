@@ -5,7 +5,11 @@ import Main from '@/component/main';
 import styled from 'styled-components';
 import { getStyledThemProperty } from '@/shared/styles/util';
 import { getAccessToken, getUser } from '@/shared/api';
-import { setAccessToken, setCookie } from '@/shared/util/axios';
+import {
+  isSetAccessToken,
+  setAccessToken,
+  setCookie,
+} from '@/shared/util/axios';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -43,13 +47,18 @@ export const getServerSideProps = async ({
   ...rest
 }: GetServerSidePropsContext) => {
   try {
-    setCookie(req.headers.cookie);
-    const token = await getAccessToken();
-    setAccessToken(token!.data.token);
-    const userData = await getUser();
-    console.log('userData', userData);
-  } catch (e) {}
-
+    const isAllowLogin = await isSetAccessToken(req?.headers?.cookie || '');
+    if (isAllowLogin) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: '/calendar',
+        },
+      };
+    }
+  } catch (e) {
+    console.log('main', e);
+  }
   return {
     props: {},
   };

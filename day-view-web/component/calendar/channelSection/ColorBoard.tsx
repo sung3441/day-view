@@ -14,6 +14,7 @@ interface Props {
 const ColorBoard = ({ isOpen, closeColorBoard }: Props) => {
   const { isShow, handleIsShow, handelOnAnimationEnd } =
     useAnimationHandler(closeColorBoard);
+
   const ref = useOuterClick<HTMLDivElement>({
     callback: handleIsShow,
   });

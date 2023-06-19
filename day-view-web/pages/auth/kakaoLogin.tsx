@@ -11,10 +11,6 @@ const Index = () => {
   useEffect(() => {
     if (!token) return;
     Auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    (async () => {
-      const res = await getUser();
-      console.log(res);
-    })();
     router.replace('/calendar');
   }, [token]);
 

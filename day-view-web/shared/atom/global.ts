@@ -6,3 +6,7 @@ export const mswStatusAtom = atom<MswStatusType>({
   key: 'mswStatusAtom',
   default: null,
 });
+export const isLoginAtom = atom<boolean>({
+  key: 'isLoginAtom',
+  default: false,
+});

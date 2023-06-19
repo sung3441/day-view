@@ -4,34 +4,41 @@ import { CheckBox, IconButton } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import dynamic from 'next/dynamic';
 import { useModal } from '@/shared/hooks';
+import { ChannelSelectType } from '@/shared/types/api';
+import useGetChannel from '@/component/calendar/channelSection/hooks/useGetChannel';
 // import ColorBoard from '@/component/calendar/channelSection/ColorBoard';
 
 const ColorBoard = dynamic(
   () => import('@/component/calendar/channelSection/ColorBoard'),
   { ssr: false }
 );
-interface Props {
+export interface Props {
   label: string;
+  selectType: ChannelSelectType;
 }
 
-const Channel = ({ label }: Props) => {
+const Channel = ({ label, selectType }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { openModal } = useModal();
+  // const { openModal } = useModal();
+
+  const { status, data } = useGetChannel({ selectType });
 
   const handelOpen = (e: SyntheticEvent) => {
     e.stopPropagation();
     setIsOpen(true);
   };
 
+  console.log(data);
+  if (status !== 'success') return null;
   return (
     <Wrap>
       <Label>
         <span>{label}</span>
-        <IconButton
-          type="sm_plus"
-          size="small"
-          onClick={() => openModal('CreateCategory')}
-        />
+        {/*<IconButton*/}
+        {/*  type="sm_plus"*/}
+        {/*  size="small"*/}
+        {/*  onClick={() => openModal('CreateCategory')}*/}
+        {/*/>*/}
       </Label>
       <List>
         <Item>

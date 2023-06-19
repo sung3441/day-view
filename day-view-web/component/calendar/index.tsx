@@ -17,17 +17,9 @@ const Calendar = () => {
       case '월':
         return <DateSection />;
       case '일정':
-        return (
-          <>
-            <ScheduleHeader />
-          </>
-        );
+        return <ScheduleHeader />;
       case '카테고리':
-        return (
-          <>
-            <CategoryHeader />
-          </>
-        );
+        return <CategoryHeader />;
       default:
         return <DateSection />;
     }
