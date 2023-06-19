@@ -1,5 +1,7 @@
 package com.side.dayv.member.service;
 
+import com.side.dayv.global.exception.NotFoundException;
+import com.side.dayv.member.dto.RequestMemberDTO;
 import com.side.dayv.member.dto.ResponseMemberDTO;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
@@ -7,6 +9,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import static com.side.dayv.global.util.ErrorMessage.MEMBER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +46,13 @@ public class MemberService {
         }
 
         member.changeRefreshToken(null);
+    }
+
+    @Transactional
+    public void updateMyInfo(RequestMemberDTO requestMemberDTO, Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(()->new NotFoundException(MEMBER_NOT_FOUND));
+
+        member.changeMyInfo(requestMemberDTO);
     }
 }
