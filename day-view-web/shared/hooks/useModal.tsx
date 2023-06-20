@@ -13,9 +13,9 @@ const useModal = () => {
   );
 
   const openModal = useCallback(
-    (modalType: ModalType, params: ModalParams) => {
+    (modalType: ModalType, params?: ModalParams) => {
       const value = { modalType, params };
-      console.log(value);
+
       setModal(modalType, value);
     },
     [setModal]

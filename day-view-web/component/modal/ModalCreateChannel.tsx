@@ -4,20 +4,18 @@ import styled from 'styled-components';
 import Modal from '@/shared/component/modal';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { ModalProps } from '@/component/modal/ModalRenderer';
-import useModalState from '@/shared/hooks/useModalState';
+import { useAnimationHandler } from '@/shared/hooks';
 
 /**
  * 카테고리 생성
  */
 const ModalCreateChannel = ({ closeModal }: ModalProps) => {
-  /**
-   * ? 예시
-   */
-  const modalprops = useModalState('CreateCategory');
-  const { clientX, clientY } = useModalState('CreateCategory');
+  const { isShow, handleIsShow, handelOnAnimationEnd } = useAnimationHandler(
+    () => closeModal('CreateCategory')
+  );
 
   return (
-    <Modal {...modalprops}>
+    <Modal isShow={isShow} onAnimationEnd={handelOnAnimationEnd}>
       <Modal.Header>
         <Modal.Title>새 카테고리 만들기</Modal.Title>
       </Modal.Header>
@@ -34,15 +32,12 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
         </Modal.Section>
       </Modal.Body>
       <Modal.Control>
-        <Modal.Button
-          variant="primary"
-          onClick={() => closeModal('CreateCategory')}
-        >
+        <Modal.Button variant="primary" onClick={() => handleIsShow()}>
           취소
         </Modal.Button>
         <Modal.Button variant="accent">완료</Modal.Button>
       </Modal.Control>
-      <Modal.Dim onClick={() => closeModal('CreateCategory')} />
+      <Modal.Dim onClick={() => handleIsShow} />
     </Modal>
   );
 };
