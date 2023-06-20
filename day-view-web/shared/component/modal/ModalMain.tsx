@@ -15,6 +15,8 @@ import { ModalParams } from '@/shared/atom/modalState';
 import ModalDim from './ModalDim';
 interface Props extends ModalParams {
   children?: ReactNode;
+  isShow?: boolean;
+  onAnimationEnd?: () => void;
 }
 
 const FILTER = [(<ModalDim />).type];
@@ -55,12 +57,13 @@ const ModalMain = ({ children, ...props }: Props) => {
   );
 
   return (
-    <S.Layout>
+    <S.Layout onAnimationEnd={props.onAnimationEnd} isShow={props.isShow}>
       <S.Container
         ref={ref}
         clientX={position && position.x}
         clientY={position && position.y}
         isDimmed={isDimmed}
+        isShow={props.isShow}
       >
         {remainComponents}
       </S.Container>
@@ -92,7 +95,7 @@ const fadeOut = keyframes`
 `;
 
 const S = {
-  Layout: styled.div`
+  Layout: styled.div<{ isShow?: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,9 +106,19 @@ const S = {
     left: 0;
     right: 0;
     z-index: 100;
+
+    ${({ isShow }) =>
+      isShow
+        ? css`
+            animation: ${fadeIn} 0.3s ease forwards;
+          `
+        : css`
+            animation: ${fadeOut} 0.3s ease forwards;
+          `};
   `,
 
   Container: styled.div<{
+    isShow?: boolean;
     isDimmed?: boolean;
     clientX?: number;
     clientY?: number;
@@ -130,7 +143,14 @@ const S = {
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
           `};
 
-    animation: ${fadeIn} 0.3s ease forwards;
+    ${({ isShow }) =>
+      isShow
+        ? css`
+            animation: ${fadeIn} 0.3s ease forwards;
+          `
+        : css`
+            animation: ${fadeOut} 0.3s ease forwards;
+          `};
 
     top: ${({ clientY }) => clientY && `${clientY}px`};
     left: ${({ clientX }) => clientX && `${clientX}px`};

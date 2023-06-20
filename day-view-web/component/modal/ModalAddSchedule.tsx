@@ -2,10 +2,15 @@ import React, { memo } from 'react';
 import Modal from '@/shared/component/modal';
 import { CheckBox } from '@/shared/component/Molecule';
 import { ModalProps } from '@/component/modal/ModalRenderer';
+import { useAnimationHandler } from '@/shared/hooks';
 
 const ModalAddSchedule = ({ closeModal }: ModalProps) => {
+  const { isShow, handleIsShow, handelOnAnimationEnd } = useAnimationHandler(
+    () => closeModal('AddSchedule')
+  );
+
   return (
-    <Modal>
+    <Modal isShow={isShow} onAnimationEnd={handelOnAnimationEnd}>
       <Modal.Body>
         <Modal.Section>
           <Modal.SubTitle>제목</Modal.SubTitle>
@@ -23,7 +28,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
           <Modal.Textarea placeholder="메모를 입력하세요." />
         </Modal.Section>
       </Modal.Body>
-      <Modal.Dim onClick={() => closeModal('AddSchedule')} />
+      <Modal.Dim onClick={() => handleIsShow} />
     </Modal>
   );
 };
