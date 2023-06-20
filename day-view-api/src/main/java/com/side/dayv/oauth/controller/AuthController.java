@@ -75,6 +75,7 @@ public class AuthController {
         Date now = new Date();
         AuthToken newAccessToken = tokenProvider.createAuthToken(
                 userId,
+                member.getId(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
 
@@ -89,6 +90,7 @@ public class AuthController {
 
             authRefreshToken = tokenProvider.createAuthToken(
                     appProperties.getAuth().getTokenSecret(),
+                    member.getId(),
                     new Date(now.getTime() + refreshTokenExpiry)
             );
 
