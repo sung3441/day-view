@@ -13,6 +13,7 @@ export const getClient = (() => {
             refetchOnReconnect: false,
             refetchOnWindowFocus: false,
             retry: 0,
+            // suspense: true,
           },
         },
       });

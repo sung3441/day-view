@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { useModal } from '@/shared/hooks';
 import { ChannelSelectType } from '@/shared/types/api';
 import useGetChannel from '@/component/calendar/channelSection/hooks/useGetChannel';
+import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
 // import ColorBoard from '@/component/calendar/channelSection/ColorBoard';
 
 const ColorBoard = dynamic(
@@ -19,7 +20,7 @@ export interface Props {
 
 const Channel = ({ label, selectType }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  // const { openModal } = useModal();
+  const { openModal } = useModal();
 
   const { status, data } = useGetChannel({ selectType });
 
@@ -28,17 +29,17 @@ const Channel = ({ label, selectType }: Props) => {
     setIsOpen(true);
   };
 
-  console.log(data);
+  if (status === 'error') return null;
   if (status !== 'success') return null;
   return (
     <Wrap>
       <Label>
         <span>{label}</span>
-        {/*<IconButton*/}
-        {/*  type="sm_plus"*/}
-        {/*  size="small"*/}
-        {/*  onClick={() => openModal('CreateCategory')}*/}
-        {/*/>*/}
+        <IconButton
+          type="sm_plus"
+          size="small"
+          onClick={() => openModal('CreateCategory')}
+        />
       </Label>
       <List>
         <Item>

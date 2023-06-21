@@ -27,3 +27,8 @@ export type ChannelRes = {
   channelType: string;
   subscribeAuth: string;
 };
+
+export type CreateChannelParmaType = {
+  name: string;
+  secretYn: boolean;
+};
