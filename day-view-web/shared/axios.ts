@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
-import qs from 'qs';
 
 type ErrorResponse = {
   config?: {};
@@ -24,7 +23,6 @@ export class Client {
   private readonly url: string;
 
   constructor(url: string) {
-    console.log('test', this.instance.defaults.headers);
     this.url = url;
   }
 
@@ -33,7 +31,6 @@ export class Client {
       const res = await this.instance.get<T>(this.url, {
         params: this.makeParams(params),
       });
-      console.log('Res', res);
       const { data, status } = res;
 
       return {
@@ -51,13 +48,11 @@ export class Client {
 
   async post<T extends {}>(params: any = {}) {
     try {
-      const res = await this.instance.post(this.url, qs.stringify(params));
+      const res = await this.instance.post<T>(this.url, params);
       const { data, status } = res;
 
-      if (data.errors?.length && data.errors) throw data?.errors[0];
-
       return {
-        data: data as T,
+        data: data,
         status,
       };
     } catch (error) {
