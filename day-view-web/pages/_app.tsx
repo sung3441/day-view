@@ -12,7 +12,7 @@ RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 import { isSetAccessToken, setAccessToken } from '@/shared/util/axios';
 import { getAccessToken } from '@/shared/api';
 import { useEffect } from 'react';
-import { isLogin, isLoginAtom } from '@/shared/atom/global';
+import { isLoginAtom } from '@/shared/atom/global';
 
 // if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
 //   import('../mocks');
