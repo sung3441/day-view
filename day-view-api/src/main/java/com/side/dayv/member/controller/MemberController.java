@@ -3,6 +3,7 @@ package com.side.dayv.member.controller;
 import com.side.dayv.global.response.CommonResponse;
 import com.side.dayv.member.dto.RequestMemberDTO;
 import com.side.dayv.member.dto.ResponseMemberDTO;
+import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.service.MemberService;
 import com.side.dayv.oauth.entity.CustomUser;
 import com.side.dayv.record.dto.RequestUpdateRecordDTO;
@@ -29,7 +30,7 @@ public class MemberController {
     public ResponseEntity updateMyInfo(@AuthenticationPrincipal final CustomUser user,
                                        @RequestBody RequestMemberDTO requestMemberDTO){
 
-        memberService.updateMyInfo(requestMemberDTO, user.getMemberId());
-        return ResponseEntity.ok("");
+        Member member = memberService.updateMyInfo(requestMemberDTO, user.getMemberId());
+        return ResponseEntity.ok(new CommonResponse(member));
     }
 }

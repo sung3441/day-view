@@ -49,10 +49,11 @@ public class MemberService {
     }
 
     @Transactional
-    public void updateMyInfo(RequestMemberDTO requestMemberDTO, Long memberId) {
+    public Member updateMyInfo(RequestMemberDTO requestMemberDTO, Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(()->new NotFoundException(MEMBER_NOT_FOUND));
 
         member.changeMyInfo(requestMemberDTO);
+        return member;
     }
 }
