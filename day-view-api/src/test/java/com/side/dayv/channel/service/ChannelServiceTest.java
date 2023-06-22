@@ -222,10 +222,6 @@ class ChannelServiceTest {
                 .stream()
                 .count();
 
-        for (ChannelResponseDto channel : channels) {
-            System.out.println("channel = " + channel);
-        }
-
         assertThat(count).isEqualTo(channels.getContent().size());
     }
 }
