@@ -73,4 +73,16 @@ public class SubscribeService {
         return subscribeRepository.save(manageChannelSubscribe);
     }
 
+    public void removeChannel(final Long memberId, final Long channelId) {
+
+        Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, channelId)
+                .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
+
+        if (!subscribe.isManageAuth()) {
+            throw new BadRequestException(NO_PERMISSION);
+        }
+
+        subscribeRepository.delete(subscribe);
+    }
+
 }

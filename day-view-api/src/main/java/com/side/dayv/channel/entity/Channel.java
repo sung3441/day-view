@@ -47,4 +47,8 @@ public class Channel {
         this.lastModifiedDate = lastModifiedDate;
         this.createMember = member;
     }
+
+    public boolean isMyChannel(){
+        return this.type == ChannelType.MY;
+    }
 }

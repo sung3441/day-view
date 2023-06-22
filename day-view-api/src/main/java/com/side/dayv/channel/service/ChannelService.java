@@ -59,4 +59,16 @@ public class ChannelService {
 
         return channelRepository.findChannels(memberId, pageable, search);
     }
+
+    public void removeChannel(final Long memberId, final Long channelId){
+        Channel channel = channelRepository.findById(channelId)
+                .orElseThrow(() -> new NotFoundException(CHANNEL_NOT_FOUNT));
+
+        if( channel.isMyChannel() ){
+            throw new BadRequestException(IMPOSSIBLE_MY_CHANNEL_DELETE);
+        }
+
+        subscribeService.removeChannel(memberId, channelId);
+        channelRepository.delete(channel);
+    }
 }
