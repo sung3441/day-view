@@ -10,7 +10,10 @@ import com.side.dayv.global.response.CommonResponse;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.service.MemberService;
 import com.side.dayv.oauth.entity.CustomUser;
+import com.side.dayv.subscribe.entity.Subscribe;
 import com.side.dayv.subscribe.entity.SubscribeAuth;
+import com.side.dayv.subscribe.entity.Subscribers;
+import com.side.dayv.subscribe.service.SubscribeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +30,7 @@ import java.util.List;
 public class ChannelController {
 
     private final ChannelService channelService;
-    private final MemberService memberService;
+    private final SubscribeService subscribeService;
 
     @PostMapping
     public ResponseEntity<CommonResponse> save(@AuthenticationPrincipal final CustomUser user,
@@ -61,5 +64,10 @@ public class ChannelController {
         return ResponseEntity.ok("");
     }
 
-
+    @GetMapping("/{channelId}/members")
+    public ResponseEntity findMemberByChannelAndAuth(@AuthenticationPrincipal final CustomUser user,
+                                                     @PathVariable final Long channelId){
+        Subscribers subscribers = subscribeService.getSubscribers(channelId);
+        return ResponseEntity.ok(new CommonResponse<>(subscribers));
+    }
 }

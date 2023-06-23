@@ -9,10 +9,13 @@ import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.subscribe.dto.request.SubscribeUpdateDto;
 import com.side.dayv.subscribe.entity.Subscribe;
+import com.side.dayv.subscribe.entity.Subscribers;
 import com.side.dayv.subscribe.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static com.side.dayv.global.util.ErrorMessage.*;
 
@@ -83,6 +86,11 @@ public class SubscribeService {
         }
 
         subscribeRepository.delete(subscribe);
+    }
+
+    public Subscribers getSubscribers(final Long channelId){
+        List<Subscribe> subscribes = subscribeRepository.findAllByChannelId(channelId);
+        return new Subscribers(subscribes);
     }
 
 }
