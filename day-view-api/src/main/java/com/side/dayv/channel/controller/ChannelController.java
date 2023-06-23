@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.NoPermissionException;
 import java.util.List;
 
 @Slf4j
@@ -65,9 +66,9 @@ public class ChannelController {
     }
 
     @GetMapping("/{channelId}/members")
-    public ResponseEntity findMemberByChannelAndAuth(@AuthenticationPrincipal final CustomUser user,
-                                                     @PathVariable final Long channelId){
-        Subscribers subscribers = subscribeService.getSubscribers(channelId);
+    public ResponseEntity getSubscribers(@AuthenticationPrincipal final CustomUser user,
+                                                     @PathVariable final Long channelId) throws NoPermissionException {
+        Subscribers subscribers = subscribeService.getSubscribers(user.getMemberId(), channelId);
         return ResponseEntity.ok(new CommonResponse<>(subscribers));
     }
 }

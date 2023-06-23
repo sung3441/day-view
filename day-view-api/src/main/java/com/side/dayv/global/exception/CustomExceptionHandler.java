@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.naming.NoPermissionException;
+
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
@@ -48,5 +50,11 @@ public class CustomExceptionHandler {
     public ResponseEntity badRequestException(Exception e){
         ExceptionResponse response = new ExceptionResponse(e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(NoPermissionException.class)
+    public ResponseEntity noPermissionException(Exception e){
+        ExceptionResponse response = new ExceptionResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 }

@@ -19,6 +19,6 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Long> {
     Optional<Subscribe> findByMemberIdAndChannelId(final Long memberId, final Long channelId);
 
     @EntityGraph(attributePaths = {"member"})
-    List<Subscribe> findAllByChannelId(final Long channelId);
+    List<Subscribe> findAllByChannelIdOrderByAuth(final Long channelId);
 
 }
