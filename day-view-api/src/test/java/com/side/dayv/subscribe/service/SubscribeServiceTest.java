@@ -12,6 +12,7 @@ import com.side.dayv.oauth.entity.ProviderType;
 import com.side.dayv.subscribe.dto.request.SubscribeUpdateDto;
 import com.side.dayv.subscribe.entity.Subscribe;
 import com.side.dayv.subscribe.entity.SubscribeColor;
+import com.side.dayv.subscribe.entity.Subscribers;
 import com.side.dayv.subscribe.repository.SubscribeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -22,6 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static com.side.dayv.global.util.ErrorMessage.*;
@@ -169,5 +171,32 @@ class SubscribeServiceTest {
         assertThatThrownBy(() -> subscribeService.update(subscribe.getId(), 99L, subscribeUpdateDto))
                 .isInstanceOf(BadRequestException.class)
                 .hasMessageContaining(BAD_REQUEST_PERMISSION);
+    }
+
+    @Test
+    void 채널의_구독자_목록_구독X(){
+
+        List<Subscribe> subscribeList = subscribeRepository.findAllByChannelIdOrderByAuth(452L);
+        Subscribers subscribers = new Subscribers(subscribeList);
+        assertThatThrownBy(() -> subscribers.isManageAuth(MEMBER.getId()));
+    }
+
+    @Test
+    void 채널의_구독자_목록_구독O_권한X(){
+        Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
+
+        List<Subscribe> subscribeList = subscribeRepository.findAllByChannelIdOrderByAuth(CHANNEL.getId());
+        Subscribers subscribers = new Subscribers(subscribeList);
+        assertThat(subscribers.isManageAuth(MEMBER.getId())).isFalse();
+    }
+
+    @Test
+    void 채널의_구독자_목록_구독O_권한O(){
+        Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
+        subscribe.changeAuthToManage();
+
+        List<Subscribe> subscribeList = subscribeRepository.findAllByChannelIdOrderByAuth(CHANNEL.getId());
+        Subscribers subscribers = new Subscribers(subscribeList);
+        assertThat(subscribers.isManageAuth(MEMBER.getId())).isTrue();
     }
 }
