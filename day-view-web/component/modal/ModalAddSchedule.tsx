@@ -9,7 +9,7 @@ import { addScheduleParamType } from '@/shared/types/api';
 import useAddSchedule from './hooks/useAddSchedule';
 
 const ModalAddSchedule = ({ closeModal }: ModalProps) => {
-  const { isShow, handleIsShow, handelOnAnimationEnd } = useAnimationHandler(
+  const { isShow, handleIsShow, handleOnAnimationEnd } = useAnimationHandler(
     () => closeModal('AddSchedule')
   );
 
@@ -50,7 +50,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   };
 
   return (
-    <Modal isShow={isShow} onAnimationEnd={handelOnAnimationEnd}>
+    <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <S.Body>
         <S.Section>
           <Modal.SubTitle>제목</Modal.SubTitle>

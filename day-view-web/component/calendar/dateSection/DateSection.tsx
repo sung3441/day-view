@@ -18,13 +18,13 @@ const DateSection = ({}: Props) => {
     setSelectedYYMM({ year: d.getFullYear(), month: d.getMonth() + 1 });
   };
 
-  const handelOnWheel = (e: WheelEvent<HTMLDivElement>) => {
+  const handleOnWheel = (e: WheelEvent<HTMLDivElement>) => {
     if (e.deltaY > 0) return handleMoveMonth('next');
     return handleMoveMonth('prev');
   };
 
   return (
-    <div onWheel={(e) => handelOnWheel(e)}>
+    <div onWheel={(e) => handleOnWheel(e)}>
       <CalendarHeader handleMoveMonth={handleMoveMonth} />
       <MonthWrap>
         <DayLabels />

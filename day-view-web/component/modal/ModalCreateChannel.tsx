@@ -17,7 +17,7 @@ type CreateChannel = {
 };
 
 const ModalCreateChannel = ({ closeModal }: ModalProps) => {
-  const { isShow, handleIsShow, handelOnAnimationEnd } = useAnimationHandler(
+  const { isShow, handleIsShow, handleOnAnimationEnd } = useAnimationHandler(
     () => closeModal('CreateCategory')
   );
 
@@ -28,7 +28,7 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
 
   const { mutate, status } = useCreateChannel();
 
-  const handelChangeValue = (e: SyntheticEvent) => {
+  const handleChangeValue = (e: SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
     const { name, value, checked } = target;
 
@@ -46,12 +46,12 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
   // 1. 성공시 모달 닫기
   // 2. 실패시 에러메세지 띄우기 -> 제가 할게요
   // 3. 로딩시 버튼 disabled
-  const handelCreateChannel = () => {
+  const handleCreateChannel = () => {
     mutate({ name: value.categoryName, secretYn: value.isPrivate });
   };
 
   return (
-    <Modal isShow={isShow} onAnimationEnd={handelOnAnimationEnd}>
+    <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <Modal.Header>
         <Modal.Title>새 카테고리 만들기</Modal.Title>
       </Modal.Header>
@@ -62,7 +62,7 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
             type="text"
             name="categoryName"
             value={value.categoryName}
-            onChange={handelChangeValue}
+            onChange={handleChangeValue}
             placeholder="이름을 입력하세요."
           />
         </Modal.Section>
@@ -73,7 +73,7 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
               id="toggle"
               name="toggle"
               checked
-              onChange={handelChangeValue}
+              onChange={handleChangeValue}
             />
           </WrapButton>
         </Modal.Section>
@@ -82,7 +82,7 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
         <Modal.Button variant="primary" onClick={() => handleIsShow()}>
           취소
         </Modal.Button>
-        <Modal.Button variant="accent" onClick={handelCreateChannel}>
+        <Modal.Button variant="accent" onClick={handleCreateChannel}>
           완료
         </Modal.Button>
       </Modal.Control>

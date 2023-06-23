@@ -6,7 +6,7 @@ interface Props {}
 const DayLabels = ({}: Props) => {
   return (
     <>
-      {['일', '회', '수', '목', '금', '토', '월'].map((label) => (
+      {['일', '화', '수', '목', '금', '토', '월'].map((label) => (
         <LabelDay className={label === '일' ? 'red' : ''} key={label}>
           <div>{label}</div>
         </LabelDay>

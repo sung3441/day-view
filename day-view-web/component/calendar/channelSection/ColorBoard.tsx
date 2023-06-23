@@ -12,7 +12,7 @@ interface Props {
 }
 
 const ColorBoard = ({ isOpen, closeColorBoard }: Props) => {
-  const { isShow, handleIsShow, handelOnAnimationEnd } =
+  const { isShow, handleIsShow, handleOnAnimationEnd } =
     useAnimationHandler(closeColorBoard);
 
   const ref = useOuterClick<HTMLDivElement>({
@@ -20,7 +20,7 @@ const ColorBoard = ({ isOpen, closeColorBoard }: Props) => {
   });
 
   return (
-    <Box ref={ref} isShow={isShow} onAnimationEnd={handelOnAnimationEnd}>
+    <Box ref={ref} isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <BoxTitle>
         <Icon type="sm_config" />
         <span>관리</span>

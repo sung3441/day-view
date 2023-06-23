@@ -24,7 +24,7 @@ const Channel = ({ label, selectType }: Props) => {
 
   const { status, data } = useGetChannel({ selectType });
 
-  const handelOpen = (e: SyntheticEvent) => {
+  const handleOpen = (e: SyntheticEvent) => {
     e.stopPropagation();
     setIsOpen(true);
   };
@@ -45,7 +45,7 @@ const Channel = ({ label, selectType }: Props) => {
         <Item>
           <CheckBox id="test" label="test" />
           <div style={{ position: 'relative' }}>
-            <IconButton type="sm_more" size="small" onClick={handelOpen} />
+            <IconButton type="sm_more" size="small" onClick={handleOpen} />
             {isOpen && (
               <ColorBoard
                 isOpen={isOpen}
