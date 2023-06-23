@@ -7,6 +7,7 @@ import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.oauth.entity.ProviderType;
 import com.side.dayv.record.dto.RequestCreateRecordDTO;
+import com.side.dayv.record.dto.RequestUpdateRecordDTO;
 import com.side.dayv.record.dto.ResponseRecordDTO;
 import com.side.dayv.record.entity.Record;
 import com.side.dayv.record.repository.RecordRepository;
@@ -84,11 +85,77 @@ class RecordServiceTest {
     }
 
     @Test
+    void 일정_등록실패_채널없음() {
+
+    }
+
+    @Test
+    void 일정_등록실패_구독안된채널() {
+
+    }
+
+    @Test
+    void 일정_등록실패_권한없음() {
+
+    }
+
+    @Test
     void 일정_삭제() {
         ResponseRecordDTO record = recordService.createRecord(CREATE_RECORD_REQUEST, MEMBER.getId(), CHANNEL.getId());
         recordService.removeRecord(MEMBER.getId(), record.getRecordId());
 
         Optional<Record> optional = recordRepository.findById(record.getRecordId());
         assertThat(optional.isEmpty()).isTrue();
+    }
+
+    @Test
+    void 일정_삭제실패_이미삭제된일정() {
+
+    }
+
+    @Test
+    void 일정_삭제실패_구독안된채널() {
+
+    }
+
+    @Test
+    void 일정_삭제실패_권한없음() {
+
+    }
+
+    @Test
+    void 일정_수정() {
+        ResponseRecordDTO record = recordService.createRecord(CREATE_RECORD_REQUEST, MEMBER.getId(), CHANNEL.getId());
+
+        RequestUpdateRecordDTO request = RequestUpdateRecordDTO.builder()
+                .title("new title")
+                .content("new content")
+                .complete(true)
+                .startDate(LocalDateTime.of(2023, 6, 1, 10, 30))
+                .endDate(LocalDateTime.of(2023, 6, 30, 10, 30))
+                .build();
+
+        ResponseRecordDTO updateRecord = recordService.updateRecord(request, MEMBER.getId(), record.getRecordId());
+
+        assertThat(updateRecord.getTitle()).isEqualTo(request.getTitle());
+        assertThat(updateRecord.getContent()).isEqualTo(request.getContent());
+        assertThat(updateRecord.getStartDate()).isEqualTo(request.getStartDate());
+        assertThat(updateRecord.getEndDate()).isEqualTo(request.getEndDate());
+        assertThat(updateRecord.isComplete()).isTrue();
+    }
+
+    @Test
+    void 일정_수정실페_이미삭제된일정() {
+
+    }
+
+    @Test
+    void 일정_수정실페_구독안된채널() {
+
+    }
+
+    @Test
+    void 일정_수정실페_권한없음() {
+
     }
 }
