@@ -1,12 +1,12 @@
-import Auth, { Client } from '@/shared/axios';
+import { Client } from '@/shared/axios';
 import {
   ChannelRes,
   ChannelSelectType,
   CreateChannelParmaType,
   Token,
   UserRes,
+  addScheduleParamType,
 } from '@/shared/types/api';
-import auth from '@/pages/auth';
 
 export const getAccessToken = async () => {
   const res = await new Client('/api/v1/auth/refresh').get<Token>();
@@ -34,5 +34,19 @@ export const createChannel = async (
   console.log('CreateChannelParmaType');
   const res = await new Client(`/api/channels`).post(createChannelParma);
   console.log('createChannelParma', res);
+  return res;
+};
+
+export const addSchedule = async (addScheduleParam: addScheduleParamType) => {
+  console.log('addSchedule');
+
+  const { channelId, ...params } = addScheduleParam;
+
+  const res = await new Client(
+    `/api/channels/${channelId}/records`
+  ).post<addScheduleParamType>(params);
+
+  console.log('addSchedule', res);
+
   return res;
 };

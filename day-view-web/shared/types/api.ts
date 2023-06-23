@@ -1,4 +1,3 @@
-import { number, string } from 'prop-types';
 export type Token = {
   token: string;
 };
@@ -31,4 +30,13 @@ export type ChannelRes = {
 export type CreateChannelParmaType = {
   name: string;
   secretYn: boolean;
+};
+
+export type addScheduleParamType = {
+  channelId: number;
+  title: string;
+  startDate: Date;
+  endDate: Date;
+  content?: string;
+  recordImageUrl?: string;
 };
