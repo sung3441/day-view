@@ -13,6 +13,7 @@ import com.side.dayv.subscribe.entity.Subscribers;
 import com.side.dayv.subscribe.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.PermissionDeniedDataAccessException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -84,18 +85,18 @@ public class SubscribeService {
                 .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
 
         if (!subscribe.isManageAuth()) {
-            throw new BadRequestException(NO_PERMISSION);
+            throw new AccessDeniedException(NO_PERMISSION);
         }
 
         subscribeRepository.delete(subscribe);
     }
 
-    public Subscribers getSubscribers(final Long memberId, final Long channelId) throws NoPermissionException {
+    public Subscribers getSubscribers(final Long memberId, final Long channelId) {
         List<Subscribe> subscribeList = subscribeRepository.findAllByChannelIdOrderByAuth(channelId);
         Subscribers subscribers = new Subscribers(subscribeList);
 
         if( !subscribers.isManageAuth(memberId) ){
-            throw new NoPermissionException(NO_PERMISSION);
+            throw new AccessDeniedException(NO_PERMISSION);
         }
         return subscribers;
     }

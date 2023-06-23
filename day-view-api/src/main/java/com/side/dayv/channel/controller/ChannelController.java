@@ -67,7 +67,7 @@ public class ChannelController {
 
     @GetMapping("/{channelId}/members")
     public ResponseEntity getSubscribers(@AuthenticationPrincipal final CustomUser user,
-                                                     @PathVariable final Long channelId) throws NoPermissionException {
+                                                     @PathVariable final Long channelId) {
         Subscribers subscribers = subscribeService.getSubscribers(user.getMemberId(), channelId);
         return ResponseEntity.ok(new CommonResponse<>(subscribers));
     }
