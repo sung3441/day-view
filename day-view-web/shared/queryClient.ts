@@ -25,6 +25,7 @@ type QueryKeysType = {
   MAIN: string;
   USER: string;
   CHANNEL: string;
+  RECORD: string;
 };
 
 // ex 쿼리키를 중앙에서 관리
@@ -32,4 +33,5 @@ export const QueryKeys: Readonly<QueryKeysType> = {
   MAIN: 'MAIN',
   USER: 'USER',
   CHANNEL: 'CHANNEL',
+  RECORD: 'RECORD',
 };

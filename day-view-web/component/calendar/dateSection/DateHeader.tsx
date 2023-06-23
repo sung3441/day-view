@@ -14,7 +14,7 @@ const DateHeader = ({ handleMoveMonth }: Props) => {
   const resetYYMM = useResetRecoilState(selectedYYMMAtom);
   const resetDay = useResetRecoilState(selectedDayAtom);
 
-  const handelClickToday = () => {
+  const handleClickToday = () => {
     resetYYMM();
     resetDay();
   };
@@ -26,7 +26,7 @@ const DateHeader = ({ handleMoveMonth }: Props) => {
       </CalendarLabel>
       <RightBox>
         <IconButton type="left" onClick={() => handleMoveMonth('prev')} />
-        <TodayButton onClick={() => handelClickToday()}>오늘</TodayButton>
+        <TodayButton onClick={() => handleClickToday()}>오늘</TodayButton>
         <IconButton type="right" onClick={() => handleMoveMonth('next')} />
       </RightBox>
     </Wrap>

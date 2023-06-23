@@ -4,9 +4,9 @@ const useAnimationHandler = (closeFn: () => void) => {
   const [isShow, setIsShow] = useState(true);
 
   const handleIsShow = () => setIsShow(false);
-  const handelOnAnimationEnd = () => !isShow && closeFn();
+  const handleOnAnimationEnd = () => !isShow && closeFn();
 
-  return { isShow, handleIsShow, handelOnAnimationEnd };
+  return { isShow, handleIsShow, handleOnAnimationEnd };
 };
 
 export default useAnimationHandler;
