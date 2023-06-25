@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 type SelectType = ComponentPropsWithoutRef<'select'>;
 interface Props extends SelectType {
-  children: ReactElement<'option'>[];
+  children: ReactElement<'option'>[] | undefined;
 }
 // 추후 드랍박스 형태로 사용하지 결정
 const Select = ({ children, ...props }: Props) => {

@@ -190,19 +190,19 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
         <S.Section>
           <Modal.SubTitle>카테고리</Modal.SubTitle>
           <S.Wrapper>
-            {/** @ts-ignore */}
             <Select
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                 const channelId = parseInt(e.target.value);
                 setValue((prev) => ({ ...prev, channelId }));
               }}
             >
-              {channelStatus === 'success' &&
-                channels?.data.map(({ channelId, name }) => (
-                  <option key={channelId} value={channelId}>
-                    {name}
-                  </option>
-                ))}
+              {channelStatus === 'success'
+                ? channels?.data.map(({ channelId, name }) => (
+                    <option key={channelId} value={channelId}>
+                      {name}
+                    </option>
+                  ))
+                : undefined}
             </Select>
           </S.Wrapper>
         </S.Section>
