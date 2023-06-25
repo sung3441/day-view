@@ -6,6 +6,8 @@ import {
   Token,
   UserRes,
   addScheduleParamType,
+  SearchChannelParmaType,
+  SearchChannelRes,
 } from '@/shared/types/api';
 
 export const getAccessToken = async () => {
@@ -48,5 +50,15 @@ export const addSchedule = async (addScheduleParam: addScheduleParamType) => {
 
   console.log('addSchedule', res);
 
+  return res;
+};
+
+export const getSearchChannel = async (
+  createChannelParma: SearchChannelParmaType
+) => {
+  const res = await new Client(`/api/channels
+`).get<SearchChannelRes>(createChannelParma);
+
+  console.log('createChannelParma', res);
   return res;
 };

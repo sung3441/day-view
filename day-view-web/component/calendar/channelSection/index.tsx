@@ -1,12 +1,12 @@
 import { CSSProperties, memo } from 'react';
 import styled, { css } from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { G_isOpenChannelAtom } from '@/shared/atom/globalCalendar';
 import Channel from '@/component/calendar/channelSection/Channel';
 import { Button, Icon } from '@/shared/component/Atom';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useModal } from '@/shared/hooks';
 import { type Props as ChannelInfoType } from './Channel';
+import { G_isOpenChannelAtom } from '@/shared/component/Organism/GNB/state';
 
 const buttonStyle: CSSProperties = {
   width: pixelToRemUnit(323),
@@ -43,7 +43,7 @@ export default memo(ChannelSection);
 
 const Wrap = styled.div<{ isOpenChannel: boolean }>`
   position: absolute;
-  overflow-x: visible;
+  overflow-x: auto;
   ::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }

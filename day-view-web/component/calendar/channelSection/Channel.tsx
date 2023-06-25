@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { memo, SyntheticEvent, useState } from 'react';
-import { CheckBox, IconButton } from '@/shared/component/Molecule';
+import { memo } from 'react';
+import { IconButton } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import dynamic from 'next/dynamic';
 import { useModal } from '@/shared/hooks';
@@ -8,10 +8,6 @@ import { ChannelSelectType } from '@/shared/types/api';
 import useGetChannel from '@/component/calendar/channelSection/hooks/useGetChannel';
 import ChannelItem from '@/component/calendar/channelSection/ChannelItem';
 
-const ColorBoard = dynamic(
-  () => import('@/component/calendar/channelSection/ColorBoard'),
-  { ssr: false }
-);
 export interface Props {
   label: string;
   selectType: ChannelSelectType;
@@ -19,11 +15,9 @@ export interface Props {
 
 const Channel = ({ label, selectType }: Props) => {
   const { openModal } = useModal();
-
   const { status, data } = useGetChannel({ selectType });
 
   if (status !== 'success') return null;
-  console.log(data);
   return (
     <Wrap>
       <Label>

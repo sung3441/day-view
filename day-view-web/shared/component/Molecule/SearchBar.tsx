@@ -1,38 +1,52 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, CSSProperties, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { Inputbox, Icon } from '@/shared/component/Atom';
 import { IconButton } from '@/shared/component/Molecule';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
+import { SetterOrUpdater } from 'recoil';
 
 interface Props {
+  value: string;
+  setValue: SetterOrUpdater<string>;
   placeholder?: string;
+  customStyle?: CSSProperties;
 }
 
-const SearchBar = ({ placeholder }: Props) => {
-  const [isEmpty, setIsEmpty] = useState(true);
+const SearchBar = ({ value, setValue, placeholder, customStyle }: Props) => {
+  // input event를 위해 필요
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleButtonClick = () => {
-    if (inputRef.current) {
-      inputRef.current.value = '';
-      setIsEmpty(true);
-    }
-  };
+  const handleButtonClick = () => setValue('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsEmpty(e.target.value === '');
+    setValue(e.target.value);
   };
 
   return (
-    <DivStyle>
-      <Icon type="search" />
+    <DivStyle style={customStyle}>
+      <Icon
+        type="sm_search"
+        height={40}
+        width={40}
+        style={{ marginRight: '5px' }}
+      />
       <Inputbox
-        ref={inputRef}
+        type="search"
+        maxLength={20}
+        value={value}
         onChange={handleChange}
         placeholder={placeholder}
+        ref={inputRef}
       />
-      {!isEmpty && <IconButton type="close" onClick={handleButtonClick} />}
+      {!value && (
+        <IconButton
+          type="close"
+          onClick={handleButtonClick}
+          isActiveFnc={false}
+          height={40}
+          width={40}
+        />
+      )}
     </DivStyle>
   );
 };

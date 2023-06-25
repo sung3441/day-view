@@ -1,11 +1,9 @@
 import styled from 'styled-components';
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import { IconButton } from '@/shared/component/Molecule';
-import { useSetRecoilState } from 'recoil';
-import GnbTab from '@/shared/component/Organism/GNB/GnbTab';
-import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
-import { G_isOpenChannelAtom } from '@/shared/atom/globalCalendar';
+import { pixelToRemUnit } from '@/shared/styles/util';
 import { useRouter } from 'next/router';
+import CalendarGNB from '@/shared/component/Organism/GNB/CalendarGNB';
 
 interface Props {
   handleChangeTheme?: () => void;
@@ -13,43 +11,11 @@ interface Props {
 
 const Index = ({ handleChangeTheme }: Props) => {
   const { pathname } = useRouter();
-  const setIsOpenChannel = useSetRecoilState(G_isOpenChannelAtom);
-
-  const handleClickMenu = useCallback(
-    () => setIsOpenChannel((prev) => !prev),
-    []
-  );
 
   const renderContent = () => {
     switch (pathname) {
       case '/calendar': {
-        return (
-          <>
-            <LeftBox>
-              <IconButton
-                type="menu"
-                onClick={handleClickMenu}
-                customStyle={{ marginRight: '20px' }}
-              />
-              <IconButton
-                type="logo"
-                width={96}
-                height={40}
-                isActiveFnc={false}
-                customStyle={{
-                  width: '96px',
-                  height: '40px',
-                  marginLeft: '20px',
-                }}
-              />
-            </LeftBox>
-            <RightBox>
-              <GnbTab />
-              <IconButton type="search" />
-              <IconButton type="user" />
-            </RightBox>
-          </>
-        );
+        return <CalendarGNB />;
       }
       default:
         return (
@@ -82,17 +48,4 @@ const Header = styled.header`
 
   background-color: #ffffff;
   border-bottom: 1px solid #dbdbdb;
-`;
-
-const LeftBox = styled.div`
-  ${getStyledThemProperty('box', 'flexBetweenBox')}
-`;
-
-const RightBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  > * {
-    margin-left: 28px;
-  }
 `;

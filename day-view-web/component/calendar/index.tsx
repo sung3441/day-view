@@ -2,14 +2,20 @@ import styled, { css } from 'styled-components';
 import Channel from '@/component/calendar/channelSection';
 import DateSection from '@/component/calendar/dateSection/DateSection';
 import { useRecoilValue } from 'recoil';
-import { G_isOpenChannelAtom, G_tabAtom } from '@/shared/atom/globalCalendar';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useMemo } from 'react';
 import CategoryHeader from '../category/CategoryHeader';
 import ScheduleHeader from '../schedule/ScheduleHeader';
+import {
+  G_isOpenChannelAtom,
+  G_isSearchOpenAtom,
+  G_tabAtom,
+} from '@/shared/component/Organism/GNB/state';
+import SearchResult from '@/component/calendar/searchResult';
 
 const Calendar = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
+  const isSearchOpen = useRecoilValue(G_isSearchOpenAtom);
   const tabLabel = useRecoilValue(G_tabAtom);
 
   const curTabElement = useMemo(() => {
@@ -28,7 +34,11 @@ const Calendar = () => {
   return (
     <CalderWrap>
       <Channel />
-      <TabWrap isOpenChannel={isOpenChannel}>{curTabElement}</TabWrap>
+      {isSearchOpen ? (
+        <SearchResult />
+      ) : (
+        <TabWrap isOpenChannel={isOpenChannel}>{curTabElement}</TabWrap>
+      )}
     </CalderWrap>
   );
 };

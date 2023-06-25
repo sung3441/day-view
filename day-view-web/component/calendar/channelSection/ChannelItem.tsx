@@ -17,7 +17,6 @@ const ChannelItem = ({
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = (e: SyntheticEvent) => {
-    e.stopPropagation();
     setIsOpen(true);
   };
 
