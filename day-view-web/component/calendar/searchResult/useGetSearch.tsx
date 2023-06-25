@@ -1,14 +1,14 @@
 import { useInfiniteQuery } from 'react-query';
 import { getSearchChannel } from '@/shared/api';
 import {
-  G_isSearchValueAtom,
-  G_searchSortOptionAtom,
+  G_isSearchKeywordAtom,
+  G_searchOrderOptionAtom,
 } from '@/shared/component/Organism/GNB/state';
 import { useRecoilValue } from 'recoil';
 
 const useGetSearch = () => {
-  const keyword = useRecoilValue(G_isSearchValueAtom);
-  const sort = useRecoilValue(G_searchSortOptionAtom);
+  const keyword = useRecoilValue(G_isSearchKeywordAtom);
+  const sort = useRecoilValue(G_searchOrderOptionAtom);
 
   return useInfiniteQuery(
     ['search', keyword, sort],

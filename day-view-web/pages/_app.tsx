@@ -14,6 +14,7 @@ import { getClient } from '@/shared/queryClient';
 import { isSetAccessToken, setAccessToken } from '@/shared/util/axios';
 import { getAccessToken } from '@/shared/api';
 import { isLoginAtom } from '@/shared/atom/global';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
@@ -36,6 +37,9 @@ function App({ Component, pageProps }: AppProps) {
                   <Component {...pageProps} />
                 </LocalizationProvider>
               </APPWithConfig>
+              <ReactQueryDevtools
+                initialIsOpen={typeof window !== 'undefined'}
+              />
             </ThemeProvider>
           </StyledEngineProvider>
         </Hydrate>

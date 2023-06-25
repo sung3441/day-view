@@ -31,14 +31,14 @@ const SearchBar = ({ value, setValue, placeholder, customStyle }: Props) => {
         style={{ marginRight: '5px' }}
       />
       <Inputbox
-        type="search"
+        type="text"
         maxLength={20}
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
         ref={inputRef}
       />
-      {!value && (
+      {!!value && (
         <IconButton
           type="close"
           onClick={handleButtonClick}
@@ -64,7 +64,6 @@ const DivStyle = styled.div`
   padding-right: ${pixelToRemUnit(10)};
 
   background: ${getStyledThemProperty('colors', 'White')};
-
   border: 1px solid ${getStyledThemProperty('colors', 'G_500')};
   border-radius: 7px;
 `;

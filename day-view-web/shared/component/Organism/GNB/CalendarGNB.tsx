@@ -7,13 +7,13 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   G_isOpenChannelAtom,
   G_isSearchOpenAtom,
-  G_isSearchValueAtom,
+  G_isSearchKeywordAtom,
 } from '@/shared/component/Organism/GNB/state';
-import { Inputbox } from '@/shared/component/Atom';
+import SearchSortBox from '@/shared/component/Organism/GNB/SearchBox';
 
 const CalendarGNB = () => {
   const [isSearchOpen, setISearchOpen] = useRecoilState(G_isSearchOpenAtom);
-  const [searchValue, setSearchValue] = useRecoilState(G_isSearchValueAtom);
+  const [searchValue, setSearchValue] = useRecoilState(G_isSearchKeywordAtom);
   const setIsOpenChannel = useSetRecoilState(G_isOpenChannelAtom);
 
   const handleClickMenu = useCallback(
@@ -63,7 +63,7 @@ const CalendarGNB = () => {
       )}
 
       <RightBox>
-        {isSearchOpen ? '셀렉트 박스 만들어여함 ㅡㅡ' : <GnbTab />}
+        {isSearchOpen ? <SearchSortBox /> : <GnbTab />}
         <IconButton type="search" onClick={handleClickSearch} />
         <IconButton type="user" />
       </RightBox>
