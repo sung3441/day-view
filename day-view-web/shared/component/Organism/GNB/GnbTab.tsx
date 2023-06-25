@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 import styled, { css } from 'styled-components';
 import { memo } from 'react';
-import { G_tabAtom, TabType } from '@/shared/atom/globalCalendar';
+import { G_tabAtom, TabType } from '@/shared/component/Organism/GNB/state';
 
 const tabList: TabType[] = ['월', '일정', '카테고리'];
 

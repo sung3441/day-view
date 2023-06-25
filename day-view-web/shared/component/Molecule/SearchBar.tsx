@@ -1,43 +1,67 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { KeyboardEvent, CSSProperties, useRef, memo } from 'react';
 import styled from 'styled-components';
 
 import { Inputbox, Icon } from '@/shared/component/Atom';
 import { IconButton } from '@/shared/component/Molecule';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
+import { SetterOrUpdater } from 'recoil';
 
 interface Props {
+  value: string;
+  setValue: SetterOrUpdater<string>;
   placeholder?: string;
+  customStyle?: CSSProperties;
 }
 
-const SearchBar = ({ placeholder }: Props) => {
-  const [isEmpty, setIsEmpty] = useState(true);
+const SearchBar = ({ value, setValue, placeholder, customStyle }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleButtonClick = () => {
-    if (inputRef.current) {
-      inputRef.current.value = '';
-      setIsEmpty(true);
-    }
+  const handleCloseClick = () => {
+    if (!inputRef.current) return;
+    inputRef.current.value = '';
+    setValue(inputRef.current.value);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsEmpty(e.target.value === '');
+  const handleClick = () => {
+    if (!inputRef.current) return;
+    setValue(inputRef.current.value);
+  };
+
+  const handleKeyup = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleClick();
   };
 
   return (
-    <DivStyle>
-      <Icon type="search" />
-      <Inputbox
-        ref={inputRef}
-        onChange={handleChange}
-        placeholder={placeholder}
+    <DivStyle style={customStyle}>
+      <IconButton
+        type="sm_search"
+        height={40}
+        width={40}
+        style={{ marginRight: '5px' }}
+        onClick={handleClick}
       />
-      {!isEmpty && <IconButton type="close" onClick={handleButtonClick} />}
+      <Inputbox
+        type="text"
+        maxLength={20}
+        placeholder={placeholder}
+        ref={inputRef}
+        onKeyUp={handleKeyup}
+        // value={value}
+        // onChange={handleChange}
+      />
+      {!!value && (
+        <IconButton
+          type="close"
+          onClick={handleCloseClick}
+          isActiveFnc={false}
+          height={40}
+          width={40}
+        />
+      )}
     </DivStyle>
   );
 };
 
-export default SearchBar;
+export default memo(SearchBar);
 
 const DivStyle = styled.div`
   display: flex;
@@ -50,7 +74,6 @@ const DivStyle = styled.div`
   padding-right: ${pixelToRemUnit(10)};
 
   background: ${getStyledThemProperty('colors', 'White')};
-
   border: 1px solid ${getStyledThemProperty('colors', 'G_500')};
   border-radius: 7px;
 `;

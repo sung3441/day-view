@@ -4,3 +4,4 @@ export { default as Inputbox } from './Inputbox';
 export { default as Textarea } from './Textarea';
 export { default as ToggleButton } from './ToggleButton';
 export { default as UserImage } from './UserImage';
+export { default as Select } from './Select';

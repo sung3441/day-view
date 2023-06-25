@@ -1,7 +1,7 @@
 import { memo, SyntheticEvent, useState } from 'react';
 import styled from 'styled-components';
 
-import Modal from '@/shared/component/modal';
+import Modal from '../../shared/component/Organism/MODAL';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 import { useAnimationHandler } from '@/shared/hooks';

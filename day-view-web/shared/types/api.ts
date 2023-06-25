@@ -1,3 +1,7 @@
+import { getSearchChannel } from '@/shared/api';
+import { string } from 'prop-types';
+import dates from '@/component/calendar/dateSection/Dates';
+
 export type Token = {
   token: string;
 };
@@ -39,4 +43,30 @@ export type addScheduleParamType = {
   endDate: Date;
   content?: string;
   recordImageUrl?: string;
+};
+
+export type SearchChannelParmaType = {
+  page: number;
+  size: number;
+  keyword: string;
+  order: string;
+};
+
+export type SearchChannelRes = {
+  data: {
+    content: [
+      {
+        id: number;
+        name: string;
+        channelType: ChannelSelectType;
+        creatorId: number;
+        creatorNickname: string;
+        subscriberCount: number;
+        createdDate: Date;
+        subscribe: boolean;
+      }
+    ];
+    last: boolean;
+    totalElements: number;
+  };
 };

@@ -10,10 +10,12 @@ import { StyledEngineProvider } from '@mui/styled-engine';
 import Layout from '@/shared/component/Layout';
 import GlobalStyle from '@/shared/styles/globalStyle';
 import { commonTheme } from '@/shared/styles/theme';
-import { getClient } from '@/shared/queryClient';
 import { isSetAccessToken, setAccessToken } from '@/shared/util/axios';
 import { getAccessToken } from '@/shared/api';
 import { isLoginAtom } from '@/shared/atom/global';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import useGetClient from '@/shared/queryClient';
+import getClient from '@/shared/queryClient';
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
@@ -25,8 +27,8 @@ function App({ Component, pageProps }: AppProps) {
   const queryClient = getClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <StyledEngineProvider injectFirst>
             <ThemeProvider theme={commonTheme}>
@@ -36,22 +38,28 @@ function App({ Component, pageProps }: AppProps) {
                   <Component {...pageProps} />
                 </LocalizationProvider>
               </APPWithConfig>
+              <ReactQueryDevtools
+                initialIsOpen={typeof window !== 'undefined'}
+              />
             </ThemeProvider>
           </StyledEngineProvider>
         </Hydrate>
-      </RecoilRoot>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 }
 
 const APPWithConfig = ({ children }: { children: any }) => {
   const setIsLogin = useSetRecoilState(isLoginAtom);
+  const queryClient = getClient();
+
   useEffect(() => {
     (async () => {
       try {
         const token = await getAccessToken();
         setAccessToken(token!.data.token);
         setIsLogin(true);
+        queryClient.defaultQueryOptions().enabled = true;
       } catch (e) {}
     })();
   }, []);

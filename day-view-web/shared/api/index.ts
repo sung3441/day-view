@@ -6,6 +6,8 @@ import {
   Token,
   UserRes,
   addScheduleParamType,
+  SearchChannelParmaType,
+  SearchChannelRes,
 } from '@/shared/types/api';
 
 export const getAccessToken = async () => {
@@ -21,9 +23,9 @@ export const getUser = async () => {
 };
 
 export const getChannel = async (channelSelectType: ChannelSelectType) => {
-  const res = await new Client(`/api/channels/${channelSelectType}`).get<
-    ChannelRes[]
-  >();
+  const res = await new Client(`/api/channels/${channelSelectType}`).get<{
+    data: ChannelRes[];
+  }>();
   console.log('getChannel', res);
   return res;
 };
@@ -31,22 +33,23 @@ export const getChannel = async (channelSelectType: ChannelSelectType) => {
 export const createChannel = async (
   createChannelParma: CreateChannelParmaType
 ) => {
-  console.log('CreateChannelParmaType');
   const res = await new Client(`/api/channels`).post(createChannelParma);
-  console.log('createChannelParma', res);
   return res;
 };
 
 export const addSchedule = async (addScheduleParam: addScheduleParamType) => {
-  console.log('addSchedule');
-
   const { channelId, ...params } = addScheduleParam;
-
   const res = await new Client(
     `/api/channels/${channelId}/records`
   ).post<addScheduleParamType>(params);
 
-  console.log('addSchedule', res);
+  return res;
+};
 
+export const getSearchChannel = async (
+  createChannelParma: SearchChannelParmaType
+) => {
+  const res = await new Client(`/api/channels
+`).get<SearchChannelRes>(createChannelParma);
   return res;
 };
