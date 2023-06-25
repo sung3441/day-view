@@ -1,4 +1,4 @@
-import { ChangeEvent, CSSProperties, useRef, useState } from 'react';
+import { KeyboardEvent, CSSProperties, useRef } from 'react';
 import styled from 'styled-components';
 
 import { Inputbox, Icon } from '@/shared/component/Atom';
@@ -14,34 +14,44 @@ interface Props {
 }
 
 const SearchBar = ({ value, setValue, placeholder, customStyle }: Props) => {
-  // input event를 위해 필요
   const inputRef = useRef<HTMLInputElement>(null);
-  const handleButtonClick = () => setValue('');
+  const handleCloseClick = () => {
+    if (!inputRef.current) return;
+    inputRef.current.value = '';
+    setValue(inputRef.current.value);
+  };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+  const handleClick = () => {
+    if (!inputRef.current) return;
+    setValue(inputRef.current.value);
+  };
+
+  const handleKeyup = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleClick();
   };
 
   return (
     <DivStyle style={customStyle}>
-      <Icon
+      <IconButton
         type="sm_search"
         height={40}
         width={40}
         style={{ marginRight: '5px' }}
+        onClick={handleClick}
       />
       <Inputbox
         type="text"
         maxLength={20}
-        value={value}
-        onChange={handleChange}
         placeholder={placeholder}
         ref={inputRef}
+        onKeyUp={handleKeyup}
+        // value={value}
+        // onChange={handleChange}
       />
       {!!value && (
         <IconButton
           type="close"
-          onClick={handleButtonClick}
+          onClick={handleCloseClick}
           isActiveFnc={false}
           height={40}
           width={40}
