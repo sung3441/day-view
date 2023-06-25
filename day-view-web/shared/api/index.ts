@@ -21,9 +21,9 @@ export const getUser = async () => {
 };
 
 export const getChannel = async (channelSelectType: ChannelSelectType) => {
-  const res = await new Client(`/api/channels/${channelSelectType}`).get<
-    ChannelRes[]
-  >();
+  const res = await new Client(`/api/channels/${channelSelectType}`).get<{
+    data: ChannelRes[];
+  }>();
   console.log('getChannel', res);
   return res;
 };

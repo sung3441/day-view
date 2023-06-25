@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react';
 import styled from 'styled-components';
-import Modal from '@/shared/component/modal';
+import Modal from '../../shared/component/Organism/MODAL';
 import { CheckBox } from '@/shared/component/Molecule';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 import { useAnimationHandler } from '@/shared/hooks';
