@@ -1,4 +1,4 @@
-import { KeyboardEvent, CSSProperties, useRef } from 'react';
+import { KeyboardEvent, CSSProperties, useRef, memo } from 'react';
 import styled from 'styled-components';
 
 import { Inputbox, Icon } from '@/shared/component/Atom';
@@ -61,7 +61,7 @@ const SearchBar = ({ value, setValue, placeholder, customStyle }: Props) => {
   );
 };
 
-export default SearchBar;
+export default memo(SearchBar);
 
 const DivStyle = styled.div`
   display: flex;

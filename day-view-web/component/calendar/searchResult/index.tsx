@@ -1,9 +1,8 @@
 import { memo } from 'react';
-import useGetSearch from '@/component/calendar/searchResult/useGetSearch';
+import useGetSearch from '@/component/calendar/searchResult/hooks/useGetSearch';
 
 const SearchResult = () => {
   const { data } = useGetSearch();
-  console.log(data);
   return null;
 };
 

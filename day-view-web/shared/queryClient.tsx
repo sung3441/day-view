@@ -1,6 +1,8 @@
 import { QueryClient } from 'react-query';
+import { useRecoilValue } from 'recoil';
+import { isLoginAtom } from '@/shared/atom/global';
 
-export const getClient = (() => {
+const getClient = (() => {
   let client: QueryClient | null = null;
   return () => {
     if (!client)
@@ -20,6 +22,7 @@ export const getClient = (() => {
     return client;
   };
 })();
+export default getClient;
 
 type QueryKeysType = {
   MAIN: string;

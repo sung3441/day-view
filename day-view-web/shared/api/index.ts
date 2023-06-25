@@ -33,22 +33,15 @@ export const getChannel = async (channelSelectType: ChannelSelectType) => {
 export const createChannel = async (
   createChannelParma: CreateChannelParmaType
 ) => {
-  console.log('CreateChannelParmaType');
   const res = await new Client(`/api/channels`).post(createChannelParma);
-  console.log('createChannelParma', res);
   return res;
 };
 
 export const addSchedule = async (addScheduleParam: addScheduleParamType) => {
-  console.log('addSchedule');
-
   const { channelId, ...params } = addScheduleParam;
-
   const res = await new Client(
     `/api/channels/${channelId}/records`
   ).post<addScheduleParamType>(params);
-
-  console.log('addSchedule', res);
 
   return res;
 };
@@ -58,7 +51,5 @@ export const getSearchChannel = async (
 ) => {
   const res = await new Client(`/api/channels
 `).get<SearchChannelRes>(createChannelParma);
-
-  console.log('createChannelParma', res);
   return res;
 };

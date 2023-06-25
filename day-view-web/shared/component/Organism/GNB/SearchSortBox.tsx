@@ -20,7 +20,7 @@ const SearchSortBox = () => {
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSort(e.target.value as SearchOrderType);
   };
-  console.log('sort', sort);
+
   return (
     <Select value={sort} onChange={onChange}>
       {selectOptions.map(({ name, value }) => (

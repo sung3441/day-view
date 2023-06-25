@@ -12,7 +12,7 @@ import {
 import SearchSortBox from '@/shared/component/Organism/GNB/SearchSortBox';
 import SearchGnb from '@/shared/component/Organism/GNB/SearchGnb';
 
-const CalendarGNB = () => {
+const CalendarGnb = () => {
   const [isSearchOpen, setISearchOpen] = useRecoilState(G_isSearchOpenAtom);
   const setIsOpenChannel = useSetRecoilState(G_isOpenChannelAtom);
 
@@ -57,7 +57,7 @@ const CalendarGNB = () => {
   );
 };
 
-export default memo(CalendarGNB);
+export default memo(CalendarGnb);
 
 const LeftBox = styled.div`
   ${getStyledThemProperty('box', 'flexBetweenBox')}

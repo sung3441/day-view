@@ -10,8 +10,8 @@ const useGetSearch = () => {
   const keyword = useRecoilValue(G_isSearchKeywordAtom);
   const sort = useRecoilValue(G_searchOrderOptionAtom);
 
-  return useInfiniteQuery(
-    ['search', keyword, sort],
+  const infiniteQueryRes = useInfiniteQuery(
+    ['search', sort],
     async ({ pageParam = 1 }) => {
       const res = await getSearchChannel({
         keyword,
@@ -28,14 +28,18 @@ const useGetSearch = () => {
       };
     },
     {
-      refetchOnMount: true,
+      refetchOnMount: false,
       staleTime: 0,
+      cacheTime: 1000 * 60 * 1,
+      enabled: !!sort,
       getNextPageParam: (lastPage) => {
         if (lastPage.isLast) return undefined;
         return lastPage.nextPage;
       },
     }
   );
+
+  return infiniteQueryRes;
 };
 
 export default useGetSearch;
