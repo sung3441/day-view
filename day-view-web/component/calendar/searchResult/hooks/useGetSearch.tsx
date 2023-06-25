@@ -11,7 +11,7 @@ const useGetSearch = () => {
   const sort = useRecoilValue(G_searchOrderOptionAtom);
 
   const infiniteQueryRes = useInfiniteQuery(
-    ['search', sort],
+    ['search', keyword, sort],
     async ({ pageParam = 1 }) => {
       const res = await getSearchChannel({
         keyword,
