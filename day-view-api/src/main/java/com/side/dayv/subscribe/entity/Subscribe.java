@@ -49,7 +49,7 @@ public class Subscribe {
     @JoinColumn(name = "channel_id")
     private Channel channel;
 
-    public static final String DEFAULT_COLOR = "#FFFF00";
+    public static final String DEFAULT_COLOR = "rgba(228, 192, 51)"; // 노랑색
 
     public void changeAuthToManage() {
         this.auth = SubscribeAuth.MANAGE;

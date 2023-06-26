@@ -80,6 +80,7 @@ class SubscribeServiceTest {
         assertThat(subscribe != null).isTrue();
         assertThat(subscribe.getMember().getId()).isEqualTo(MEMBER.getId());
         assertThat(subscribe.getChannel().getId()).isEqualTo(CHANNEL.getId());
+        assertThat(subscribe.getColor()).isEqualTo(Subscribe.DEFAULT_COLOR);
     }
 
     @Test
