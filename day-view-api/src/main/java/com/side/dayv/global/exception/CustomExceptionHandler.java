@@ -52,7 +52,7 @@ public class CustomExceptionHandler {
         ExceptionResponse response = new ExceptionResponse(e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
-
+  
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity accessDeniedException(Exception e){
         ExceptionResponse response = new ExceptionResponse(e.getMessage());

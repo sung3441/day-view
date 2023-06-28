@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useRecoilCallback } from 'recoil';
 import { ModalParams, ModalState, modalSelector } from '../atom/modalState';
 import { ModalType } from '@/component/modal/ModalRenderer';
+
 const useModal = () => {
   const setModal = useRecoilCallback(
     ({ set }) =>
@@ -12,8 +13,9 @@ const useModal = () => {
   );
 
   const openModal = useCallback(
-    (modalType: ModalType, params: ModalParams = null) => {
+    (modalType: ModalType, params?: ModalParams) => {
       const value = { modalType, params };
+
       setModal(modalType, value);
     },
     [setModal]

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -29,7 +28,7 @@ public class RecordController {
                                        @PathVariable final Long channelId){
 
         ResponseRecordDTO responseRecordDTO = recordService.createRecord(recordDTO, user.getMemberId(), channelId);
-
+      
         return ResponseEntity.ok(new CommonResponse(responseRecordDTO));
     }
 

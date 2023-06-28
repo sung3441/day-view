@@ -24,9 +24,8 @@ public class Subscribe {
     private Long id;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
     @Column(name = "subscribe_color")
-    private SubscribeColor color;
+    private String color;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -50,6 +49,8 @@ public class Subscribe {
     @JoinColumn(name = "channel_id")
     private Channel channel;
 
+    public static final String DEFAULT_COLOR = "rgba(228, 192, 51)"; // 노랑색
+
     public void changeAuthToManage() {
         this.auth = SubscribeAuth.MANAGE;
     }
@@ -58,7 +59,7 @@ public class Subscribe {
         this.auth = SubscribeAuth.SUBSCRIBE;
     }
 
-    public void changeColor(final SubscribeColor color) {
+    public void changeColor(final String color) {
         if (color != null) {
             this.color = color;
         }
@@ -69,7 +70,7 @@ public class Subscribe {
     }
 
     @Builder
-    public Subscribe(final SubscribeColor color, final SubscribeAuth auth, final boolean showYn,
+    public Subscribe(final String color, final SubscribeAuth auth, final boolean showYn,
                      final LocalDateTime subscribeDate, final Member member, final Channel channel) {
         this.color = color;
         this.auth = auth;
@@ -80,7 +81,7 @@ public class Subscribe {
     }
 
     public Subscribe(final Member member, final Channel channel) {
-        this.color = SubscribeColor.YELLOW;
+        this.color = DEFAULT_COLOR;
         this.auth = SubscribeAuth.SUBSCRIBE;
         this.showYn = true;
         this.subscribeDate = LocalDateTime.now();
@@ -96,14 +97,14 @@ public class Subscribe {
         return this.member.getId() == memberId;
     }
 
-    public void update(final SubscribeColor color, final boolean showYn) {
+    public void update(final String color, final boolean showYn) {
         changeColor(color);
         changeShowYn(showYn);
     }
 
     public static Subscribe createManageChannelSubscribe(final Member member, final Channel channel) {
         return Subscribe.builder()
-                .color(SubscribeColor.YELLOW)
+                .color(DEFAULT_COLOR)
                 .auth(SubscribeAuth.MANAGE)
                 .showYn(true)
                 .subscribeDate(LocalDateTime.now())

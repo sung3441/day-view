@@ -1,19 +1,22 @@
 import dynamic from 'next/dynamic';
 import Calendar from '@/component/calendar';
 import { GetServerSidePropsContext } from 'next';
-import { getUser } from '@/shared/api';
-import * as cookie from 'cookie';
+import { getAccessToken, getUser } from '@/shared/api';
 
-import { cookies } from 'next/headers';
-import { dehydrate, QueryClient } from 'react-query';
-import Auth from '@/shared/axios';
-import { setCookie } from '@/shared/util/axios';
+import { dehydrate, QueryClient, useQuery } from 'react-query';
+import {
+  isSetAccessToken,
+  setAccessToken,
+  setCookie,
+} from '@/shared/util/axios';
+import { QueryKeys } from '@/shared/queryClient';
 
 const ModalRenderer = dynamic(() => import('@/component/modal/ModalRenderer'), {
   ssr: false,
 });
 
 function CalendarPage() {
+  const { data } = useQuery([QueryKeys.USER], getUser);
   return (
     <>
       <Calendar />
@@ -29,16 +32,31 @@ export const getServerSideProps = async ({
   res,
   ...rest
 }: GetServerSidePropsContext) => {
-  setCookie(req.headers.cookie);
-  const userData = await getUser();
-  console.log(userData);
+  const queryClient = new QueryClient();
+  try {
+    const isAllowLogin = await isSetAccessToken(req?.headers?.cookie || '');
+    if (!isAllowLogin) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: '/',
+        },
+      };
+    }
 
-  // const queryClient = new QueryClient();
-  // await queryClient.prefetchQuery(['user'], getUser);
+    await queryClient.prefetchQuery([QueryKeys.USER], getUser);
 
-  return {
-    props: {
-      // dehydratedState: dehydrate(queryClient),
-    },
-  };
+    return {
+      props: {
+        dehydratedState: dehydrate(queryClient),
+      },
+    };
+  } catch (e) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
 };

@@ -92,4 +92,5 @@ public class RecordService {
                 .map(record -> new ResponseRecordDTO(record))
                 .collect(Collectors.toList());
     }
+
 }

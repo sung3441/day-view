@@ -12,7 +12,6 @@ import com.side.dayv.oauth.entity.ProviderType;
 import com.side.dayv.oauth.info.OAuth2UserInfoFactory;
 import com.side.dayv.subscribe.entity.Subscribe;
 import com.side.dayv.subscribe.entity.SubscribeAuth;
-import com.side.dayv.subscribe.entity.SubscribeColor;
 import com.side.dayv.subscribe.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -72,7 +71,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private void saveMyChannelSubscribe(Member savedUser, Channel myChannel) {
         subscribeRepository.save(Subscribe.builder()
-                .color(SubscribeColor.YELLOW)
+                .color(Subscribe.DEFAULT_COLOR)
                 .auth(SubscribeAuth.MANAGE)
                 .showYn(true)
                 .subscribeDate(LocalDateTime.now())

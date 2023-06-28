@@ -11,11 +11,7 @@ const Index = () => {
   useEffect(() => {
     if (!token) return;
     Auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    (async () => {
-      const res = await getUser();
-      console.log(res);
-    })();
-    // router.replace('/calendar');
+    router.replace('/calendar');
   }, [token]);
 
   return <div>카카오 로그인 처리중입니다.</div>;

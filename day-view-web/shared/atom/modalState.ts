@@ -4,7 +4,7 @@ import { ModalType } from '@/component/modal/ModalRenderer';
 export type ModalParams = {
   clientX?: number;
   clientY?: number;
-} | null;
+};
 
 export type ModalState = {
   modalType: ModalType;
@@ -20,7 +20,7 @@ export const modalState = atomFamily<ModalState, ModalType>({
   key: 'modalState',
   default: (modalType: ModalType) => ({
     modalType,
-    params: null,
+    params: {},
   }),
 });
 

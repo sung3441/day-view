@@ -14,7 +14,6 @@ import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.oauth.entity.ProviderType;
 import com.side.dayv.subscribe.entity.Subscribe;
 import com.side.dayv.subscribe.entity.SubscribeAuth;
-import com.side.dayv.subscribe.entity.SubscribeColor;
 import com.side.dayv.subscribe.repository.SubscribeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -103,7 +102,7 @@ class ChannelServiceTest {
         Channel saveChannel = channelRepository.save(myChannel);
 
         Subscribe subscribe = Subscribe.builder()
-                .color(SubscribeColor.YELLOW)
+                .color(Subscribe.DEFAULT_COLOR)
                 .auth(SubscribeAuth.MANAGE)
                 .showYn(true)
                 .subscribeDate(now)
@@ -183,7 +182,7 @@ class ChannelServiceTest {
         Channel saveChannel = channelRepository.save(newChannel);
 
         Subscribe subscribe = Subscribe.builder()
-                .color(SubscribeColor.YELLOW)
+                .color(Subscribe.DEFAULT_COLOR)
                 .auth(SubscribeAuth.MANAGE)
                 .showYn(true)
                 .subscribeDate(now)
@@ -222,10 +221,6 @@ class ChannelServiceTest {
                 .filter(c -> c.getChannelType() == CUSTOM)
                 .stream()
                 .count();
-
-        for (ChannelResponseDto channel : channels) {
-            System.out.println("channel = " + channel);
-        }
 
         assertThat(count).isEqualTo(channels.getContent().size());
     }

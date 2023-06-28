@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { PropsWithChildren } from 'react';
-import Gnb from '@/shared/component/Gnb';
+import Gnb from '@/shared/component/Organism/GNB';
 import { useRouter } from 'next/router';
 
 interface Props {}

@@ -1,6 +1,8 @@
 import { QueryClient } from 'react-query';
+import { useRecoilValue } from 'recoil';
+import { isLoginAtom } from '@/shared/atom/global';
 
-export const getClient = (() => {
+const getClient = (() => {
   let client: QueryClient | null = null;
   return () => {
     if (!client)
@@ -13,15 +15,26 @@ export const getClient = (() => {
             refetchOnReconnect: false,
             refetchOnWindowFocus: false,
             retry: 0,
+            // suspense: true,
           },
         },
       });
     return client;
   };
 })();
+export default getClient;
+
+type QueryKeysType = {
+  MAIN: string;
+  USER: string;
+  CHANNEL: string;
+  RECORD: string;
+};
 
 // ex 쿼리키를 중앙에서 관리
-export const QueryKeys = {
+export const QueryKeys: Readonly<QueryKeysType> = {
   MAIN: 'MAIN',
-  MAIN_DETAIL: (detail: string) => ['MAIN', detail],
+  USER: 'USER',
+  CHANNEL: 'CHANNEL',
+  RECORD: 'RECORD',
 };
