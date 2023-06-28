@@ -24,7 +24,6 @@ public class ResponseMemberDTO {
 
     private String profileImageUrl;
     private String birthday;
-    private String accessToken;
     private String refreshToken;
 
     @Builder
@@ -32,7 +31,7 @@ public class ResponseMemberDTO {
                           String email, String nickname,
                           LocalDateTime createdDate, LocalDateTime lastModifiedDate,
                           String profileImageUrl, String birthday,
-                          String accessToken, String refreshToken){
+                          String refreshToken){
         this.memberId = memberId;
         this.provider = provider;
         this.email = email;
@@ -41,7 +40,6 @@ public class ResponseMemberDTO {
         this.lastModifiedDate = lastModifiedDate;
         this.profileImageUrl = profileImageUrl;
         this.birthday = birthday;
-        this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }
 }

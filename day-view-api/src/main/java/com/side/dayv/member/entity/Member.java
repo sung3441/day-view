@@ -1,5 +1,6 @@
 package com.side.dayv.member.entity;
 
+import com.side.dayv.member.dto.RequestMemberDTO;
 import com.side.dayv.oauth.entity.ProviderType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -82,5 +83,11 @@ public class Member {
 
     public void changeRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public void changeMyInfo(RequestMemberDTO requestMemberDTO){
+        this.nickname = requestMemberDTO.getNickname();
+        this.birthday = requestMemberDTO.getBirthday();
+        this.profileImageUrl = requestMemberDTO.getProfileImageUrl();
     }
 }

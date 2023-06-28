@@ -7,7 +7,13 @@ import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.channel.entity.ChannelSelectType;
 import com.side.dayv.channel.service.ChannelService;
 import com.side.dayv.global.response.CommonResponse;
+import com.side.dayv.member.entity.Member;
+import com.side.dayv.member.service.MemberService;
 import com.side.dayv.oauth.entity.CustomUser;
+import com.side.dayv.subscribe.entity.Subscribe;
+import com.side.dayv.subscribe.entity.SubscribeAuth;
+import com.side.dayv.subscribe.entity.Subscribers;
+import com.side.dayv.subscribe.service.SubscribeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.NoPermissionException;
 import java.util.List;
 
 @Slf4j
@@ -24,6 +31,7 @@ import java.util.List;
 public class ChannelController {
 
     private final ChannelService channelService;
+    private final SubscribeService subscribeService;
 
     @PostMapping
     public ResponseEntity<CommonResponse> save(@AuthenticationPrincipal final CustomUser user,
@@ -47,5 +55,20 @@ public class ChannelController {
                                                               ChannelSearchDto search) {
 
         return ResponseEntity.ok(new CommonResponse(channelService.findChannels(user.getMemberId(), pageable, search)));
+    }
+
+    @DeleteMapping("/{channelId}")
+    public ResponseEntity removeChannel(@AuthenticationPrincipal final CustomUser user,
+                                        @PathVariable final Long channelId){
+
+        channelService.removeChannel(user.getMemberId(), channelId);
+        return ResponseEntity.ok("");
+    }
+
+    @GetMapping("/{channelId}/members")
+    public ResponseEntity getSubscribers(@AuthenticationPrincipal final CustomUser user,
+                                                     @PathVariable final Long channelId) {
+        Subscribers subscribers = subscribeService.getSubscribers(user.getMemberId(), channelId);
+        return ResponseEntity.ok(new CommonResponse<>(subscribers));
     }
 }

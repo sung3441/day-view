@@ -9,6 +9,8 @@ public class ErrorMessage {
     public static final String CHANNEL_NOT_FOUNT = "채널을 찾을 수 없습니다.";
     public static final String BAD_REQUEST_GOOGLE_PERMISSION = "구글 계정이 아닙니다.";
 
+    public static final String NO_PERMISSION = "권한이 없습니다";
+    public static final String IMPOSSIBLE_MY_CHANNEL_DELETE = "내 일정은 삭제 할 수 없습니다";
     // subscribe
     public static final String SUBSCRIBE_ALREADY_EXISTS = "이미 구독 중입니다.";
     public static final String SUBSCRIBE_NOT_FOUND = "구독 정보를 찾을 수 없습니다.";
