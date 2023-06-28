@@ -8,6 +8,7 @@ import com.side.dayv.global.exception.NotFoundException;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.subscribe.dto.request.SubscribeUpdateDto;
+import com.side.dayv.subscribe.entity.ResponseSubscribeDTO;
 import com.side.dayv.subscribe.entity.Subscribe;
 import com.side.dayv.subscribe.entity.Subscribers;
 import com.side.dayv.subscribe.repository.SubscribeRepository;
@@ -33,7 +34,7 @@ public class SubscribeService {
 
     private final ChannelRepository channelRepository;
 
-    public Subscribe subscribe(final Long memberId, final Long channelId) {
+    public ResponseSubscribeDTO subscribe(final Long memberId, final Long channelId) {
 
         if (subscribeRepository.existsByMemberIdAndChannelId(memberId, channelId)) {
             throw new AlreadyExistsException(SUBSCRIBE_ALREADY_EXISTS);
@@ -45,7 +46,8 @@ public class SubscribeService {
         Channel channel = channelRepository.findById(channelId)
                 .orElseThrow(() -> new NotFoundException(CHANNEL_NOT_FOUNT));
 
-        return subscribeRepository.save(new Subscribe(member, channel));
+        return subscribeRepository.save(new Subscribe(member, channel))
+                .toResponseSubscribeDTO();
     }
 
     public void unsubscribe(final Long memberId, final Long channelId) {
@@ -60,7 +62,7 @@ public class SubscribeService {
         subscribeRepository.delete(subscribe);
     }
 
-    public void update(final Long id, final Long memberId, final SubscribeUpdateDto request) {
+    public ResponseSubscribeDTO update(final Long id, final Long memberId, final SubscribeUpdateDto request) {
 
         Subscribe subscribe = subscribeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
@@ -69,7 +71,10 @@ public class SubscribeService {
             throw new BadRequestException(BAD_REQUEST_PERMISSION);
         }
 
+        subscribe.changeSubscribeAuth(request.getAuth());
         subscribe.update(request.getColor(), request.isShowYn());
+
+        return subscribe.toResponseSubscribeDTO();
     }
 
     public Subscribe manageChannelSubscribe(final Member member, final Channel channel) {

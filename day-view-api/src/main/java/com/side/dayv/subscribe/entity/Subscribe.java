@@ -1,5 +1,6 @@
 package com.side.dayv.subscribe.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.global.exception.BadRequestException;
 import com.side.dayv.member.entity.Member;
@@ -59,6 +60,8 @@ public class Subscribe {
         this.auth = SubscribeAuth.SUBSCRIBE;
     }
 
+    public void changeSubscribeAuth(SubscribeAuth auth) { this.auth = auth; }
+
     public void changeColor(final String color) {
         if (color != null) {
             this.color = color;
@@ -110,6 +113,16 @@ public class Subscribe {
                 .subscribeDate(LocalDateTime.now())
                 .member(member)
                 .channel(channel)
+                .build();
+    }
+
+    public ResponseSubscribeDTO toResponseSubscribeDTO(){
+        return ResponseSubscribeDTO.builder()
+                .id(id)
+                .color(color)
+                .subscribeDate(subscribeDate)
+                .showYn(showYn)
+                .auth(auth)
                 .build();
     }
 }
