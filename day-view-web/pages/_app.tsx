@@ -10,12 +10,12 @@ import { StyledEngineProvider } from '@mui/styled-engine';
 import Layout from '@/shared/component/Layout';
 import GlobalStyle from '@/shared/styles/globalStyle';
 import { commonTheme } from '@/shared/styles/theme';
-import { isSetAccessToken, setAccessToken } from '@/shared/util/axios';
+import { setAccessToken } from '@/shared/util/axios';
 import { getAccessToken } from '@/shared/api';
-import { isLoginAtom } from '@/shared/atom/global';
+import { isLoginAtom, userInfoAtom } from '@/shared/atom/global';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import useGetClient from '@/shared/queryClient';
-import getClient from '@/shared/queryClient';
+import getClient, { QueryKeys } from '@/shared/queryClient';
+import { UserRes } from '@/shared/types/api';
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
@@ -51,6 +51,7 @@ function App({ Component, pageProps }: AppProps) {
 
 const APPWithConfig = ({ children }: { children: any }) => {
   const setIsLogin = useSetRecoilState(isLoginAtom);
+  const setUserInfo = useSetRecoilState(userInfoAtom);
   const queryClient = getClient();
 
   useEffect(() => {
@@ -58,6 +59,9 @@ const APPWithConfig = ({ children }: { children: any }) => {
       try {
         const token = await getAccessToken();
         setAccessToken(token!.data.token);
+        const user = await queryClient.getQueryData([QueryKeys.USER]);
+
+        if (user) setUserInfo(user as UserRes);
         setIsLogin(true);
         queryClient.defaultQueryOptions().enabled = true;
       } catch (e) {}
