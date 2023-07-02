@@ -37,6 +37,16 @@ export const createChannel = async (
   return res;
 };
 
+export const subscribeChannel = async (channelId: number) => {
+  const res = await new Client(`/api/channels/${channelId}/subscribes`).post();
+  return res;
+};
+
+export const unsubscribeChannel = async (subscribeId: number) => {
+  const res = await new Client(`/api/subscribes/${subscribeId}`).delete();
+  return res;
+};
+
 export const addSchedule = async (addScheduleParam: addScheduleParamType) => {
   const { channelId, ...params } = addScheduleParam;
   const res = await new Client(

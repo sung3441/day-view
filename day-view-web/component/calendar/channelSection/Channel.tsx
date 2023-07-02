@@ -5,7 +5,7 @@ import { pixelToRemUnit } from '@/shared/styles/util';
 import dynamic from 'next/dynamic';
 import { useModal } from '@/shared/hooks';
 import { ChannelSelectType } from '@/shared/types/api';
-import useGetChannel from '@/component/calendar/channelSection/hooks/useGetChannel';
+import useGetChannel from '@/component/calendar/hooks/useGetChannel';
 import ChannelItem from '@/component/calendar/channelSection/ChannelItem';
 
 export interface Props {

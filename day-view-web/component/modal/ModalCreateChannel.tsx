@@ -5,9 +5,7 @@ import Modal from '../../shared/component/Organism/MODAL';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 import { useAnimationHandler } from '@/shared/hooks';
-import useCreateChannel from '@/component/calendar/channelSection/hooks/usePostChannel';
-import useValidation from '@/shared/hooks/useValidation';
-import { VALIDATION_LENGTH } from '@/constants/validate';
+import { useCreateChannel } from '@/component/calendar/hooks/usePostChannel';
 
 /**
  * 카테고리 생성
@@ -19,18 +17,14 @@ type CreateChannel = {
 };
 
 const ModalCreateChannel = ({ closeModal }: ModalProps) => {
-  const {
-    isShow,
-    handleIsShow: modalClose,
-    handleOnAnimationEnd,
-  } = useAnimationHandler(() => closeModal('CreateCategory'));
+  const { isShow, handleIsShow, handleOnAnimationEnd } = useAnimationHandler(
+    () => closeModal('CreateCategory')
+  );
 
   const [value, setValue] = useState<CreateChannel>({
     categoryName: '',
     isPrivate: false,
   });
-
-  const { isValid, validate } = useValidation('channelNameLength');
 
   const { mutate, status } = useCreateChannel();
 
@@ -40,7 +34,6 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
 
     switch (name) {
       case 'categoryName':
-        validate(value);
         setValue((prev) => ({ ...prev, categoryName: value }));
         break;
       case 'toggle':
@@ -55,7 +48,6 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
   // 3. 로딩시 버튼 disabled
   const handleCreateChannel = () => {
     mutate({ name: value.categoryName, secretYn: value.isPrivate });
-    modalClose();
   };
 
   return (
@@ -66,19 +58,13 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
       <Modal.Body>
         <Modal.Section>
           <Modal.SubTitle>카테고리 이름</Modal.SubTitle>
-          <Modal.Wrapper>
-            <Modal.Input
-              type="text"
-              name="categoryName"
-              value={value.categoryName}
-              onChange={handleChangeValue}
-              placeholder="이름을 입력하세요."
-              isValid={isValid}
-            />
-            {!isValid && (
-              <Modal.Validation>{`${VALIDATION_LENGTH.MIN_LENGTH}자 ~ ${VALIDATION_LENGTH.CHANNEL_MAX_LENGTH}자로 입력해주세요.`}</Modal.Validation>
-            )}
-          </Modal.Wrapper>
+          <Modal.Input
+            type="text"
+            name="categoryName"
+            value={value.categoryName}
+            onChange={handleChangeValue}
+            placeholder="이름을 입력하세요."
+          />
         </Modal.Section>
         <Modal.Section>
           <Modal.SubTitle>비공개</Modal.SubTitle>
@@ -93,18 +79,14 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
         </Modal.Section>
       </Modal.Body>
       <Modal.Control>
-        <Modal.Button variant="primary" onClick={modalClose}>
+        <Modal.Button variant="primary" onClick={() => handleIsShow()}>
           취소
         </Modal.Button>
-        <Modal.Button
-          variant="accent"
-          onClick={handleCreateChannel}
-          disabled={!isValid}
-        >
+        <Modal.Button variant="accent" onClick={handleCreateChannel}>
           완료
         </Modal.Button>
       </Modal.Control>
-      <Modal.Dim />
+      <Modal.Dim onClick={() => handleIsShow} />
     </Modal>
   );
 };
