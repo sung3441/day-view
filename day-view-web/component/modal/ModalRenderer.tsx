@@ -2,7 +2,11 @@ import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useRecoilValue } from 'recoil';
 
-import { ModalCreateChannel, ModalAddSchedule } from '@/component/modal';
+import {
+  ModalCreateChannel,
+  ModalAddSchedule,
+  ModalScheduleDetail,
+} from '@/component/modal';
 import { useModal } from '@/shared/hooks';
 import { modalListAtom } from '@/shared/atom/modalState';
 
@@ -14,6 +18,7 @@ export interface ModalProps {
 const modalComponents = {
   CreateCategory: ModalCreateChannel,
   AddSchedule: ModalAddSchedule,
+  ScheduleDetail: ModalScheduleDetail,
 } satisfies Record<
   string,
   React.MemoExoticComponent<(P: ModalProps) => React.ReactElement>

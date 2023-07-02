@@ -57,13 +57,16 @@ const ModalMain = ({ children, ...props }: Props) => {
   );
 
   return (
-    <S.Layout onAnimationEnd={props.onAnimationEnd} isShow={props.isShow}>
+    <S.Layout
+      onAnimationEnd={props.onAnimationEnd}
+      isShow={props.isShow === undefined ? true : props.isShow}
+    >
       <S.Container
         ref={ref}
         clientX={position && position.x}
         clientY={position && position.y}
         isDimmed={isDimmed}
-        isShow={props.isShow}
+        isShow={props.isShow === undefined ? true : props.isShow}
       >
         {remainComponents}
       </S.Container>
