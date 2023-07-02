@@ -1,6 +1,5 @@
 import { memo, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { hasNextPage } from 'react-query/types/core/infiniteQueryBehavior';
 import Spinner from '@/shared/component/Atom/Spinner';
 import styled, { css } from 'styled-components';
 
@@ -19,7 +18,7 @@ const InfiniteObserver = ({
 }: Props) => {
   // TODO 추후 라이브러리 제거
   const [inViewRef, inView] = useInView({
-    threshold: 0.3,
+    threshold: 0.01,
   });
 
   useEffect(() => {

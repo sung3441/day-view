@@ -52,21 +52,22 @@ export type SearchChannelParmaType = {
   order: string;
 };
 
+export type SearchItemType = {
+  id: number;
+  name: string;
+  channelType: ChannelSelectType;
+  creatorId: number;
+  creatorNickname: string;
+  subscriberCount: number;
+  createdDate: string;
+  subscribe: boolean;
+};
+
 export type SearchChannelRes = {
   data: {
-    content: [
-      {
-        id: number;
-        name: string;
-        channelType: ChannelSelectType;
-        creatorId: number;
-        creatorNickname: string;
-        subscriberCount: number;
-        createdDate: Date;
-        subscribe: boolean;
-      }
-    ];
+    content: SearchItemType[];
     last: boolean;
     totalElements: number;
+    totalPages: number;
   };
 };
