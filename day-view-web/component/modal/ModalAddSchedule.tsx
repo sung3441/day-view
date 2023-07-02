@@ -9,7 +9,7 @@ import { addScheduleParamType } from '@/shared/types/api';
 import useAddSchedule from './hooks/useAddSchedule';
 import { DateField, TimeField } from '@mui/x-date-pickers';
 import { Icon, Select } from '@/shared/component/Atom';
-import useGetChannel from '../calendar/channelSection/hooks/useGetChannel';
+import useGetChannel from '@/component/calendar/hooks/useGetChannel';
 import dayjs from 'dayjs';
 import { dateToDayjs, dayjsToDate } from '@/shared/util/dateConversion';
 import useValidation from '@/shared/hooks/useValidation';
