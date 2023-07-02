@@ -1,0 +1,36 @@
+import { useMutation, useQueryClient } from 'react-query';
+import {
+  createChannel,
+  subscribeChannel,
+  unsubscribeChannel,
+} from '@/shared/api';
+import { QueryKeys } from '@/shared/queryClient';
+
+const useCreateChannel = () => {
+  const queryClient = useQueryClient();
+  return useMutation(createChannel, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries([QueryKeys.CHANNEL, 'MANAGE']);
+    },
+  });
+};
+
+export default useCreateChannel;
+
+export const useSubscribeChannel = () => {
+  const queryClient = useQueryClient();
+  return useMutation(subscribeChannel, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries([QueryKeys.SEARCH]);
+    },
+  });
+};
+
+export const useUnsubscribeChannel = () => {
+  const queryClient = useQueryClient();
+  return useMutation(unsubscribeChannel, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries([QueryKeys.SEARCH]);
+    },
+  });
+};
