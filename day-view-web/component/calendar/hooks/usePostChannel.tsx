@@ -6,7 +6,7 @@ import {
 } from '@/shared/api';
 import { QueryKeys } from '@/shared/queryClient';
 
-const useCreateChannel = () => {
+export const useCreateChannel = () => {
   const queryClient = useQueryClient();
   return useMutation(createChannel, {
     onSuccess: async () => {
@@ -14,8 +14,6 @@ const useCreateChannel = () => {
     },
   });
 };
-
-export default useCreateChannel;
 
 export const useSubscribeChannel = () => {
   const queryClient = useQueryClient();

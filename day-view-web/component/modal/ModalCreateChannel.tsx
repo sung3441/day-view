@@ -5,7 +5,7 @@ import Modal from '../../shared/component/Organism/MODAL';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 import { useAnimationHandler } from '@/shared/hooks';
-import useCreateChannel from '@/component/calendar/hooks/usePostChannel';
+import { useCreateChannel } from '@/component/calendar/hooks/usePostChannel';
 
 /**
  * 카테고리 생성
