@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 
 const Header = styled.div`
   display: flex;
@@ -49,4 +50,25 @@ const Divider = styled.div`
   background: #dbdbdb;
 `;
 
-export { Header, Body, Section, Control, Title, SubTitle, Divider };
+const Validation = styled.div`
+  ${getStyledThemProperty('fonts', 'caption3')}
+  color: ${getStyledThemProperty('colors', 'Red')}
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: ${pixelToRemUnit(380)};
+`;
+
+export {
+  Header,
+  Body,
+  Section,
+  Control,
+  Title,
+  SubTitle,
+  Divider,
+  Validation,
+  Wrapper,
+};
