@@ -34,11 +34,9 @@ const Calendar = () => {
   return (
     <CalderWrap>
       <Channel />
-      {isSearchOpen ? (
-        <SearchResult />
-      ) : (
-        <TabWrap isOpenChannel={isOpenChannel}>{curTabElement}</TabWrap>
-      )}
+      <TabWrap isOpenChannel={isOpenChannel}>
+        {isSearchOpen ? <SearchResult /> : curTabElement}
+      </TabWrap>
     </CalderWrap>
   );
 };
