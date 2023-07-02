@@ -12,6 +12,7 @@ import { Icon, Select } from '@/shared/component/Atom';
 import useGetChannel from '../calendar/channelSection/hooks/useGetChannel';
 import dayjs from 'dayjs';
 import { dateToDayjs, dayjsToDate } from '@/shared/util/dateConversion';
+import useValidation from '@/shared/hooks/useValidation';
 
 const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   const {
@@ -21,6 +22,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   } = useAnimationHandler(() => closeModal('AddSchedule'));
 
   const [isChecked, setIsChecked] = useState(true);
+  const { isValid, validate } = useValidation('empty');
 
   // ! TEST
   const [value, setValue] = useState<addScheduleParamType>({
@@ -41,6 +43,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
 
     switch (name as keyof Omit<addScheduleParamType, 'channelId'>) {
       case 'title':
+        validate(value);
         setValue((prev) => ({ ...prev, title: value }));
         break;
       case 'content':
@@ -116,18 +119,24 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
       <S.Body>
         <S.Section>
           <Modal.SubTitle>제목</Modal.SubTitle>
-          <Modal.Input
-            placeholder="제목을 입력하세요."
-            name="title"
-            value={value.title}
-            onChange={handleChangeValue}
-          />
+          <Modal.Wrapper>
+            <Modal.Input
+              placeholder="제목을 입력하세요."
+              name="title"
+              value={value.title}
+              onChange={handleChangeValue}
+              isValid={isValid}
+            />
+            {!isValid && (
+              <Modal.Validation>제목을 입력해주세요.</Modal.Validation>
+            )}
+          </Modal.Wrapper>
         </S.Section>
         <S.Section>
           <Modal.SubTitle style={{ alignSelf: 'flex-start' }}>
             날짜
           </Modal.SubTitle>
-          <S.Wrapper style={{ gap: '6px' }}>
+          <Modal.Wrapper style={{ gap: '6px' }}>
             {isChecked ? (
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <S.DateField
@@ -185,11 +194,11 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
                 setIsChecked(!isChecked);
               }}
             />
-          </S.Wrapper>
+          </Modal.Wrapper>
         </S.Section>
         <S.Section>
           <Modal.SubTitle>카테고리</Modal.SubTitle>
-          <S.Wrapper>
+          <Modal.Wrapper>
             <Select
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                 const channelId = parseInt(e.target.value);
@@ -204,7 +213,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
                   ))
                 : undefined}
             </Select>
-          </S.Wrapper>
+          </Modal.Wrapper>
         </S.Section>
         <S.Section>
           <Modal.SubTitle style={{ alignSelf: 'flex-start' }}>
@@ -222,7 +231,11 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
         <Modal.Button variant="primary" onClick={modalClose}>
           취소
         </Modal.Button>
-        <Modal.Button variant="accent" onClick={handleAddSchedule}>
+        <Modal.Button
+          variant="accent"
+          onClick={handleAddSchedule}
+          disabled={!isValid}
+        >
           완료
         </Modal.Button>
       </Modal.Control>
@@ -246,16 +259,9 @@ const Section = styled.section`
   gap: 78px;
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: ${pixelToRemUnit(380)};
-`;
-
 const S = {
   Body,
   Section,
-  Wrapper,
   DateField: styled(DateField)`
     ${pixelToRemUnit(175)};
     input {

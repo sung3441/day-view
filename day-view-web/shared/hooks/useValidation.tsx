@@ -1,34 +1,33 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { VALIDATION_LENGTH } from '@/constants/validate';
 
 type ValueType = {
-  channelName: string;
-  test: number;
+  channelNameLength: string;
+  empty: string;
 };
 
 type ValidateType = keyof ValueType;
 
-// 특수문자 제외
-const regex = /^[a-zA-Z0-9\s$_]*$/;
-
 const useValidation = <T extends ValidateType>(type: T) => {
   const [isValid, setIsValid] = useState<boolean>(false);
 
-  const getValidateTypeMessage = () => {};
-
-  const validate = (value: ValueType[T]): void => {
-    switch (type) {
-      case 'channelName':
-        if (
-          typeof value === 'string' &&
-          VALIDATION_LENGTH.MIN_LENGTH < value.length &&
+  const validate = useCallback(
+    (value: ValueType[T]): void => {
+      switch (type) {
+        case 'channelNameLength':
+          VALIDATION_LENGTH.MIN_LENGTH <= value.length &&
           value.length < VALIDATION_LENGTH.CHANNEL_MAX_LENGTH
-        ) {
-          setIsValid(true);
-        }
-        break;
-    }
-  };
+            ? setIsValid(true)
+            : setIsValid(false);
+          break;
+
+        case 'empty':
+          value.length !== 0 ? setIsValid(true) : setIsValid(false);
+          break;
+      }
+    },
+    [type]
+  );
 
   return { isValid, validate };
 };
