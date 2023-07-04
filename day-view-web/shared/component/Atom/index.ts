@@ -5,3 +5,5 @@ export { default as Textarea } from './Textarea';
 export { default as ToggleButton } from './ToggleButton';
 export { default as UserImage } from './UserImage';
 export { default as Select } from './Select';
+export { default as DateInput } from './DateInput';
+export { default as TimeInput } from './TimeInput';

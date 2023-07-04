@@ -1,17 +1,18 @@
 import React, { memo, useState } from 'react';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
+
 import Modal from '@/shared/component/Organism/MODAL';
 import { CheckBox } from '@/shared/component/Molecule';
 import { ModalProps } from '@/component/modal/ModalRenderer';
-import { useAnimationHandler } from '@/shared/hooks';
-import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
+
 import { addScheduleParamType } from '@/shared/types/api';
-import useAddSchedule from './hooks/useAddSchedule';
-import { DateField, TimeField } from '@mui/x-date-pickers';
-import { Icon, Select } from '@/shared/component/Atom';
-import useGetChannel from '@/component/calendar/hooks/useGetChannel';
-import dayjs from 'dayjs';
+import { DateInput, Icon, Select, TimeInput } from '@/shared/component/Atom';
 import { dateToDayjs, dayjsToDate } from '@/shared/util/dateConversion';
+import useAddSchedule from './hooks/useAddSchedule';
+
+import { useAnimationHandler } from '@/shared/hooks';
+import useGetChannel from '@/component/calendar/hooks/useGetChannel';
 import useValidation from '@/shared/hooks/useValidation';
 
 const ModalAddSchedule = ({ closeModal }: ModalProps) => {
@@ -139,24 +140,21 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
           <Modal.Wrapper style={{ gap: '6px' }}>
             {isChecked ? (
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <S.DateField
-                  format="YYYY-MM-DD"
+                <DateInput
                   value={dateToDayjs(value.startDate)}
                   onChange={(newValue) =>
                     handleChangeDate(newValue, 'startDate')
                   }
                 />
                 <Icon type="sm_up" style={{ transform: 'rotate(90deg)' }} />
-                <S.DateField
-                  format="YYYY-MM-DD"
+                <DateInput
                   value={dateToDayjs(value.endDate)}
                   onChange={(newValue) => handleChangeDate(newValue, 'endDate')}
                 />
               </div>
             ) : (
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <S.DateField
-                  format="YYYY-MM-DD"
+                <DateInput
                   style={{ marginRight: '18px' }}
                   value={dateToDayjs(value.startDate)}
                   onChange={(newValue) => {
@@ -167,7 +165,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
                     }));
                   }}
                 />
-                <S.TimeField
+                <TimeInput
                   format="HH:mm"
                   value={dateToDayjs(value.startDate)}
                   onChange={(newValue, context) => {
@@ -176,7 +174,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
                   }}
                 />
                 <Icon type="sm_up" style={{ transform: 'rotate(90deg)' }} />
-                <S.TimeField
+                <TimeInput
                   format="HH:mm"
                   value={dateToDayjs(value.endDate)}
                   onChange={(newValue, context) => {
@@ -262,28 +260,4 @@ const Section = styled.section`
 const S = {
   Body,
   Section,
-  DateField: styled(DateField)`
-    ${pixelToRemUnit(175)};
-    input {
-      box-sizing: border-box;
-      height: 48px;
-      padding: 8px 18px;
-      ${getStyledThemProperty('fonts', 'caption2')}
-      color: ${getStyledThemProperty('colors', 'Black')};
-      border: 1px solid ${getStyledThemProperty('colors', 'G_300')};
-      border-radius: 7px;
-    }
-  `,
-  TimeField: styled(TimeField)`
-    ${pixelToRemUnit(100)};
-    input {
-      box-sizing: border-box;
-      height: 48px;
-      padding: 8px 18px;
-      ${getStyledThemProperty('fonts', 'caption2')}
-      color: ${getStyledThemProperty('colors', 'Black')};
-      border: 1px solid ${getStyledThemProperty('colors', 'G_300')};
-      border-radius: 7px;
-    }
-  `,
 };
