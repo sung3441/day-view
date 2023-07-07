@@ -71,6 +71,7 @@ const DateRangeInput = ({
           handleOnChange(newValue, context, 'startDate')
         }
         style={style}
+        maxDate={values?.endDate}
       />
       {children}
       <DateInput
@@ -80,6 +81,7 @@ const DateRangeInput = ({
           handleOnChange(newValue, context, 'endDate')
         }
         style={style}
+        minDate={values?.startDate}
       />
     </div>
   );

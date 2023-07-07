@@ -16,12 +16,16 @@ interface Props {
     context: FieldChangeHandlerContext<DateValidationError>
   ) => void;
   style?: CSSProperties;
+  minDate?: unknown;
+  maxDate?: unknown;
 }
 
 const DateInput = ({
   value,
   onChange,
   style,
+  minDate,
+  maxDate,
   format = 'YYYY-MM-DD',
 }: Props) => {
   return (
@@ -30,6 +34,8 @@ const DateInput = ({
       value={value}
       onChange={(newValue, context) => onChange && onChange(newValue, context)}
       style={style}
+      minDate={minDate}
+      maxDate={maxDate}
     />
   );
 };
