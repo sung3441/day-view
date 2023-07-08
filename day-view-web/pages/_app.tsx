@@ -16,6 +16,7 @@ import { isLoginAtom, userInfoAtom } from '@/shared/atom/global';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import getClient, { QueryKeys } from '@/shared/queryClient';
 import { UserRes } from '@/shared/types/api';
+import { useRouter } from 'next/router';
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
@@ -53,18 +54,29 @@ const APPWithConfig = ({ children }: { children: any }) => {
   const setIsLogin = useSetRecoilState(isLoginAtom);
   const setUserInfo = useSetRecoilState(userInfoAtom);
   const queryClient = getClient();
+  const router = useRouter();
 
   useEffect(() => {
+    const setToken = async () => {
+      const token = await getAccessToken();
+      if (token) throw new Error('token');
+      setAccessToken(token!.data.token);
+    };
+
+    const setUser = async () => {
+      const user = await queryClient.getQueryData([QueryKeys.USER]);
+      if (user) setUserInfo(user as UserRes);
+      setIsLogin(true);
+    };
+
     (async () => {
       try {
-        const token = await getAccessToken();
-        setAccessToken(token!.data.token);
-        const user = await queryClient.getQueryData([QueryKeys.USER]);
-
-        if (user) setUserInfo(user as UserRes);
-        setIsLogin(true);
+        await setToken();
+        await setUser();
         queryClient.defaultQueryOptions().enabled = true;
-      } catch (e) {}
+      } catch (e) {
+        await router.replace('/');
+      }
     })();
   }, []);
 
