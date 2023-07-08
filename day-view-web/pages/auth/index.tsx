@@ -8,12 +8,10 @@ const AuthPage = () => {
 
   useEffect(() => {
     if (!token) return;
-    console.log('??');
     Auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     router.replace('/calendar');
   }, [token]);
 
   return <div>카카오 로그인 처리중입니다.</div>;
 };
-
 export default AuthPage;

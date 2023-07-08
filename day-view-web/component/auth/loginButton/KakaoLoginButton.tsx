@@ -1,7 +1,7 @@
 import button from '@/shared/component/Atom/Button';
 import { memo } from 'react';
 import axios from 'axios';
-import { StyleLoginButton } from '@/component/login/loginButton/styles';
+import { StyleLoginButton } from '@/component/auth/loginButton/styles';
 import { Icon } from '@/shared/component/Atom';
 
 const KakaoLoginButton = () => {

@@ -47,6 +47,7 @@ class MyDocument extends Document {
         <body>
           <Main />
           <div id="portal" />
+          <div id="box" />
           <NextScript />
         </body>
       </Html>

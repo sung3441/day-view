@@ -13,12 +13,6 @@ import {
 
 const inter = Inter({ subsets: ['latin'] });
 
-declare global {
-  interface Window {
-    Kakao: any;
-  }
-}
-
 export default function Home() {
   return (
     <>

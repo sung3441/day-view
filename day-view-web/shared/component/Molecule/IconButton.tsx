@@ -24,8 +24,9 @@ function conversionSize(iconSize: IconSizeType) {
 interface Props extends IconProps {
   children?: ReactNode;
   customStyle?: CSSProperties;
-  onClick?: (e: SyntheticEvent) => void;
   isActiveFnc?: boolean;
+  onClick?(e: SyntheticEvent): void;
+  onClick?<T extends {}>(res: T, e?: SyntheticEvent): void;
 }
 
 const IconButton = ({
@@ -45,6 +46,7 @@ const IconButton = ({
       onClick={onClick}
       aria-label={`${type} button`}
       isActiveFnc={isActiveFnc}
+      tabIndex={0}
     >
       <Icon type={type} size={size} fill="#fff" {...resForIcon} />
       {children}

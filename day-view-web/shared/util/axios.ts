@@ -18,7 +18,6 @@ export async function isSetAccessToken(cookie: string) {
     setAccessToken(token!.data.token);
     return true;
   } catch (e) {
-    console.log('e', e);
     return false;
   }
 }

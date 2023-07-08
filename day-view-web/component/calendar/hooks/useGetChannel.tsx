@@ -15,10 +15,6 @@ const useGetChannel = ({ selectType }: Props) => {
     () => getChannel(selectType),
     {
       enabled: isLogin,
-      onError: () => {
-        //   TODO 에러 코드에 따른 처리 필요
-        console.log('error');
-      },
       select: (data) => data?.data,
     }
   );

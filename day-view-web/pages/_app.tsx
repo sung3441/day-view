@@ -59,13 +59,14 @@ const APPWithConfig = ({ children }: { children: any }) => {
   useEffect(() => {
     const setToken = async () => {
       const token = await getAccessToken();
-      if (token) throw new Error('token');
+      if (!token) throw new Error('token');
       setAccessToken(token!.data.token);
     };
 
     const setUser = async () => {
       const user = await queryClient.getQueryData([QueryKeys.USER]);
       if (user) setUserInfo(user as UserRes);
+      console.log('user', user);
       setIsLogin(true);
     };
 
@@ -75,6 +76,7 @@ const APPWithConfig = ({ children }: { children: any }) => {
         await setUser();
         queryClient.defaultQueryOptions().enabled = true;
       } catch (e) {
+        console.log('??');
         await router.replace('/');
       }
     })();

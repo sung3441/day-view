@@ -2,8 +2,8 @@ import { Icon } from '@/shared/component/Atom';
 import { memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
-import KakaoLoginButton from '@/component/login/loginButton/KakaoLoginButton';
-import GoogleLoginButton from '@/component/login/loginButton/GoogleLoginButton';
+import KakaoLoginButton from '@/component/auth/loginButton/KakaoLoginButton';
+import GoogleLoginButton from '@/component/auth/loginButton/GoogleLoginButton';
 
 const Main = () => {
   return (
