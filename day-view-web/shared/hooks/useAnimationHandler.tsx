@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useAnimationHandler = (closeFn: () => void) => {
+const useAnimationHandler = (closeFn: Function) => {
   const [isShow, setIsShow] = useState(true);
 
   const handleIsShow = () => setIsShow(false);

@@ -1,12 +1,17 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import Auth from '@/shared/axios';
 
-const Index = () => {
-  const { query } = useRouter();
+const AuthPage = () => {
+  const router = useRouter();
+  const token = router.query.token as string;
 
-  useEffect(() => {}, [query]);
+  useEffect(() => {
+    if (!token) return;
+    Auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    router.replace('/calendar');
+  }, [token]);
 
-  return <div>로그인 처리중입니다.</div>;
+  return <div>카카오 로그인 처리중입니다.</div>;
 };
-
-export default Index;
+export default AuthPage;

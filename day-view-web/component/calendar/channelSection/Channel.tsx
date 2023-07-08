@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { memo } from 'react';
+import { memo, SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import { IconButton } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import dynamic from 'next/dynamic';
@@ -7,6 +7,8 @@ import { useModal } from '@/shared/hooks';
 import { ChannelSelectType } from '@/shared/types/api';
 import useGetChannel from '@/component/calendar/hooks/useGetChannel';
 import ChannelItem from '@/component/calendar/channelSection/ChannelItem';
+import { useRecoilState } from 'recoil';
+import { channelColorIdAtom } from '@/state/channel';
 
 export interface Props {
   label: string;
@@ -14,12 +16,40 @@ export interface Props {
 }
 
 const Channel = ({ label, selectType }: Props) => {
+  const [channelColorId, setChannelColorId] =
+    useRecoilState(channelColorIdAtom);
   const { openModal } = useModal();
   const { status, data } = useGetChannel({ selectType });
 
+  const toggleChannelColor = useCallback(
+    ({ id }: { id: number }, e?: SyntheticEvent) => {
+      if (!e) {
+        setChannelColorId({
+          id,
+          x: 0,
+          y: 0,
+        });
+        return;
+      }
+      e?.stopPropagation();
+
+      const target = e.target as HTMLElement;
+      let { x, y, height } = target.getBoundingClientRect();
+      const documentH = document.documentElement.offsetHeight;
+
+      if (y + 251 > documentH) y = documentH - 251 - 5;
+      setChannelColorId({
+        id,
+        x: x,
+        y: y,
+      });
+    },
+    []
+  );
+
   if (status !== 'success') return null;
   return (
-    <Wrap>
+    <>
       <Label>
         <span>{label}</span>
         <IconButton
@@ -31,20 +61,21 @@ const Channel = ({ label, selectType }: Props) => {
       <List>
         {status === 'success' &&
           data?.data?.map((channel, index) => (
-            <ChannelItem key={channel.channelId} {...channel} />
+            <ChannelItem
+              key={channel.channelId}
+              toggleChannelColor={toggleChannelColor}
+              isOpen={channel.channelId === channelColorId.id}
+              x={channelColorId.x}
+              y={channelColorId.y}
+              {...channel}
+            />
           ))}
       </List>
-    </Wrap>
+    </>
   );
 };
 
 export default memo(Channel);
-
-const Wrap = styled.div`
-  & + & {
-    //margin-top: ${pixelToRemUnit(60)};
-  }
-`;
 
 const Label = styled.div`
   display: flex;
@@ -59,6 +90,4 @@ const Label = styled.div`
 
 const List = styled.ul`
   padding: ${pixelToRemUnit([30, 6])};
-  display: flex;
-  flex-direction: column;
 `;

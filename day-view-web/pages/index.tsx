@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import { GetServerSidePropsContext } from 'next';
-import Main from '@/component/main';
+import Main from '../component/mainPage';
 import styled from 'styled-components';
 import { getStyledThemProperty } from '@/shared/styles/util';
 import { getAccessToken, getUser } from '@/shared/api';
@@ -12,12 +12,6 @@ import {
 } from '@/shared/util/axios';
 
 const inter = Inter({ subsets: ['latin'] });
-
-declare global {
-  interface Window {
-    Kakao: any;
-  }
-}
 
 export default function Home() {
   return (

@@ -43,7 +43,7 @@ const Calendar = () => {
 export default Calendar;
 
 const CalderWrap = styled.div`
-  position: relative;
+  //position: relative;
   display: flex;
   width: 100%;
   height: calc(100vh - 100px);

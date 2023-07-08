@@ -1,12 +1,20 @@
 import { CheckBox, IconButton } from '@/shared/component/Molecule';
 import ColorBoard from '@/component/calendar/channelSection/ColorBoard';
-import { memo, SyntheticEvent, useState } from 'react';
+import { memo, SyntheticEvent, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ChannelRes } from '@/shared/types/api';
 
-interface Props extends ChannelRes {}
+interface Props extends ChannelRes {
+  isOpen: boolean;
+  x: number;
+  y: number;
+  toggleChannelColor({ id }: { id: number }, e?: SyntheticEvent): void;
+}
 
 const ChannelItem = ({
+  isOpen,
+  x,
+  y,
   channelId,
   channelType,
   name,
@@ -14,25 +22,30 @@ const ChannelItem = ({
   subscribeId,
   subscribeAuth,
   showYn,
+  toggleChannelColor,
 }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleOpen = (e: SyntheticEvent) => {
-    setIsOpen(true);
-  };
-
   return (
-    <Item>
-      <CheckBox id={name} label={name} />
-      <div style={{ position: 'relative' }}>
-        <IconButton type="sm_more" size="small" onClick={handleOpen} />
-        {isOpen && (
-          <ColorBoard
-            isOpen={isOpen}
-            closeColorBoard={() => setIsOpen(false)}
-          />
-        )}
-      </div>
-    </Item>
+    <>
+      <Item id={`channel${channelId.toString()}`}>
+        <CheckBox id={name} label={name} />
+        <div
+          onClick={(e: SyntheticEvent) =>
+            toggleChannelColor({ id: channelId }, e)
+          }
+          style={{ position: 'relative' }}
+        >
+          <IconButton type="sm_more" size="small" />
+        </div>
+      </Item>
+      {isOpen && (
+        <ColorBoard
+          isOpen={isOpen}
+          closeColorBoard={() => toggleChannelColor({ id: 0 })}
+          x={x}
+          y={y}
+        />
+      )}
+    </>
   );
 };
 
