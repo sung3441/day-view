@@ -66,7 +66,6 @@ const APPWithConfig = ({ children }: { children: any }) => {
     const setUser = async () => {
       const user = await queryClient.getQueryData([QueryKeys.USER]);
       if (user) setUserInfo(user as UserRes);
-      console.log('user', user);
       setIsLogin(true);
     };
 
@@ -76,7 +75,6 @@ const APPWithConfig = ({ children }: { children: any }) => {
         await setUser();
         queryClient.defaultQueryOptions().enabled = true;
       } catch (e) {
-        console.log('??');
         await router.replace('/');
       }
     })();

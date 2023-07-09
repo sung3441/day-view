@@ -7,7 +7,7 @@ import { useModal } from '@/shared/hooks';
 import { ChannelSelectType } from '@/shared/types/api';
 import useGetChannel from '@/component/calendar/hooks/useGetChannel';
 import ChannelItem from '@/component/calendar/channelSection/ChannelItem';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { channelColorIdAtom } from '@/state/channel';
 import useColorBoxControl from '@/component/calendar/hooks/useColorBoxControl';
 

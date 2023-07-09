@@ -1,4 +1,4 @@
-import { memo, SyntheticEvent } from 'react';
+import { memo } from 'react';
 import styled, { css } from 'styled-components';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { fadeIn, fadeOut } from '@/shared/styles/keyframes';

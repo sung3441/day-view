@@ -7,7 +7,6 @@ import { pixelToRemUnit } from '@/shared/styles/util';
 import { useModal } from '@/shared/hooks';
 import { type Props as ChannelInfoType } from './Channel';
 import { G_isOpenChannelAtom } from '@/shared/component/Organism/GNB/state';
-import { channelColorIdAtom } from '@/state/channel';
 import useColorBoxControl from '@/component/calendar/hooks/useColorBoxControl';
 
 const buttonStyle: CSSProperties = {
@@ -57,6 +56,10 @@ const Wrap = styled.div<{ isOpenChannel: boolean }>`
   background-color: #fcfcfc;
   border-right: 1px solid #dbdbdb;
   transition: all 0.3s ease-out 0.05s;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   ${({ isOpenChannel }) =>
     isOpenChannel
