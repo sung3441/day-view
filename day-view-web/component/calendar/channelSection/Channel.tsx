@@ -25,7 +25,7 @@ const Channel = ({ label, selectType }: Props) => {
 
   if (status !== 'success') return null;
   return (
-    <>
+    <div>
       <Label>
         <span>{label}</span>
         <IconButton
@@ -47,7 +47,7 @@ const Channel = ({ label, selectType }: Props) => {
             />
           ))}
       </List>
-    </>
+    </div>
   );
 };
 

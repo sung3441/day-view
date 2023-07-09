@@ -47,15 +47,16 @@ export default memo(ChannelSection);
 
 const Wrap = styled.div<{ isOpenChannel: boolean }>`
   position: absolute;
-  z-index: 1;
-  overflow: auto;
+  overflow: scroll;
 
   width: ${pixelToRemUnit(373)};
-  height: 100%;
+  height: calc(100% - 100px);
 
   background-color: #fcfcfc;
   border-right: 1px solid #dbdbdb;
   transition: all 0.3s ease-out 0.05s;
+
+  padding: ${pixelToRemUnit([32, 28])};
 
   ::-webkit-scrollbar {
     display: none;
@@ -72,14 +73,9 @@ const Wrap = styled.div<{ isOpenChannel: boolean }>`
 `;
 
 const Inner = styled.div`
-  height: auto;
   width: 100%;
-  overflow: visible;
-  z-index: 2;
 
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-
-  padding: ${pixelToRemUnit([32, 28])};
+  flex-wrap: wrap;
 `;
