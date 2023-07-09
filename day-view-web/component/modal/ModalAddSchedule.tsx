@@ -11,7 +11,7 @@ import { DateInput, Icon, Select, TimeInput } from '@/shared/component/Atom';
 import { dateToDayjs, dayjsToDate } from '@/shared/util/dateConversion';
 import useAddSchedule from './hooks/useAddSchedule';
 
-import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
+import { useAnimationHandler } from '@/shared/hooks';
 import useGetChannel from '@/component/calendar/hooks/useGetChannel';
 import useValidation from '@/shared/hooks/useValidation';
 import DateRangeInput from '@/shared/component/Molecule/DateRangeInput';
@@ -22,12 +22,6 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
     handleIsShow: modalClose,
     handleOnAnimationEnd,
   } = useAnimationHandler(() => closeModal('AddSchedule'));
-
-  // ! OuterClick 테스트
-  // ? 모달 열리자마자 닫힘
-  const ref = useOuterClick<HTMLDivElement>({
-    callback: () => modalClose,
-  });
 
   const [isChecked, setIsChecked] = useState(true);
   const { isValid, validate } = useValidation('empty');
@@ -122,7 +116,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   };
 
   return (
-    <Modal ref={ref} isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
+    <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <S.Body>
         <S.Section>
           <Modal.SubTitle>제목</Modal.SubTitle>
