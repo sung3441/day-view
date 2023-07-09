@@ -63,6 +63,25 @@ export class Client {
       }
     }
   }
+
+  async patch<T extends {}>(params: any = {}) {
+    try {
+      const res = await this.instance.patch<T>(this.url, params);
+      const { data, status } = res;
+
+      return {
+        data: data,
+        status,
+      };
+    } catch (error) {
+      // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
+      if (axios.isAxiosError<ErrorResponse, any>(error)) {
+        console.log('error', error);
+        throw new Error(error?.response?.status.toString());
+      }
+    }
+  }
+
   async delete<T extends {}>(params: any = {}) {
     try {
       const res = await this.instance.delete<T>(this.url, params);
