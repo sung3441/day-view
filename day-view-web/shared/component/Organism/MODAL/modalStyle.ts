@@ -15,11 +15,11 @@ const Body = styled.div<{ gap?: number }>`
   gap: ${({ gap }) => (gap ? `${gap}px` : '22px')};
 `;
 
-const Section = styled.section`
+const Section = styled.section<{ gap?: number }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: ${({ gap }) => (gap ? `${gap}px` : '16px')};
 `;
 
 const Control = styled.section`
@@ -55,10 +55,11 @@ const Validation = styled.div`
   color: ${getStyledThemProperty('colors', 'Red')}
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ gap?: number }>`
   display: flex;
   flex-direction: column;
   width: ${pixelToRemUnit(380)};
+  gap: ${({ gap }) => gap && `${gap}px`};
 `;
 
 export {

@@ -1,6 +1,7 @@
 import {
   Children,
   ReactNode,
+  forwardRef,
   isValidElement,
   memo,
   useEffect,
@@ -18,62 +19,68 @@ interface Props extends ModalParams {
   isShow?: boolean;
   onAnimationEnd?: () => void;
 }
-
 const FILTER = [(<ModalDim />).type];
 
-const ModalMain = ({ children, ...props }: Props) => {
-  const ref = useRef(null);
-  const { clientX, clientY } = props;
-  const [position, setPosition] = useState<{ x: number; y: number }>();
+const ModalMain = forwardRef<HTMLDivElement, Props>(
+  ({ children, ...props }, forwardedRef) => {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const { clientX, clientY } = props;
+    const [position, setPosition] = useState<{ x: number; y: number }>();
 
-  useEffect(() => {
-    if (!clientX || !clientY) return;
+    useEffect(() => {
+      if (!clientX || !clientY) return;
+      const [x, y] = getAdjustPosition(clientX, clientY, containerRef);
+      setPosition({ x, y });
+    }, [clientX, clientY]);
 
-    const [x, y] = getAdjustPosition(clientX, clientY, ref);
-    setPosition({ x, y });
-  }, [clientX, clientY]);
+    /** 컴포넌트 분리 */
+    const splitComponents = (children: ReactNode) => {
+      const remainComponents: ReactNode[] = [];
+      const filteredComponents: ReactNode[] = [];
 
-  /** 컴포넌트 분리 */
-  const splitComponents = (children: ReactNode) => {
-    const remainComponents: ReactNode[] = [];
-    const filteredComponents: ReactNode[] = [];
+      Children.forEach(children, (child) => {
+        if (isValidElement(child) && FILTER.includes(child.type)) {
+          filteredComponents.push(child);
+        } else {
+          remainComponents.push(child);
+        }
+      });
 
-    Children.forEach(children, (child) => {
-      if (isValidElement(child) && FILTER.includes(child.type)) {
-        filteredComponents.push(child);
-      } else {
-        remainComponents.push(child);
-      }
-    });
+      return [remainComponents, filteredComponents];
+    };
 
-    return [remainComponents, filteredComponents];
-  };
+    const [remainComponents, filteredComponents] = splitComponents(children);
 
-  const [remainComponents, filteredComponents] = splitComponents(children);
-
-  /** dim 체크 */
-  const isDimmed = filteredComponents.some(
-    (child) => isValidElement(child) && FILTER.includes(child.type)
-  );
-
-  return (
-    <S.Layout
-      onAnimationEnd={props.onAnimationEnd}
-      isShow={props.isShow === undefined ? true : props.isShow}
-    >
-      <S.Container
-        ref={ref}
-        clientX={position && position.x}
-        clientY={position && position.y}
-        isDimmed={isDimmed}
+    /** dim 체크 */
+    const isDimmed = filteredComponents.some(
+      (child) => isValidElement(child) && FILTER.includes(child.type)
+    );
+    
+    return (
+      <S.Layout
+        onAnimationEnd={props.onAnimationEnd}
         isShow={props.isShow === undefined ? true : props.isShow}
       >
-        {remainComponents}
-      </S.Container>
-      {filteredComponents}
-    </S.Layout>
-  );
-};
+        <S.Container
+          ref={(node) => {
+            containerRef.current = node;
+            if (forwardedRef && typeof forwardedRef === 'object')
+              forwardedRef.current = node;
+          }}
+          clientX={position && position.x}
+          clientY={position && position.y}
+          isDimmed={isDimmed}
+          isShow={props.isShow === undefined ? true : props.isShow}
+        >
+          {remainComponents}
+        </S.Container>
+        {filteredComponents}
+      </S.Layout>
+    );
+  }
+);
+
+ModalMain.displayName = 'ModalMain';
 
 const fadeIn = keyframes`
   from {

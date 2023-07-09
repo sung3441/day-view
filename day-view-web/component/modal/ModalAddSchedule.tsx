@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 
@@ -11,9 +11,10 @@ import { DateInput, Icon, Select, TimeInput } from '@/shared/component/Atom';
 import { dateToDayjs, dayjsToDate } from '@/shared/util/dateConversion';
 import useAddSchedule from './hooks/useAddSchedule';
 
-import { useAnimationHandler } from '@/shared/hooks';
+import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import useGetChannel from '@/component/calendar/hooks/useGetChannel';
 import useValidation from '@/shared/hooks/useValidation';
+import DateRangeInput from '@/shared/component/Molecule/DateRangeInput';
 
 const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   const {
@@ -22,10 +23,15 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
     handleOnAnimationEnd,
   } = useAnimationHandler(() => closeModal('AddSchedule'));
 
+  // ! OuterClick 테스트
+  // ? 모달 열리자마자 닫힘
+  const ref = useOuterClick<HTMLDivElement>({
+    callback: () => modalClose,
+  });
+
   const [isChecked, setIsChecked] = useState(true);
   const { isValid, validate } = useValidation('empty');
 
-  // ! TEST
   const [value, setValue] = useState<addScheduleParamType>({
     channelId: 1,
     title: '',
@@ -116,7 +122,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   };
 
   return (
-    <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
+    <Modal ref={ref} isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <S.Body>
         <S.Section>
           <Modal.SubTitle>제목</Modal.SubTitle>
@@ -225,6 +231,9 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
           />
         </S.Section>
       </S.Body>
+      <DateRangeInput
+        onChange={(values, contexts) => console.log(values, contexts)}
+      />
       <Modal.Control>
         <Modal.Button variant="primary" onClick={modalClose}>
           취소
