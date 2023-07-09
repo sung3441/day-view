@@ -8,6 +8,7 @@ import {
   addScheduleParamType,
   SearchChannelParmaType,
   SearchChannelRes,
+  PatchChannelType,
 } from '@/shared/types/api';
 
 export const getAccessToken = async () => {
@@ -44,6 +45,14 @@ export const subscribeChannel = async (channelId: number) => {
 
 export const unsubscribeChannel = async (subscribeId: number) => {
   const res = await new Client(`/api/subscribes/${subscribeId}`).delete();
+  return res;
+};
+export const patchChannel = async (PatchChannelParams: PatchChannelType) => {
+  const { subscribeId, showYn, color } = PatchChannelParams;
+  const res = await new Client(`/api/subscribes/${subscribeId}`).patch({
+    showYn,
+    color,
+  });
   return res;
 };
 

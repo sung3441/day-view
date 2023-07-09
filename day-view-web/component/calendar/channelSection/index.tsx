@@ -7,7 +7,7 @@ import { pixelToRemUnit } from '@/shared/styles/util';
 import { useModal } from '@/shared/hooks';
 import { type Props as ChannelInfoType } from './Channel';
 import { G_isOpenChannelAtom } from '@/shared/component/Organism/GNB/state';
-import { channelColorIdAtom } from '@/state/channel';
+import useColorBoxControl from '@/component/calendar/hooks/useColorBoxControl';
 
 const buttonStyle: CSSProperties = {
   width: pixelToRemUnit(323),
@@ -25,19 +25,11 @@ const channelInfo: ChannelInfoType[] = [
 
 const ChannelSection = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
-  const channelColorId = useRecoilValue(channelColorIdAtom);
   const { openModal } = useModal();
-
-  // useEffect(() => {
-  //   if (channelColorId.id === 0) return;
-  //   window.addEventListener('scroll', () => toggleChannelColor({ id: 0 }));
-  //   return () => {
-  //     window.removeEventListener('scroll', () => toggleChannelColor({ id: 0 }));
-  //   };
-  // }, [channelColorId.id]);
+  const { closeColorBox } = useColorBoxControl({ isRequiredEffect: true });
 
   return (
-    <Wrap isOpenChannel={isOpenChannel}>
+    <Wrap isOpenChannel={isOpenChannel} onScroll={closeColorBox}>
       <Inner>
         {channelInfo.map((info) => (
           <Channel key={info.label} {...info} />
@@ -55,16 +47,20 @@ export default memo(ChannelSection);
 
 const Wrap = styled.div<{ isOpenChannel: boolean }>`
   position: absolute;
-  z-index: 1;
+  overflow: scroll;
 
   width: ${pixelToRemUnit(373)};
-  height: 100%;
+  height: calc(100% - 100px);
 
   background-color: #fcfcfc;
   border-right: 1px solid #dbdbdb;
   transition: all 0.3s ease-out 0.05s;
 
-  overflow: auto;
+  padding: ${pixelToRemUnit([32, 28])};
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   ${({ isOpenChannel }) =>
     isOpenChannel
@@ -77,14 +73,9 @@ const Wrap = styled.div<{ isOpenChannel: boolean }>`
 `;
 
 const Inner = styled.div`
-  overflow: visible;
-  height: auto;
   width: 100%;
-  z-index: 2;
 
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-
-  padding: ${pixelToRemUnit([32, 28])};
+  flex-wrap: wrap;
 `;

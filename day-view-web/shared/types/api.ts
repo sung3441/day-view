@@ -71,3 +71,9 @@ export type SearchChannelRes = {
     totalPages: number;
   };
 };
+
+export type PatchChannelType = {
+  subscribeId: number;
+  color: string;
+  showYn: boolean;
+};

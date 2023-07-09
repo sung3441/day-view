@@ -1,4 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
+import { Noto_Sans_KR } from '@next/font/google';
+
+const notoSansKR = Noto_Sans_KR({
+  weight: ['100', '300', '400', '500', '700', '900'],
+  display: 'swap',
+  style: 'normal',
+  variable: '--noto-sans_KR-bold',
+  subsets: ['latin'],
+  fallback: ['system-ui'],
+});
 
 const GlobalStyle = createGlobalStyle`
   
@@ -14,39 +24,9 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    font-family: 'Noto Sans KR';
+    font-family:${notoSansKR.style.fontFamily};
   }
-
-@font-face {
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 900;
-  src: local("NotoSansKR"),
-    url("/fonts/NotoSansKR-Black.woff2") format("woff2"),
-    url("/fonts/NotoSansKR-Black.woff") format("woff");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 700;
-  src: local("NotoSansKR"),
-    url("/fonts/NotoSansKR-Bold.woff2") format("woff2"),
-    url("/fonts/NotoSansKR-Bold.woff") format("woff");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Noto Sans KR";
-  font-style: normal;
-  font-weight: 400;
-  src: local("NotoSansKR"),
-    url("/fonts/NotoSansKR-Regular.woff2") format("woff2"),
-    url("/fonts/NotoSansKR-Regular.woff") format("woff");
-  font-display: swap;
-}
-
+  
   div#__next {
     width: 100%;
     height: 100%;

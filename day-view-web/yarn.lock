@@ -1516,6 +1516,11 @@
   dependencies:
     glob "7.1.7"
 
+"@next/font@^13.4.9":
+  version "13.4.9"
+  resolved "https://registry.yarnpkg.com/@next/font/-/font-13.4.9.tgz#5540e69a1a5fbd1113d622a89cdd21c0ab3906c8"
+  integrity sha512-aR0XEyd1cxqaKuelQFDGwUBYV0wyZfJTNiRoSk1XsECTyMhiSMmCOY7yOPMuPlw+6cctca0GyZXGGFb5EVhiRw==
+
 "@next/swc-android-arm-eabi@13.2.4":
   version "13.2.4"
   resolved "https://registry.yarnpkg.com/@next/swc-android-arm-eabi/-/swc-android-arm-eabi-13.2.4.tgz#758d0403771e549f9cee71cbabc0cb16a6c947c0"

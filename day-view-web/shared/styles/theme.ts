@@ -2,7 +2,7 @@ import { DefaultTheme, Interpolation } from 'styled-components';
 import { CSSProperties } from 'react';
 import { pixelToRemUnit } from './util';
 
-type BoxKeys = 'flexBetweenBox' | "flexCenterBox";
+type BoxKeys = 'flexBetweenBox' | 'flexCenterBox';
 
 const box: { [p in BoxKeys]: Interpolation<CSSProperties> } = {
   flexCenterBox: {
@@ -98,19 +98,3 @@ export const common = {
 export const commonTheme: DefaultTheme = {
   ...common,
 };
-
-// export const lightTheme: DefaultTheme = {
-//   ...common,
-
-// };
-// export const darkTheme: DefaultTheme = {
-//   ...common,
-//   color: {
-//     bgColor: '#252525',
-//     textColor: '#fff',
-//     shadowColor: '#000',
-//     borderColor: 'rgb(222, 226, 230)',
-//     redColor: '#CF0F0F',
-//   },
-//   name: 'dark' as const,
-// };
