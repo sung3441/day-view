@@ -7,8 +7,9 @@ import { useModal } from '@/shared/hooks';
 import { ChannelSelectType } from '@/shared/types/api';
 import useGetChannel from '@/component/calendar/hooks/useGetChannel';
 import ChannelItem from '@/component/calendar/channelSection/ChannelItem';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { channelColorIdAtom } from '@/state/channel';
+import useColorBoxControl from '@/component/calendar/hooks/useColorBoxControl';
 
 export interface Props {
   label: string;
@@ -16,36 +17,11 @@ export interface Props {
 }
 
 const Channel = ({ label, selectType }: Props) => {
-  const [channelColorId, setChannelColorId] =
-    useRecoilState(channelColorIdAtom);
+  const channelColorId = useRecoilValue(channelColorIdAtom);
   const { openModal } = useModal();
+  const { toggleChannelColor } = useColorBoxControl();
+
   const { status, data } = useGetChannel({ selectType });
-
-  const toggleChannelColor = useCallback(
-    ({ id }: { id: number }, e?: SyntheticEvent) => {
-      if (!e) {
-        setChannelColorId({
-          id,
-          x: 0,
-          y: 0,
-        });
-        return;
-      }
-      e?.stopPropagation();
-
-      const target = e.target as HTMLElement;
-      let { x, y, height } = target.getBoundingClientRect();
-      const documentH = document.documentElement.offsetHeight;
-
-      if (y + 251 > documentH) y = documentH - 251 - 5;
-      setChannelColorId({
-        id,
-        x: x,
-        y: y,
-      });
-    },
-    []
-  );
 
   if (status !== 'success') return null;
   return (

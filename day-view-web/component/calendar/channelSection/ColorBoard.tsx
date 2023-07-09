@@ -47,6 +47,8 @@ export default memo(ColorBoard);
 
 const Box = styled.div<{ isShow: boolean; x: number; y: number }>`
   position: absolute;
+  height: 251px;
+
   top: ${({ y }) => y}px;
   left: ${({ x }) => x}px;
   z-index: 55555;
@@ -68,9 +70,10 @@ const Box = styled.div<{ isShow: boolean; x: number; y: number }>`
 
 const BoxTitle = styled.div`
   border-bottom: 1px solid #d9d9d9;
-  padding: ${pixelToRemUnit(10)};
+  padding: 10px;
 
   ${getStyledThemProperty('box', 'flexBetweenBox')};
+
   > span {
     margin-left: ${pixelToRemUnit(7)};
     ${getStyledThemProperty('fonts', 'caption3')};
@@ -81,13 +84,11 @@ const ColorWrap = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 
-  padding: ${pixelToRemUnit(10)};
+  padding: 10px;
   gap: 12px;
 `;
 
 const ColorCircle = styled.span<{ rgb: string }>`
-  // width: ${pixelToRemUnit(20)};
-  // height: ${pixelToRemUnit(20)};
   width: 20px;
   height: 20px;
   border-radius: 50%;
