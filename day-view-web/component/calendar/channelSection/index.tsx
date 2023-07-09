@@ -27,12 +27,7 @@ const channelInfo: ChannelInfoType[] = [
 const ChannelSection = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
   const { openModal } = useModal();
-  const { channelColor, closeColorBox } = useColorBoxControl();
-
-  useEffect(() => {
-    if (channelColor.id) window.addEventListener('resize', closeColorBox);
-    return () => window.removeEventListener('resize', closeColorBox);
-  }, [channelColor]);
+  const { closeColorBox } = useColorBoxControl({ isRequiredEffect: true });
 
   return (
     <Wrap isOpenChannel={isOpenChannel} onScroll={closeColorBox}>
