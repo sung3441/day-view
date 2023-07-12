@@ -42,7 +42,7 @@ public class CustomChannelRepositoryImpl implements CustomChannelRepository {
                 ))
                 .from(channel)
                 .innerJoin(subscribe)
-                .on(on)
+                .on(on.and(subscribe.member.id.eq(memberId)))
                 .join(member)
                 .on(member.id.eq(memberId))
                 .where(where)
