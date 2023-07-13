@@ -16,15 +16,15 @@ interface Props {
     context: FieldChangeHandlerContext<TimeValidationError>
   ) => void;
   style?: CSSProperties;
+  disabled?: boolean;
 }
 
-const TimeInput = ({ value, onChange, style, format = 'HH:mm' }: Props) => {
+const TimeInput = ({ onChange, format = 'HH:mm', ...props }: Props) => {
   return (
     <S.TimeField
       format={format}
-      value={value}
       onChange={(newValue, context) => onChange && onChange(newValue, context)}
-      style={style}
+      {...props}
     />
   );
 };

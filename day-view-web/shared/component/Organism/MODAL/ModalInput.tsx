@@ -6,6 +6,7 @@ type InputType = ComponentPropsWithRef<'input'>;
 
 interface Props extends InputType {
   isValid?: boolean;
+  disabled?: boolean;
 }
 
 const ModalInput = ({ ...props }: Props) => {

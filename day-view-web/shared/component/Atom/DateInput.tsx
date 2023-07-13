@@ -18,24 +18,15 @@ interface Props {
   style?: CSSProperties;
   minDate?: unknown;
   maxDate?: unknown;
+  disabled?: boolean;
 }
 
-const DateInput = ({
-  value,
-  onChange,
-  style,
-  minDate,
-  maxDate,
-  format = 'YYYY-MM-DD',
-}: Props) => {
+const DateInput = ({ onChange, format = 'YYYY-MM-DD', ...props }: Props) => {
   return (
     <S.DateField
       format={format}
-      value={value}
       onChange={(newValue, context) => onChange && onChange(newValue, context)}
-      style={style}
-      minDate={minDate}
-      maxDate={maxDate}
+      {...props}
     />
   );
 };

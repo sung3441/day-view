@@ -24,15 +24,15 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   } = useAnimationHandler(() => closeModal('AddSchedule'));
 
   const [isChecked, setIsChecked] = useState(true);
-  const { isValid, validate } = useValidation('empty');
 
   const [value, setValue] = useState<addScheduleParamType>({
-    channelId: 1,
+    channelId: -1,
     title: '',
     startDate: new Date(),
     endDate: new Date(),
   });
 
+  const { isValid, validate } = useValidation('empty');
   const { mutate, status } = useAddSchedule();
   const { data: channels, status: channelStatus } = useGetChannel({
     selectType: 'MANAGE',

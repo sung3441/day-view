@@ -1,6 +1,7 @@
 import { DefaultValue, atom, atomFamily, selectorFamily } from 'recoil';
 import { ModalType } from '@/component/modal/ModalRenderer';
 
+// TODO 모달마다 받아야 할 변수 다른 거 대응하기
 export type ModalParams = {
   clientX?: number;
   clientY?: number;

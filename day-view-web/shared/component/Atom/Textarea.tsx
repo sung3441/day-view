@@ -5,6 +5,7 @@ type TextareaType = ComponentPropsWithoutRef<'textarea'>;
 
 interface Props extends TextareaType {
   id?: string;
+  disabled?: boolean;
 }
 
 const Textarea = ({ id, ...props }: Props) => {

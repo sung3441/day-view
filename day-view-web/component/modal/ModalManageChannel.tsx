@@ -1,29 +1,25 @@
-import { memo, SyntheticEvent, useState } from 'react';
+import { useState, SyntheticEvent, memo } from 'react';
 import styled from 'styled-components';
 
-import Modal from '@/shared/component/Organism/MODAL';
-import { pixelToRemUnit } from '@/shared/styles/util';
-import { ModalProps } from '@/component/modal/ModalRenderer';
-import { useAnimationHandler } from '@/shared/hooks';
-import { useCreateChannel } from '@/component/calendar/hooks/usePostChannel';
-import useValidation from '@/shared/hooks/useValidation';
 import { VALIDATION_LENGTH } from '@/constants/validate';
-
-/**
- * 카테고리 생성
- */
+import { useAnimationHandler } from '@/shared/hooks';
+import { pixelToRemUnit } from '@/shared/styles/util';
+import { useCreateChannel } from '../calendar/hooks/usePostChannel';
+import { ModalProps } from './ModalRenderer';
+import useValidation from '@/shared/hooks/useValidation';
+import Modal from '@/shared/component/Organism/MODAL';
 
 type CreateChannel = {
   categoryName: string;
   isPrivate: boolean;
 };
 
-const ModalCreateChannel = ({ closeModal }: ModalProps) => {
+const ModalManageChannel = ({ closeModal }: ModalProps) => {
   const {
     isShow,
     handleIsShow: modalClose,
     handleOnAnimationEnd,
-  } = useAnimationHandler(() => closeModal('CreateChannel'));
+  } = useAnimationHandler(() => closeModal('ManageChannel'));
 
   const [value, setValue] = useState<CreateChannel>({
     categoryName: '',
@@ -49,10 +45,6 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
     }
   };
 
-  // TODO status 상태에 따른 다음 동작필요
-  // 1. 성공시 모달 닫기
-  // 2. 실패시 에러메세지 띄우기 -> 제가 할게요
-  // 3. 로딩시 버튼 disabled
   const handleCreateChannel = () => {
     mutate({ name: value.categoryName, secretYn: value.isPrivate });
     modalClose();
@@ -61,7 +53,7 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
   return (
     <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <Modal.Header>
-        <Modal.Title>새 채널 만들기</Modal.Title>
+        <Modal.Title>채널 수정</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Modal.Section>
@@ -109,7 +101,7 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
   );
 };
 
-export default memo(ModalCreateChannel);
+export default memo(ModalManageChannel);
 
 const WrapButton = styled.div`
   width: ${pixelToRemUnit(380)};

@@ -20,11 +20,13 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
 
   const { clientX, clientY } = useModalState('ScheduleDetail');
 
+  const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
+
   const [isEditMode, setIsEditMode] = useState(false);
-  console.log('editMode', isEditMode);
 
   return (
     <Modal
+      ref={ref}
       isShow={isShow}
       onAnimationEnd={handleOnAnimationEnd}
       clientX={clientX}
@@ -43,34 +45,51 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
         <Modal.Section gap={78}>
           <Modal.SubTitle>제목</Modal.SubTitle>
           <Modal.Wrapper>
-            <Modal.Input name="title" />
+            <Modal.Input name="title" disabled={!isEditMode} />
           </Modal.Wrapper>
         </Modal.Section>
         <Modal.Section>
           <Modal.SubTitle>날짜</Modal.SubTitle>
           <Modal.Wrapper>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <DateInput />
-              <TimeInput />
+              <DateInput disabled={!isEditMode} />
+              <TimeInput disabled={!isEditMode} />
               <Icon type="sm_up" style={{ transform: 'rotate(90deg)' }} />
-              <TimeInput />
+              <TimeInput disabled={!isEditMode} />
             </div>
           </Modal.Wrapper>
         </Modal.Section>
         <Modal.Section>
           <Modal.SubTitle>카테고리</Modal.SubTitle>
           <Modal.Wrapper>
-            <select></select>
+            {/* <Select
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                const channelId = parseInt(e.target.value);
+                setValue((prev) => ({ ...prev, channelId }));
+              }}
+            >
+              {channelStatus === 'success'
+                ? channels?.data.map(({ channelId, name }) => (
+                    <option key={channelId} value={channelId}>
+                      {name}
+                    </option>
+                  ))
+                : undefined}
+            </Select> */}
           </Modal.Wrapper>
         </Modal.Section>
         <Modal.Section>
           <Modal.SubTitle>메모(선택)</Modal.SubTitle>
-          <Modal.Textarea name="content" />
+          <Modal.Textarea name="content" disabled={!isEditMode} />
         </Modal.Section>
       </Modal.Body>
-      <Modal.Divider />
       <Modal.Control>
-        <button>asd</button>
+        {!isEditMode ? (
+          <button>미완료로 표시</button>
+        ) : (
+          <Modal.Button variant="accent">완료</Modal.Button>
+        )}
+        <Modal.Divider />
       </Modal.Control>
     </Modal>
   );

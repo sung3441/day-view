@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil';
 
 import {
   ModalCreateChannel,
+  ModalManageChannel,
   ModalAddSchedule,
   ModalScheduleDetail,
 } from '@/component/modal';
@@ -16,7 +17,8 @@ export interface ModalProps {
 }
 
 const modalComponents = {
-  CreateCategory: ModalCreateChannel,
+  CreateChannel: ModalCreateChannel,
+  ManageChannel: ModalManageChannel,
   AddSchedule: ModalAddSchedule,
   ScheduleDetail: ModalScheduleDetail,
 } satisfies Record<

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Modal from '@/shared/component/Organism/MODAL';
-import { useAnimationHandler } from '@/shared/hooks';
+import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import { ModalProps } from './ModalRenderer';
 
 const ModalUserManagement = ({ closeModal }: ModalProps) => {
@@ -10,8 +10,10 @@ const ModalUserManagement = ({ closeModal }: ModalProps) => {
     handleOnAnimationEnd,
   } = useAnimationHandler(() => closeModal('ScheduleDetail'));
 
+  const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
+
   return (
-    <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
+    <Modal ref={ref} isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <Modal.Body>
         <Modal.Section>
           <Modal.SubTitle>제목</Modal.SubTitle>
@@ -26,7 +28,7 @@ const ModalUserManagement = ({ closeModal }: ModalProps) => {
           <Modal.SubTitle>메모(선택)</Modal.SubTitle>
         </Modal.Section>
       </Modal.Body>
-      <Modal.Dim onClick={modalClose} />
+      <Modal.Dim />
     </Modal>
   );
 };
