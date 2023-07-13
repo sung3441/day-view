@@ -2,7 +2,7 @@ import { memo } from 'react';
 import styled, { css } from 'styled-components';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { fadeIn, fadeOut } from '@/shared/styles/keyframes';
-import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
+import { useAnimationHandler, useModal, useOuterClick } from '@/shared/hooks';
 import { colorEntries } from '@/shared/util/colorInfo';
 import { Icon } from '@/shared/component/Atom';
 import { createPortal } from 'react-dom';
@@ -18,6 +18,8 @@ const ColorBoard = ({ isOpen, closeColorBoard, x, y }: Props) => {
   const { isShow, handleIsShow, handleOnAnimationEnd } =
     useAnimationHandler(closeColorBoard);
 
+  const { openModal } = useModal();
+
   const ref = useOuterClick<HTMLDivElement>({
     callback: handleIsShow,
   });
@@ -29,7 +31,12 @@ const ColorBoard = ({ isOpen, closeColorBoard, x, y }: Props) => {
       y={y}
       onAnimationEnd={handleOnAnimationEnd}
     >
-      <BoxTitle>
+      <BoxTitle
+        onClick={() => {
+          handleIsShow();
+          openModal('ManageChannel');
+        }}
+      >
         <Icon type="sm_config" />
         <span>관리</span>
       </BoxTitle>

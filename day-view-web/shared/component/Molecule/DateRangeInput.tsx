@@ -17,6 +17,7 @@ interface Props {
   ) => void;
   style?: CSSProperties;
   children?: React.ReactNode;
+  disabled?: boolean;
 }
 
 const DateRangeInput = ({
@@ -24,6 +25,7 @@ const DateRangeInput = ({
   onChange,
   style,
   children,
+  disabled,
   format = 'YYYY-MM-DD',
 }: Props) => {
   const [values, setValues] = useState<{
@@ -72,6 +74,7 @@ const DateRangeInput = ({
         }
         style={style}
         maxDate={values?.endDate}
+        disabled={disabled}
       />
       {children}
       <DateInput
@@ -82,6 +85,7 @@ const DateRangeInput = ({
         }
         style={style}
         minDate={values?.startDate}
+        disabled={disabled}
       />
     </div>
   );

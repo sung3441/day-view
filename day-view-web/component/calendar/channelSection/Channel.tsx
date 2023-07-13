@@ -31,7 +31,7 @@ const Channel = ({ label, selectType }: Props) => {
         <IconButton
           type="sm_plus"
           size="small"
-          onClick={() => openModal('CreateCategory')}
+          onClick={() => openModal('CreateChannel')}
         />
       </Label>
       <List>
