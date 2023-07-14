@@ -12,6 +12,7 @@ export type ModalState = {
   params?: ModalParams;
 };
 
+/** 렌더링 될 모달의 이름 배열 */
 export const modalListAtom = atom<ModalType[]>({
   key: 'modalList',
   default: [],
