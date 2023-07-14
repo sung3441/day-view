@@ -10,6 +10,11 @@ type ValueType = {
 
 type ValidateType = keyof ValueType;
 
+/**
+ * 인자로 전달한 타입에 따라 validate 함수로 유효성 검사. isValid의 값을 변경함
+ * @param ValidateType 유효성 검사 타입
+ * @returns isValid, validate
+ */
 const useValidation = <T extends ValidateType>(type: T) => {
   const [isValid, setIsValid] = useState<boolean>(false);
 
@@ -28,9 +33,6 @@ const useValidation = <T extends ValidateType>(type: T) => {
           typeof value === 'string' && value.length !== 0
             ? setIsValid(true)
             : setIsValid(false);
-          break;
-
-        case 'dateRange':
           break;
       }
     },

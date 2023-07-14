@@ -7,6 +7,7 @@ import {
   ModalManageChannel,
   ModalAddSchedule,
   ModalScheduleDetail,
+  ModalSubscriberManagement,
 } from '@/component/modal';
 import { useModal } from '@/shared/hooks';
 import { modalListAtom } from '@/shared/atom/modalState';
@@ -16,11 +17,15 @@ export interface ModalProps {
   closeModal: (modalType: ModalType) => void;
 }
 
+/**
+ * 모달 컴포넌트는 반드시 메모이제이션 해야함
+ */
 const modalComponents = {
   CreateChannel: ModalCreateChannel,
   ManageChannel: ModalManageChannel,
   AddSchedule: ModalAddSchedule,
   ScheduleDetail: ModalScheduleDetail,
+  SubscriberManagement: ModalSubscriberManagement,
 } satisfies Record<
   string,
   React.MemoExoticComponent<(P: ModalProps) => React.ReactElement>
