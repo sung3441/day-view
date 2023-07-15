@@ -2,8 +2,8 @@
  *
  * @param clientX
  * @param clientY
- * @param componentRef
- * @returns [number, number]
+ * @param componentRef 위치조정할 컴포넌트의 ref
+ * @returns 위치조정 된 값 배열 반환 [x: number, y: number]
  */
 export const getAdjustPosition = (
   clientX: number,

@@ -7,13 +7,14 @@ type InputType = ComponentPropsWithRef<'input'>;
 interface Props extends InputType {
   isValid?: boolean;
   disabled?: boolean;
+  width?: number;
 }
 
-const ModalInput = ({ ...props }: Props) => {
+const ModalInput = ({ width, ...props }: Props) => {
   const { isValid } = props;
 
   return (
-    <S.Wrapper isValid={isValid === undefined ? true : isValid}>
+    <S.Wrapper isValid={isValid === undefined ? true : isValid} width={width}>
       <S.Input type="text" {...props} />
     </S.Wrapper>
   );
@@ -22,13 +23,20 @@ const ModalInput = ({ ...props }: Props) => {
 export default ModalInput;
 
 const S = {
-  Wrapper: styled.div<{ isValid?: boolean }>`
+  Wrapper: styled.div<{ isValid?: boolean; width?: number }>`
     background: ${({ theme }) => theme.colors.White};
 
     border: 1px solid ${({ theme }) => theme.colors.G_300};
     border-radius: 7px;
 
-    width: ${pixelToRemUnit(380)};
+    ${({ width }) =>
+      width
+        ? css`
+            width: ${pixelToRemUnit(width)};
+          `
+        : css`
+            width: ${pixelToRemUnit(380)};
+          `};
 
     padding: ${pixelToRemUnit([8, 18])};
 
