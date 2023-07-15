@@ -11,10 +11,12 @@ import {
 } from '@/shared/component/Organism/GNB/state';
 import SearchSortBox from '@/shared/component/Organism/GNB/SearchSortBox';
 import SearchGnb from '@/shared/component/Organism/GNB/SearchGnb';
+import { useModal } from '@/shared/hooks';
 
 const CalendarGnb = () => {
   const [isSearchOpen, setISearchOpen] = useRecoilState(G_isSearchOpenAtom);
   const setIsOpenChannel = useSetRecoilState(G_isOpenChannelAtom);
+  const { openModal } = useModal();
 
   const handleClickMenu = useCallback(
     () => setIsOpenChannel((prev) => !prev),
@@ -51,7 +53,13 @@ const CalendarGnb = () => {
       <RightBox>
         {isSearchOpen ? <SearchSortBox /> : <GnbTab />}
         <IconButton type="search" onClick={handleIsSearch} />
-        <IconButton type="user" />
+        <IconButton
+          type="user"
+          onClick={(e: React.MouseEvent<HTMLElement>) => {
+            e.stopPropagation();
+            openModal('Profile', { clientX: e.clientX, clientY: e.clientY });
+          }}
+        />
       </RightBox>
     </>
   );

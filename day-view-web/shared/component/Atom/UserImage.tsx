@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { memo } from 'react';
+import { CSSProperties, memo } from 'react';
 import styled from 'styled-components';
 
 type SizeType = 'small' | 'large';
@@ -7,6 +7,7 @@ type SizeType = 'small' | 'large';
 interface Props {
   src: string;
   size?: SizeType;
+  style?: CSSProperties;
 }
 
 const imageSizes = {
@@ -17,13 +18,14 @@ const imageSizes = {
 /**
  * TODO: Refactor
  */
-const UserImage = ({ src, size = 'small' }: Props) => {
+const UserImage = ({ src, style, size = 'small' }: Props) => {
   return (
     <StyledImage
       src={`images/icon/user.svg`}
       alt="UserImage"
       width={imageSizes[size].width}
       height={imageSizes[size].height}
+      style={style}
     />
   );
 };
