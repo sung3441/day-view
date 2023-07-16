@@ -2,13 +2,14 @@ import { Client } from '@/shared/axios';
 import {
   ChannelRes,
   ChannelSelectType,
-  CreateChannelParmaType,
+  CreateChannelParamType,
   Token,
   UserRes,
   addScheduleParamType,
-  SearchChannelParmaType,
+  SearchChannelParamType,
   SearchChannelRes,
   PatchChannelType,
+  PutChannelParamType,
 } from '@/shared/types/api';
 
 export const getAccessToken = async () => {
@@ -32,9 +33,9 @@ export const getChannel = async (channelSelectType: ChannelSelectType) => {
 };
 
 export const createChannel = async (
-  createChannelParma: CreateChannelParmaType
+  createChannelParam: CreateChannelParamType
 ) => {
-  const res = await new Client(`/api/channels`).post(createChannelParma);
+  const res = await new Client(`/api/channels`).post(createChannelParam);
   return res;
 };
 
@@ -47,11 +48,21 @@ export const unsubscribeChannel = async (subscribeId: number) => {
   const res = await new Client(`/api/subscribes/${subscribeId}`).delete();
   return res;
 };
+
 export const patchChannel = async (PatchChannelParams: PatchChannelType) => {
   const { subscribeId, showYn, color } = PatchChannelParams;
   const res = await new Client(`/api/subscribes/${subscribeId}`).patch({
     showYn,
     color,
+  });
+  return res;
+};
+
+/** 채널명 수정 */
+export const putChannel = async (PutChannelParams: PutChannelParamType) => {
+  const { channelId, name } = PutChannelParams;
+  const res = await new Client(`/api/channels/${channelId}`).put({
+    name,
   });
   return res;
 };
@@ -66,9 +77,9 @@ export const addSchedule = async (addScheduleParam: addScheduleParamType) => {
 };
 
 export const getSearchChannel = async (
-  createChannelParma: SearchChannelParmaType
+  createChannelParam: SearchChannelParamType
 ) => {
   const res = await new Client(`/api/channels
-`).get<SearchChannelRes>(createChannelParma);
+`).get<SearchChannelRes>(createChannelParam);
   return res;
 };

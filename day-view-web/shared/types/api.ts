@@ -31,9 +31,14 @@ export type ChannelRes = {
   subscribeAuth: string;
 };
 
-export type CreateChannelParmaType = {
+export type CreateChannelParamType = {
   name: string;
   secretYn: boolean;
+};
+
+export type PutChannelParamType = {
+  channelId: number;
+  name: string;
 };
 
 export type addScheduleParamType = {
@@ -45,7 +50,7 @@ export type addScheduleParamType = {
   recordImageUrl?: string;
 };
 
-export type SearchChannelParmaType = {
+export type SearchChannelParamType = {
   page: number;
   size: number;
   keyword: string;
