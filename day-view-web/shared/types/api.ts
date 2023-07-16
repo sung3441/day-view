@@ -36,6 +36,11 @@ export type CreateChannelParmaType = {
   secretYn: boolean;
 };
 
+export type PutChannelParmaType = {
+  channelId: number;
+  name: string;
+};
+
 export type addScheduleParamType = {
   channelId: number;
   title: string;

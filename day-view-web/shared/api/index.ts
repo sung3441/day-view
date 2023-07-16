@@ -9,6 +9,7 @@ import {
   SearchChannelParmaType,
   SearchChannelRes,
   PatchChannelType,
+  PutChannelParmaType,
 } from '@/shared/types/api';
 
 export const getAccessToken = async () => {
@@ -47,11 +48,21 @@ export const unsubscribeChannel = async (subscribeId: number) => {
   const res = await new Client(`/api/subscribes/${subscribeId}`).delete();
   return res;
 };
+
 export const patchChannel = async (PatchChannelParams: PatchChannelType) => {
   const { subscribeId, showYn, color } = PatchChannelParams;
   const res = await new Client(`/api/subscribes/${subscribeId}`).patch({
     showYn,
     color,
+  });
+  return res;
+};
+
+/** 채널명 수정 */
+export const putChannel = async (PutChannelParmas: PutChannelParmaType) => {
+  const { channelId, name } = PutChannelParmas;
+  const res = await new Client(`/api/channels/${channelId}`).put({
+    name,
   });
   return res;
 };
