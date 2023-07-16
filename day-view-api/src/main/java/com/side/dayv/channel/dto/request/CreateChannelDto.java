@@ -11,14 +11,14 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class ChannelCreateDto {
+public class CreateChannelDto {
 
     private String name;
 
     private boolean secretYn;
 
     @Builder
-    public ChannelCreateDto(String name, boolean secretYn) {
+    public CreateChannelDto(String name, boolean secretYn) {
         this.name = name;
         this.secretYn = secretYn;
     }

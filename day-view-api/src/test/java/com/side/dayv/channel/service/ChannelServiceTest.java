@@ -1,7 +1,7 @@
 package com.side.dayv.channel.service;
 
-import com.side.dayv.channel.dto.request.ChannelCreateDto;
-import com.side.dayv.channel.dto.request.ChannelSearchDto;
+import com.side.dayv.channel.dto.request.CreateChannelDto;
+import com.side.dayv.channel.dto.request.SearchChannelDto;
 import com.side.dayv.channel.dto.response.ChannelResponseDto;
 import com.side.dayv.channel.dto.response.ManageChannelResponseDto;
 import com.side.dayv.channel.entity.Channel;
@@ -47,7 +47,7 @@ class ChannelServiceTest {
 
     Member MEMBER;
 
-    ChannelCreateDto CREATE_REQUEST;
+    CreateChannelDto CREATE_REQUEST;
 
     @BeforeEach
     void init() {
@@ -61,7 +61,7 @@ class ChannelServiceTest {
                 .profileImageUrl("")
                 .build());
 
-        CREATE_REQUEST = ChannelCreateDto.builder()
+        CREATE_REQUEST = CreateChannelDto.builder()
                 .name("테스트 채널")
                 .secretYn(false)
                 .build();
@@ -78,7 +78,7 @@ class ChannelServiceTest {
 
     @Test
     void 비밀채널_등록() {
-        ChannelCreateDto secret = ChannelCreateDto.builder()
+        CreateChannelDto secret = CreateChannelDto.builder()
                 .name("비밀 채널 테스트")
                 .secretYn(true)
                 .build();
@@ -216,7 +216,7 @@ class ChannelServiceTest {
         assertThat(saveChannel.getName()).isEqualTo(CREATE_REQUEST.getName());
         assertThat(saveChannel.getCreateMember()).isEqualTo(MEMBER);
 
-        Page<ChannelResponseDto> channels = channelService.findChannels(MEMBER.getId(), PageRequest.of(0, 5), new ChannelSearchDto("", ChannelOrderType.OLD));
+        Page<ChannelResponseDto> channels = channelService.findChannels(MEMBER.getId(), PageRequest.of(0, 5), new SearchChannelDto("", ChannelOrderType.OLD));
         long count = channels
                 .filter(c -> c.getChannelType() == CUSTOM)
                 .stream()

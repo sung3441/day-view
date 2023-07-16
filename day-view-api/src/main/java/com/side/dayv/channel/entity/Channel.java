@@ -1,5 +1,6 @@
 package com.side.dayv.channel.entity;
 
+import com.side.dayv.channel.dto.request.UpdateChannelDto;
 import com.side.dayv.member.entity.Member;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -50,5 +51,9 @@ public class Channel {
 
     public boolean isMyChannel(){
         return this.type == ChannelType.MY;
+    }
+
+    public void updateChannel(UpdateChannelDto request) {
+        this.name = request.getName();
     }
 }

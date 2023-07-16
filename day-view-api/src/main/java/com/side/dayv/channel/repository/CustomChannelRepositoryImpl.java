@@ -5,7 +5,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.side.dayv.channel.dto.request.ChannelSearchDto;
+import com.side.dayv.channel.dto.request.SearchChannelDto;
 import com.side.dayv.channel.dto.response.ChannelResponseDto;
 import com.side.dayv.channel.dto.response.ManageChannelResponseDto;
 import com.side.dayv.channel.dto.response.QChannelResponseDto;
@@ -50,7 +50,7 @@ public class CustomChannelRepositoryImpl implements CustomChannelRepository {
     }
 
     @Override
-    public Page<ChannelResponseDto> findChannels(final Long memberId, final Pageable pageable, final ChannelSearchDto search) {
+    public Page<ChannelResponseDto> findChannels(final Long memberId, final Pageable pageable, final SearchChannelDto search) {
         List<ChannelResponseDto> channels = queryFactory
                 .select(new QChannelResponseDto(
                         channel,

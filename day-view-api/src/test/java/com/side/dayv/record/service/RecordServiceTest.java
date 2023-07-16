@@ -1,6 +1,6 @@
 package com.side.dayv.record.service;
 
-import com.side.dayv.channel.dto.request.ChannelCreateDto;
+import com.side.dayv.channel.dto.request.CreateChannelDto;
 import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.channel.service.ChannelService;
 import com.side.dayv.member.entity.Member;
@@ -42,7 +42,7 @@ class RecordServiceTest {
 
     Channel CHANNEL;
 
-    ChannelCreateDto CREATE_CHANNEL_REQUEST;
+    CreateChannelDto CREATE_CHANNEL_REQUEST;
 
     RequestCreateRecordDTO CREATE_RECORD_REQUEST;
 
@@ -58,7 +58,7 @@ class RecordServiceTest {
                 .profileImageUrl("")
                 .build());
 
-        CREATE_CHANNEL_REQUEST = ChannelCreateDto.builder()
+        CREATE_CHANNEL_REQUEST = CreateChannelDto.builder()
                 .name("테스트 채널")
                 .secretYn(false)
                 .build();
