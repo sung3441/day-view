@@ -1,17 +1,16 @@
-import { useState, SyntheticEvent, memo } from 'react';
-import styled from 'styled-components';
+import { useState, SyntheticEvent, memo, useEffect } from 'react';
 
 import { VALIDATION_LENGTH } from '@/constants/validate';
 import { useAnimationHandler } from '@/shared/hooks';
-import { pixelToRemUnit } from '@/shared/styles/util';
-import { useCreateChannel } from '../calendar/hooks/usePostChannel';
+
 import { ModalProps } from './ModalRenderer';
 import useValidation from '@/shared/hooks/useValidation';
 import Modal from '@/shared/component/Organism/MODAL';
+import { usePutChannel } from '../calendar/hooks/usePostChannel';
+import useModalState from '@/shared/hooks/useModalState';
 
-type CreateChannel = {
-  categoryName: string;
-  isPrivate: boolean;
+type ManageChannel = {
+  channelName: string;
 };
 
 const ModalManageChannel = ({ closeModal }: ModalProps) => {
@@ -21,32 +20,40 @@ const ModalManageChannel = ({ closeModal }: ModalProps) => {
     handleOnAnimationEnd,
   } = useAnimationHandler(() => closeModal('ManageChannel'));
 
-  const [value, setValue] = useState<CreateChannel>({
-    categoryName: '',
-    isPrivate: false,
+  const { channelId, name = '' } = useModalState('ManageChannel');
+
+  const [value, setValue] = useState<ManageChannel>({
+    channelName: name,
   });
 
+  // 채널이름 길이 유효성 검사
   const { isValid, validate } = useValidation('channelNameLength');
 
-  const { mutate, status } = useCreateChannel();
+  useEffect(() => {
+    validate(name);
+  }, [name, validate]);
+
+  const { mutate, status } = usePutChannel();
 
   const handleChangeValue = (e: SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
-    const { name, value, checked } = target;
+    const { name, value } = target;
 
     switch (name) {
-      case 'categoryName':
+      case 'channelName':
         validate(value);
-        setValue((prev) => ({ ...prev, categoryName: value }));
-        break;
-      case 'toggle':
-        setValue((prev) => ({ ...prev, isPrivate: checked }));
+        setValue((prev) => ({ ...prev, channelName: value }));
         break;
     }
   };
 
-  const handleCreateChannel = () => {
-    mutate({ name: value.categoryName, secretYn: value.isPrivate });
+  // TODO status 상태에 따른 다음 동작필요
+  // 1. 성공시 모달 닫기
+  // 2. 실패시 에러메세지 띄우기
+  // 3. 로딩시 버튼 disabled
+  const handleManageChannel = () => {
+    if (!channelId) return;
+    mutate({ channelId, name: value.channelName });
     modalClose();
   };
 
@@ -61,8 +68,8 @@ const ModalManageChannel = ({ closeModal }: ModalProps) => {
           <Modal.Wrapper>
             <Modal.Input
               type="text"
-              name="categoryName"
-              value={value.categoryName}
+              name="channelName"
+              value={value.channelName}
               onChange={handleChangeValue}
               placeholder="이름을 입력하세요."
               isValid={isValid}
@@ -72,17 +79,6 @@ const ModalManageChannel = ({ closeModal }: ModalProps) => {
             )}
           </Modal.Wrapper>
         </Modal.Section>
-        <Modal.Section>
-          <Modal.SubTitle>비공개</Modal.SubTitle>
-          <WrapButton>
-            <Modal.ToggleButton
-              id="toggle"
-              name="toggle"
-              checked
-              onChange={handleChangeValue}
-            />
-          </WrapButton>
-        </Modal.Section>
       </Modal.Body>
       <Modal.Control>
         <Modal.Button variant="primary" onClick={modalClose}>
@@ -90,7 +86,7 @@ const ModalManageChannel = ({ closeModal }: ModalProps) => {
         </Modal.Button>
         <Modal.Button
           variant="accent"
-          onClick={handleCreateChannel}
+          onClick={handleManageChannel}
           disabled={!isValid}
         >
           완료
@@ -102,7 +98,3 @@ const ModalManageChannel = ({ closeModal }: ModalProps) => {
 };
 
 export default memo(ModalManageChannel);
-
-const WrapButton = styled.div`
-  width: ${pixelToRemUnit(380)};
-`;

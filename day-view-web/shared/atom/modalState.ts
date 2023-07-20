@@ -5,6 +5,8 @@ import { ModalType } from '@/component/modal/ModalRenderer';
 export type ModalParams = {
   clientX?: number;
   clientY?: number;
+  channelId?: number;
+  name?: string;
 };
 
 export type ModalState = {
