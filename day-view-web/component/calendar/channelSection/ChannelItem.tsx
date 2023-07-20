@@ -39,6 +39,8 @@ const ChannelItem = ({
       </Item>
       {isOpen && (
         <ColorBoard
+          name={name}
+          channelId={channelId}
           isOpen={isOpen}
           closeColorBoard={() => toggleChannelColor({ id: 0 })}
           x={x}
