@@ -12,9 +12,18 @@ interface Props {
   isOpen: boolean;
   x: number;
   y: number;
+  channelId: number;
+  name: string;
 }
 
-const ColorBoard = ({ isOpen, closeColorBoard, x, y }: Props) => {
+const ColorBoard = ({
+  isOpen,
+  closeColorBoard,
+  x,
+  y,
+  channelId,
+  name,
+}: Props) => {
   const { isShow, handleIsShow, handleOnAnimationEnd } =
     useAnimationHandler(closeColorBoard);
 
@@ -34,7 +43,7 @@ const ColorBoard = ({ isOpen, closeColorBoard, x, y }: Props) => {
       <BoxTitle
         onClick={() => {
           handleIsShow();
-          openModal('ManageChannel');
+          openModal('ManageChannel', { channelId: channelId, name: name });
         }}
       >
         <Icon type="sm_config" />
