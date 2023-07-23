@@ -2,6 +2,10 @@ import styled, { css } from 'styled-components';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { memo } from 'react';
 import { SearchItemType } from '@/shared/types/api';
+import {
+  useSubscribeChannel,
+  useUnsubscribeChannel,
+} from '@/component/calendar/hooks/usePostChannel';
 
 const coverToComma = (num: number) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -18,12 +22,11 @@ const SearchItem = ({
   creatorId,
   channelType,
 }: Props) => {
+  const { mutate: subscribeChannel } = useSubscribeChannel();
+  const { mutate: unsubscribeChannel } = useUnsubscribeChannel();
   const handelSubscribe = () => {
-    if (subscribe) {
-      // 구독 취소
-    } else {
-      // 구독
-    }
+    if (subscribe) unsubscribeChannel(id);
+    else subscribeChannel(id);
   };
 
   return (
@@ -33,7 +36,7 @@ const SearchItem = ({
       <Item>{coverToComma(subscriberCount)} 명</Item>
       <Item>{createdDate.slice(0, 10)}</Item>
       <Item>
-        <SubscribeButton isSubscribe={subscribe}>
+        <SubscribeButton isSubscribe={subscribe} onClick={handelSubscribe}>
           {subscribe ? '구독중' : '구독'}
         </SubscribeButton>
       </Item>

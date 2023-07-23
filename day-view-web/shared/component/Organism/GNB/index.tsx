@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { IconButton } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useRouter } from 'next/router';
@@ -12,7 +12,7 @@ interface Props {
 const Index = ({ handleChangeTheme }: Props) => {
   const { pathname } = useRouter();
 
-  const renderContent = () => {
+  const renderContent = useMemo(() => {
     switch (pathname) {
       case '/calendar': {
         return <CalendarGNB />;
@@ -31,9 +31,9 @@ const Index = ({ handleChangeTheme }: Props) => {
           />
         );
     }
-  };
+  }, [pathname]);
 
-  return <Header>{renderContent()}</Header>;
+  return <Header>{renderContent}</Header>;
 };
 export default memo(Index);
 

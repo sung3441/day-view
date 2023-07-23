@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo, SyntheticEvent, useCallback } from 'react';
 import { IconButton, SearchBar } from '@/shared/component/Molecule';
 import GnbTab from '@/shared/component/Organism/GNB/GnbTab';
 import styled from 'styled-components';
@@ -12,6 +12,7 @@ import {
 import SearchSortBox from '@/shared/component/Organism/GNB/SearchSortBox';
 import SearchGnb from '@/shared/component/Organism/GNB/SearchGnb';
 import { useModal } from '@/shared/hooks';
+import { ModalProfile } from '@/component/modal';
 
 const CalendarGnb = () => {
   const [isSearchOpen, setISearchOpen] = useRecoilState(G_isSearchOpenAtom);
@@ -23,7 +24,13 @@ const CalendarGnb = () => {
     []
   );
 
-  const handleIsSearch = useCallback(() => setISearchOpen((prev) => !prev), []);
+  const handleClickUser = (e?: SyntheticEvent) => {
+    console.log(e);
+    e?.stopPropagation();
+    const target = e?.target as HTMLButtonElement;
+    const { x, y } = target.getBoundingClientRect();
+    openModal('Profile', { clientX: x, clientY: y });
+  };
 
   return (
     <>
@@ -49,17 +56,10 @@ const CalendarGnb = () => {
           />
         </LeftBox>
       )}
-
       <RightBox>
         {isSearchOpen ? <SearchSortBox /> : <GnbTab />}
-        <IconButton type="search" onClick={handleIsSearch} />
-        <IconButton
-          type="user"
-          onClick={(e: React.MouseEvent<HTMLElement>) => {
-            e.stopPropagation();
-            openModal('Profile', { clientX: e.clientX, clientY: e.clientY });
-          }}
-        />
+        <IconButton type="search" />
+        <IconButton type="user" onClick={handleClickUser} />
       </RightBox>
     </>
   );

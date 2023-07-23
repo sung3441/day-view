@@ -11,15 +11,16 @@ import { useRecoilValue } from 'recoil';
 import { channelColorIdAtom } from '@/state/channel';
 import useColorBoxControl from '@/component/calendar/hooks/useColorBoxControl';
 import usePatchChannelInfo from '@/component/calendar/hooks/usePatchChannelInfo';
+import * as fs from 'fs';
 
 export interface Props {
   label: string;
   selectType: ChannelSelectType;
+  onClickPlus?(): void;
 }
 
-const Channel = ({ label, selectType }: Props) => {
+const Channel = ({ label, selectType, onClickPlus }: Props) => {
   const channelColorId = useRecoilValue(channelColorIdAtom);
-  const { openModal } = useModal();
   const { toggleChannelColor } = useColorBoxControl();
 
   const { status, data } = useGetChannel({ selectType });
@@ -30,11 +31,7 @@ const Channel = ({ label, selectType }: Props) => {
     <div>
       <Label>
         <span>{label}</span>
-        <IconButton
-          type="sm_plus"
-          size="small"
-          onClick={() => openModal('CreateChannel')}
-        />
+        <IconButton type="sm_plus" size="small" onClick={onClickPlus} />
       </Label>
       <List>
         {data?.data?.map((channel, index) => (
