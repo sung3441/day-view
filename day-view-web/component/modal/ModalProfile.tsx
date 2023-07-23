@@ -1,5 +1,5 @@
-import Modal from '@/shared/component/Organism/MODAL';
 import { memo } from 'react';
+import Modal from '@/shared/component/Organism/MODAL';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 import { UserImage } from '@/shared/component/Atom';
 import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
@@ -17,6 +17,12 @@ const ModalProfile = ({ closeModal }: ModalProps) => {
   const { clientX, clientY } = useModalState('Profile');
   const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
 
+  const {
+    email = '',
+    nickname = '',
+    profileImageUrl = '',
+  } = useModalState('Profile');
+
   return (
     <Modal
       ref={ref}
@@ -26,20 +32,26 @@ const ModalProfile = ({ closeModal }: ModalProps) => {
       clientY={clientY}
     >
       <S.Layout>
-        <UserImage src="" size="large" style={{ marginBottom: 40 }} />
+        <UserImage
+          src={profileImageUrl}
+          size="large"
+          style={{ marginBottom: 40 }}
+        />
         <Modal.Body gap={30} style={{ marginBottom: 30 }}>
           <Modal.Section gap={38}>
             <Modal.SubTitle>이름</Modal.SubTitle>
-            <Modal.Input width={246} />
+            <Modal.Input width={246} value={nickname} disabled />
           </Modal.Section>
           <Modal.Section gap={38}>
             <Modal.SubTitle>이메일</Modal.SubTitle>
-            <div>asd</div>
+            <div>{email}</div>
           </Modal.Section>
         </Modal.Body>
         <Modal.Control>
           <Modal.Button variant="secondary">로그아웃</Modal.Button>
-          <Modal.Button variant="accent">완료</Modal.Button>
+          <Modal.Button variant="accent" onClick={modalClose}>
+            완료
+          </Modal.Button>
         </Modal.Control>
       </S.Layout>
     </Modal>
