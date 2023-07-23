@@ -10,42 +10,41 @@ import ChannelItem from '@/component/calendar/channelSection/ChannelItem';
 import { useRecoilValue } from 'recoil';
 import { channelColorIdAtom } from '@/state/channel';
 import useColorBoxControl from '@/component/calendar/hooks/useColorBoxControl';
+import usePatchChannelInfo from '@/component/calendar/hooks/usePatchChannelInfo';
+import * as fs from 'fs';
 
 export interface Props {
   label: string;
   selectType: ChannelSelectType;
+  onClickPlus?(): void;
 }
 
-const Channel = ({ label, selectType }: Props) => {
+const Channel = ({ label, selectType, onClickPlus }: Props) => {
   const channelColorId = useRecoilValue(channelColorIdAtom);
-  const { openModal } = useModal();
   const { toggleChannelColor } = useColorBoxControl();
 
   const { status, data } = useGetChannel({ selectType });
+  const { handelMutateChannelInfo } = usePatchChannelInfo(selectType);
 
   if (status !== 'success') return null;
   return (
     <div>
       <Label>
         <span>{label}</span>
-        <IconButton
-          type="sm_plus"
-          size="small"
-          onClick={() => openModal('CreateChannel')}
-        />
+        <IconButton type="sm_plus" size="small" onClick={onClickPlus} />
       </Label>
       <List>
-        {status === 'success' &&
-          data?.data?.map((channel, index) => (
-            <ChannelItem
-              key={channel.channelId}
-              toggleChannelColor={toggleChannelColor}
-              isOpen={channel.channelId === channelColorId.id}
-              x={channelColorId.x}
-              y={channelColorId.y}
-              {...channel}
-            />
-          ))}
+        {data?.data?.map((channel, index) => (
+          <ChannelItem
+            key={channel.channelId}
+            isOpen={channel.channelId === channelColorId.id}
+            x={channelColorId.x}
+            y={channelColorId.y}
+            handelMutateChannelInfo={handelMutateChannelInfo}
+            toggleChannelColor={toggleChannelColor}
+            {...channel}
+          />
+        ))}
       </List>
     </div>
   );

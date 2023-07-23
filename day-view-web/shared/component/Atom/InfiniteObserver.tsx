@@ -26,7 +26,6 @@ const InfiniteObserver = ({
   }, [hasNextPage, inView]);
 
   if (status !== 'success' || !hasNextPage) return null;
-
   return !isFetchingNextPage ? (
     <RefWrapper ref={inViewRef}></RefWrapper>
   ) : (

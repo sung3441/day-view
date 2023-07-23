@@ -14,7 +14,6 @@ import {
 
 export const getAccessToken = async () => {
   const res = await new Client('/api/v1/auth/refresh').get<Token>();
-  console.log('getAccessToken', res);
   return res;
 };
 
@@ -28,7 +27,6 @@ export const getChannel = async (channelSelectType: ChannelSelectType) => {
   const res = await new Client(`/api/channels/${channelSelectType}`).get<{
     data: ChannelRes[];
   }>();
-  console.log('getChannel', res);
   return res;
 };
 

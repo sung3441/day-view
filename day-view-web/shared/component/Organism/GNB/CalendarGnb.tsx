@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, SyntheticEvent, useCallback, useState } from 'react';
 import { IconButton, SearchBar } from '@/shared/component/Molecule';
 import GnbTab from '@/shared/component/Organism/GNB/GnbTab';
 import styled, { css, keyframes } from 'styled-components';
@@ -41,7 +41,13 @@ const CalendarGnb = () => {
     []
   );
 
-  const handleIsSearch = useCallback(() => setISearchOpen((prev) => !prev), []);
+  const handleClickUser = (e?: SyntheticEvent) => {
+    console.log(e);
+    e?.stopPropagation();
+    const target = e?.target as HTMLButtonElement;
+    const { x, y } = target.getBoundingClientRect();
+    openModal('Profile', { clientX: x, clientY: y });
+  };
 
   return (
     <>
@@ -67,14 +73,13 @@ const CalendarGnb = () => {
           />
         </LeftBox>
       )}
-
       <RightBox>
         {isSearchOpen ? <SearchSortBox /> : <GnbTab />}
-        <IconButton type="search" onClick={handleIsSearch} />
+        <IconButton type="search" />
         <IconButton
           type="user"
-          onClick={(e: React.MouseEvent<HTMLElement>) => {
-            e.stopPropagation();
+          onClick={(e?: SyntheticEvent) => {
+            e?.stopPropagation();
             setIsOpenUserInfo(!isOpenUserInfo);
           }}
         />

@@ -37,10 +37,8 @@ const useColorBoxControl = ({ isRequiredEffect }: Props = {}) => {
         closeColorBox();
         return;
       }
-
       e.stopPropagation();
       const { x, y } = calcPosition(e);
-
       setChannelColor({
         id,
         x: x,

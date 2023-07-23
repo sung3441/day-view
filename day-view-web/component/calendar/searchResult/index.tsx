@@ -1,4 +1,4 @@
-import { Fragment, memo } from 'react';
+import { memo } from 'react';
 import useGetSearch from '@/component/calendar/searchResult/hooks/useGetSearch';
 import styled from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
@@ -10,9 +10,9 @@ const SearchResult = () => {
   const { data, status, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetSearch();
 
+  if (status !== 'success') return null;
   if (data?.pages?.at(0)?.result?.length === 0)
     return <EmptyWrapper>검색 결과가 없습니다.</EmptyWrapper>;
-
   return (
     <Wrapper>
       <SearchHeader />

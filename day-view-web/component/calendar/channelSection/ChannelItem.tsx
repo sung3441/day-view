@@ -1,6 +1,6 @@
 import { CheckBox, IconButton } from '@/shared/component/Molecule';
 import ColorBoard from '@/component/calendar/channelSection/ColorBoard';
-import { memo, SyntheticEvent } from 'react';
+import { ChangeEvent, memo, SyntheticEvent } from 'react';
 import styled, { css } from 'styled-components';
 import { ChannelRes } from '@/shared/types/api';
 
@@ -9,6 +9,11 @@ interface Props extends ChannelRes {
   x: number;
   y: number;
   toggleChannelColor({ id }: { id: number }, e?: SyntheticEvent): void;
+  handelMutateChannelInfo(
+    e: ChangeEvent<HTMLInputElement>,
+    channelId: number,
+    color: string
+  ): void;
 }
 
 const ChannelItem = ({
@@ -22,12 +27,18 @@ const ChannelItem = ({
   subscribeId,
   subscribeAuth,
   showYn,
+  handelMutateChannelInfo,
   toggleChannelColor,
 }: Props) => {
   return (
     <>
       <Item id={`channel${channelId.toString()}`}>
-        <CheckBox id={name} label={name} />
+        <CheckBox
+          id={name}
+          label={name}
+          onChange={(e) => handelMutateChannelInfo(e, channelId, color)}
+          checked={showYn}
+        />
         <div
           onClick={(e: SyntheticEvent) =>
             toggleChannelColor({ id: channelId }, e)

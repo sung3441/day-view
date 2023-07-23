@@ -64,8 +64,8 @@ const APPWithConfig = ({ children }: { children: any }) => {
     };
 
     const setUser = async () => {
-      const user = await queryClient.getQueryData([QueryKeys.USER]);
-      if (user) setUserInfo(user as UserRes);
+      const user = await queryClient.getQueryData<UserRes>([QueryKeys.USER]);
+      if (user) setUserInfo(user);
       setIsLogin(true);
     };
 
