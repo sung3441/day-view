@@ -41,14 +41,6 @@ const CalendarGnb = () => {
     []
   );
 
-  const handleClickUser = (e?: SyntheticEvent) => {
-    console.log(e);
-    e?.stopPropagation();
-    const target = e?.target as HTMLButtonElement;
-    const { x, y } = target.getBoundingClientRect();
-    openModal('Profile', { clientX: x, clientY: y });
-  };
-
   return (
     <>
       {isSearchOpen ? (
