@@ -225,9 +225,6 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
           />
         </S.Section>
       </S.Body>
-      <DateRangeInput
-        onChange={(values, contexts) => console.log(values, contexts)}
-      />
       <Modal.Control>
         <Modal.Button variant="primary" onClick={modalClose}>
           취소
