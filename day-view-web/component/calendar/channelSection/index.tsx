@@ -29,7 +29,7 @@ const ChannelSection = () => {
   const { closeColorBox } = useColorBoxControl({ isRequiredEffect: true });
 
   return (
-    <Wrap isOpenChannel={isOpenChannel} onScroll={closeColorBox}>
+    <Wrapper isOpenChannel={isOpenChannel} onScroll={closeColorBox}>
       <Inner>
         {channelInfo.map((info) => (
           <Channel key={info.label} {...info} />
@@ -39,13 +39,13 @@ const ChannelSection = () => {
           <span>일정추가</span>
         </Button>
       </Inner>
-    </Wrap>
+    </Wrapper>
   );
 };
 
 export default memo(ChannelSection);
 
-const Wrap = styled.div<{ isOpenChannel: boolean }>`
+const Wrapper = styled.div<{ isOpenChannel: boolean }>`
   position: absolute;
   overflow: scroll;
 

@@ -10,6 +10,7 @@ import ChannelItem from '@/component/calendar/channelSection/ChannelItem';
 import { useRecoilValue } from 'recoil';
 import { channelColorIdAtom } from '@/state/channel';
 import useColorBoxControl from '@/component/calendar/hooks/useColorBoxControl';
+import usePatchChannelInfo from '@/component/calendar/hooks/usePatchChannelInfo';
 
 export interface Props {
   label: string;
@@ -22,6 +23,7 @@ const Channel = ({ label, selectType }: Props) => {
   const { toggleChannelColor } = useColorBoxControl();
 
   const { status, data } = useGetChannel({ selectType });
+  const { handelMutateChannelInfo } = usePatchChannelInfo(selectType);
 
   if (status !== 'success') return null;
   return (
@@ -35,17 +37,17 @@ const Channel = ({ label, selectType }: Props) => {
         />
       </Label>
       <List>
-        {status === 'success' &&
-          data?.data?.map((channel, index) => (
-            <ChannelItem
-              key={channel.channelId}
-              toggleChannelColor={toggleChannelColor}
-              isOpen={channel.channelId === channelColorId.id}
-              x={channelColorId.x}
-              y={channelColorId.y}
-              {...channel}
-            />
-          ))}
+        {data?.data?.map((channel, index) => (
+          <ChannelItem
+            key={channel.channelId}
+            isOpen={channel.channelId === channelColorId.id}
+            x={channelColorId.x}
+            y={channelColorId.y}
+            handelMutateChannelInfo={handelMutateChannelInfo}
+            toggleChannelColor={toggleChannelColor}
+            {...channel}
+          />
+        ))}
       </List>
     </div>
   );

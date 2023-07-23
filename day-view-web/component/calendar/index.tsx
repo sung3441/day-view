@@ -13,23 +13,18 @@ import {
 } from '@/shared/component/Organism/GNB/state';
 import SearchResult from '@/component/calendar/searchResult';
 
+const tabList = {
+  월: <DateSection />,
+  일정: <ScheduleHeader />,
+  카테고리: <CategoryHeader />,
+};
+
 const Calendar = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
   const isSearchOpen = useRecoilValue(G_isSearchOpenAtom);
   const tabLabel = useRecoilValue(G_tabAtom);
 
-  const curTabElement = useMemo(() => {
-    switch (tabLabel) {
-      case '월':
-        return <DateSection />;
-      case '일정':
-        return <ScheduleHeader />;
-      case '카테고리':
-        return <CategoryHeader />;
-      default:
-        return <DateSection />;
-    }
-  }, [tabLabel]);
+  const curTabElement = useMemo(() => tabList[tabLabel], [tabLabel]);
 
   return (
     <CalderWrap>
@@ -43,7 +38,6 @@ const Calendar = () => {
 export default Calendar;
 
 const CalderWrap = styled.div`
-  //position: relative;
   display: flex;
   width: 100%;
   height: calc(100vh - 100px);

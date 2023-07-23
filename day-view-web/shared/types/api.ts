@@ -1,7 +1,3 @@
-import { getSearchChannel } from '@/shared/api';
-import { string } from 'prop-types';
-import dates from '@/component/calendar/dateSection/Dates';
-
 export type Token = {
   token: string;
 };
@@ -79,6 +75,6 @@ export type SearchChannelRes = {
 
 export type PatchChannelType = {
   subscribeId: number;
-  color: string;
-  showYn: boolean;
+  color?: string;
+  showYn?: boolean;
 };
