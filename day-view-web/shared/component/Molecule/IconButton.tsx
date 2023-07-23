@@ -25,8 +25,9 @@ interface Props extends IconProps {
   children?: ReactNode;
   customStyle?: CSSProperties;
   isActiveFnc?: boolean;
-  onClick?(e: SyntheticEvent): void;
+  onClick?(): void;
   onClick?<T extends {}>(res: T, e?: SyntheticEvent): void;
+  onClick?(e?: SyntheticEvent): void;
 }
 
 const IconButton = ({

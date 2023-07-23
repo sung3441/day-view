@@ -1,12 +1,15 @@
-import { CSSProperties, memo, useEffect } from 'react';
+import { CSSProperties, memo, useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Channel from '@/component/calendar/channelSection/Channel';
 import { Button, Icon } from '@/shared/component/Atom';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useModal } from '@/shared/hooks';
 import { type Props as ChannelInfoType } from './Channel';
-import { G_isOpenChannelAtom } from '@/shared/component/Organism/GNB/state';
+import {
+  G_isOpenChannelAtom,
+  G_isSearchOpenAtom,
+} from '@/shared/component/Organism/GNB/state';
 import useColorBoxControl from '@/component/calendar/hooks/useColorBoxControl';
 
 const buttonStyle: CSSProperties = {
@@ -17,19 +20,32 @@ const buttonStyle: CSSProperties = {
   color: '#FFFFFF',
 };
 
-const channelInfo: ChannelInfoType[] = [
-  { label: '내 채널', selectType: 'MANAGE' },
-  { label: '구독 채널', selectType: 'SUBSCRIBE' },
-  { label: '구글 채널', selectType: 'GOOGLE' },
-];
-
 const ChannelSection = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
+  const setISearchOpen = useSetRecoilState(G_isSearchOpenAtom);
+
   const { openModal } = useModal();
   const { closeColorBox } = useColorBoxControl({ isRequiredEffect: true });
 
+  const channelInfo: ChannelInfoType[] = useMemo(
+    () => [
+      {
+        label: '내 채널',
+        selectType: 'MANAGE',
+        onClickPlus: () => openModal('CreateChannel'),
+      },
+      {
+        label: '구독 채널',
+        selectType: 'SUBSCRIBE',
+        onClickPlus: () => setISearchOpen((prev) => !prev),
+      },
+      { label: '구글 채널', selectType: 'GOOGLE' },
+    ],
+    []
+  );
+
   return (
-    <Wrap isOpenChannel={isOpenChannel} onScroll={closeColorBox}>
+    <Wrapper isOpenChannel={isOpenChannel} onScroll={closeColorBox}>
       <Inner>
         {channelInfo.map((info) => (
           <Channel key={info.label} {...info} />
@@ -39,13 +55,13 @@ const ChannelSection = () => {
           <span>일정추가</span>
         </Button>
       </Inner>
-    </Wrap>
+    </Wrapper>
   );
 };
 
 export default memo(ChannelSection);
 
-const Wrap = styled.div<{ isOpenChannel: boolean }>`
+const Wrapper = styled.div<{ isOpenChannel: boolean }>`
   position: absolute;
   overflow: scroll;
 

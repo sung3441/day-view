@@ -6,6 +6,8 @@ import {
 } from '@/shared/component/Organism/GNB/state';
 import { useRecoilValue } from 'recoil';
 
+const PAGE_SIZE = 10;
+
 const useGetSearch = () => {
   const keyword = useRecoilValue(G_isSearchKeywordAtom);
   const sort = useRecoilValue(G_searchOrderOptionAtom);
@@ -16,7 +18,7 @@ const useGetSearch = () => {
       const res = await getSearchChannel({
         keyword,
         order: sort,
-        size: 2,
+        size: PAGE_SIZE,
         page: pageParam,
       });
 
