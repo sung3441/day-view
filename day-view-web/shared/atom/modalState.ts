@@ -1,12 +1,30 @@
 import { DefaultValue, atom, atomFamily, selectorFamily } from 'recoil';
 import { ModalType } from '@/component/modal/ModalRenderer';
 
-// TODO 모달마다 받아야 할 변수 다른 거 대응하기
 export type ModalParams = {
   clientX?: number;
   clientY?: number;
+
+  // 공통
+  title?: string;
+  content?: string;
+
+  // 채널
   channelId?: number;
   name?: string;
+
+  // 내정보
+  memberId?: number;
+  nickname?: string;
+  email?: string;
+  profileImageUrl?: string;
+
+  // 일정
+  recordId?: number;
+  complete?: boolean;
+  startDate?: Date;
+  endDate?: Date;
+  recordImageUrl?: string;
 };
 
 export type ModalState = {
