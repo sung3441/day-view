@@ -23,7 +23,6 @@ const Calendar = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
   const isSearchOpen = useRecoilValue(G_isSearchOpenAtom);
   const tabLabel = useRecoilValue(G_tabAtom);
-
   const curTabElement = useMemo(() => tabList[tabLabel], [tabLabel]);
 
   return (
