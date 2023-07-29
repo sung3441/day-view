@@ -95,7 +95,7 @@ const ConfigButton = styled.button`
   padding: 5px;
   display: flex;
   align-items: center;
-  background-color: ${getStyledThemProperty('colors', 'White')}};
+  background-color: ${getStyledThemProperty('colors', 'White')};
 
   > span {
     margin-left: ${pixelToRemUnit(7)};
