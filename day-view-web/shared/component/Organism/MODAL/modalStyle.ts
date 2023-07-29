@@ -50,7 +50,7 @@ const Divider = styled.div`
   background: #dbdbdb;
 `;
 
-const Validation = styled.div`
+const InvalidText = styled.div`
   ${getStyledThemProperty('fonts', 'caption3')}
   color: ${getStyledThemProperty('colors', 'Red')}
 `;
@@ -70,6 +70,6 @@ export {
   Title,
   SubTitle,
   Divider,
-  Validation,
+  InvalidText,
   Wrapper,
 };

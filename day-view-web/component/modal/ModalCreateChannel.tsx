@@ -30,7 +30,8 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
     isPrivate: false,
   });
 
-  const { isValid, validate } = useValidation('channelNameLength');
+  const { isValid, InvalidMessage, validate } =
+    useValidation('channelNameLength');
 
   const { mutate, status } = useCreateChannel();
 
@@ -76,7 +77,7 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
               isValid={isValid}
             />
             {!isValid && (
-              <Modal.Validation>{`${VALIDATION_LENGTH.MIN_LENGTH}자 ~ ${VALIDATION_LENGTH.CHANNEL_MAX_LENGTH}자로 입력해주세요.`}</Modal.Validation>
+              <Modal.InvalidText>{InvalidMessage}</Modal.InvalidText>
             )}
           </Modal.Wrapper>
         </Modal.Section>
