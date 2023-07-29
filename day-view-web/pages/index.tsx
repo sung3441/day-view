@@ -4,14 +4,7 @@ import { GetServerSidePropsContext } from 'next';
 import Main from '../component/mainPage';
 import styled from 'styled-components';
 import { getStyledThemProperty } from '@/shared/styles/util';
-import { getAccessToken, getUser } from '@/shared/api';
-import {
-  isSetAccessToken,
-  setAccessToken,
-  setCookie,
-} from '@/shared/util/auth';
-
-const inter = Inter({ subsets: ['latin'] });
+import { isSetAccessToken } from '@/shared/util/auth';
 
 export default function Home() {
   return (

@@ -6,14 +6,16 @@ import {
   selectedDayAtom,
   selectedYYMMAtom,
 } from '@/state/calendar';
-import { makeDays } from '@/component/calendar/util/data';
-import useGetMyChannelRecodes from '@/component/calendar/hooks/useGetMyChannelRecodes';
+import { makeDays } from '@/shared/context/calendar/util/date';
+import useGetMyChannelRecodes from '@/shared/context/calendar/hooks/useGetMyChannelRecodes';
 
 const Dates = () => {
   const { year, month } = useRecoilValue(selectedYYMMAtom);
   const [selectedDay, setSelectedDay] = useRecoilState(selectedDayAtom);
   const [cacheDays, setCacheDays] = useRecoilState(cacheDaysAtom);
   const key = useRef<string>('');
+
+  // const { mySubscribeChannel } = useGetMyChannelRecodes();
 
   const generatedDays = useMemo(() => {
     key.current = `${year}-${month}`;

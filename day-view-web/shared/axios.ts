@@ -24,7 +24,6 @@ export class Client {
 
   constructor(url: string) {
     this.url = url;
-    console.log(this.instance.defaults);
   }
 
   async get<T>(params: object = {}) {
@@ -69,6 +68,7 @@ export class Client {
     try {
       const res = await this.instance.patch<T>(this.url, params);
       const { data, status } = res;
+
       return {
         data: data,
         status,

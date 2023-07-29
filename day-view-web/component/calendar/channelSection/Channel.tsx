@@ -1,17 +1,14 @@
 import styled, { css } from 'styled-components';
-import { memo, SyntheticEvent, useCallback, useEffect, useState } from 'react';
+import { memo } from 'react';
 import { IconButton } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
-import dynamic from 'next/dynamic';
-import { useModal } from '@/shared/hooks';
 import { ChannelSelectType } from '@/shared/types/api';
-import useGetChannel from '@/component/calendar/hooks/useGetChannel';
+import useGetChannel from '@/shared/context/calendar/hooks/useGetChannel';
 import ChannelItem from '@/component/calendar/channelSection/ChannelItem';
 import { useRecoilValue } from 'recoil';
 import { channelColorIdAtom } from '@/state/channel';
-import useColorBoxControl from '@/component/calendar/hooks/useColorBoxControl';
-import usePatchChannelInfo from '@/component/calendar/hooks/usePatchChannelInfo';
-import * as fs from 'fs';
+import useColorBoxControl from '@/shared/context/calendar/hooks/useColorBoxControl';
+import usePatchChannelInfo from '@/shared/context/calendar/hooks/usePatchChannelInfo';
 
 export interface Props {
   label: string;
@@ -34,7 +31,7 @@ const Channel = ({ label, selectType, onClickPlus }: Props) => {
         <IconButton type="sm_plus" size="small" onClick={onClickPlus} />
       </Label>
       <List>
-        {data?.data?.map((channel, index) => (
+        {data?.data?.map((channel) => (
           <ChannelItem
             key={channel.channelId}
             isOpen={channel.channelId === channelColorId.id}

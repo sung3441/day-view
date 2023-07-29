@@ -1,6 +1,7 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { channelColorIdAtom } from '@/state/channel';
 import { SyntheticEvent, useCallback, useEffect } from 'react';
+import { COLOR_BOX_HEIGHT } from '@/shared/constant/calendar';
 
 interface Props {
   isRequiredEffect?: boolean;
@@ -11,14 +12,13 @@ const useColorBoxControl = ({ isRequiredEffect }: Props = {}) => {
 
   const calcPosition = useCallback((e: SyntheticEvent) => {
     const BOTTOM_MARGIN = 10;
-    const CLOSE_BOX_HEIGHT = 251;
 
     const documentHeight = document.documentElement.offsetHeight;
     const target = e.target as HTMLElement;
     let { x, y } = target.getBoundingClientRect();
 
-    if (y + CLOSE_BOX_HEIGHT >= documentHeight)
-      y = documentHeight - CLOSE_BOX_HEIGHT - BOTTOM_MARGIN;
+    if (y + COLOR_BOX_HEIGHT >= documentHeight)
+      y = documentHeight - COLOR_BOX_HEIGHT - BOTTOM_MARGIN;
 
     return { x, y };
   }, []);
