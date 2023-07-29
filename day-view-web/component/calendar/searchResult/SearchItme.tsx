@@ -5,7 +5,7 @@ import { SearchItemType } from '@/shared/types/api';
 import {
   useSubscribeChannel,
   useUnsubscribeChannel,
-} from '@/component/calendar/hooks/usePostChannel';
+} from '@/shared/context/calendar/hooks/usePostChannel';
 
 const coverToComma = (num: number) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');

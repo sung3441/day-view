@@ -15,6 +15,7 @@ import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import { Button, UserImage } from '@/shared/component/Atom';
 import ModalInput from '../MODAL/ModalInput';
 import useGetMember from '@/component/modal/hooks/useGetMember';
+import useLogout from '@/shared/hooks/user/useLogout';
 
 const CalendarGnb = () => {
   const [isSearchOpen, setISearchOpen] = useRecoilState(G_isSearchOpenAtom);
@@ -24,6 +25,7 @@ const CalendarGnb = () => {
   // TODO: 데이터 로딩 완료 시 리렌더링, useOuterClick 제대로 안됌
   const [isOpenUserInfo, setIsOpenUserInfo] = useState(false);
   const { data, status } = useGetMember();
+  const logout = useLogout();
 
   const {
     isShow,
@@ -92,7 +94,9 @@ const CalendarGnb = () => {
               </UserInfo.Section>
             </UserInfo.Body>
             <UserInfo.Control>
-              <Button variant="secondary">로그아웃</Button>
+              <Button variant="secondary" onClick={logout}>
+                로그아웃
+              </Button>
               <Button
                 variant="accent"
                 onClick={() => {

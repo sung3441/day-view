@@ -12,6 +12,6 @@ const AuthPage = () => {
     router.replace('/calendar');
   }, [token]);
 
-  return <div>카카오 로그인 처리중입니다.</div>;
+  return <div>로그인 처리중입니다.</div>;
 };
 export default AuthPage;

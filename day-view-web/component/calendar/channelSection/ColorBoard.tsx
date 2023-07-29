@@ -6,24 +6,18 @@ import { useAnimationHandler, useModal, useOuterClick } from '@/shared/hooks';
 import { colorEntries } from '@/shared/util/colorInfo';
 import { Icon } from '@/shared/component/Atom';
 import { createPortal } from 'react-dom';
+import { COLOR_BOX_HEIGHT } from '@/shared/constant/calendar';
 
 interface Props {
-  closeColorBoard({ id }: { id: number }): void;
   isOpen: boolean;
   x: number;
   y: number;
   channelId: number;
   name: string;
+  closeColorBoard({ id }: { id: number }): void;
 }
 
-const ColorBoard = ({
-  isOpen,
-  closeColorBoard,
-  x,
-  y,
-  channelId,
-  name,
-}: Props) => {
+const ColorBoard = ({ closeColorBoard, x, y, channelId, name }: Props) => {
   const { isShow, handleIsShow, handleOnAnimationEnd } =
     useAnimationHandler(closeColorBoard);
 
@@ -40,7 +34,7 @@ const ColorBoard = ({
       y={y}
       onAnimationEnd={handleOnAnimationEnd}
     >
-      <BoxTitle
+      <ConfigButton
         onClick={() => {
           handleIsShow();
           openModal('ManageChannel', { channelId: channelId, name: name });
@@ -48,7 +42,16 @@ const ColorBoard = ({
       >
         <Icon type="sm_config" />
         <span>관리</span>
-      </BoxTitle>
+      </ConfigButton>
+      <ConfigButton
+        onClick={() => {
+          handleIsShow();
+          openModal('ManageChannel', { channelId: channelId, name: name });
+        }}
+      >
+        <Icon type="sm_user" />
+        <span>관리</span>
+      </ConfigButton>
       <ColorWrap>
         {colorEntries.map(([key, value]) => (
           <ColorCircle key={key} rgb={value} />
@@ -63,7 +66,8 @@ export default memo(ColorBoard);
 
 const Box = styled.div<{ isShow: boolean; x: number; y: number }>`
   position: absolute;
-  height: 251px;
+  height: ${COLOR_BOX_HEIGHT}px;
+  overflow: hidden;
 
   top: ${({ y }) => y}px;
   left: ${({ x }) => x}px;
@@ -84,11 +88,14 @@ const Box = styled.div<{ isShow: boolean; x: number; y: number }>`
         `}
 `;
 
-const BoxTitle = styled.div`
+const ConfigButton = styled.button`
+  width: 100%;
+  border: none;
   border-bottom: 1px solid #d9d9d9;
-  padding: 10px;
-
-  ${getStyledThemProperty('box', 'flexBetweenBox')};
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  background-color: ${getStyledThemProperty('colors', 'White')}};
 
   > span {
     margin-left: ${pixelToRemUnit(7)};

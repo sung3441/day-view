@@ -8,7 +8,7 @@ import {
   isSetAccessToken,
   setAccessToken,
   setCookie,
-} from '@/shared/util/axios';
+} from '@/shared/util/auth';
 import { QueryKeys } from '@/shared/queryClient';
 
 const ModalRenderer = dynamic(() => import('@/component/modal/ModalRenderer'), {

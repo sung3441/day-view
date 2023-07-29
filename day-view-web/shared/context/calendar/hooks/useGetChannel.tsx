@@ -15,7 +15,7 @@ const useGetChannel = ({ selectType }: Props) => {
     () => getChannel(selectType),
     {
       enabled: isLogin,
-      select: (data) => data?.data,
+      select: (data) => data!.data,
     }
   );
 };

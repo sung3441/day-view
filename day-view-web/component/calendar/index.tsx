@@ -12,11 +12,12 @@ import {
   G_tabAtom,
 } from '@/shared/component/Organism/GNB/state';
 import SearchResult from '@/component/calendar/searchResult';
+import Category from '@/component/category';
 
 const tabList = {
   월: <DateSection />,
   일정: <ScheduleHeader />,
-  카테고리: <CategoryHeader />,
+  카테고리: <Category />,
 };
 
 const Calendar = () => {
@@ -48,6 +49,7 @@ const TabWrap = styled.div<{ isOpenChannel: boolean }>`
   ${({ isOpenChannel }) =>
     isOpenChannel &&
     css`
-      margin-left: ${pixelToRemUnit(373)};
+      transform: translateX(${pixelToRemUnit(373)});
+      width: calc(100% - ${pixelToRemUnit(373)});
     `}
 `;

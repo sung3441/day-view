@@ -21,7 +21,7 @@ export const common = {
   layout: {
     pageHeader: {
       width: '100%',
-      height: `${pixelToRemUnit(76)}`,
+      height: '70px',
       padding: `${pixelToRemUnit([17, 40])}`,
       borderBottom: '1px solid #dbdbdb',
     },

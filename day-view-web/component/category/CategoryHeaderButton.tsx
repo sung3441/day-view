@@ -1,36 +1,39 @@
-import { ReactNode, useState } from 'react';
+import { memo, MouseEventHandler, SyntheticEvent } from 'react';
 import styled, { css } from 'styled-components';
 
 interface Props {
-  children: ReactNode;
+  isSelected: boolean;
+  name: string;
+  id: number;
+  toggleHandler(e: SyntheticEvent<HTMLButtonElement>, channelId: number): void;
 }
 
-const CategoryHeaderButton = ({ children }: Props) => {
-  const [isSelected, setIsSelected] = useState(false);
-
-  const toggleHandler = () => {
-    setIsSelected(!isSelected);
-  };
-
+const CategoryHeaderButton = ({
+  isSelected,
+  id,
+  name,
+  toggleHandler,
+}: Props) => {
   return (
-    <Btn isSelected={isSelected} onClick={toggleHandler}>
-      {children}
-    </Btn>
+    <CategoryButton
+      isSelected={isSelected}
+      onClick={(e) => toggleHandler(e, id)}
+    >
+      {name}
+    </CategoryButton>
   );
 };
 
-export default CategoryHeaderButton;
+export default memo(CategoryHeaderButton);
 
-const Btn = styled.button<{ isSelected: boolean }>`
+const CategoryButton = styled.button<{ isSelected: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
 
   padding: 4px 20px;
-  width: 88px;
-  height: 30px;
+  width: auto;
   border-radius: 20px;
-
   white-space: nowrap;
 
   ${({ theme, isSelected }) =>
