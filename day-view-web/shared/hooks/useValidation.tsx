@@ -18,37 +18,59 @@ type ValidateType = keyof ValueType;
 const useValidation = <T extends ValidateType>(type: T) => {
   const [isValid, setIsValid] = useState<boolean>(false);
 
+  const getInvalidMessage = (type: ValidateType): string => {
+    switch (type) {
+      case 'channelNameLength':
+        return `${VALIDATION_LENGTH.MIN_LENGTH}자 ~ ${VALIDATION_LENGTH.CHANNEL_MAX_LENGTH}자로 입력해주세요.`;
+      case 'empty':
+        return '제목을 입력해주세요.';
+      default:
+        return '';
+    }
+  };
+
   const validate = useCallback(
     (value: ValueType[T]): void => {
+      let valid = false;
+
       switch (type) {
         // 채널명 글자 수 제한
         case 'channelNameLength':
-          typeof value === 'string' &&
-          VALIDATION_LENGTH.MIN_LENGTH <= value.length &&
-          value.length < VALIDATION_LENGTH.CHANNEL_MAX_LENGTH
-            ? setIsValid(true)
-            : setIsValid(false);
+          if (
+            VALIDATION_LENGTH.MIN_LENGTH <= value.length &&
+            value.length < VALIDATION_LENGTH.CHANNEL_MAX_LENGTH
+          ) {
+            valid = true;
+          }
           break;
 
         // 채널명 길이가 0인지 체크
         case 'empty':
-          typeof value === 'string' && value.length !== 0
-            ? setIsValid(true)
-            : setIsValid(false);
+          if (value.length !== 0) {
+            valid = true;
+          }
           break;
 
-        //
+        // 두 값이 다른 경우만 true
         case 'isNameDifferent':
-          typeof value === 'string' && value[0] !== value[1]
-            ? setIsValid(true)
-            : setIsValid(false);
+          if (value[0] !== value[1]) {
+            valid = true;
+          }
+          break;
+
+        default:
+          console.error(`유효하지 않은 검사 타입: ${type}`);
           break;
       }
+
+      setIsValid(valid);
     },
     [type]
   );
 
-  return { isValid, validate };
+  const InvalidMessage = getInvalidMessage(type);
+
+  return { isValid, InvalidMessage, validate };
 };
 
 export default useValidation;

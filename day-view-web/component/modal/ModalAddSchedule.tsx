@@ -14,7 +14,6 @@ import useAddSchedule from './hooks/useAddSchedule';
 import { useAnimationHandler } from '@/shared/hooks';
 import useGetChannel from '@/shared/context/calendar/hooks/useGetChannel';
 import useValidation from '@/shared/hooks/useValidation';
-import DateRangeInput from '@/shared/component/Molecule/DateRangeInput';
 
 const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   const {
@@ -32,7 +31,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
     endDate: new Date(),
   });
 
-  const { isValid, validate } = useValidation('empty');
+  const { isValid, InvalidMessage, validate } = useValidation('empty');
   const { mutate, status } = useAddSchedule();
   const { data: channels, status: channelStatus } = useGetChannel({
     selectType: 'MANAGE',
@@ -129,7 +128,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
               isValid={isValid}
             />
             {!isValid && (
-              <Modal.Validation>제목을 입력해주세요.</Modal.Validation>
+              <Modal.InvalidText>{InvalidMessage}</Modal.InvalidText>
             )}
           </Modal.Wrapper>
         </S.Section>

@@ -1,6 +1,5 @@
 import { useState, SyntheticEvent, memo, useEffect } from 'react';
 
-import { VALIDATION_LENGTH } from '@/constants/validate';
 import { useAnimationHandler } from '@/shared/hooks';
 
 import { ModalProps } from './ModalRenderer';
@@ -27,7 +26,8 @@ const ModalManageChannel = ({ closeModal }: ModalProps) => {
   });
 
   // 채널이름 길이 유효성 검사
-  const { isValid, validate } = useValidation('channelNameLength');
+  const { isValid, InvalidMessage, validate } =
+    useValidation('channelNameLength');
 
   /**
    * TODO: 유효성 검사 두 개 합치기
@@ -43,12 +43,12 @@ const ModalManageChannel = ({ closeModal }: ModalProps) => {
 
   const handleChangeValue = (e: SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
-    const { name, value } = target;
 
-    switch (name) {
+    switch (target.name) {
       case 'channelName':
-        validate(value);
-        setValue((prev) => ({ ...prev, channelName: value }));
+        validate(target.value);
+        validateNameDiff([name, target.value]);
+        setValue((prev) => ({ ...prev, channelName: target.value }));
         break;
     }
   };
@@ -81,7 +81,7 @@ const ModalManageChannel = ({ closeModal }: ModalProps) => {
               isValid={isValid}
             />
             {!isValid && (
-              <Modal.Validation>{`${VALIDATION_LENGTH.MIN_LENGTH}자 ~ ${VALIDATION_LENGTH.CHANNEL_MAX_LENGTH}자로 입력해주세요.`}</Modal.Validation>
+              <Modal.InvalidText>{InvalidMessage}</Modal.InvalidText>
             )}
           </Modal.Wrapper>
         </Modal.Section>
@@ -93,7 +93,7 @@ const ModalManageChannel = ({ closeModal }: ModalProps) => {
         <Modal.Button
           variant="accent"
           onClick={handleManageChannel}
-          disabled={!isValid}
+          disabled={!isValid || !isValidNameDiff}
         >
           완료
         </Modal.Button>
