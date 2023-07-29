@@ -9,7 +9,7 @@ import {
   isSetAccessToken,
   setAccessToken,
   setCookie,
-} from '@/shared/util/axios';
+} from '@/shared/util/auth';
 
 const inter = Inter({ subsets: ['latin'] });
 

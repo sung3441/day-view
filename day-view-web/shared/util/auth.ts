@@ -7,8 +7,11 @@ export function setCookie(pCookie: string | undefined) {
 
 export function setAccessToken(accessToken: string) {
   // Todo 에러 코드로 던져야함.
-  if (!accessToken) return;
   Auth.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+}
+
+export function removeAccessToken() {
+  Auth.defaults.headers.common['Authorization'] = '';
 }
 
 export async function isSetAccessToken(cookie: string) {

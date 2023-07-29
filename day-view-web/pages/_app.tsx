@@ -10,7 +10,7 @@ import { StyledEngineProvider } from '@mui/styled-engine';
 import Layout from '@/shared/component/Layout';
 import GlobalStyle from '@/shared/styles/globalStyle';
 import { commonTheme } from '@/shared/styles/theme';
-import { setAccessToken } from '@/shared/util/axios';
+import { setAccessToken } from '@/shared/util/auth';
 import { getAccessToken } from '@/shared/api';
 import { isLoginAtom, userInfoAtom } from '@/shared/atom/global';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -66,6 +66,7 @@ const APPWithConfig = ({ children }: { children: any }) => {
     const setUser = async () => {
       const user = await queryClient.getQueryData<UserRes>([QueryKeys.USER]);
       if (user) setUserInfo(user);
+      console.log('user', user);
       setIsLogin(true);
     };
 
