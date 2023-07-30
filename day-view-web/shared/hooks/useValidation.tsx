@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { VALIDATION_LENGTH } from '@/constants/validate';
+import { VALIDATION_LENGTH } from '@/shared/constant/validate';
 
 /** ValueType에 따라 validate 함수 파라미터 타입이 변경됌. */
 type ValueType = {

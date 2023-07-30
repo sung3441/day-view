@@ -7,7 +7,7 @@ import { ModalProps } from '@/component/modal/ModalRenderer';
 import { useAnimationHandler } from '@/shared/hooks';
 import { useCreateChannel } from '@/shared/context/calendar/hooks/usePostChannel';
 import useValidation from '@/shared/hooks/useValidation';
-import { VALIDATION_LENGTH } from '@/constants/validate';
+import { VALIDATION_LENGTH } from '@/shared/constant/validate';
 
 /**
  * 카테고리 생성

@@ -10,7 +10,7 @@ import {
   ModalSubscriberManagement,
 } from '@/component/modal';
 import { useModal } from '@/shared/hooks';
-import { modalListAtom } from '@/shared/atom/modalState';
+import { modalListAtom } from '@/state/modalState';
 
 export interface ModalProps {
   openModal: (modalType: ModalType) => void;
