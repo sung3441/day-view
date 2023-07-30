@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { Button, UserImage } from '@/shared/component/Atom';
 import useLogout from '@/shared/hooks/user/useLogout';
 import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import ModalInput from '../Organism/MODAL/ModalInput';
-import { useRecoilValue } from 'recoil';
 import useGetUserInfo from '@/shared/context/user/hooks/useGetUserInfo';
+import useValidation from '@/shared/hooks/useValidation';
+import usePatchUserInfo from '@/shared/context/user/hooks/usePatchUserInfo';
 
 interface Props {
   callback: () => void;
@@ -16,36 +17,36 @@ interface Props {
  * @param callback useAnimationHandler의 handleOnAnimationEnd 전달
  */
 const UserProfile = ({ callback }: Props) => {
-  /**
-   * TODO: 사용자 정보 nickname, email, profileImageUrl 렌더링
-   */
-
-  // ! _app.tsx에서 유저정보 fetching 후 userInfoAtom에 저장한 값 가져오기
-  // const userInfo = useRecoilValue(userInfoAtom);
-  const { data: userInfo } = useGetUserInfo((data) => data);
-
-  // ! 전부 undefined
-  const { nickname, email, profileImageUrl } = userInfo;
-
-  console.log('UserProfile', userInfo);
-  console.log('UserProfile', nickname, email, profileImageUrl);
-
-  const logout = useLogout();
-
   const {
     isShow,
     handleIsShow: closeUserInfo,
     handleOnAnimationEnd,
   } = useAnimationHandler(() => callback());
 
-  // ! OuterClick 적용 안됌
-  const refUserInfo = useOuterClick<HTMLDivElement>({
-    callback: () => closeUserInfo,
+  const ref = useOuterClick<HTMLDivElement>({
+    callback: closeUserInfo,
   });
+
+  const { data: userInfo } = useGetUserInfo((data) => data);
+  const { nickname, email, profileImageUrl } = userInfo;
+  const { mutate, status } = usePatchUserInfo();
+
+  const logout = useLogout();
+
+  const [value, setValue] = useState(nickname);
+  const { isValid, validate } = useValidation('isNameDifferent');
+  const { isValid: isEmpty, validate: validateEmpty } = useValidation('empty');
+
+  const handleChange = (e: SyntheticEvent) => {
+    const target = e.target as HTMLInputElement;
+    validate([nickname, target.value]);
+    validateEmpty(target.value);
+    setValue(target.value);
+  };
 
   return (
     <S.Container
-      ref={refUserInfo}
+      ref={ref}
       isShow={isShow}
       onAnimationEnd={handleOnAnimationEnd}
     >
@@ -57,11 +58,11 @@ const UserProfile = ({ callback }: Props) => {
       <S.Body>
         <S.Section>
           <S.SubTitle>이름</S.SubTitle>
-          <ModalInput width={246} value={nickname} disabled />
+          <ModalInput onChange={handleChange} width={246} value={value} />
         </S.Section>
         <S.Section>
           <S.SubTitle>이메일</S.SubTitle>
-          <div>{email}</div>
+          <S.Email>{email}</S.Email>
         </S.Section>
       </S.Body>
       <S.Control>
@@ -71,8 +72,10 @@ const UserProfile = ({ callback }: Props) => {
         <Button
           variant="accent"
           onClick={() => {
+            mutate({ nickname: value });
             closeUserInfo();
           }}
+          disabled={!isValid || !isEmpty}
         >
           완료
         </Button>
@@ -120,6 +123,10 @@ const S = {
   SubTitle: styled.div`
     ${getStyledThemProperty('fonts', 'caption2')};
     color: ${getStyledThemProperty('colors', 'G_700')};
+  `,
+  Email: styled.div`
+    ${getStyledThemProperty('fonts', 'caption2')};
+    color: ${getStyledThemProperty('colors', 'Black')};
   `,
   Control: styled.div`
     display: flex;
