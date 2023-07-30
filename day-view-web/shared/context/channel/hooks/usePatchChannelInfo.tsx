@@ -1,6 +1,7 @@
 import { ChannelSelectType } from '@/shared/types/api';
-import { usePatchChannel } from '@/shared/context/calendar/hooks/usePostChannel';
-import { ChangeEvent } from 'react';
+import { usePatchChannel } from '@/shared/context/channel/hooks/usePostChannel';
+import { ChangeEvent, ChangeEventHandler } from 'react';
+import { string } from 'prop-types';
 
 const usePatchChannelInfo = (channelSelect: ChannelSelectType) => {
   const { mutate, status } = usePatchChannel(channelSelect);

@@ -5,7 +5,7 @@ import Modal from '@/shared/component/Organism/MODAL';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 import { useAnimationHandler } from '@/shared/hooks';
-import { useCreateChannel } from '@/shared/context/calendar/hooks/usePostChannel';
+import { useCreateChannel } from '@/shared/context/channel/hooks/usePostChannel';
 import useValidation from '@/shared/hooks/useValidation';
 import { VALIDATION_LENGTH } from '@/shared/constant/validate';
 

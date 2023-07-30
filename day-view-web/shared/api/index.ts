@@ -94,8 +94,14 @@ export const getSearchChannel = async (
 `).get<SearchChannelRes>(createChannelParam);
   return res;
 };
-// export const getMyRecord = async (getMyRecordParam: { channelId: number }) => {
-//   const res = await new Client(`/api/channels/{channelId}/records
-// `).get<SearchChannelRes>();
-//   return res;
-// };
+
+export const getRecordInChannel = async ({
+  channelId,
+}: {
+  channelId: number;
+}) => {
+  const res = await new Client(`/api/channels/${channelId.toString()}/records
+`).get<SearchChannelRes>();
+
+  return res;
+};

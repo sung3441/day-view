@@ -6,9 +6,12 @@ import {
   MouseEventHandler,
   SyntheticEvent,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react';
+import { useRecoilState } from 'recoil';
+import { selectedCategoryIdAtom } from '@/shared/context/category/state';
 
 interface Props {
   categories: ChannelRes[];
@@ -29,22 +32,32 @@ const moveCenterFromParent = (parent: HTMLElement, target: HTMLElement) => {
 // '카테고리' 탭 누르면 실행
 const CategoryHeader = ({ categories }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [selectedChannelId, setSelectedChannelId] = useState<number>(0);
+  const [selectedCategoryId, setSelectedCategoryId] = useRecoilState(
+    selectedCategoryIdAtom
+  );
+  const [isInitSelected, setIsInitSelected] = useState(false);
+
   const toggleHandler = useCallback(
     (e: SyntheticEvent<HTMLButtonElement>, channelId: number) => {
-      setSelectedChannelId(channelId);
+      setSelectedCategoryId(channelId);
       if (!wrapperRef.current) return;
       moveCenterFromParent(wrapperRef.current, e.currentTarget);
     },
     []
   );
 
+  useEffect(() => {
+    if (!categories?.length || isInitSelected) return;
+    setSelectedCategoryId(categories[0].channelId);
+    setIsInitSelected(true);
+  }, [categories]);
+
   return (
     <Wrapper ref={wrapperRef}>
       {categories?.map((channel) => (
         <CategoryButton
           key={channel.channelId}
-          isSelected={channel.channelId === selectedChannelId}
+          isSelected={channel.channelId === selectedCategoryId}
           name={channel.name}
           id={channel.channelId}
           toggleHandler={toggleHandler}

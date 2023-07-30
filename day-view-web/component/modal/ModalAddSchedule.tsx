@@ -12,7 +12,7 @@ import { dateToDayjs, dayjsToDate } from '@/shared/util/dateConversion';
 import useAddSchedule from './hooks/useAddSchedule';
 
 import { useAnimationHandler } from '@/shared/hooks';
-import useGetChannel from '@/shared/context/calendar/hooks/useGetChannel';
+import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
 import useValidation from '@/shared/hooks/useValidation';
 
 const ModalAddSchedule = ({ closeModal }: ModalProps) => {
