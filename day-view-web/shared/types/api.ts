@@ -3,16 +3,18 @@ export type Token = {
 };
 
 export type UserRes = {
-  memberId: number;
-  provider: string;
-  email: string;
-  nickname: string;
-  profileImageUrl: string;
-  birthday: string;
-  accessToken?: string;
-  refreshToken?: string;
-  createdDate?: Date;
-  lastModifiedDate?: Date;
+  data: {
+    memberId: number;
+    provider: string;
+    email: string;
+    nickname: string;
+    profileImageUrl: string;
+    birthday: string;
+    accessToken?: string;
+    refreshToken?: string;
+    createdDate?: Date;
+    lastModifiedDate?: Date;
+  };
 };
 
 export type ChannelSelectType = 'MANAGE' | 'SUBSCRIBE' | 'GOOGLE';

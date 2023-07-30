@@ -12,7 +12,7 @@ import GlobalStyle from '@/shared/styles/globalStyle';
 import { commonTheme } from '@/shared/styles/theme';
 import { setAccessToken } from '@/shared/util/auth';
 import { getAccessToken } from '@/shared/api';
-import { isLoginAtom, userInfoAtom } from '@/shared/atom/global';
+import { isLoginAtom } from '@/shared/atom/global';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import getClient, { QueryKeys } from '@/shared/queryClient';
 import { UserRes } from '@/shared/types/api';
@@ -52,7 +52,6 @@ function App({ Component, pageProps }: AppProps) {
 
 const APPWithConfig = ({ children }: { children: any }) => {
   const setIsLogin = useSetRecoilState(isLoginAtom);
-  const setUserInfo = useSetRecoilState(userInfoAtom);
   const queryClient = getClient();
   const router = useRouter();
 
@@ -64,10 +63,10 @@ const APPWithConfig = ({ children }: { children: any }) => {
     };
 
     const setUser = async () => {
-      const user = await queryClient.getQueryData<UserRes>([QueryKeys.USER]);
-      if (user) setUserInfo(user);
-      console.log('user', user);
-      setIsLogin(true);
+      const user = await queryClient.getQueryData<HttpResType<UserRes>>([
+        QueryKeys.USER,
+      ]);
+      if (user?.status === 200) setIsLogin(true);
     };
 
     (async () => {
