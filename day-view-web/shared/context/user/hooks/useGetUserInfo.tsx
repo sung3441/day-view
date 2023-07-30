@@ -2,7 +2,6 @@ import { useQuery } from 'react-query';
 import { QueryKeys } from '@/shared/queryClient';
 import { getUser } from '@/shared/api';
 import { UserRes } from '@/shared/types/api';
-import { number } from 'prop-types';
 
 type SelectFnc = (data: UserRes['data']) => UserRes['data'];
 

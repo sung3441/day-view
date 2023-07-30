@@ -5,7 +5,7 @@ import { useAnimationHandler } from '@/shared/hooks';
 import { ModalProps } from './ModalRenderer';
 import useValidation from '@/shared/hooks/useValidation';
 import Modal from '@/shared/component/Organism/MODAL';
-import { usePutChannel } from '@/shared/context/calendar/hooks/usePostChannel';
+import { usePutChannel } from '@/shared/context/channel/hooks/usePostChannel';
 import useModalState from '@/shared/hooks/useModalState';
 
 type ManageChannel = {
