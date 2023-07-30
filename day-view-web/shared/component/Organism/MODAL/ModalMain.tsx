@@ -11,7 +11,7 @@ import {
 import styled, { css, keyframes } from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { getAdjustPosition } from '@/shared/util/getAdjustPosition';
-import { ModalParams } from '@/shared/atom/modalState';
+import { ModalParams } from '@/state/modalState';
 
 import ModalDim from './ModalDim';
 interface Props extends ModalParams {
@@ -55,7 +55,7 @@ const ModalMain = forwardRef<HTMLDivElement, Props>(
     const isDimmed = filteredComponents.some(
       (child) => isValidElement(child) && FILTER.includes(child.type)
     );
-    
+
     return (
       <S.Layout
         onAnimationEnd={props.onAnimationEnd}

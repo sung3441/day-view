@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useRecoilCallback } from 'recoil';
-import { ModalParams, ModalState, modalSelector } from '../atom/modalState';
+import { ModalParams, ModalState, modalSelector } from '../../state/modalState';
 import { ModalType } from '@/component/modal/ModalRenderer';
 
 const useModal = () => {
