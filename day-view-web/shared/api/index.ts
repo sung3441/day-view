@@ -19,7 +19,6 @@ export const getAccessToken = async () => {
 
 export const getUser = async () => {
   const res = await new Client('/api/members/me').get<UserRes>();
-  console.log('getUser', res);
   return res;
 };
 

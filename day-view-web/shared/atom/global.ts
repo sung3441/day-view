@@ -11,15 +11,3 @@ export const isLoginAtom = atom<boolean>({
   key: 'isLoginAtom',
   default: false,
 });
-
-export const userInfoAtom = atom<UserRes>({
-  key: 'userInfoAtom',
-  default: {
-    memberId: -1,
-    provider: '',
-    email: '',
-    nickname: '',
-    profileImageUrl: '',
-    birthday: '',
-  },
-});
