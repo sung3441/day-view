@@ -1,5 +1,5 @@
 import { ChannelSelectType } from '@/shared/types/api';
-import useGetChannel from '@/shared/context/calendar/hooks/useGetChannel';
+import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
 import { useMemo } from 'react';
 
 const useGetMyChannelRecodes = () => {

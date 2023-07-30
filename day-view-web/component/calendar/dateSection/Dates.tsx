@@ -6,8 +6,8 @@ import {
   selectedDayAtom,
   selectedYYMMAtom,
 } from '@/state/calendar';
-import { makeDays } from '@/shared/context/calendar/util/date';
-import useGetMyChannelRecodes from '@/shared/context/calendar/hooks/useGetMyChannelRecodes';
+import { makeDays } from '@/shared/context/channel/util/date';
+import useGetMyChannelRecodes from '@/shared/context/channel/hooks/useGetMyChannelRecodes';
 
 const Dates = () => {
   const { year, month } = useRecoilValue(selectedYYMMAtom);
