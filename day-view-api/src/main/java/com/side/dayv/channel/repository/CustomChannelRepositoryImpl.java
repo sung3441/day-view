@@ -12,6 +12,7 @@ import com.side.dayv.channel.dto.response.QChannelResponseDto;
 import com.side.dayv.channel.dto.response.QManageChannelResponseDto;
 import com.side.dayv.channel.entity.ChannelOrderType;
 import com.side.dayv.channel.entity.ChannelType;
+import com.side.dayv.subscribe.entity.QSubscribe;
 import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,15 +52,18 @@ public class CustomChannelRepositoryImpl implements CustomChannelRepository {
 
     @Override
     public Page<ChannelResponseDto> findChannels(final Long memberId, final Pageable pageable, final SearchChannelDto search) {
+
+        QSubscribe countSubscribe = new QSubscribe("selectSubscribe");
+
         List<ChannelResponseDto> channels = queryFactory
                 .select(new QChannelResponseDto(
                         channel,
                         member,
                         subscribe.isNotNull(),
                         JPAExpressions
-                                .select(subscribe.count())
-                                .from(subscribe)
-                                .where(subscribe.channel.id.eq(channel.id))
+                                .select(countSubscribe.count())
+                                .from(countSubscribe)
+                                .where(countSubscribe.channel.id.eq(channel.id))
                 ))
                 .from(channel)
                 .leftJoin(member)
