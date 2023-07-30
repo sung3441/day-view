@@ -10,7 +10,7 @@ import {
   G_isOpenChannelAtom,
   G_isSearchOpenAtom,
 } from '@/shared/component/Organism/GNB/state';
-import useColorBoxControl from '@/shared/context/calendar/hooks/useColorBoxControl';
+import useColorBoxControl from '@/shared/context/channel/hooks/useColorBoxControl';
 
 const buttonStyle: CSSProperties = {
   width: pixelToRemUnit(323),
