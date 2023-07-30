@@ -10,6 +10,7 @@ import {
   SearchChannelRes,
   PatchChannelType,
   PutChannelParamType,
+  PatchUserParams,
 } from '@/shared/types/api';
 
 export const getAccessToken = async () => {
@@ -20,6 +21,18 @@ export const getAccessToken = async () => {
 export const getUser = async () => {
   const res = await new Client('/api/members/me').get<UserRes>();
   console.log('resresresres', res);
+  return res;
+};
+
+export const patchUser = async (patchUserParams: PatchUserParams) => {
+  const { nickname, birthday, profileImageUrl } = patchUserParams;
+
+  const res = await new Client('/api/members/me').patch({
+    nickname,
+    birthday,
+    profileImageUrl,
+  });
+
   return res;
 };
 
@@ -47,8 +60,8 @@ export const unsubscribeChannel = async (subscribeId: number) => {
   return res;
 };
 
-export const patchChannel = async (PatchChannelParams: PatchChannelType) => {
-  const { subscribeId, showYn, color } = PatchChannelParams;
+export const patchChannel = async (patchChannelParams: PatchChannelType) => {
+  const { subscribeId, showYn, color } = patchChannelParams;
   const res = await new Client(`/api/subscribes/${subscribeId}`).patch({
     showYn,
     color,
@@ -57,8 +70,8 @@ export const patchChannel = async (PatchChannelParams: PatchChannelType) => {
 };
 
 /** 채널명 수정 */
-export const putChannel = async (PutChannelParams: PutChannelParamType) => {
-  const { channelId, name } = PutChannelParams;
+export const putChannel = async (putChannelParams: PutChannelParamType) => {
+  const { channelId, name } = putChannelParams;
   const res = await new Client(`/api/channels/${channelId}`).put({
     name,
   });

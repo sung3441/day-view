@@ -17,6 +17,12 @@ export type UserRes = {
   };
 };
 
+export type PatchUserParams = {
+  nickname?: string;
+  birthday?: string;
+  profileImageUrl?: string;
+};
+
 export type ChannelSelectType = 'MANAGE' | 'SUBSCRIBE' | 'GOOGLE';
 
 export type ChannelRes = {
