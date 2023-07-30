@@ -53,6 +53,10 @@ public class SubscribeService {
         Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, channelId)
                 .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
 
+        if (!subscribe.isSameMember(memberId)) {
+            throw new BadRequestException(BAD_REQUEST_PERMISSION);
+        }
+
         if (subscribe.isManageAuth()) {
             throw new BadRequestException(BAD_REQUEST_MANAGE_UNSUBSCRIBE);
         }

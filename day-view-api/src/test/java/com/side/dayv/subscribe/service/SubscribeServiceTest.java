@@ -11,7 +11,6 @@ import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.oauth.entity.ProviderType;
 import com.side.dayv.subscribe.dto.request.SubscribeUpdateDto;
 import com.side.dayv.subscribe.entity.Subscribe;
-import com.side.dayv.subscribe.entity.SubscribeColor;
 import com.side.dayv.subscribe.entity.Subscribers;
 
 import com.side.dayv.subscribe.repository.SubscribeRepository;
