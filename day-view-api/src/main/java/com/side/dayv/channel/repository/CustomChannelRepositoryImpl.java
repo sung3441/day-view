@@ -65,7 +65,7 @@ public class CustomChannelRepositoryImpl implements CustomChannelRepository {
                 .leftJoin(member)
                 .on(member.id.eq(channel.createMember.id))
                 .leftJoin(subscribe)
-                .on(subscribe.channel.id.eq(channel.id))
+                .on(subscribe.channel.id.eq(channel.id).and(subscribe.member.id.eq(memberId)))
                 .where(channel.type.eq(ChannelType.CUSTOM).and(channelSearch(search.getKeyword())))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
