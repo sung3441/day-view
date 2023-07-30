@@ -6,7 +6,7 @@ import useLogout from '@/shared/hooks/user/useLogout';
 import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import ModalInput from '../Organism/MODAL/ModalInput';
 import { useRecoilValue } from 'recoil';
-import { userInfoAtom } from '@/shared/atom/global';
+import useGetUserInfo from '@/shared/context/user/hooks/useGetUserInfo';
 
 interface Props {
   callback: () => void;
@@ -21,7 +21,8 @@ const UserProfile = ({ callback }: Props) => {
    */
 
   // ! _app.tsx에서 유저정보 fetching 후 userInfoAtom에 저장한 값 가져오기
-  const userInfo = useRecoilValue(userInfoAtom);
+  // const userInfo = useRecoilValue(userInfoAtom);
+  const { data: userInfo } = useGetUserInfo((data) => data);
 
   // ! 전부 undefined
   const { nickname, email, profileImageUrl } = userInfo;
