@@ -4,7 +4,6 @@ import DateSection from '@/component/calendar/dateSection/DateSection';
 import { useRecoilValue } from 'recoil';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useMemo } from 'react';
-import CategoryHeader from '../category/CategoryHeader';
 import ScheduleHeader from '../schedule/ScheduleHeader';
 import {
   G_isOpenChannelAtom,

@@ -25,13 +25,9 @@ const ModalManageChannel = ({ closeModal }: ModalProps) => {
     channelName: name,
   });
 
-  // 채널이름 길이 유효성 검사
   const { isValid, InvalidMessage, validate } =
     useValidation('channelNameLength');
 
-  /**
-   * TODO: 유효성 검사 두 개 합치기
-   */
   const { isValid: isValidNameDiff, validate: validateNameDiff } =
     useValidation('isNameDifferent');
 

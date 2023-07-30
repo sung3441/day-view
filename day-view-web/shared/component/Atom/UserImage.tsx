@@ -15,13 +15,10 @@ const imageSizes = {
   large: { width: 112, height: 112 },
 };
 
-/**
- * TODO: Refactor
- */
 const UserImage = ({ src, style, size = 'small' }: Props) => {
   return (
     <StyledImage
-      src={`images/icon/user.svg`}
+      src={src ? src : `images/icon/user.svg`}
       alt="UserImage"
       width={imageSizes[size].width}
       height={imageSizes[size].height}

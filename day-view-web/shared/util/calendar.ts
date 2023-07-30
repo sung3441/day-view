@@ -1,5 +1,4 @@
 import { YYMMType } from '@/shared/types/calendar';
-import { number } from 'prop-types';
 
 export function getTodayYYMM(): YYMMType {
   const today = new Date();

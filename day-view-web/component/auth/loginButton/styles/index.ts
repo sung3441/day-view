@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { CSSProperties } from 'react';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
-import { string } from 'prop-types';
 
 export const StyleLoginButton = styled.button<{ name: 'google' | 'kakao' }>`
   position: relative;
