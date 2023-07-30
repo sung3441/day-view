@@ -4,7 +4,7 @@ import { getUser } from '@/shared/api';
 import { UserRes } from '@/shared/types/api';
 import { number } from 'prop-types';
 
-type SelectFnc = (data: UserRes) => UserRes;
+type SelectFnc = (data: UserRes['data']) => UserRes['data'];
 
 const initUser = {
   memberId: 0,
@@ -20,7 +20,7 @@ const initUser = {
 const useGetUserInfo = (selectFnc?: SelectFnc) => {
   const res = useQuery([QueryKeys.USER], getUser, {
     select: (data) => {
-      const res = data?.data;
+      const res = data?.data?.data;
       if (!res) return initUser;
       return selectFnc ? selectFnc(res) : res;
     },
