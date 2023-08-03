@@ -1,13 +1,9 @@
 import { memo, SyntheticEvent, useState } from 'react';
-import styled from 'styled-components';
-
 import Modal from '@/shared/component/Organism/MODAL';
-import { pixelToRemUnit } from '@/shared/styles/util';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 import { useAnimationHandler } from '@/shared/hooks';
 import { useCreateChannel } from '@/shared/context/channel/hooks/usePostChannel';
 import useValidation from '@/shared/hooks/useValidation';
-import { VALIDATION_LENGTH } from '@/shared/constant/validate';
 
 /**
  * 카테고리 생성
@@ -83,14 +79,12 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
         </Modal.Section>
         <Modal.Section>
           <Modal.SubTitle>비공개</Modal.SubTitle>
-          <WrapButton>
-            <Modal.ToggleButton
-              id="toggle"
-              name="toggle"
-              checked
-              onChange={handleChangeValue}
-            />
-          </WrapButton>
+          <Modal.ToggleButton
+            id="toggle"
+            name="toggle"
+            checked
+            onChange={handleChangeValue}
+          />
         </Modal.Section>
       </Modal.Body>
       <Modal.Control>
@@ -111,7 +105,3 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
 };
 
 export default memo(ModalCreateChannel);
-
-const WrapButton = styled.div`
-  width: ${pixelToRemUnit(380)};
-`;

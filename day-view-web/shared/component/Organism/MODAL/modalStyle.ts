@@ -16,10 +16,10 @@ const Body = styled.div<{ gap?: number }>`
 `;
 
 const Section = styled.section<{ gap?: number }>`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  grid-column-gap: ${({ gap }) => (gap ? `${gap}px` : '16px')};
   align-items: center;
-  justify-content: space-between;
-  gap: ${({ gap }) => (gap ? `${gap}px` : '16px')};
 `;
 
 const Control = styled.section`
