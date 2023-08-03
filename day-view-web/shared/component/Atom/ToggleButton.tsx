@@ -32,6 +32,8 @@ export default memo(ToggleButton);
 const Label = styled.label`
   gap: 10px;
   cursor: pointer;
+  width: 42px;
+  height: 22px;
 `;
 
 const Switch = styled.div`
