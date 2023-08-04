@@ -5,10 +5,6 @@ import { useAnimationHandler } from '@/shared/hooks';
 import { useCreateChannel } from '@/shared/context/channel/hooks/usePostChannel';
 import useValidation from '@/shared/hooks/useValidation';
 
-/**
- * 카테고리 생성
- */
-
 type CreateChannel = {
   categoryName: string;
   isPrivate: boolean;

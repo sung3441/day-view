@@ -44,9 +44,10 @@ const ColorBoard = ({ closeColorBoard, x, y, channelId, name }: Props) => {
         <span>관리</span>
       </ConfigButton>
       <ConfigButton
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           handleIsShow();
-          openModal('ManageChannel', { channelId: channelId, name: name });
+          openModal('ManageSubscriber');
         }}
       >
         <Icon type="sm_user" />

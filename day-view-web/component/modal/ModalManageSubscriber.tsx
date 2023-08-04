@@ -5,12 +5,12 @@ import { ModalProps } from './ModalRenderer';
 import { SearchBar } from '@/shared/component/Molecule';
 import UserInfo from '@/shared/component/Molecule/UserInfo';
 
-const ModalSubscriberManagement = ({ closeModal }: ModalProps) => {
+const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
   const {
     isShow,
     handleIsShow: modalClose,
     handleOnAnimationEnd,
-  } = useAnimationHandler(() => closeModal('SubscriberManagement'));
+  } = useAnimationHandler(() => closeModal('ManageSubscriber'));
 
   const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
 
@@ -33,4 +33,4 @@ const ModalSubscriberManagement = ({ closeModal }: ModalProps) => {
   );
 };
 
-export default memo(ModalSubscriberManagement);
+export default memo(ModalManageSubscriber);

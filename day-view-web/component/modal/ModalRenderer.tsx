@@ -7,7 +7,7 @@ import {
   ModalManageChannel,
   ModalAddSchedule,
   ModalScheduleDetail,
-  ModalSubscriberManagement,
+  ModalManageSubscriber,
 } from '@/component/modal';
 import { useModal } from '@/shared/hooks';
 import { modalListAtom } from '@/state/modalState';
@@ -25,7 +25,7 @@ const modalComponents = {
   ManageChannel: ModalManageChannel,
   AddSchedule: ModalAddSchedule,
   ScheduleDetail: ModalScheduleDetail,
-  SubscriberManagement: ModalSubscriberManagement,
+  ManageSubscriber: ModalManageSubscriber,
 } satisfies Record<
   string,
   React.MemoExoticComponent<(P: ModalProps) => React.ReactElement>

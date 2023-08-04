@@ -30,5 +30,6 @@ const S = {
 
     background-color: ${({ theme }) => theme.colors.Black};
     animation: ${dimFade} 0.3s ease forwards;
+    z-index: 10;
   `,
 };
