@@ -1,5 +1,4 @@
-import React, { memo, useRef, useState } from 'react';
-import styled from 'styled-components';
+import React, { memo, useState } from 'react';
 import dayjs from 'dayjs';
 
 import Modal from '@/shared/component/Organism/MODAL';
@@ -14,6 +13,9 @@ import useAddSchedule from './hooks/useAddSchedule';
 import { useAnimationHandler } from '@/shared/hooks';
 import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
 import useValidation from '@/shared/hooks/useValidation';
+
+const BODY_GAP = 22;
+const SECTION_GAP = 34;
 
 const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   const {
@@ -116,8 +118,8 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
 
   return (
     <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
-      <S.Body>
-        <S.Section>
+      <Modal.Body gap={BODY_GAP}>
+        <Modal.Section gap={SECTION_GAP}>
           <Modal.SubTitle>제목</Modal.SubTitle>
           <Modal.Wrapper>
             <Modal.Input
@@ -131,8 +133,8 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
               <Modal.InvalidText>{InvalidMessage}</Modal.InvalidText>
             )}
           </Modal.Wrapper>
-        </S.Section>
-        <S.Section>
+        </Modal.Section>
+        <Modal.Section gap={SECTION_GAP}>
           <Modal.SubTitle style={{ alignSelf: 'flex-start' }}>
             날짜
           </Modal.SubTitle>
@@ -192,8 +194,8 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
               }}
             />
           </Modal.Wrapper>
-        </S.Section>
-        <S.Section>
+        </Modal.Section>
+        <Modal.Section gap={SECTION_GAP}>
           <Modal.SubTitle>카테고리</Modal.SubTitle>
           <Modal.Wrapper>
             <Select
@@ -211,8 +213,8 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
                 : undefined}
             </Select>
           </Modal.Wrapper>
-        </S.Section>
-        <S.Section>
+        </Modal.Section>
+        <Modal.Section gap={SECTION_GAP}>
           <Modal.SubTitle style={{ alignSelf: 'flex-start' }}>
             메모(선택)
           </Modal.SubTitle>
@@ -222,8 +224,8 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
             onChange={handleChangeValue}
             placeholder="메모를 입력하세요."
           />
-        </S.Section>
-      </S.Body>
+        </Modal.Section>
+      </Modal.Body>
       <Modal.Control>
         <Modal.Button variant="primary" onClick={modalClose}>
           취소
@@ -242,21 +244,3 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
 };
 
 export default memo(ModalAddSchedule);
-
-const Body = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-`;
-
-const Section = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 78px;
-`;
-
-const S = {
-  Body,
-  Section,
-};

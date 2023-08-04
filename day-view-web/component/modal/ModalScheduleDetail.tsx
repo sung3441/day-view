@@ -1,12 +1,9 @@
 import { memo, useState } from 'react';
-import styled from 'styled-components';
 
 import Modal from '@/shared/component/Organism/MODAL';
-import { pixelToRemUnit } from '@/shared/styles/util';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
-import useValidation from '@/shared/hooks/useValidation';
-import { VALIDATION_LENGTH } from '@/shared/constant/validate';
+
 import { IconButton } from '@/shared/component/Molecule';
 import useModalState from '@/shared/hooks/useModalState';
 import { DateInput, Icon, Select, TimeInput } from '@/shared/component/Atom';

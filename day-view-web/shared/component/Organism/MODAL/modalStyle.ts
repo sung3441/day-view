@@ -17,9 +17,9 @@ const Body = styled.div<{ gap?: number }>`
 
 const Section = styled.section<{ gap?: number }>`
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: 1fr ${pixelToRemUnit(380)};
   grid-column-gap: ${({ gap }) => (gap ? `${gap}px` : '16px')};
-  align-items: center;
+  place-items: center start;
 `;
 
 const Control = styled.section`
