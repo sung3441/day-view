@@ -5,6 +5,7 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 40px;
 
   width: 100%;
 `;
@@ -13,6 +14,7 @@ const Body = styled.div<{ gap?: number }>`
   display: flex;
   flex-direction: column;
   gap: ${({ gap }) => (gap ? `${gap}px` : '22px')};
+  margin-bottom: 40px;
 `;
 
 const Section = styled.section<{ gap?: number }>`

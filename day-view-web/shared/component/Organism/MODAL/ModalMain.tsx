@@ -135,7 +135,6 @@ const S = {
   }>`
     display: flex;
     flex-direction: column;
-    gap: 40px;
     position: absolute;
 
     padding: ${pixelToRemUnit([60, 50])};

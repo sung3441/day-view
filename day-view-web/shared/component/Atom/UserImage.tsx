@@ -8,6 +8,8 @@ interface Props {
   src: string;
   size?: SizeType;
   style?: CSSProperties;
+  width?: number;
+  height?: number;
 }
 
 const imageSizes = {
@@ -15,13 +17,13 @@ const imageSizes = {
   large: { width: 112, height: 112 },
 };
 
-const UserImage = ({ src, style, size = 'small' }: Props) => {
+const UserImage = ({ src, style, width, height, size = 'small' }: Props) => {
   return (
     <StyledImage
       src={src ? src : `images/icon/user.svg`}
       alt="UserImage"
-      width={imageSizes[size].width}
-      height={imageSizes[size].height}
+      width={width ? width : imageSizes[size].width}
+      height={height ? height : imageSizes[size].height}
       style={style}
     />
   );
