@@ -8,13 +8,26 @@ type InputType = ComponentPropsWithoutRef<'input'>;
 interface props extends InputType {
   id: string;
   label?: string;
+  color?: string;
 }
 
-const CheckBox = ({ id, label, ...props }: props) => {
-  const t = toRGBA('rgba(173, 20, 87)', 1);
+const CheckBox = ({
+  id,
+  label,
+  color = 'rgba(173, 20, 87)',
+  ...props
+}: props) => {
+  const mainColor = toRGBA(color, 1);
+  const shadowColor = toRGBA(color, 0.26);
   return (
     <>
-      <CheckBoxInput id={id} type="checkbox" {...props} />
+      <CheckBoxInput
+        id={id}
+        type="checkbox"
+        mainColor={mainColor}
+        shadowColor={shadowColor}
+        {...props}
+      />
       <CheckBoxLabel htmlFor={id}>{label}</CheckBoxLabel>
     </>
   );
@@ -22,7 +35,10 @@ const CheckBox = ({ id, label, ...props }: props) => {
 
 export default memo(CheckBox);
 
-export const CheckBoxInput = styled.input`
+export const CheckBoxInput = styled.input<{
+  mainColor: string;
+  shadowColor: string;
+}>`
   overflow: hidden;
   position: absolute;
   top: 1px;
@@ -47,11 +63,11 @@ export const CheckBoxInput = styled.input`
 
     transition: background-color 0.2s ease-in-out 0s;
 
-    border: 2px solid ${toRGBA('rgba(173, 20, 87)', 0.26)};
+    border: 2px solid ${({ shadowColor }) => shadowColor};
   }
 
   :checked + label::before {
-    background-color: ${toRGBA('rgba(173, 20, 87)', 0.26)};
+    background-color: ${({ shadowColor }) => shadowColor};
     border-style: none;
   }
 
@@ -70,7 +86,7 @@ export const CheckBoxInput = styled.input`
     border-style: solid;
     border-image: initial;
     border-width: 0 4px 4px 0;
-    border-color: rgba(173, 20, 87, 1);
+    border-color: ${({ mainColor }) => mainColor};
   }
 `;
 

@@ -1,18 +1,22 @@
 import { ChannelSelectType } from '@/shared/types/api';
 import { usePatchChannel } from '@/shared/context/channel/hooks/usePostChannel';
-import { ChangeEvent, ChangeEventHandler } from 'react';
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  SyntheticEvent,
+  useCallback,
+} from 'react';
 import { string } from 'prop-types';
 
 const usePatchChannelInfo = (channelSelect: ChannelSelectType) => {
   const { mutate, status } = usePatchChannel(channelSelect);
 
-  const handelMutateChannelInfo = (
-    e: ChangeEvent<HTMLInputElement>,
-    channelId: number,
-    color: string
-  ) => {
-    mutate({ subscribeId: channelId, showYn: !e.target.checked, color });
-  };
+  const handelMutateChannelInfo = useCallback(
+    (channelId: number, color: string, showYn: boolean) => {
+      mutate({ subscribeId: channelId, showYn: showYn, color });
+    },
+    []
+  );
 
   return { handelMutateChannelInfo };
 };
