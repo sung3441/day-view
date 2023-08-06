@@ -21,21 +21,21 @@ const ModalManageChannel = ({ closeModal }: ModalProps) => {
 
   const { channelId, name = '' } = useModalState('ManageChannel');
 
+  const { mutate, status } = usePutChannel();
+
   const [value, setValue] = useState<ManageChannel>({
     channelName: name,
   });
 
+  // 유효성 검사
   const { isValid, InvalidMessage, validate } =
     useValidation('channelNameLength');
-
   const { isValid: isValidNameDiff, validate: validateNameDiff } =
     useValidation('isNameDifferent');
 
   useEffect(() => {
     validate(name);
   }, [name, validate]);
-
-  const { mutate, status } = usePutChannel();
 
   const handleChangeValue = (e: SyntheticEvent) => {
     const target = e.target as HTMLInputElement;

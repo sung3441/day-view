@@ -47,7 +47,7 @@ const ColorBoard = ({ closeColorBoard, x, y, channelId, name }: Props) => {
         onClick={(e) => {
           e.stopPropagation();
           handleIsShow();
-          openModal('ManageSubscriber');
+          openModal('ManageSubscriber', { channelId, name });
         }}
       >
         <Icon type="sm_user" />

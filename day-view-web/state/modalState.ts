@@ -1,7 +1,7 @@
 import { DefaultValue, atom, atomFamily, selectorFamily } from 'recoil';
 import { ModalType } from '@/component/modal/ModalRenderer';
 
-export type ModalParams = {
+export type ModalParams = Readonly<{
   clientX?: number;
   clientY?: number;
 
@@ -25,7 +25,7 @@ export type ModalParams = {
   startDate?: Date;
   endDate?: Date;
   recordImageUrl?: string;
-};
+}>;
 
 export type ModalState = {
   modalType: ModalType;
