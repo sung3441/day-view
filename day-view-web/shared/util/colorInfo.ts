@@ -34,6 +34,5 @@ export const colorEntries = Object.entries(rbgInfo);
 
 export function toRGBA(rgb: string, to: 1 | 0.26) {
   const [s, e] = rgb.split(')');
-
   return `${s}, ${to.toString()})`;
 }

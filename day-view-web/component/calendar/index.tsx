@@ -11,7 +11,7 @@ import {
   G_tabAtom,
 } from '@/shared/component/Organism/GNB/state';
 import SearchResult from '@/component/calendar/searchResult';
-import Category from '@/component/category';
+import Category from '@/component/Category.tsx';
 
 const tabList = {
   월: <DateSection />,

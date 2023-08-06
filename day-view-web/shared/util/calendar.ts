@@ -5,6 +5,10 @@ export function getTodayYYMM(): YYMMType {
   return { year: today.getFullYear(), month: today.getMonth() + 1 };
 }
 
+export function getSeletedYYMM(year: number, month: number) {
+  return { year, month };
+}
+
 export function getStrToday() {
   const today = new Date();
   const year = today.getFullYear();

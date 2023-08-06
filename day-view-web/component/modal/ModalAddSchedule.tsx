@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 
 import Modal from '@/shared/component/Organism/MODAL';
@@ -112,9 +112,19 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   };
 
   const handleAddSchedule = () => {
+    if (value.channelId === -1) return;
     mutate({ ...value });
     modalClose();
   };
+
+  useEffect(() => {
+    // 초기 state값이 변경 되지 않아 초기 값 세팅
+    if (channelStatus !== 'success' || !channels?.data?.length) return;
+    setValue((prev) => ({
+      ...prev,
+      channelId: channels.data?.at(0)?.channelId ?? 1,
+    }));
+  }, [channelStatus, channels]);
 
   return (
     <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>

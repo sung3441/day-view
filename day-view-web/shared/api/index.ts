@@ -11,6 +11,7 @@ import {
   PatchChannelType,
   PutChannelParamType,
   PatchUserParams,
+  RecordRes,
 } from '@/shared/types/api';
 
 export const getAccessToken = async () => {
@@ -101,7 +102,6 @@ export const getRecordInChannel = async ({
   channelId: number;
 }) => {
   const res = await new Client(`/api/channels/${channelId.toString()}/records
-`).get<SearchChannelRes>();
-
+`).get<RecordRes[]>();
   return res;
 };

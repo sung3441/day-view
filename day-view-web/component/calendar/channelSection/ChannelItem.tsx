@@ -10,9 +10,9 @@ interface Props extends ChannelRes {
   y: number;
   toggleChannelColor({ id }: { id: number }, e?: SyntheticEvent): void;
   handelMutateChannelInfo(
-    e: ChangeEvent<HTMLInputElement>,
     channelId: number,
-    color: string
+    color: string,
+    showYn: boolean
   ): void;
 }
 
@@ -30,32 +30,38 @@ const ChannelItem = ({
   handelMutateChannelInfo,
   toggleChannelColor,
 }: Props) => {
+  const handleIsShowChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handelMutateChannelInfo(channelId, color, e.target.checked);
+  };
+
   return (
     <>
       <Item id={`channel${channelId.toString()}`}>
         <CheckBox
           id={name}
+          color={color}
           label={name}
-          onChange={(e) => handelMutateChannelInfo(e, channelId, color)}
+          onChange={(e) => handleIsShowChange(e)}
           checked={showYn}
         />
-        <div
-          onClick={(e: SyntheticEvent) =>
+        <IconButton
+          type="sm_more"
+          size="small"
+          onClick={(e?: SyntheticEvent) =>
             toggleChannelColor({ id: channelId }, e)
           }
-          style={{ position: 'relative' }}
-        >
-          <IconButton type="sm_more" size="small" />
-        </div>
+        />
       </Item>
       {isOpen && (
         <ColorBoard
           name={name}
           channelId={channelId}
           isOpen={isOpen}
-          closeColorBoard={() => toggleChannelColor({ id: 0 })}
           x={x}
           y={y}
+          showYn={showYn}
+          closeColorBoard={() => toggleChannelColor({ id: 0 })}
+          handelMutateChannelInfo={handelMutateChannelInfo}
         />
       )}
     </>

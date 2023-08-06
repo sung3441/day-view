@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, SyntheticEvent } from 'react';
 import styled, { css } from 'styled-components';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { fadeIn, fadeOut } from '@/shared/styles/keyframes';
@@ -14,18 +14,48 @@ interface Props {
   y: number;
   channelId: number;
   name: string;
+  showYn: boolean;
   closeColorBoard({ id }: { id: number }): void;
+  handelMutateChannelInfo(
+    channelId: number,
+    color: string,
+    showYn: boolean
+  ): void;
 }
 
-const ColorBoard = ({ closeColorBoard, x, y, channelId, name }: Props) => {
+const ColorBoard = ({
+  x,
+  y,
+  channelId,
+  name,
+  showYn,
+  closeColorBoard,
+  handelMutateChannelInfo,
+}: Props) => {
   const { isShow, handleIsShow, handleOnAnimationEnd } =
     useAnimationHandler(closeColorBoard);
-
   const { openModal } = useModal();
-
   const ref = useOuterClick<HTMLDivElement>({
     callback: handleIsShow,
   });
+
+  const openManageChannelModal = (e: SyntheticEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    handleIsShow();
+    openModal('ManageChannel', { channelId: channelId, name: name });
+  };
+
+  const openManageSubscriberModal = (e: SyntheticEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    handleIsShow();
+    openModal('ManageSubscriber', { channelId: channelId, name: name });
+  };
+
+  const handleColorChange = (color: string) => {
+    handelMutateChannelInfo(channelId, color, showYn);
+    handleIsShow();
+  };
+
   return createPortal(
     <Box
       ref={ref}
@@ -34,28 +64,21 @@ const ColorBoard = ({ closeColorBoard, x, y, channelId, name }: Props) => {
       y={y}
       onAnimationEnd={handleOnAnimationEnd}
     >
-      <ConfigButton
-        onClick={() => {
-          handleIsShow();
-          openModal('ManageChannel', { channelId: channelId, name: name });
-        }}
-      >
+      <ConfigButton onClick={(e) => openManageChannelModal(e)}>
         <Icon type="sm_config" />
         <span>관리</span>
       </ConfigButton>
-      <ConfigButton
-        onClick={(e) => {
-          e.stopPropagation();
-          handleIsShow();
-          openModal('ManageSubscriber', { channelId, name });
-        }}
-      >
+      <ConfigButton onClick={(e) => openManageSubscriberModal(e)}>
         <Icon type="sm_user" />
-        <span>관리</span>
+        <span>구독자 관리</span>
       </ConfigButton>
       <ColorWrap>
         {colorEntries.map(([key, value]) => (
-          <ColorCircle key={key} rgb={value} />
+          <ColorCircle
+            key={key}
+            rgb={value}
+            onClick={() => handleColorChange(value)}
+          />
         ))}
       </ColorWrap>
     </Box>,

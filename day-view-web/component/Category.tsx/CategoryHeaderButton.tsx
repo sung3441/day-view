@@ -1,10 +1,12 @@
 import { memo, MouseEventHandler, SyntheticEvent } from 'react';
 import styled, { css } from 'styled-components';
+import { toRGBA } from '@/shared/util/colorInfo';
 
 interface Props {
   isSelected: boolean;
   name: string;
   id: number;
+  color: string;
   toggleHandler(e: SyntheticEvent<HTMLButtonElement>, channelId: number): void;
 }
 
@@ -13,10 +15,13 @@ const CategoryHeaderButton = ({
   id,
   name,
   toggleHandler,
+  color,
 }: Props) => {
+  const mainColor = toRGBA(color, 1);
   return (
     <CategoryButton
       isSelected={isSelected}
+      mainColor={mainColor}
       onClick={(e) => toggleHandler(e, id)}
     >
       {name}
@@ -26,7 +31,10 @@ const CategoryHeaderButton = ({
 
 export default memo(CategoryHeaderButton);
 
-const CategoryButton = styled.button<{ isSelected: boolean }>`
+const CategoryButton = styled.button<{
+  isSelected: boolean;
+  mainColor: string;
+}>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,17 +43,17 @@ const CategoryButton = styled.button<{ isSelected: boolean }>`
   width: auto;
   border-radius: 20px;
   white-space: nowrap;
-
-  ${({ theme, isSelected }) =>
+  transition: all 0.15s ease-in-out 0;
+  ${({ theme, isSelected, mainColor }) =>
     isSelected
       ? css`
-          color: ${theme.colors.main};
-          border: 1px solid ${theme.colors.main};
+          color: ${mainColor};
+          border: 1px solid ${mainColor};
           background: #fff;
         `
       : css`
           color: #222;
-          border: none;
+          border: 1px solid ${theme.colors.G_200};
           background: ${theme.colors.G_200};
-        `}
+        `};
 `;
