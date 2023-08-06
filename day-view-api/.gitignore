@@ -1,4 +1,5 @@
 **/src/main/resources/application-oauth.yml
+**/src/main/resources/application-dev.yml
 
 HELP.md
 .gradle
