@@ -2,11 +2,6 @@ import { atom } from 'recoil';
 import { getStrToday, getTodayYYMM } from '@/shared/util/calendar';
 import { DatType, YYMMType } from '@/shared/types/calendar';
 
-export const todayAtom = atom<string>({
-  key: 'today',
-  default: getStrToday(),
-});
-
 export const selectedYYMMAtom = atom<YYMMType>({
   key: 'selectedYYMMAtom', // unique ID (with respect to other atoms/selectors)
   default: getTodayYYMM(), // default value (aka initial value)

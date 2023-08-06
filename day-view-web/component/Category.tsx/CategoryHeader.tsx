@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import CategoryButton from './CategoryHeaderButton';
 import { ChannelRes } from '@/shared/types/api';
 import {
-  MouseEventHandler,
   SyntheticEvent,
   useCallback,
   useEffect,
@@ -40,6 +39,7 @@ const CategoryHeader = ({ categories }: Props) => {
   const toggleHandler = useCallback(
     (e: SyntheticEvent<HTMLButtonElement>, channelId: number) => {
       setSelectedCategoryId(channelId);
+
       if (!wrapperRef.current) return;
       moveCenterFromParent(wrapperRef.current, e.currentTarget);
     },
@@ -60,6 +60,7 @@ const CategoryHeader = ({ categories }: Props) => {
           isSelected={channel.channelId === selectedCategoryId}
           name={channel.name}
           id={channel.channelId}
+          color={channel.color}
           toggleHandler={toggleHandler}
         />
       ))}

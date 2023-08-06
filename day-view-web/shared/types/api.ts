@@ -86,3 +86,13 @@ export type PatchChannelType = {
   color?: string;
   showYn?: boolean;
 };
+
+export type RecordRes = {
+  recordId: number;
+  title: string;
+  content: string;
+  complete: boolean;
+  startDate: string;
+  endDate: string;
+  recordImageUrl: string;
+};

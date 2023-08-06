@@ -60,10 +60,9 @@ export const CheckBoxInput = styled.input<{
 
     border-radius: 7px;
     background-color: #fff;
-
-    transition: background-color 0.2s ease-in-out 0s;
-
     border: 2px solid ${({ shadowColor }) => shadowColor};
+
+    transition: background-color 0.15s ease-in-out 0s;
   }
 
   :checked + label::before {
