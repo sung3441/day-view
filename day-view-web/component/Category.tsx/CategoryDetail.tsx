@@ -18,6 +18,7 @@ const CategoryDetail = ({}: Props) => {
       const targetYYMM = `${year}-${
         strMonth.length === 1 ? `0${strMonth}` : strMonth
       }`;
+
       return redData.filter(({ startDate }) => {
         const parts = startDate.split('-');
         return parts.slice(0, 2).join('-') === targetYYMM;
