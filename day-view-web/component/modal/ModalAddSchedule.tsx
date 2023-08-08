@@ -27,7 +27,6 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   const [isChecked, setIsChecked] = useState(true);
 
   const [value, setValue] = useState<addScheduleParamType>({
-    channelId: -1,
     title: '',
     startDate: new Date(),
     endDate: new Date(),
@@ -43,7 +42,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
     const target = e.target as HTMLInputElement;
     const { name, value } = target;
 
-    switch (name as keyof Omit<addScheduleParamType, 'channelId'>) {
+    switch (name as keyof addScheduleParamType) {
       case 'title':
         validate(value);
         setValue((prev) => ({ ...prev, title: value }));
@@ -112,7 +111,6 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   };
 
   const handleAddSchedule = () => {
-    if (value.channelId === -1) return;
     mutate({ ...value });
     modalClose();
   };

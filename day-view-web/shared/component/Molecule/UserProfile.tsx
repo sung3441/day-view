@@ -28,7 +28,7 @@ const UserProfile = ({ callback }: Props) => {
   });
 
   const { data: userInfo } = useGetUserInfo((data) => data);
-  const { nickname, email, profileImageUrl } = userInfo;
+  const { nickname, email, birthday, profileImageUrl } = userInfo;
   const { mutate, status } = usePatchUserInfo();
 
   const logout = useLogout();
@@ -72,7 +72,7 @@ const UserProfile = ({ callback }: Props) => {
         <Button
           variant="accent"
           onClick={() => {
-            mutate({ nickname: value });
+            mutate({ nickname: value, birthday, profileImageUrl });
             closeUserInfo();
           }}
           disabled={!isValid || !isEmpty}
