@@ -5,6 +5,7 @@ import com.side.dayv.channel.repository.ChannelRepository;
 import com.side.dayv.global.exception.BadRequestException;
 import com.side.dayv.global.exception.NotFoundException;
 import com.side.dayv.record.dto.RequestCreateRecordDTO;
+import com.side.dayv.record.dto.RequestSearchRecordDTO;
 import com.side.dayv.record.dto.RequestUpdateRecordDTO;
 import com.side.dayv.record.dto.ResponseRecordDTO;
 import com.side.dayv.record.entity.Record;
@@ -91,6 +92,12 @@ public class RecordService {
                 .stream()
                 .map(record -> new ResponseRecordDTO(record))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<ResponseRecordDTO> getRecordOfSubscribedChannels(Long userId, RequestSearchRecordDTO searchRecordDTO){
+
+        return null;
     }
 
 }

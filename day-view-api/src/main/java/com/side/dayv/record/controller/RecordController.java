@@ -1,7 +1,9 @@
 package com.side.dayv.record.controller;
 
+import com.side.dayv.channel.dto.request.SearchChannelDto;
 import com.side.dayv.global.response.CommonResponse;
 import com.side.dayv.oauth.entity.CustomUser;
+import com.side.dayv.record.dto.RequestSearchRecordDTO;
 import com.side.dayv.record.dto.RequestUpdateRecordDTO;
 import com.side.dayv.record.dto.RequestCreateRecordDTO;
 import com.side.dayv.record.dto.ResponseRecordDTO;
@@ -63,4 +65,11 @@ public class RecordController {
         return ResponseEntity.ok(new CommonResponse<>(responseRecordDTOS));
     }
 
+    @GetMapping(value = "/subscribe/me/records")
+    public ResponseEntity getRecordOfSubscribedChannels(@AuthenticationPrincipal final CustomUser user,
+                                                        final RequestSearchRecordDTO search){
+
+        List<ResponseRecordDTO> responseRecordDTOS = recordService.getRecordOfSubscribedChannels(user.getMemberId(), search);
+        return ResponseEntity.ok(new CommonResponse<>(responseRecordDTOS));
+    }
 }
