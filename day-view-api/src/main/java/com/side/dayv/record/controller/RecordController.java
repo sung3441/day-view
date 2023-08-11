@@ -3,10 +3,7 @@ package com.side.dayv.record.controller;
 import com.side.dayv.channel.dto.request.SearchChannelDto;
 import com.side.dayv.global.response.CommonResponse;
 import com.side.dayv.oauth.entity.CustomUser;
-import com.side.dayv.record.dto.RequestSearchRecordDTO;
-import com.side.dayv.record.dto.RequestUpdateRecordDTO;
-import com.side.dayv.record.dto.RequestCreateRecordDTO;
-import com.side.dayv.record.dto.ResponseRecordDTO;
+import com.side.dayv.record.dto.*;
 import com.side.dayv.record.service.RecordService;
 import com.side.dayv.subscribe.service.SubscribeService;
 import lombok.RequiredArgsConstructor;
@@ -69,7 +66,8 @@ public class RecordController {
     public ResponseEntity getRecordOfSubscribedChannels(@AuthenticationPrincipal final CustomUser user,
                                                         final RequestSearchRecordDTO search){
 
-        List<ResponseRecordDTO> responseRecordDTOS = recordService.getRecordOfSubscribedChannels(user.getMemberId(), search);
+        System.out.println(search);
+        List<ResponseScheduleRecordDTO> responseRecordDTOS = recordService.getRecordOfSubscribedChannels(user.getMemberId(), search);
         return ResponseEntity.ok(new CommonResponse<>(responseRecordDTOS));
     }
 }

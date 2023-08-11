@@ -4,10 +4,7 @@ import com.side.dayv.channel.entity.Channel;
 import com.side.dayv.channel.repository.ChannelRepository;
 import com.side.dayv.global.exception.BadRequestException;
 import com.side.dayv.global.exception.NotFoundException;
-import com.side.dayv.record.dto.RequestCreateRecordDTO;
-import com.side.dayv.record.dto.RequestSearchRecordDTO;
-import com.side.dayv.record.dto.RequestUpdateRecordDTO;
-import com.side.dayv.record.dto.ResponseRecordDTO;
+import com.side.dayv.record.dto.*;
 import com.side.dayv.record.entity.Record;
 import com.side.dayv.record.repository.RecordRepository;
 import com.side.dayv.subscribe.entity.Subscribe;
@@ -95,9 +92,9 @@ public class RecordService {
     }
 
     @Transactional
-    public List<ResponseRecordDTO> getRecordOfSubscribedChannels(Long userId, RequestSearchRecordDTO searchRecordDTO){
+    public List<ResponseScheduleRecordDTO> getRecordOfSubscribedChannels(Long userId, RequestSearchRecordDTO searchRecordDTO){
 
-        return null;
+        return recordRepository.getRecordOfSubscribedChannels(userId, searchRecordDTO);
     }
 
 }

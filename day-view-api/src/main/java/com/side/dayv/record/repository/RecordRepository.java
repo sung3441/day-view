@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RecordRepository extends JpaRepository<Record, Long> {
+public interface RecordRepository extends JpaRepository<Record, Long>, CustomRecordRepository {
 
     Optional<Record> findByIdAndChannelId(final Long recordId, final Long channelId);
 
