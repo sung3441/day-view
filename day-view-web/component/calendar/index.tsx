@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import Channel from '@/component/calendar/channelSection';
-import DateSection from '@/component/calendar/dateSection/DateSection';
+import DateSection from '../date';
 import { useRecoilValue } from 'recoil';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useMemo } from 'react';
@@ -9,9 +9,9 @@ import {
   G_isOpenChannelAtom,
   G_isSearchOpenAtom,
   G_tabAtom,
-} from '@/shared/component/Organism/GNB/state';
+} from '@/shared/component/Organism/Gnb/state';
 import SearchResult from '@/component/calendar/searchResult';
-import Category from '@/component/Category.tsx';
+import Category from '../category';
 
 const tabList = {
   월: <DateSection />,

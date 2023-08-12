@@ -1,13 +1,10 @@
 import styled, { css } from 'styled-components';
 import { PropsWithChildren } from 'react';
-import Gnb from '@/shared/component/Organism/GNB';
-import { useRouter } from 'next/router';
+import Gnb from '@/shared/component/Organism/Gnb';
 
 interface Props {}
 
 const Layout = ({ children }: PropsWithChildren<Props>) => {
-  const router = useRouter();
-
   return (
     <StyledLayout>
       <Gnb />

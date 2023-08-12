@@ -1,5 +1,6 @@
 import { DateFlag, DatType } from '@/shared/types/calendar';
 import { getDateAndDay } from '@/shared/util/calendar';
+import { addZeroPad } from '@/shared/context/date/util';
 
 type PushDataType = {
   list: DatType[];
@@ -18,7 +19,7 @@ const pushData = ({
   day,
   flag = 'this',
 }: PushDataType) => {
-  const strDate = `${year.toString()}-${month.toString()}-${date.toString()}`;
+  const strDate = `${year}-${addZeroPad(month)}-${addZeroPad(date)}`;
   list.push({ date, strDate, day: day % 7, flag });
 };
 

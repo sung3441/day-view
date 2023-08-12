@@ -1,10 +1,9 @@
 import { memo, useState } from 'react';
-import Modal from '@/shared/component/Organism/MODAL';
+import Modal from '../../shared/component/Organism/Modal';
 import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import { ModalProps } from './ModalRenderer';
-import { SearchBar } from '@/shared/component/Molecule';
 import styled, { css } from 'styled-components';
-import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
+import { getStyledThemProperty } from '@/shared/styles/util';
 import { UserImage } from '@/shared/component/Atom';
 import useModalState from '@/shared/hooks/useModalState';
 

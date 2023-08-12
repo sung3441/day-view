@@ -3,7 +3,7 @@ import { getSearchChannel } from '@/shared/api';
 import {
   G_isSearchKeywordAtom,
   G_searchOrderOptionAtom,
-} from '@/shared/component/Organism/GNB/state';
+} from '@/shared/component/Organism/Gnb/state';
 import { useRecoilValue } from 'recoil';
 
 const PAGE_SIZE = 10;

@@ -1,4 +1,4 @@
-import { CSSProperties, memo, useEffect, useMemo } from 'react';
+import { CSSProperties, memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Channel from '@/component/calendar/channelSection/Channel';
@@ -9,11 +9,12 @@ import { type Props as ChannelInfoType } from './Channel';
 import {
   G_isOpenChannelAtom,
   G_isSearchOpenAtom,
-} from '@/shared/component/Organism/GNB/state';
+} from '@/shared/component/Organism/Gnb/state';
 import useColorBoxControl from '@/shared/context/channel/hooks/useColorBoxControl';
 
 const buttonStyle: CSSProperties = {
   width: pixelToRemUnit(323),
+
   height: pixelToRemUnit(60),
   background: '#FF836D',
   borderRadius: '7px',

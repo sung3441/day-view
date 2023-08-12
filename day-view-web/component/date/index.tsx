@@ -1,14 +1,14 @@
 import { memo, WheelEvent } from 'react';
-import CalendarDates from '@/component/calendar/dateSection/Dates';
+import CalendarDates from '@/component/date/Dates';
 import styled from 'styled-components';
-import DayLabels from '@/component/calendar/dateSection/DayLabels';
-import CalendarHeader from '@/component/calendar/dateSection/DateHeader';
+import DayLabels from '@/component/date/DayLabels';
+import CalendarHeader from '@/component/date/DateHeader';
 import { useRecoilState } from 'recoil';
 import { selectedYYMMAtom } from '@/state/calendar';
 
 interface Props {}
 
-const DateSection = ({}: Props) => {
+const Index = ({}: Props) => {
   const [selectedYYMM, setSelectedYYMM] = useRecoilState(selectedYYMMAtom);
 
   const handleMoveMonth = (flag: 'prev' | 'next') => {
@@ -24,7 +24,7 @@ const DateSection = ({}: Props) => {
   };
 
   return (
-    <div onWheel={(e) => handleOnWheel(e)}>
+    <div onWheel={handleOnWheel}>
       <CalendarHeader handleMoveMonth={handleMoveMonth} />
       <MonthWrap>
         <DayLabels />
@@ -34,7 +34,7 @@ const DateSection = ({}: Props) => {
   );
 };
 
-export default memo(DateSection);
+export default memo(Index);
 
 const MonthWrap = styled.div`
   height: calc(100vh - 100px - 76px);

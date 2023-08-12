@@ -1,9 +1,9 @@
 import {
   Children,
-  ReactNode,
   forwardRef,
   isValidElement,
   memo,
+  ReactNode,
   useEffect,
   useRef,
   useState,
@@ -14,6 +14,7 @@ import { getAdjustPosition } from '@/shared/util/getAdjustPosition';
 import { ModalParams } from '@/state/modalState';
 
 import ModalDim from './ModalDim';
+
 interface Props extends ModalParams {
   children?: ReactNode;
   isShow?: boolean;

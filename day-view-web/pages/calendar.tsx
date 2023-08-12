@@ -1,26 +1,23 @@
 import dynamic from 'next/dynamic';
 import Calendar from '@/component/calendar';
 import { GetServerSidePropsContext } from 'next';
-import { getAccessToken, getUser } from '@/shared/api';
+import { getUser } from '@/shared/api';
 
-import { dehydrate, QueryClient, useQuery } from 'react-query';
-import {
-  isSetAccessToken,
-  setAccessToken,
-  setCookie,
-} from '@/shared/util/auth';
+import { dehydrate, QueryClient } from 'react-query';
+import { isSetAccessToken } from '@/shared/util/auth';
 import { QueryKeys } from '@/shared/queryClient';
+import CommonCalendar from '@/shared/component/Organism/CommonCalendar';
 
 const ModalRenderer = dynamic(() => import('@/component/modal/ModalRenderer'), {
   ssr: false,
 });
 
 function CalendarPage() {
-  const { data } = useQuery([QueryKeys.USER], getUser);
   return (
     <>
       <Calendar />
       <ModalRenderer />
+      <CommonCalendar />
     </>
   );
 }

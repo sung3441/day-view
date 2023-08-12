@@ -45,12 +45,13 @@ export type PutChannelParamType = {
   name: string;
 };
 
-export type addScheduleParamType = {
+export type AddScheduleParamType = {
   title: string;
-  content?: string;
   startDate: Date;
   endDate: Date;
+  content?: string;
   recordImageUrl?: string;
+  channelId?: number;
 };
 
 export type SearchChannelParamType = {
@@ -94,4 +95,22 @@ export type RecordRes = {
   startDate: string;
   endDate: string;
   recordImageUrl: string;
+  color: string;
+  channelName: string;
+  subscribeId: number;
+  channelId: number;
+};
+
+export type RecordInChannel = Omit<
+  RecordRes,
+  'color' | 'channelName' | 'subscribeId' | 'channelId'
+>;
+
+export type RecordInSubscribeParam = {
+  startDate: string; // 2021-09-01T00:00:00
+  endDate: string; // 2021-09-30T23:59:59
+};
+
+export type MyChannelRecodeRes = {
+  data: RecordRes[];
 };

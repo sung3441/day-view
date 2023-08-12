@@ -1,11 +1,11 @@
 import { IconButton, SearchBar } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
   G_isSearchKeywordAtom,
   G_isSearchOpenAtom,
-} from '@/shared/component/Organism/GNB/state';
+} from '@/shared/component/Organism/Gnb/state';
 import styled from 'styled-components';
 
 const SearchGnb = () => {
