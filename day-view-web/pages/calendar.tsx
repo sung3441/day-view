@@ -10,17 +10,18 @@ import {
   setCookie,
 } from '@/shared/util/auth';
 import { QueryKeys } from '@/shared/queryClient';
+import CommonCalendar from '@/shared/component/Organism/CommonCalendar';
 
 const ModalRenderer = dynamic(() => import('@/component/modal/ModalRenderer'), {
   ssr: false,
 });
 
 function CalendarPage() {
-  const { data } = useQuery([QueryKeys.USER], getUser);
   return (
     <>
       <Calendar />
       <ModalRenderer />
+      <CommonCalendar />
     </>
   );
 }

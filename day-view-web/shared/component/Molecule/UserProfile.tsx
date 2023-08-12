@@ -4,7 +4,7 @@ import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { Button, UserImage } from '@/shared/component/Atom';
 import useLogout from '@/shared/hooks/user/useLogout';
 import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
-import ModalInput from '../Organism/MODAL/ModalInput';
+import ModalInput from '@/shared/component/Organism/Modal/ModalInput';
 import useGetUserInfo from '@/shared/context/user/hooks/useGetUserInfo';
 import useValidation from '@/shared/hooks/useValidation';
 import usePatchUserInfo from '@/shared/context/user/hooks/usePatchUserInfo';

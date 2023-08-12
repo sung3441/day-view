@@ -4,7 +4,7 @@ import { useAnimationHandler } from '@/shared/hooks';
 
 import { ModalProps } from './ModalRenderer';
 import useValidation from '@/shared/hooks/useValidation';
-import Modal from '@/shared/component/Organism/MODAL';
+import Modal from '../../shared/component/Organism/Modal';
 import { usePutChannel } from '@/shared/context/channel/hooks/usePostChannel';
 import useModalState from '@/shared/hooks/useModalState';
 

@@ -20,7 +20,7 @@ const DateHeader = ({ handleMoveMonth }: Props) => {
   };
 
   return (
-    <Wrap>
+    <Wrapper>
       <CalendarLabel>
         {year}년 {month}월
       </CalendarLabel>
@@ -29,13 +29,13 @@ const DateHeader = ({ handleMoveMonth }: Props) => {
         <TodayButton onClick={() => handleClickToday()}>오늘</TodayButton>
         <IconButton type="right" onClick={() => handleMoveMonth('next')} />
       </RightBox>
-    </Wrap>
+    </Wrapper>
   );
 };
 
 export default memo(DateHeader);
 
-const Wrap = styled.div`
+const Wrapper = styled.div`
   ${getStyledThemProperty('box', 'flexBetweenBox')}
   ${getStyledThemProperty('layout', 'pageHeader')}
 `;

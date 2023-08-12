@@ -3,7 +3,7 @@ import { Select } from '@/shared/component/Atom';
 import {
   G_searchOrderOptionAtom,
   SearchOrderType,
-} from '@/shared/component/Organism/GNB/state';
+} from '@/shared/component/Organism/Gnb/state';
 import { useRecoilState } from 'recoil';
 
 const selectOptions: {

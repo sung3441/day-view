@@ -49,11 +49,11 @@ export type PutChannelParamType = {
 
 export type AddScheduleParamType = {
   title: string;
-  content?: string;
   startDate: Date;
   endDate: Date;
+  content?: string;
   recordImageUrl?: string;
-  channelId: number;
+  channelId?: number;
 };
 
 export type SearchChannelParamType = {

@@ -37,15 +37,18 @@ const Wrap = styled.div<{
   isRed: boolean;
   isNotThis: boolean;
 }>`
-  padding: 4px 0 0 18px;
   z-index: 0;
   background-color: #fff;
   cursor: pointer;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   ${({ theme }) =>
     css`
       color: ${theme.color.textColor};
-    `}
+    `}s
   ${({ theme, isRed }) =>
     isRed &&
     css`
@@ -68,15 +71,13 @@ const Date = styled.div<{ isSelectedDay: boolean }>`
   font-weight: 400;
   font-size: 16px;
   
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   ${({ theme, isSelectedDay }) =>
     isSelectedDay &&
     css`
       color: #fff;
       background-color: #ff7f69;
+      z-index: 1;
+      border-radius: 50%;
     `}
   }
 `;

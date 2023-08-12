@@ -9,7 +9,7 @@ import { type Props as ChannelInfoType } from './Channel';
 import {
   G_isOpenChannelAtom,
   G_isSearchOpenAtom,
-} from '@/shared/component/Organism/GNB/state';
+} from '@/shared/component/Organism/Gnb/state';
 import useColorBoxControl from '@/shared/context/channel/hooks/useColorBoxControl';
 
 const buttonStyle: CSSProperties = {

@@ -1,5 +1,5 @@
 import { memo, useState } from 'react';
-import Modal from '@/shared/component/Organism/MODAL';
+import Modal from '../../shared/component/Organism/Modal';
 import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import { ModalProps } from './ModalRenderer';
 import { SearchBar } from '@/shared/component/Molecule';

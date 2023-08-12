@@ -1,8 +1,8 @@
 import { memo, useCallback, WheelEvent } from 'react';
-import CalendarDates from '@/component/Date/Dates';
+import CalendarDates from '@/component/date/Dates';
 import styled from 'styled-components';
-import DayLabels from '@/component/Date/DayLabels';
-import CalendarHeader from '@/component/Date/DateHeader';
+import DayLabels from '@/component/date/DayLabels';
+import CalendarHeader from '@/component/date/DateHeader';
 import { useRecoilState } from 'recoil';
 import { selectedYYMMAtom } from '@/state/calendar';
 

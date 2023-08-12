@@ -1,5 +1,5 @@
 import { memo, SyntheticEvent, useState } from 'react';
-import Modal from '@/shared/component/Organism/MODAL';
+import Modal from '../../shared/component/Organism/Modal';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 import { useAnimationHandler } from '@/shared/hooks';
 import { useCreateChannel } from '@/shared/context/channel/hooks/usePostChannel';

@@ -1,6 +1,6 @@
 import { memo, SyntheticEvent, useCallback, useState } from 'react';
 import { IconButton } from '@/shared/component/Molecule';
-import GnbTab from '@/shared/component/Organism/GNB/GnbTab';
+import GnbTab from '@/shared/component/Organism/Gnb/GnbTab';
 import styled from 'styled-components';
 import { getStyledThemProperty } from '@/shared/styles/util';
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -8,9 +8,9 @@ import {
   G_isOpenChannelAtom,
   G_isSearchOpenAtom,
   G_isSearchKeywordAtom,
-} from '@/shared/component/Organism/GNB/state';
-import SearchSortBox from '@/shared/component/Organism/GNB/SearchSortBox';
-import SearchGnb from '@/shared/component/Organism/GNB/SearchGnb';
+} from '@/shared/component/Organism/Gnb/state';
+import SearchSortBox from '@/shared/component/Organism/Gnb/SearchSortBox';
+import SearchGnb from '@/shared/component/Organism/Gnb/SearchGnb';
 import UserProfile from '../../Molecule/UserProfile';
 
 const CalendarGnb = () => {

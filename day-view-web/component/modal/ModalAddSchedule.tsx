@@ -1,11 +1,10 @@
 import React, { memo, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 
-import Modal from '@/shared/component/Organism/MODAL';
+import Modal from '../../shared/component/Organism/Modal';
 import { CheckBox } from '@/shared/component/Molecule';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 
-import { addScheduleParamType } from '@/shared/types/api';
 import { DateInput, Icon, Select, TimeInput } from '@/shared/component/Atom';
 import { dateToDayjs, dayjsToDate } from '@/shared/util/dateConversion';
 import useAddSchedule from './hooks/useAddSchedule';
@@ -13,6 +12,7 @@ import useAddSchedule from './hooks/useAddSchedule';
 import { useAnimationHandler } from '@/shared/hooks';
 import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
 import useValidation from '@/shared/hooks/useValidation';
+import { AddScheduleParamType } from '@/shared/types/api';
 
 const BODY_GAP = 22;
 const SECTION_GAP = 34;
@@ -26,7 +26,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
 
   const [isChecked, setIsChecked] = useState(true);
 
-  const [value, setValue] = useState<addScheduleParamType>({
+  const [value, setValue] = useState<AddScheduleParamType>({
     title: '',
     startDate: new Date(),
     endDate: new Date(),
@@ -42,7 +42,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
     const target = e.target as HTMLInputElement;
     const { name, value } = target;
 
-    switch (name as keyof addScheduleParamType) {
+    switch (name as keyof AddScheduleParamType) {
       case 'title':
         validate(value);
         setValue((prev) => ({ ...prev, title: value }));
@@ -59,14 +59,14 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   /** hour, minute만 변경 */
   const handleChangeTime = (
     date: unknown,
-    field: keyof Pick<addScheduleParamType, 'startDate' | 'endDate'>
+    field: keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
   ) => {
     const newDate = date as dayjs.Dayjs;
     const hour = newDate.hour();
     const minute = newDate.minute();
 
     switch (
-      field as keyof Pick<addScheduleParamType, 'startDate' | 'endDate'>
+      field as keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
     ) {
       case 'startDate':
         setValue((prev) => ({
@@ -90,10 +90,10 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   /** date 전체 변경 */
   const handleChangeDate = (
     date: unknown,
-    field: keyof Pick<addScheduleParamType, 'startDate' | 'endDate'>
+    field: keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
   ) => {
     switch (
-      field as keyof Pick<addScheduleParamType, 'startDate' | 'endDate'>
+      field as keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
     ) {
       case 'startDate':
         setValue((prev) => ({

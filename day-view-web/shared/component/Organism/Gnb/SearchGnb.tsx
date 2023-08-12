@@ -5,7 +5,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
   G_isSearchKeywordAtom,
   G_isSearchOpenAtom,
-} from '@/shared/component/Organism/GNB/state';
+} from '@/shared/component/Organism/Gnb/state';
 import styled from 'styled-components';
 
 const SearchGnb = () => {

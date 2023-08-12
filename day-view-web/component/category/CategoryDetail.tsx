@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { selectedCategoryIdAtom } from '@/shared/context/category/state';
 import useGetRecord from '@/shared/context/record/hooks/useGetRecord';
 import { selectedYYMMAtom } from '@/state/calendar';
-import { selectedYYMMRecords } from '@/component/Category.tsx/util';
+import { selectedYYMMRecords } from '@/component/category/util';
 
 type Props = {};
 

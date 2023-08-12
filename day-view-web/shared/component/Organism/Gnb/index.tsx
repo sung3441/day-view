@@ -3,7 +3,7 @@ import { memo, useMemo } from 'react';
 import { IconButton } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useRouter } from 'next/router';
-import CalendarGNB from '@/shared/component/Organism/GNB/CalendarGnb';
+import CalendarGNB from '@/shared/component/Organism/Gnb/CalendarGnb';
 
 interface Props {
   handleChangeTheme?: () => void;
