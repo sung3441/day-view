@@ -1,4 +1,4 @@
-import { memo, useCallback, WheelEvent } from 'react';
+import { memo, WheelEvent } from 'react';
 import CalendarDates from '@/component/date/Dates';
 import styled from 'styled-components';
 import DayLabels from '@/component/date/DayLabels';

@@ -62,23 +62,23 @@ const Wrap = styled.div<{
     css`
       color: ${theme.color.redColor};
     `};
-  ${({ theme, isNotThis }) =>
+  ${({ isNotThis }) =>
     isNotThis &&
     css`
       opacity: 0.4;
     `};
-  ${({ theme, isRange }) =>
+  ${({ isRange }) =>
     isRange &&
     css`
       background-color: rgba(255, 131, 109, 0.26);
     `}
-  ${({ theme, isSelectedStartDay }) =>
+  ${({ isSelectedStartDay }) =>
     isSelectedStartDay &&
     css`
       border-top-left-radius: 50%;
       border-bottom-left-radius: 50%;
     `}
-${({ theme, isSelectedEndDay }) =>
+${({ isSelectedEndDay }) =>
     isSelectedEndDay &&
     css`
       border-top-right-radius: 50%;

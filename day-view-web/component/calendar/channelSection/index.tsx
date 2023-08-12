@@ -1,4 +1,4 @@
-import { CSSProperties, memo, useEffect, useMemo } from 'react';
+import { CSSProperties, memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Channel from '@/component/calendar/channelSection/Channel';
@@ -14,6 +14,7 @@ import useColorBoxControl from '@/shared/context/channel/hooks/useColorBoxContro
 
 const buttonStyle: CSSProperties = {
   width: pixelToRemUnit(323),
+
   height: pixelToRemUnit(60),
   background: '#FF836D',
   borderRadius: '7px',

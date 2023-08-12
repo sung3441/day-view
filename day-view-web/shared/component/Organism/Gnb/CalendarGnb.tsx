@@ -7,7 +7,6 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
   G_isOpenChannelAtom,
   G_isSearchOpenAtom,
-  G_isSearchKeywordAtom,
 } from '@/shared/component/Organism/Gnb/state';
 import SearchSortBox from '@/shared/component/Organism/Gnb/SearchSortBox';
 import SearchGnb from '@/shared/component/Organism/Gnb/SearchGnb';

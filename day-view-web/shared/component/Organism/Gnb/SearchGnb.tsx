@@ -1,6 +1,6 @@
 import { IconButton, SearchBar } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
   G_isSearchKeywordAtom,

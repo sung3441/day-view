@@ -1,5 +1,3 @@
-import { getRecordInSubscribe } from '@/shared/api';
-
 export type Token = {
   token: string;
 };

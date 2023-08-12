@@ -1,4 +1,4 @@
-import { memo, MouseEventHandler, SyntheticEvent } from 'react';
+import { memo, SyntheticEvent } from 'react';
 import styled, { css } from 'styled-components';
 import { toRGBA } from '@/shared/util/colorInfo';
 
@@ -43,7 +43,7 @@ const CategoryButton = styled.button<{
   width: auto;
   border-radius: 20px;
   white-space: nowrap;
-  transition: all 0.15s ease-in-out 0;
+  transition: all 0.15s ease-in-out;
   ${({ theme, isSelected, mainColor }) =>
     isSelected
       ? css`

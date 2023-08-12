@@ -1,5 +1,4 @@
 import { memo, useCallback } from 'react';
-import { RecordRes } from '@/shared/types/api';
 import { useRecoilValue } from 'recoil';
 import { selectedCategoryIdAtom } from '@/shared/context/category/state';
 import useGetRecord from '@/shared/context/record/hooks/useGetRecord';

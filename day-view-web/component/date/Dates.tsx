@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
+import { memo } from 'react';
 import Day from '@/component/date/Day';
 import { useDate, useDateParam } from '@/shared/context/date/hooks/useDate';
 import useGetDateRecord from '@/shared/context/date/hooks/useGetDateRecord';
