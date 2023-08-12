@@ -1,21 +1,18 @@
-import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
-import Day from '@/component/calendar/dateSection/Day';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   cacheDaysAtom,
   selectedDayAtom,
   selectedYYMMAtom,
 } from '@/state/calendar';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { makeDays } from '@/shared/context/channel/util/date';
-import useGetMyChannelRecodes from '@/shared/context/channel/hooks/useGetMyChannelRecodes';
+import { covertDateParam } from '@/shared/context/date/util';
 
-const Dates = () => {
+export const useDate = () => {
   const { year, month } = useRecoilValue(selectedYYMMAtom);
   const [selectedDay, setSelectedDay] = useRecoilState(selectedDayAtom);
   const [cacheDays, setCacheDays] = useRecoilState(cacheDaysAtom);
   const key = useRef<string>('');
-
-  // const { mySubscribeChannel } = useGetMyChannelRecodes();
 
   const generatedDays = useMemo(() => {
     key.current = `${year}-${month}`;
@@ -30,18 +27,23 @@ const Dates = () => {
       setCacheDays((prev) => ({ ...prev, [key.current]: generatedDays }));
   }, [generatedDays]);
 
-  return (
-    <>
-      {generatedDays.map((info) => (
-        <Day
-          key={info.strDate}
-          isSelectedDay={info.strDate === selectedDay}
-          handleSelectDay={handleSelectDay}
-          {...info}
-        />
-      ))}
-    </>
-  );
+  return {
+    generatedDays,
+    handleSelectDay,
+    selectedDay,
+  };
 };
 
-export default memo(Dates);
+export const useDateParam = () => {
+  const { year, month } = useRecoilValue(selectedYYMMAtom);
+
+  return useMemo(() => {
+    const startDate = covertDateParam({ year, month, day: 1 });
+    const endDate = covertDateParam({
+      year,
+      month,
+      isLastDay: true,
+    });
+    return { startDate, endDate };
+  }, [year, month]);
+};

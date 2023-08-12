@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import Channel from '@/component/calendar/channelSection';
-import DateSection from '@/component/calendar/dateSection/DateSection';
+import DateSection from '@/component/Date';
 import { useRecoilValue } from 'recoil';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useMemo } from 'react';

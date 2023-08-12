@@ -52,7 +52,7 @@ const Ul = styled.ul`
   flex-direction: column;
   gap: 20px;
 
-  overflow-y: overlay;
+  //overflow-y: overlay;
 
   &::-webkit-scrollbar {
     display: none;
