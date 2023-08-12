@@ -21,16 +21,20 @@ public class RequestUpdateRecordDTO {
     private LocalDateTime endDate;
     private String recordImageUrl;
 
+    private boolean allDay;
+
     @Builder
     public RequestUpdateRecordDTO(String title, String content,
                                   LocalDateTime startDate, LocalDateTime endDate,
-                                  String recordImageUrl, boolean complete){
+                                  String recordImageUrl, boolean complete,
+                                  boolean allDay){
         this.title = title;
         this.content = content;
         this.complete = complete;
         this.startDate = startDate;
         this.endDate = endDate;
         this.recordImageUrl = recordImageUrl;
+        this.allDay = allDay;
     }
 
     public Record toEntity(Channel channel) {
@@ -42,6 +46,7 @@ public class RequestUpdateRecordDTO {
                 .startDate(startDate)
                 .endDate(endDate)
                 .channel(channel)
+                .allDay(allDay)
                 .build();
     }
 }

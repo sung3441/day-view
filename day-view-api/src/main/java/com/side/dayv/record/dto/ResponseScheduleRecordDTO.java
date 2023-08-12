@@ -16,6 +16,7 @@ public class ResponseScheduleRecordDTO {
     private String title;
     private String content;
     private boolean complete;
+    private boolean allDay;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -41,5 +42,6 @@ public class ResponseScheduleRecordDTO {
         this.channelName = channel.getName();
         this.channelId = channel.getId();
         this.subscribeId = subscribe.getId();
+        this.allDay = record.isAllDay();
     }
 }
