@@ -35,6 +35,10 @@ public class Record {
     private boolean complete;
 
     @NotNull
+    @Column(name = "is_all_day")
+    private boolean allDay;
+
+    @NotNull
     @Column(name = "start_date")
     private LocalDateTime startDate;
 
@@ -51,7 +55,7 @@ public class Record {
     public Record(String title, String content,
                   String imageUrl , boolean complete,
                   LocalDateTime startDate, LocalDateTime endDate,
-                  Channel channel){
+                  Channel channel, boolean allDay){
         this.title = title;
         this.content = content;
         this.imageUrl = imageUrl;
@@ -59,6 +63,7 @@ public class Record {
         this.startDate = startDate;
         this.endDate = endDate;
         this.channel = channel;
+        this.allDay = allDay;
     }
 
     public void update(RequestUpdateRecordDTO recordDTO){

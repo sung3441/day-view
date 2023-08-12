@@ -21,6 +21,7 @@ public class ResponseRecordDTO {
     private String content;
 
     private boolean complete;
+    private boolean allDay;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -35,5 +36,6 @@ public class ResponseRecordDTO {
         this.endDate = record.getEndDate();
         this.recordImageUrl = record.getImageUrl();
         this.complete = record.isComplete();
+        this.allDay = record.isAllDay();
     }
 }
