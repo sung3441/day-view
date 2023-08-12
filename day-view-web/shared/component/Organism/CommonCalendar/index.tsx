@@ -48,7 +48,7 @@ const Calendar = ({ onSelectDay }: Props) => {
 
   useEffect(() => {
     onSelectDay && onSelectDay(startDate, endDate);
-  }, [startDate, endDate]);
+  }, [startDate, endDate, onSelectDay]);
   const isRangeDay = (date: string) => {
     if (startDate === '' || endDate === '') {
       return false;

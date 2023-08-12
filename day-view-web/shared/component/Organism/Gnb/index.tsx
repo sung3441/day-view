@@ -9,7 +9,7 @@ interface Props {
   handleChangeTheme?: () => void;
 }
 
-const Index = ({ handleChangeTheme }: Props) => {
+const Index = ({}: Props) => {
   const { pathname } = useRouter();
 
   const renderContent = useMemo(() => {

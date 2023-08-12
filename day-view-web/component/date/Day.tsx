@@ -48,7 +48,7 @@ const Wrap = styled.div<{
   ${({ theme }) =>
     css`
       color: ${theme.color.textColor};
-    `}s
+    `}
   ${({ theme, isRed }) =>
     isRed &&
     css`
