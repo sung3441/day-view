@@ -16,7 +16,7 @@ export default memo(Textarea);
 
 const S = {
   Textarea: styled.textarea`
-    width: 380px;
+    width: 100%;
     height: 144px;
     padding: 8px 18px;
     resize: none;
