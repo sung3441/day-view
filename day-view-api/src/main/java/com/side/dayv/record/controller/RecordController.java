@@ -66,7 +66,6 @@ public class RecordController {
     public ResponseEntity getRecordOfSubscribedChannels(@AuthenticationPrincipal final CustomUser user,
                                                         final RequestSearchRecordDTO search){
 
-        System.out.println(search);
         List<ResponseScheduleRecordDTO> responseRecordDTOS = recordService.getRecordOfSubscribedChannels(user.getMemberId(), search);
         return ResponseEntity.ok(new CommonResponse<>(responseRecordDTOS));
     }
