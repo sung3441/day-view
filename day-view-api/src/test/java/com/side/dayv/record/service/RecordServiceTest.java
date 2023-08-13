@@ -6,9 +6,7 @@ import com.side.dayv.channel.service.ChannelService;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.oauth.entity.ProviderType;
-import com.side.dayv.record.dto.RequestCreateRecordDTO;
-import com.side.dayv.record.dto.RequestUpdateRecordDTO;
-import com.side.dayv.record.dto.ResponseRecordDTO;
+import com.side.dayv.record.dto.*;
 import com.side.dayv.record.entity.Record;
 import com.side.dayv.record.repository.RecordRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -72,6 +71,106 @@ class RecordServiceTest {
                 .endDate(LocalDateTime.of(2023, 5, 30, 10, 30))
                 .build();
     }
+
+    /**
+     *   case 1.
+     *   |------|           (일정)
+     *      |-------------| (검색)
+     */
+    @Test
+    void 기간별_일정_조회_1(){
+        RequestCreateRecordDTO createRecordDTO = RequestCreateRecordDTO.builder()
+                .title("일정 생성")
+                .content("내용 테스트")
+                .startDate(LocalDateTime.of(2023, 4, 20, 00, 00))
+                .endDate(LocalDateTime.of(2023, 5, 10, 10, 30))
+                .build();
+
+        ResponseRecordDTO record = recordService.createRecord(createRecordDTO, MEMBER.getId(), CHANNEL.getId());
+
+        RequestSearchRecordDTO search = RequestSearchRecordDTO.builder()
+                        .startDate(LocalDateTime.of(2023, 5, 1, 10, 29))
+                        .endDate(LocalDateTime.of(2023, 5, 30, 12, 30))
+                        .build();
+
+        List<ResponseScheduleRecordDTO> list = recordService.getRecordOfSubscribedChannels(MEMBER.getId(), search);
+        assertThat(list.size()).isEqualTo(1);
+    }
+    /**
+     *   case 2.
+     *         |------|     (일정)
+     *      |-------------| (검색)
+     */
+    @Test
+    void 기간별_일정_조회_2(){
+        RequestCreateRecordDTO createRecordDTO = RequestCreateRecordDTO.builder()
+                .title("일정 생성")
+                .content("내용 테스트")
+                .startDate(LocalDateTime.of(2023, 5, 1, 00, 00))
+                .endDate(LocalDateTime.of(2023, 5, 10, 10, 30))
+                .build();
+
+        recordService.createRecord(createRecordDTO, MEMBER.getId(), CHANNEL.getId());
+
+        RequestSearchRecordDTO search = RequestSearchRecordDTO.builder()
+                .startDate(LocalDateTime.of(2023, 5, 1, 00, 00))
+                .endDate(LocalDateTime.of(2023, 6, 1, 00, 00))
+                .build();
+
+        List<ResponseScheduleRecordDTO> list = recordService.getRecordOfSubscribedChannels(MEMBER.getId(), search);
+        assertThat(list.size()).isEqualTo(1);
+    }
+
+    /**
+     *   case 3.
+     *                |------|   (일정)
+     *      |-------------|      (검색)
+     */
+    @Test
+    void 기간별_일정_조회_3(){
+        RequestCreateRecordDTO createRecordDTO = RequestCreateRecordDTO.builder()
+                .title("일정 생성")
+                .content("내용 테스트")
+                .startDate(LocalDateTime.of(2023, 5, 25, 10, 00))
+                .endDate(LocalDateTime.of(2023, 6, 10, 10, 30))
+                .build();
+
+        recordService.createRecord(createRecordDTO, MEMBER.getId(), CHANNEL.getId());
+
+        RequestSearchRecordDTO search = RequestSearchRecordDTO.builder()
+                .startDate(LocalDateTime.of(2023, 5, 1, 00, 00))
+                .endDate(LocalDateTime.of(2023, 6, 1, 00, 00))
+                .build();
+
+        List<ResponseScheduleRecordDTO> list = recordService.getRecordOfSubscribedChannels(MEMBER.getId(), search);
+        assertThat(list.size()).isEqualTo(1);
+    }
+
+    /**
+     *   case 4.
+     *   |-------------------|   (일정)
+     *      |-------------|      (검색)
+     */
+    @Test
+    void 기간별_일정_조회_4(){
+        RequestCreateRecordDTO createRecordDTO = RequestCreateRecordDTO.builder()
+                .title("일정 생성")
+                .content("내용 테스트")
+                .startDate(LocalDateTime.of(2023, 4, 25, 10, 00))
+                .endDate(LocalDateTime.of(2023, 6, 10, 10, 30))
+                .build();
+
+        recordService.createRecord(createRecordDTO, MEMBER.getId(), CHANNEL.getId());
+
+        RequestSearchRecordDTO search = RequestSearchRecordDTO.builder()
+                .startDate(LocalDateTime.of(2023, 5, 1, 00, 00))
+                .endDate(LocalDateTime.of(2023, 6, 1, 00, 00))
+                .build();
+
+        List<ResponseScheduleRecordDTO> list = recordService.getRecordOfSubscribedChannels(MEMBER.getId(), search);
+        assertThat(list.size()).isEqualTo(1);
+    }
+
 
     @Test
     void 일정_등록() {
