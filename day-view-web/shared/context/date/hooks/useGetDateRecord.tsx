@@ -39,9 +39,9 @@ const useGetDateRecord = ({ startDate, endDate }: RecordInSubscribeParam) => {
         return myChannelIds?.includes(record.channelId);
       })
       .forEach((record) => {
-        const { startDate, endDate } = record;
+        const { startDate, endDate, allDay } = record;
+        if (!allDay) setDateInHash(endDate, record, res);
         setDateInHash(startDate, record, res);
-        setDateInHash(endDate, record, res);
       });
     return res;
   }, [myRecodes, myChannelIds]);

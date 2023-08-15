@@ -1,5 +1,5 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { channelColorIdAtom } from '@/state/channel';
+import { channelColorInfoAtom } from '@/state/channel';
 import { SyntheticEvent, useCallback, useEffect } from 'react';
 import { COLOR_BOX_HEIGHT } from '@/shared/constant/calendar';
 
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const useColorBoxControl = ({ isRequiredEffect }: Props = {}) => {
-  const [channelColor, setChannelColor] = useRecoilState(channelColorIdAtom);
+  const [channelColor, setChannelColor] = useRecoilState(channelColorInfoAtom);
 
   const calcPosition = useCallback((e: SyntheticEvent) => {
     const BOTTOM_MARGIN = 10;

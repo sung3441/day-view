@@ -6,7 +6,7 @@ import { ChannelSelectType } from '@/shared/types/api';
 import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
 import ChannelItem from '@/component/channel/ChannelItem';
 import { useRecoilValue } from 'recoil';
-import { channelColorIdAtom } from '@/state/channel';
+import { channelColorInfoAtom } from '@/state/channel';
 import useColorBoxControl from '@/shared/context/channel/hooks/useColorBoxControl';
 import usePatchChannelInfo from '@/shared/context/channel/hooks/usePatchChannelInfo';
 
@@ -17,7 +17,7 @@ export interface Props {
 }
 
 const Channel = ({ label, selectType, onClickPlus }: Props) => {
-  const channelColorId = useRecoilValue(channelColorIdAtom);
+  const channelColorInfo = useRecoilValue(channelColorInfoAtom);
   const { toggleChannelColor } = useColorBoxControl();
 
   const { status, data } = useGetChannel({ selectType });
@@ -34,9 +34,9 @@ const Channel = ({ label, selectType, onClickPlus }: Props) => {
         {data?.data?.map((channel) => (
           <ChannelItem
             key={channel.channelId}
-            isOpen={channel.channelId === channelColorId.id}
-            x={channelColorId.x}
-            y={channelColorId.y}
+            selectType={selectType}
+            channelColorInfo={channelColorInfo}
+            isOpen={channelColorInfo.id === channel.channelId}
             handelMutateChannelInfo={handelMutateChannelInfo}
             toggleChannelColor={toggleChannelColor}
             {...channel}

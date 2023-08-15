@@ -2,12 +2,13 @@ import { CheckBox, IconButton } from '@/shared/component/Molecule';
 import ColorBoard from '@/component/channel/ColorBoard';
 import { ChangeEvent, memo, SyntheticEvent } from 'react';
 import styled, { css } from 'styled-components';
-import { ChannelRes } from '@/shared/types/api';
+import { ChannelRes, ChannelSelectType } from '@/shared/types/api';
+import { ChannelColorInfoType } from '@/state/channel';
 
 interface Props extends ChannelRes {
   isOpen: boolean;
-  x: number;
-  y: number;
+  selectType: ChannelSelectType;
+  channelColorInfo: ChannelColorInfoType;
   toggleChannelColor({ id }: { id: number }, e?: SyntheticEvent): void;
   handelMutateChannelInfo(
     channelId: number,
@@ -17,9 +18,6 @@ interface Props extends ChannelRes {
 }
 
 const ChannelItem = ({
-  isOpen,
-  x,
-  y,
   channelId,
   channelType,
   name,
@@ -27,8 +25,11 @@ const ChannelItem = ({
   subscribeId,
   subscribeAuth,
   showYn,
+  isOpen,
+  channelColorInfo,
   handelMutateChannelInfo,
   toggleChannelColor,
+  selectType,
 }: Props) => {
   const handleIsShowChange = (e: ChangeEvent<HTMLInputElement>) => {
     handelMutateChannelInfo(channelId, color, e.target.checked);
@@ -56,9 +57,8 @@ const ChannelItem = ({
         <ColorBoard
           name={name}
           channelId={channelId}
-          isOpen={isOpen}
-          x={x}
-          y={y}
+          selectType={selectType}
+          channelColorInfo={channelColorInfo}
           showYn={showYn}
           closeColorBoard={() => toggleChannelColor({ id: 0 })}
           handelMutateChannelInfo={handelMutateChannelInfo}

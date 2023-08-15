@@ -5,6 +5,7 @@ import {
   G_searchOrderOptionAtom,
 } from '@/shared/component/Organism/Gnb/state';
 import { useRecoilValue } from 'recoil';
+import { QueryKeys } from '@/shared/queryClient';
 
 const PAGE_SIZE = 10;
 
@@ -13,7 +14,7 @@ const useGetSearch = () => {
   const sort = useRecoilValue(G_searchOrderOptionAtom);
 
   return useInfiniteQuery(
-    ['search', keyword, sort],
+    [QueryKeys.SEARCH, keyword, sort],
     async ({ pageParam = 1 }) => {
       const res = await getSearchChannel({
         keyword,
