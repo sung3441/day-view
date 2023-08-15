@@ -1,4 +1,4 @@
-import { memo, SyntheticEvent } from 'react';
+import { memo, SyntheticEvent, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { fadeIn, fadeOut } from '@/shared/styles/keyframes';
@@ -7,12 +7,14 @@ import { colorEntries } from '@/shared/util/colorInfo';
 import { Icon } from '@/shared/component/Atom';
 import { createPortal } from 'react-dom';
 import { COLOR_BOX_HEIGHT } from '@/shared/constant/calendar';
+import { ChannelSelectType } from '@/shared/types/api';
+import { ChannelColorInfoType } from '@/state/channel';
+import ChannelConfigs from '@/component/channel/ChannelConfigs';
 
 interface Props {
-  isOpen: boolean;
-  x: number;
-  y: number;
   channelId: number;
+  selectType: ChannelSelectType;
+  channelColorInfo: ChannelColorInfoType;
   name: string;
   showYn: boolean;
   closeColorBoard({ id }: { id: number }): void;
@@ -24,32 +26,19 @@ interface Props {
 }
 
 const ColorBoard = ({
-  x,
-  y,
-  channelId,
+  selectType,
   name,
   showYn,
+  channelId,
+  channelColorInfo: { x, y },
   closeColorBoard,
   handelMutateChannelInfo,
 }: Props) => {
   const { isShow, handleIsShow, handleOnAnimationEnd } =
     useAnimationHandler(closeColorBoard);
-  const { openModal } = useModal();
   const ref = useOuterClick<HTMLDivElement>({
     callback: handleIsShow,
   });
-
-  const openManageChannelModal = (e: SyntheticEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    handleIsShow();
-    openModal('ManageChannel', { channelId: channelId, name: name });
-  };
-
-  const openManageSubscriberModal = (e: SyntheticEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    handleIsShow();
-    openModal('ManageSubscriber', { channelId: channelId, name: name });
-  };
 
   const handleColorChange = (color: string) => {
     handelMutateChannelInfo(channelId, color, showYn);
@@ -64,14 +53,12 @@ const ColorBoard = ({
       y={y}
       onAnimationEnd={handleOnAnimationEnd}
     >
-      <ConfigButton onClick={(e) => openManageChannelModal(e)}>
-        <Icon type="sm_config" />
-        <span>관리</span>
-      </ConfigButton>
-      <ConfigButton onClick={(e) => openManageSubscriberModal(e)}>
-        <Icon type="sm_user" />
-        <span>구독자 관리</span>
-      </ConfigButton>
+      <ChannelConfigs
+        channelId={channelId}
+        selectType={selectType}
+        name={name}
+        handleIsShow={handleIsShow}
+      />
       <ColorWrap>
         {colorEntries.map(([key, value]) => (
           <ColorCircle
@@ -110,21 +97,6 @@ const Box = styled.div<{ isShow: boolean; x: number; y: number }>`
       : css`
           animation: ${fadeOut} 0.15s ease-in-out 0s forwards;
         `}
-`;
-
-const ConfigButton = styled.button`
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #d9d9d9;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  background-color: ${getStyledThemProperty('colors', 'White')};
-
-  > span {
-    margin-left: ${pixelToRemUnit(7)};
-    ${getStyledThemProperty('fonts', 'caption3')};
-  }
 `;
 
 const ColorWrap = styled.div`

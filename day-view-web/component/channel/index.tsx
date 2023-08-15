@@ -40,7 +40,7 @@ const ChannelSection = () => {
         selectType: 'SUBSCRIBE',
         onClickPlus: () => setISearchOpen((prev) => !prev),
       },
-      { label: '구글 채널', selectType: 'GOOGLE' },
+      // { label: '구글 채널', selectType: 'GOOGLE' },
     ],
     []
   );

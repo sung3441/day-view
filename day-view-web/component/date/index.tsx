@@ -3,12 +3,14 @@ import CalendarDates from '@/component/date/Dates';
 import styled from 'styled-components';
 import DayLabels from '@/component/date/DayLabels';
 import CalendarHeader from '@/component/date/DateHeader';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { selectedYYMMAtom } from '@/state/calendar';
+import { dayHeightAtom } from '@/shared/context/date/state';
 
 interface Props {}
 
 const Index = ({}: Props) => {
+  const innerHeight = useRecoilValue(dayHeightAtom);
   const [selectedYYMM, setSelectedYYMM] = useRecoilState(selectedYYMMAtom);
 
   const handleMoveMonth = (flag: 'prev' | 'next') => {
@@ -26,7 +28,7 @@ const Index = ({}: Props) => {
   return (
     <div onWheel={handleOnWheel}>
       <CalendarHeader handleMoveMonth={handleMoveMonth} />
-      <MonthWrap>
+      <MonthWrap innerHeight={innerHeight}>
         <DayLabels />
         <CalendarDates />
       </MonthWrap>
@@ -36,9 +38,9 @@ const Index = ({}: Props) => {
 
 export default memo(Index);
 
-const MonthWrap = styled.div`
+const MonthWrap = styled.div<{ innerHeight: number }>`
   height: calc(100vh - 100px - 76px);
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 30px;
+  grid-template-rows: 30px auto;
 `;

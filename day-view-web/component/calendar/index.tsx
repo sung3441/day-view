@@ -10,7 +10,7 @@ import {
   G_isSearchOpenAtom,
   G_tabAtom,
 } from '@/shared/component/Organism/Gnb/state';
-import SearchResult from '@/component/calendar/searchResult';
+import SearchResult from '../channelSearch';
 import Category from '../category';
 
 const tabList = {

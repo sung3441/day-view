@@ -5,12 +5,14 @@ export const selectedChannelAtom = atom<string[]>({
   default: [],
 });
 
-export const channelColorIdAtom = atom<{
+export type ChannelColorInfoType = {
   id: number;
   x: number;
   y: number;
-}>({
-  key: 'selectedChannelAtom',
+};
+
+export const channelColorInfoAtom = atom<ChannelColorInfoType>({
+  key: 'channelColorInfoAtom',
   default: {
     id: 0,
     x: 0,

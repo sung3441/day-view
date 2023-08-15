@@ -19,10 +19,9 @@ const DayLabels = ({}: Props) => {
 export default memo(DayLabels);
 
 const LabelDay = styled.div`
-  padding-left: ${pixelToRemUnit(16)};
+  padding-left: ${pixelToRemUnit(12)};
   font-weight: 400;
   font-size: 16px;
-  //border-bottom: 1px solid #ccc;
 
   & + & {
     border-right: 1px solid #ccc;
@@ -41,6 +40,7 @@ const LabelDay = styled.div`
   > div {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 24px;
     height: 24px;
   }

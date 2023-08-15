@@ -11,7 +11,9 @@ const coverToComma = (num: number) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
-interface Props extends SearchItemType {}
+interface Props extends SearchItemType {
+  handelSubscribe: (isSubscribe: boolean, id: number) => void;
+}
 const SearchItem = ({
   name,
   createdDate,
@@ -21,14 +23,8 @@ const SearchItem = ({
   id,
   creatorId,
   channelType,
+  handelSubscribe,
 }: Props) => {
-  const { mutate: subscribeChannel } = useSubscribeChannel();
-  const { mutate: unsubscribeChannel } = useUnsubscribeChannel();
-  const handelSubscribe = () => {
-    if (subscribe) unsubscribeChannel(id);
-    else subscribeChannel(id);
-  };
-
   return (
     <ItemBox>
       <Item>{name}</Item>
@@ -36,7 +32,10 @@ const SearchItem = ({
       <Item>{coverToComma(subscriberCount)} 명</Item>
       <Item>{createdDate.slice(0, 10)}</Item>
       <Item>
-        <SubscribeButton isSubscribe={subscribe} onClick={handelSubscribe}>
+        <SubscribeButton
+          isSubscribe={subscribe}
+          onClick={() => handelSubscribe(subscribe, id)}
+        >
           {subscribe ? '구독중' : '구독'}
         </SubscribeButton>
       </Item>

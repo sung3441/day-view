@@ -1,9 +1,9 @@
 import { memo } from 'react';
-import useGetSearch from '@/component/calendar/searchResult/hooks/useGetSearch';
+import useGetSearch from '@/component/channelSearch/hooks/useGetSearch';
 import styled from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
-import SearchHeader from '@/component/calendar/searchResult/SearchHeader';
-import SearchList from '@/component/calendar/searchResult/SearchList';
+import SearchHeader from '@/component/channelSearch/SearchHeader';
+import SearchList from '@/component/channelSearch/SearchList';
 import InfiniteObserver from '@/shared/component/Atom/InfiniteObserver';
 
 const SearchResult = () => {
