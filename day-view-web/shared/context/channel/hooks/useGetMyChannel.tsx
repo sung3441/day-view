@@ -1,13 +1,10 @@
-import { useQuery } from 'react-query';
-import { getChannel } from '@/shared/api';
-import { QueryKeys } from '@/shared/queryClient';
-import { useRecoilValue } from 'recoil';
-import { isLoginAtom } from '@/shared/atom/global';
 import { ChannelRes } from '@/shared/types/api';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
 
 const useGetMyChannel = () => {
-  const isLogin = useRecoilValue(isLoginAtom);
+  const { data: manageData } = useGetChannel({ selectType: 'MANAGE' });
+  const { data: subscribeData } = useGetChannel({ selectType: 'SUBSCRIBE' });
 
   const selectChannelId = useCallback((list: ChannelRes[] | undefined) => {
     if (!list) return [];
@@ -16,25 +13,14 @@ const useGetMyChannel = () => {
       .map((channel) => channel.channelId);
   }, []);
 
-  // TODO: 채널 정보를 useMemo로 변경 작업
-  const { status, data } = useQuery(
-    [QueryKeys.MY_CHANNEL],
-    async () => {
-      const res = await Promise.all([
-        getChannel('MANAGE'),
-        getChannel('SUBSCRIBE'),
-      ]);
-      const [manage, subscribe] = res;
-      const manageChannelIds = selectChannelId(manage?.data.data);
-      const subscribeChannelIds = selectChannelId(subscribe?.data.data);
-      return [...manageChannelIds, ...subscribeChannelIds];
-    },
-    {
-      enabled: isLogin,
-      refetchOnMount: true,
-    }
-  );
+  const data = useMemo(() => {
+    if (!manageData || !subscribeData) return [];
+    const manageChannelIds = selectChannelId(manageData?.data);
+    const subscribeChannelIds = selectChannelId(subscribeData?.data);
 
-  return { status, data };
+    return [...manageChannelIds, ...subscribeChannelIds];
+  }, [manageData, subscribeData]);
+
+  return { data };
 };
 export default useGetMyChannel;

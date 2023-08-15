@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import styled, { css } from 'styled-components';
+import { RecordRes } from '@/shared/types/api';
 import { pixelToRemUnit } from '@/shared/styles/util';
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
   strDate: string;
   day: number;
   flag: string;
+  record: RecordRes[] | undefined;
   isSelectedDay: boolean;
   handleSelectDay: (day: string) => void;
 }
@@ -17,6 +19,7 @@ const Day = ({
   strDate,
   flag,
   day,
+  record,
   isSelectedDay,
   handleSelectDay,
 }: Props) => {
@@ -33,6 +36,15 @@ const Day = ({
       >
         {date}
       </Date>
+      {record?.map((item, idx) => (
+        <Record
+          key={item.recordId + idx.toString()}
+          isAllday={item.allDay}
+          color={item.color}
+        >
+          {item.title}
+        </Record>
+      ))}
     </Wrap>
   );
 };
@@ -45,8 +57,9 @@ const Wrap = styled.div<{
   z-index: 0;
   background-color: #fff;
   cursor: pointer;
-  padding-left: ${pixelToRemUnit(16)};
   border-bottom: 1px solid #ccc;
+  width: 100%;
+  overflow: hidden;
 
   & + & {
     border-right: 1px solid #ccc;
@@ -74,7 +87,12 @@ const Date = styled.div<{
   width: 24px;
   border-radius: 50%;
   font-weight: 400;
-  font-size: 16px;
+  font-size: ${pixelToRemUnit(16)};
+  margin-left: ${pixelToRemUnit(16)};
+  margin-bottom: ${pixelToRemUnit(12)};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   ${({ theme, isSelectedDay }) =>
     isSelectedDay &&
@@ -90,9 +108,34 @@ const Date = styled.div<{
     css`
       color: rgba(34, 34, 34, 0.4);
     `};
+
   ${({ isRed }) =>
     isRed &&
     css`
-      color: rgba(207, 15, 15, 0.4);
+      color: rgba업(207, 15, 15, 0.4);
     `};
+`;
+
+const Record = styled.div<{ isAllday: boolean; color: string }>`
+  width: 100%;
+  height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 4px;
+
+  & + & {
+    margin-top: 8px;
+  }
+
+  ${({ isAllday, color }) =>
+    isAllday
+      ? css`
+          background-color: ${color};
+          color: #fff;
+        `
+      : css`
+          border-left: 4px solid ${color};
+          color: black;
+        `}
 `;

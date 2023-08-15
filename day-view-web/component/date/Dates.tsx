@@ -7,9 +7,6 @@ const Dates = () => {
   const { generatedDays, handleSelectDay, selectedDay } = useDate();
   const { startDate, endDate } = useDateParam();
   const data = useGetDateRecord({ startDate, endDate });
-
-  console.log(data);
-
   return (
     <>
       {generatedDays.map((info) => (
@@ -17,6 +14,7 @@ const Dates = () => {
           key={info.strDate}
           isSelectedDay={info.strDate === selectedDay}
           handleSelectDay={handleSelectDay}
+          record={data.get(info.strDate)}
           {...info}
         />
       ))}

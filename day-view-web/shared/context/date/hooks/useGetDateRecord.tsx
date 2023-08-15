@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 const useGetDateRecord = ({ startDate, endDate }: RecordInSubscribeParam) => {
   const isLogin = useRecoilValue(isLoginAtom);
 
-  const { data: myChannelIds, status: myChannelIdsStatus } = useGetMyChannel();
+  const { data: myChannelIds } = useGetMyChannel();
 
   const { data: myRecodes, status } = useQuery(
     [QueryKeys.DATE, startDate, endDate],
@@ -32,7 +32,6 @@ const useGetDateRecord = ({ startDate, endDate }: RecordInSubscribeParam) => {
 
   return useMemo(() => {
     const res = new Map<string, RecordRes[]>();
-    if (status !== 'success' && myChannelIdsStatus !== 'success') return res;
     if (!myRecodes || !myChannelIds) return res;
 
     myRecodes.data

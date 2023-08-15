@@ -32,8 +32,7 @@ export const usePatchChannel = (channelSelect: ChannelSelectType) => {
   return useMutation(patchChannel, {
     onSuccess: async () => {
       await queryClient.invalidateQueries([QueryKeys.CHANNEL, channelSelect]);
-      await queryClient.invalidateQueries([QueryKeys.MY_CHANNEL]);
-      // await queryClient.invalidateQueries([QueryKeys.DATE]);
+      await queryClient.invalidateQueries([QueryKeys.DATE]);
     },
   });
 };
