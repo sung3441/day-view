@@ -9,6 +9,7 @@ import com.side.dayv.global.exception.NotFoundException;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.oauth.entity.ProviderType;
+import com.side.dayv.subscribe.dto.request.ResponseSubscribeDTO;
 import com.side.dayv.subscribe.dto.request.SubscribeUpdateDto;
 import com.side.dayv.subscribe.entity.Subscribe;
 import com.side.dayv.subscribe.entity.Subscribers;
@@ -111,11 +112,11 @@ class SubscribeServiceTest {
 
     @Test
     void 구독_취소() {
-        Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
+        ResponseSubscribeDTO responseSubscribeDTO = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
 
         subscribeService.unsubscribe(MEMBER.getId(), CHANNEL.getId());
 
-        Optional<Subscribe> subscribeOptional = subscribeRepository.findById(subscribe.getId());
+        Optional<Subscribe> subscribeOptional = subscribeRepository.findById(responseSubscribeDTO.getId());
 
         assertThat(subscribeOptional.isEmpty()).isTrue();
     }
@@ -131,7 +132,10 @@ class SubscribeServiceTest {
 
     @Test
     void 구독_취소_실패_관리자_권한() {
-        Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
+        ResponseSubscribeDTO responseSubscribeDTO = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
+
+        Subscribe subscribe = subscribeRepository.findById(responseSubscribeDTO.getId())
+                .orElse(null);
         subscribe.changeAuthToManage();
         subscribeRepository.save(subscribe);
 
@@ -142,7 +146,9 @@ class SubscribeServiceTest {
 
     @Test
     void 구독_수정() {
-        Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
+        ResponseSubscribeDTO responseSubscribeDTO = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
+        Subscribe subscribe = subscribeRepository.findById(responseSubscribeDTO.getId())
+                .orElse(null);
 
         SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(Subscribe.DEFAULT_COLOR, false);
 
@@ -165,11 +171,11 @@ class SubscribeServiceTest {
 
     @Test
     void 구독_수정_실패_권한_없음() {
-        Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
+        ResponseSubscribeDTO responseSubscribeDTO = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
 
         SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(Subscribe.DEFAULT_COLOR, false);
 
-        assertThatThrownBy(() -> subscribeService.update(subscribe.getId(), 99L, subscribeUpdateDto))
+        assertThatThrownBy(() -> subscribeService.update(responseSubscribeDTO.getId(), 99L, subscribeUpdateDto))
                 .isInstanceOf(BadRequestException.class)
                 .hasMessageContaining(BAD_REQUEST_PERMISSION);
     }
@@ -184,7 +190,7 @@ class SubscribeServiceTest {
 
     @Test
     void 채널의_구독자_목록_구독O_권한X(){
-        Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
+        ResponseSubscribeDTO responseSubscribeDTO = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
 
         List<Subscribe> subscribeList = subscribeRepository.findAllByChannelIdOrderByAuth(CHANNEL.getId());
         Subscribers subscribers = new Subscribers(subscribeList);
@@ -193,7 +199,9 @@ class SubscribeServiceTest {
 
     @Test
     void 채널의_구독자_목록_구독O_권한O(){
-        Subscribe subscribe = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
+        ResponseSubscribeDTO responseSubscribeDTO = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
+
+        Subscribe subscribe = subscribeRepository.findById(responseSubscribeDTO.getId()).orElse(null);
         subscribe.changeAuthToManage();
 
         List<Subscribe> subscribeList = subscribeRepository.findAllByChannelIdOrderByAuth(CHANNEL.getId());
