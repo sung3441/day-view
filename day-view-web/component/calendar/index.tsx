@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import Channel from '@/component/calendar/channelSection';
+import Channel from '../channel';
 import DateSection from '../date';
 import { useRecoilValue } from 'recoil';
 import { pixelToRemUnit } from '@/shared/styles/util';

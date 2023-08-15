@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
-import { getStrToday, getTodayYYMM } from '@/shared/util/calendar';
 import { DatType, YYMMType } from '@/shared/types/calendar';
+import { getStrToday, getTodayYYMM } from '@/shared/context/date/util';
 
 export const selectedYYMMAtom = atom<YYMMType>({
   key: 'selectedYYMMAtom', // unique ID (with respect to other atoms/selectors)

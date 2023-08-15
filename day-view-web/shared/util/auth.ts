@@ -1,8 +1,8 @@
 import Auth from '@/shared/axios';
 import { getAccessToken } from '@/shared/api';
 
-export function setCookie(pCookie: string | undefined) {
-  Auth.defaults.headers.Cookie = pCookie || '';
+export function setCookie(cookie: string) {
+  Auth.defaults.headers.Cookie = cookie || '';
 }
 
 export function setAccessToken(accessToken: string) {

@@ -99,6 +99,7 @@ export type RecordRes = {
   channelName: string;
   subscribeId: number;
   channelId: number;
+  allDay: boolean;
 };
 
 export type RecordInChannel = Omit<

@@ -6,7 +6,7 @@ import useGetDateRecord from '@/shared/context/date/hooks/useGetDateRecord';
 const Dates = () => {
   const { generatedDays, handleSelectDay, selectedDay } = useDate();
   const { startDate, endDate } = useDateParam();
-  useGetDateRecord({ startDate, endDate });
+  const data = useGetDateRecord({ startDate, endDate });
   return (
     <>
       {generatedDays.map((info) => (
@@ -14,6 +14,7 @@ const Dates = () => {
           key={info.strDate}
           isSelectedDay={info.strDate === selectedDay}
           handleSelectDay={handleSelectDay}
+          record={data.get(info.strDate)}
           {...info}
         />
       ))}
