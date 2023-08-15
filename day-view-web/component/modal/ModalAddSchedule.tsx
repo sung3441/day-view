@@ -24,12 +24,17 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
     handleOnAnimationEnd,
   } = useAnimationHandler(() => closeModal('AddSchedule'));
 
+  // 종일 값
   const [isChecked, setIsChecked] = useState(true);
 
   const [value, setValue] = useState<AddScheduleParamType>({
+    channelId: 1,
     title: '',
+    content: '',
     startDate: new Date(),
     endDate: new Date(),
+    recordImageUrl: '',
+    allDay: true,
   });
 
   const { isValid, InvalidMessage, validate } = useValidation('empty');
@@ -38,6 +43,15 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
     selectType: 'MANAGE',
   });
 
+  useEffect(() => {
+    // 초기 state값이 변경 되지 않아 초기 값 세팅
+    if (channelStatus !== 'success' || !channels?.data?.length) return;
+    setValue((prev) => ({
+      ...prev,
+      channelId: channels.data?.at(0)?.channelId ?? 1,
+    }));
+  }, [channelStatus, channels]);
+  
   const handleChangeValue = (e: React.SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
     const { name, value } = target;
@@ -111,18 +125,9 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   };
 
   const handleAddSchedule = () => {
-    mutate({ ...value });
+    mutate({ ...value, allDay: isChecked });
     modalClose();
   };
-
-  useEffect(() => {
-    // 초기 state값이 변경 되지 않아 초기 값 세팅
-    if (channelStatus !== 'success' || !channels?.data?.length) return;
-    setValue((prev) => ({
-      ...prev,
-      channelId: channels.data?.at(0)?.channelId ?? 1,
-    }));
-  }, [channelStatus, channels]);
 
   return (
     <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
