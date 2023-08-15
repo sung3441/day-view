@@ -21,6 +21,7 @@ interface Props {
 const SearchList = ({ data }: Props) => {
   const { mutate: subscribeChannel } = useSubscribeChannel();
   const { mutate: unsubscribeChannel } = useUnsubscribeChannel();
+
   const handelSubscribe = useCallback((isSubscribe: boolean, id: number) => {
     if (isSubscribe) unsubscribeChannel(id);
     else subscribeChannel(id);

@@ -57,8 +57,10 @@ export const subscribeChannel = async (channelId: number) => {
   return res;
 };
 
-export const unsubscribeChannel = async (subscribeId: number) => {
-  const res = await new Client(`/api/subscribes/${subscribeId}`).delete();
+export const unsubscribeChannel = async (channelId: number) => {
+  const res = await new Client(
+    `/api/channels/${channelId}/subscribes`
+  ).delete();
   return res;
 };
 

@@ -32,7 +32,7 @@ const ChannelItem = ({
   selectType,
 }: Props) => {
   const handleIsShowChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handelMutateChannelInfo(channelId, color, e.target.checked);
+    handelMutateChannelInfo(subscribeId, color, e.target.checked);
   };
 
   return (
@@ -57,6 +57,7 @@ const ChannelItem = ({
         <ColorBoard
           name={name}
           channelId={channelId}
+          subscribeId={subscribeId}
           selectType={selectType}
           channelColorInfo={channelColorInfo}
           showYn={showYn}
