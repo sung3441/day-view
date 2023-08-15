@@ -29,8 +29,7 @@ public class SubscribeController {
     @DeleteMapping("/channels/{channelId}/subscribes")
     public ResponseEntity unsubscribe(@AuthenticationPrincipal final CustomUser user, @PathVariable final Long channelId) {
         subscribeService.unsubscribe(user.getMemberId(), channelId);
-        return ResponseEntity.ok()
-                .build();
+        return ResponseEntity.ok("");
     }
 
     @PatchMapping("/subscribes/{subscribeId}")
