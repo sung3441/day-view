@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import styled, { css } from 'styled-components';
+import { pixelToRemUnit } from '@/shared/styles/util';
 
 interface Props {}
 
@@ -18,9 +19,14 @@ const DayLabels = ({}: Props) => {
 export default memo(DayLabels);
 
 const LabelDay = styled.div`
-  padding: 4px 0 0 18px;
+  padding-left: ${pixelToRemUnit(16)};
   font-weight: 400;
   font-size: 16px;
+  //border-bottom: 1px solid #ccc;
+
+  & + & {
+    border-right: 1px solid #ccc;
+  }
 
   ${({ theme }) =>
     css`
@@ -29,12 +35,12 @@ const LabelDay = styled.div`
 
   &.red {
     color: #cf0f0f;
+    border-right: 1px solid #ccc;
   }
 
   > div {
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 24px;
     height: 24px;
   }

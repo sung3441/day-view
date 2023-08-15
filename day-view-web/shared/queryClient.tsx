@@ -26,6 +26,7 @@ type QueryKeysType = {
   MAIN: string;
   USER: string;
   CHANNEL: string;
+  MY_CHANNEL: string;
   RECORD: string;
   SEARCH: string;
   RECORDS: string;
@@ -41,4 +42,5 @@ export const QueryKeys: Readonly<QueryKeysType> = {
   SEARCH: 'SEARCH',
   RECORDS: 'RECORDS',
   DATE: 'DATE',
+  MY_CHANNEL: 'MY_CHANNEL',
 };

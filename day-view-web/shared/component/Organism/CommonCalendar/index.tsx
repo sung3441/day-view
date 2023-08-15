@@ -1,9 +1,9 @@
 import { memo, useEffect, useState } from 'react';
-import { getTodayYYMM } from '@/shared/util/calendar';
 import Header from '@/shared/component/Organism/CommonCalendar/header';
 import Labels from '@/shared/component/Organism/CommonCalendar/label';
 import styled from 'styled-components';
 import Dates from '@/shared/component/Organism/CommonCalendar/Dates';
+import { getTodayYYMM } from '@/shared/context/date/util';
 
 type Props = {
   onSelectDay?: (sDate: string, endDate: string) => void;

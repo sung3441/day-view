@@ -1,7 +1,7 @@
 import { CSSProperties, memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import Channel from '@/component/calendar/channelSection/Channel';
+import Channel from '@/component/channel/Channel';
 import { Button, Icon } from '@/shared/component/Atom';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useModal } from '@/shared/hooks';

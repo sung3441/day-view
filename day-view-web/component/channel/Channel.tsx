@@ -4,7 +4,7 @@ import { IconButton } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { ChannelSelectType } from '@/shared/types/api';
 import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
-import ChannelItem from '@/component/calendar/channelSection/ChannelItem';
+import ChannelItem from '@/component/channel/ChannelItem';
 import { useRecoilValue } from 'recoil';
 import { channelColorIdAtom } from '@/state/channel';
 import useColorBoxControl from '@/shared/context/channel/hooks/useColorBoxControl';

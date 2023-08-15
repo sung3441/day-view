@@ -1,5 +1,5 @@
 import { CheckBox, IconButton } from '@/shared/component/Molecule';
-import ColorBoard from '@/component/calendar/channelSection/ColorBoard';
+import ColorBoard from '@/component/channel/ColorBoard';
 import { ChangeEvent, memo, SyntheticEvent } from 'react';
 import styled, { css } from 'styled-components';
 import { ChannelRes } from '@/shared/types/api';

@@ -108,8 +108,8 @@ export const getRecordInChannel = async ({
 };
 
 export const getRecordInSubscribe = async (params: RecordInSubscribeParam) => {
-  const res = await new Client('/api/subscribe/me/records').get<
-    MyChannelRecodeRes[]
-  >(params);
+  const res = await new Client(
+    '/api/subscribe/me/records'
+  ).get<MyChannelRecodeRes>(params);
   return res;
 };
