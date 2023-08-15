@@ -12,8 +12,8 @@ const usePatchChannelInfo = (channelSelect: ChannelSelectType) => {
   const { mutate, status } = usePatchChannel(channelSelect);
 
   const handelMutateChannelInfo = useCallback(
-    (channelId: number, color: string, showYn: boolean) => {
-      mutate({ subscribeId: channelId, showYn: showYn, color });
+    (subscribeId: number, color: string, showYn: boolean) => {
+      mutate({ subscribeId: subscribeId, showYn: showYn, color });
     },
     []
   );
