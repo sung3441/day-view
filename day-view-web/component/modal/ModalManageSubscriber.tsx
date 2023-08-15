@@ -1,15 +1,58 @@
 import { memo, useState } from 'react';
-import Modal from '../../shared/component/Organism/Modal';
-import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
-import { ModalProps } from './ModalRenderer';
 import styled, { css } from 'styled-components';
+import Modal from '../../shared/component/Organism/Modal';
+import { ModalProps } from './ModalRenderer';
+import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import { getStyledThemProperty } from '@/shared/styles/util';
-import { UserImage } from '@/shared/component/Atom';
-import useModalState from '@/shared/hooks/useModalState';
 
-type ManageSubscriber = {
-  channelName: string;
-};
+import useModalState from '@/shared/hooks/useModalState';
+import { SearchBar } from '@/shared/component/Molecule';
+
+// ! TEST
+import { SubscribeMembersRes } from '@/shared/types/api';
+const members = {
+  data: {
+    count: 2,
+    subscribers: [
+      {
+        name: '김시온',
+        email: 'st@gmail.com',
+        auth: 'MANAGE',
+        profileImageUrl: '',
+      },
+      {
+        name: '김싱온',
+        email: 'tldhs@gmail.com',
+        auth: 'MANAGE',
+        profileImageUrl: '',
+      },
+      {
+        name: '김시온',
+        email: 'st@gmail.com',
+        auth: 'MANAGE',
+        profileImageUrl: '',
+      },
+      {
+        name: '김싱온',
+        email: 'tldhs@gmail.com',
+        auth: 'MANAGE',
+        profileImageUrl: '',
+      },
+      {
+        name: '김시온',
+        email: 'st@gmail.com',
+        auth: 'MANAGE',
+        profileImageUrl: '',
+      },
+      {
+        name: '김싱온',
+        email: 'tldhs@gmail.com',
+        auth: 'MANAGE',
+        profileImageUrl: '',
+      },
+    ],
+  },
+} as SubscribeMembersRes;
 
 const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
   const {
@@ -18,47 +61,38 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
     handleOnAnimationEnd,
   } = useAnimationHandler(() => closeModal('ManageSubscriber'));
 
-  const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
-
-  const tabs = ['구독자 99+', '멤버 99+'];
-
   const { channelId, name = '' } = useModalState('ManageSubscriber');
-
-  const [test, setTest] = useState(true);
-
-  const handleAuth = () => {};
+  const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
+  const [searchValue, setSearchValue] = useState<string>('');
 
   return (
     <Modal ref={ref} isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <S.Title>{name}</S.Title>
       <S.TabBox>
-        <S.Tap isActive={test} onClick={() => setTest(!test)}>
-          구독자 99+
-        </S.Tap>
+        <S.Tap>구독자 99+</S.Tap>
         <S.Tap>멤버 99+</S.Tap>
       </S.TabBox>
       <S.Description>
         구독자에게 편집 권한을 설정하거나 해제할 수 있습니다.
       </S.Description>
-      <Modal.Input placeholder="이름을 입력하세요." />
-      <S.UserList>
-        <S.UserItem>
-          <UserImage src="" width={57} height={57} />
-          <div>
-            <S.Name>이름</S.Name>
-            <S.Email>이메일</S.Email>
-          </div>
-          <Modal.Button variant={test ? 'accent' : 'primary'}>
-            설정
-          </Modal.Button>
-        </S.UserItem>
-      </S.UserList>
+      <SearchBar
+        value={searchValue}
+        setValue={setSearchValue}
+        placeholder="이름을 입력하세요."
+      />
+      <UserListWrapper>
+        <Modal.UserList members={members} />
+      </UserListWrapper>
       <Modal.Dim />
     </Modal>
   );
 };
 
 export default memo(ModalManageSubscriber);
+
+const UserListWrapper = styled.div`
+  margin-top: 30px;
+`;
 
 const Header = styled.div`
   width: 488px;
@@ -96,29 +130,7 @@ const Description = styled.div`
   ${getStyledThemProperty('fonts', 'caption2')};
 
   margin-top: 22px;
-`;
-
-const UserList = styled.ul`
-  margin-top: 30px;
-`;
-
-const UserItem = styled.li`
-  display: grid;
-  grid-template-columns: 57px 1fr 90px;
-  align-items: center;
-  grid-column-gap: 21px;
-`;
-
-const Name = styled.div`
-  color: ${getStyledThemProperty('colors', 'Black')};
-  ${getStyledThemProperty('fonts', 'caption1')};
-  line-height: 200%;
-`;
-
-const Email = styled.div`
-  color: ${getStyledThemProperty('colors', 'G_700')};
-  ${getStyledThemProperty('fonts', 'caption3')};
-  line-height: 200%;
+  margin-bottom: 12px;
 `;
 
 const S = {
@@ -127,8 +139,4 @@ const S = {
   TabBox,
   Tap,
   Description,
-  UserList,
-  UserItem,
-  Name,
-  Email,
 };

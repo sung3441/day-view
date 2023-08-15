@@ -223,7 +223,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
           </Modal.Wrapper>
         </Modal.Section>
         <Modal.Section gap={SECTION_GAP}>
-          <Modal.SubTitle style={{ alignSelf: 'flex-start' }}>
+          <Modal.SubTitle style={{ alignSelf: 'start' }}>
             메모(선택)
           </Modal.SubTitle>
           <Modal.Textarea
