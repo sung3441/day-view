@@ -80,7 +80,8 @@ export default memo(ColorBoard);
 
 const Box = styled.div<{ isShow: boolean; x: number; y: number }>`
   position: absolute;
-  height: ${COLOR_BOX_HEIGHT}px;
+  height: auto;
+  max-height: ${COLOR_BOX_HEIGHT}px;
   overflow: hidden;
 
   top: ${({ y }) => y}px;
@@ -105,7 +106,6 @@ const Box = styled.div<{ isShow: boolean; x: number; y: number }>`
 const ColorWrap = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-
   padding: 10px;
   gap: 12px;
 `;
