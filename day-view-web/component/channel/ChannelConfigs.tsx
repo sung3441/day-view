@@ -8,6 +8,7 @@ import { useUnsubscribeChannel } from '@/shared/context/channel/hooks/usePostCha
 
 interface Props {
   channelId: number;
+  subscribeId: number;
   selectType: ChannelSelectType;
   name: string;
   handleIsShow(): void;
@@ -15,6 +16,7 @@ interface Props {
 
 const ChannelConfigs = ({
   channelId,
+  subscribeId,
   selectType,
   name,
   handleIsShow,

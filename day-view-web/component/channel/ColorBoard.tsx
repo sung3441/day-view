@@ -13,6 +13,7 @@ import ChannelConfigs from '@/component/channel/ChannelConfigs';
 
 interface Props {
   channelId: number;
+  subscribeId: number;
   selectType: ChannelSelectType;
   channelColorInfo: ChannelColorInfoType;
   name: string;
@@ -26,10 +27,11 @@ interface Props {
 }
 
 const ColorBoard = ({
+  channelId,
   selectType,
+  subscribeId,
   name,
   showYn,
-  channelId,
   channelColorInfo: { x, y },
   closeColorBoard,
   handelMutateChannelInfo,
@@ -41,7 +43,7 @@ const ColorBoard = ({
   });
 
   const handleColorChange = (color: string) => {
-    handelMutateChannelInfo(channelId, color, showYn);
+    handelMutateChannelInfo(subscribeId, color, showYn);
     handleIsShow();
   };
 
@@ -55,6 +57,7 @@ const ColorBoard = ({
     >
       <ChannelConfigs
         channelId={channelId}
+        subscribeId={subscribeId}
         selectType={selectType}
         name={name}
         handleIsShow={handleIsShow}
