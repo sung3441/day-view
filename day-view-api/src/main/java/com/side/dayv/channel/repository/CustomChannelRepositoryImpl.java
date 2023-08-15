@@ -73,7 +73,7 @@ public class CustomChannelRepositoryImpl implements CustomChannelRepository {
                 .where(channel.type.eq(ChannelType.CUSTOM).and(channelSearch(search.getKeyword())))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(channelOrder(search.getOrder()))
+                .orderBy(channelOrder(search.getOrder(), countSubscribe))
                 .fetch();
 
         JPAQuery<Long> countQuery = queryFactory
@@ -91,10 +91,10 @@ public class CustomChannelRepositoryImpl implements CustomChannelRepository {
         return channel.name.contains(keyword).or(channel.createMember.nickname.contains(keyword));
     }
 
-    private OrderSpecifier channelOrder(ChannelOrderType order) {
+    private OrderSpecifier channelOrder(ChannelOrderType order, QSubscribe countSubscribe) {
         if (order == null) {
-            return ChannelOrderType.RECENT.order();
+            return ChannelOrderType.RECENT.order(null);
         }
-        return order.order();
+        return order.order(countSubscribe);
     }
 }
