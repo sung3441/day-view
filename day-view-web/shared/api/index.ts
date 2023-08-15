@@ -1,21 +1,20 @@
 import { Client } from '@/shared/axios';
 import {
+  AddScheduleParamType,
   ChannelRes,
   ChannelSelectType,
   CreateChannelParamType,
-  Token,
-  UserRes,
-  SearchChannelParamType,
-  SearchChannelRes,
-  PatchChannelType,
-  PutChannelParamType,
-  PatchUserParams,
-  AddScheduleParamType,
   MyChannelRecodeRes,
+  PatchChannelType,
+  PatchUserParams,
+  PutChannelParamType,
   RecordInChannel,
   RecordInSubscribeParam,
+  SearchChannelParamType,
+  SearchChannelRes,
+  Token,
+  UserRes,
 } from '@/shared/types/api';
-import axios from 'axios';
 
 export const getAccessToken = async () => {
   const res = await new Client('/api/v1/auth/refresh').get<Token>();
@@ -109,13 +108,8 @@ export const getRecordInChannel = async ({
 };
 
 export const getRecordInSubscribe = async (params: RecordInSubscribeParam) => {
-  const res = await new Client(`/api/subscribes/me/records
-    `).get<MyChannelRecodeRes[]>(params);
+  const res = await new Client('/api/subscribe/me/records').get<
+    MyChannelRecodeRes[]
+  >(params);
   return res;
-  // const res = axios.get(`/api/subscribes/me/records`, {
-  //   params: {
-  //     startDate: '2023-08-01T00:00:00',
-  //     endDate: '2023-08-31T23:59:59',
-  //   },
-  // });
 };

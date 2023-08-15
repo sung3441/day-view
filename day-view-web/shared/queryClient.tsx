@@ -1,6 +1,4 @@
 import { QueryClient } from 'react-query';
-import { useRecoilValue } from 'recoil';
-import { isLoginAtom } from '@/shared/atom/global';
 
 const getClient = (() => {
   let client: QueryClient | null = null;
@@ -15,7 +13,7 @@ const getClient = (() => {
             refetchOnReconnect: false,
             refetchOnWindowFocus: false,
             retry: 0,
-            // suspense: true,
+            enabled: false,
           },
         },
       });

@@ -1,12 +1,14 @@
 import dynamic from 'next/dynamic';
 import Calendar from '@/component/calendar';
 import { GetServerSidePropsContext } from 'next';
-import { getUser } from '@/shared/api';
+import { getChannel, getRecordInSubscribe, getUser } from '@/shared/api';
 
 import { dehydrate, QueryClient } from 'react-query';
 import { isSetAccessToken } from '@/shared/util/auth';
 import { QueryKeys } from '@/shared/queryClient';
-import CommonCalendar from '@/shared/component/Organism/CommonCalendar';
+import { covertDateParam } from '@/shared/context/date/util';
+import { getTodayYYMM } from '@/shared/util/calendar';
+import { ChannelSelectType } from '@/shared/types/api';
 
 const ModalRenderer = dynamic(() => import('@/component/modal/ModalRenderer'), {
   ssr: false,
@@ -17,7 +19,6 @@ function CalendarPage() {
     <>
       <Calendar />
       <ModalRenderer />
-      <CommonCalendar />
     </>
   );
 }
@@ -32,6 +33,7 @@ export const getServerSideProps = async ({
   const queryClient = new QueryClient();
   try {
     const isAllowLogin = await isSetAccessToken(req?.headers?.cookie || '');
+
     if (!isAllowLogin) {
       return {
         redirect: {
@@ -42,6 +44,28 @@ export const getServerSideProps = async ({
     }
 
     await queryClient.prefetchQuery([QueryKeys.USER], getUser);
+
+    const { year, month } = getTodayYYMM();
+    const startDate = covertDateParam({ year, month, day: 1 });
+    const endDate = covertDateParam({
+      year,
+      month,
+      isLastDay: true,
+    });
+
+    await queryClient.prefetchQuery([QueryKeys.DATE, startDate, endDate], () =>
+      getRecordInSubscribe({ startDate, endDate })
+    );
+
+    const channels: ChannelSelectType[] = ['MANAGE', 'SUBSCRIBE', 'GOOGLE'];
+
+    await Promise.all(
+      channels.map(async (channel) => {
+        await queryClient.prefetchQuery([QueryKeys.CHANNEL, channel], () =>
+          getChannel(channel)
+        );
+      })
+    );
 
     return {
       props: {
