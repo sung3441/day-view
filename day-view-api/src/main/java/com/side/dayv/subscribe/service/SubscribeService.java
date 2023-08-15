@@ -49,9 +49,9 @@ public class SubscribeService {
         return new ResponseSubscribeDTO(subscribeRepository.save(new Subscribe(member, channel)));
     }
 
-    public void unsubscribe(final Long memberId, final Long channelId) {
+    public void unsubscribe(final Long memberId, final Long subscribeId) {
 
-        Subscribe subscribe = subscribeRepository.findByMemberIdAndChannelId(memberId, channelId)
+        Subscribe subscribe = subscribeRepository.findByIdAndMemberId(subscribeId, memberId)
                 .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
 
         if (!subscribe.isSameMember(memberId)) {

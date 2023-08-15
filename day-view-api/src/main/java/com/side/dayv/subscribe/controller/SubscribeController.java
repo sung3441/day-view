@@ -26,9 +26,9 @@ public class SubscribeController {
         return ResponseEntity.ok(new CommonResponse<>(responseSubscribeDTO));
     }
 
-    @DeleteMapping("/channels/{channelId}/subscribes")
-    public ResponseEntity unsubscribe(@AuthenticationPrincipal final CustomUser user, @PathVariable final Long channelId) {
-        subscribeService.unsubscribe(user.getMemberId(), channelId);
+    @DeleteMapping("/subscribes/{subscribeId}")
+    public ResponseEntity unsubscribe(@AuthenticationPrincipal final CustomUser user, @PathVariable final Long subscribeId) {
+        subscribeService.unsubscribe(user.getMemberId(), subscribeId);
         return ResponseEntity.ok()
                 .build();
     }

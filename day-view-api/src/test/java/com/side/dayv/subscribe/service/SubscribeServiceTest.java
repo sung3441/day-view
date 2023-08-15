@@ -114,7 +114,7 @@ class SubscribeServiceTest {
     void 구독_취소() {
         ResponseSubscribeDTO responseSubscribeDTO = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
 
-        subscribeService.unsubscribe(MEMBER.getId(), CHANNEL.getId());
+        subscribeService.unsubscribe(MEMBER.getId(), responseSubscribeDTO.getId());
 
         Optional<Subscribe> subscribeOptional = subscribeRepository.findById(responseSubscribeDTO.getId());
 
@@ -139,7 +139,7 @@ class SubscribeServiceTest {
         subscribe.changeAuthToManage();
         subscribeRepository.save(subscribe);
 
-        assertThatThrownBy(() -> subscribeService.unsubscribe(MEMBER.getId(), CHANNEL.getId()))
+        assertThatThrownBy(() -> subscribeService.unsubscribe(MEMBER.getId(), subscribe.getId()))
                 .isInstanceOf(BadRequestException.class)
                 .hasMessageContaining(BAD_REQUEST_MANAGE_UNSUBSCRIBE);
     }
