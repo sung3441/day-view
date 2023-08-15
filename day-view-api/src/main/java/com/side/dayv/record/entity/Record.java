@@ -24,7 +24,6 @@ public class Record {
     @NotNull
     private String title;
 
-    @NotNull
     private String content;
 
     @Column(name = "record_image_url")
