@@ -40,9 +40,9 @@ const Day = ({
     const realHeight = innerHeight - headerHeight;
 
     if (record.length * fixeHeight > realHeight) {
-      const availableCount = Math.floor(realHeight / fixeHeight);
+      const availableCount = Math.floor(realHeight / fixeHeight) - 1;
       return {
-        availableCount: availableCount - 1,
+        availableCount: availableCount,
         restCount: record.length - availableCount,
       };
     }
@@ -52,6 +52,7 @@ const Day = ({
       restCount: 0,
     };
   }, [record, innerHeight]);
+
   return (
     <Wrap
       className={strDate}

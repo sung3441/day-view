@@ -2,14 +2,14 @@ import { memo } from 'react';
 import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
 import CategoryHeader from '@/component/category/CategoryHeader';
 import CategoryDetail from '@/component/category/CategoryDetail';
+import useGetMyChannel from '@/shared/context/channel/hooks/useGetMyChannel';
 
 const Category = () => {
-  const { data, status } = useGetChannel({ selectType: 'MANAGE' });
+  const { myChannelRecodes } = useGetMyChannel();
 
-  if (status !== 'success') return null;
   return (
     <>
-      <CategoryHeader categories={data!.data} />
+      <CategoryHeader categories={myChannelRecodes} />
       <CategoryDetail />
     </>
   );

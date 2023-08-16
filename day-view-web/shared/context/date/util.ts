@@ -51,3 +51,25 @@ export function getDateAndDay(year: number, month: number, date: number = 0) {
   const d = new Date(year, month, date);
   return { date: d.getDate(), day: d.getDay() };
 }
+
+export const getTime = (date: Date) => {
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  return `${hours}:${addZeroPad(minutes)}`;
+};
+
+const days = ['일', '월', '화', '수', '목', '금', '토'];
+
+export const createDateInfo = (startDate: string, endDate?: string) => {
+  const d = new Date(startDate);
+
+  const year = d.getFullYear();
+  const month = d.getMonth() + 1;
+  const date = d.getDate();
+  const dayOfWeek = d.getDay();
+  const startTime = getTime(d);
+  const endTime = endDate ? getTime(new Date(endDate)) : startTime;
+
+  const key = `${year}-${addZeroPad(month)}-${addZeroPad(date)}`;
+  return { key, month, date, startTime, endTime, strDay: days[dayOfWeek] };
+};

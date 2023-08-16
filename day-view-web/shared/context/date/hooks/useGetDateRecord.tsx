@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 const useGetDateRecord = ({ startDate, endDate }: RecordInSubscribeParam) => {
   const isLogin = useRecoilValue(isLoginAtom);
 
-  const { data: myChannelIds } = useGetMyChannel();
+  const { myActiveChannelIds } = useGetMyChannel();
 
   const { data: myRecodes, status } = useQuery(
     [QueryKeys.DATE, startDate, endDate],
@@ -32,11 +32,11 @@ const useGetDateRecord = ({ startDate, endDate }: RecordInSubscribeParam) => {
 
   return useMemo(() => {
     const res = new Map<string, RecordRes[]>();
-    if (!myRecodes || !myChannelIds) return res;
+    if (!myRecodes || !myActiveChannelIds) return res;
 
     myRecodes.data
       .filter((record) => {
-        return myChannelIds?.includes(record.channelId);
+        return myActiveChannelIds?.includes(record.channelId);
       })
       .forEach((record) => {
         const { startDate, endDate, allDay } = record;
@@ -44,7 +44,7 @@ const useGetDateRecord = ({ startDate, endDate }: RecordInSubscribeParam) => {
         setDateInHash(startDate, record, res);
       });
     return res;
-  }, [myRecodes, myChannelIds]);
+  }, [myRecodes, myActiveChannelIds]);
 };
 
 export default useGetDateRecord;

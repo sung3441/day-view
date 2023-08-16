@@ -77,7 +77,6 @@ const Wrapper = styled.div`
   align-items: center;
   overflow: auto;
   gap: 0 10px;
-
   ::-webkit-scrollbar {
     display: none;
   }
