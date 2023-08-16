@@ -1,4 +1,4 @@
-import { CSSProperties, memo, useMemo } from 'react';
+import { CSSProperties, memo, useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Channel from '@/component/channel/Channel';
@@ -13,12 +13,12 @@ import {
 import useColorBoxControl from '@/shared/context/channel/hooks/useColorBoxControl';
 
 const buttonStyle: CSSProperties = {
-  width: pixelToRemUnit(323),
-
+  width: '100%',
   height: pixelToRemUnit(60),
   background: '#FF836D',
   borderRadius: '7px',
   color: '#FFFFFF',
+  marginTop: 'auto',
 };
 
 const ChannelSection = () => {
@@ -66,7 +66,7 @@ const Wrapper = styled.div<{ isOpenChannel: boolean }>`
   position: absolute;
   overflow: scroll;
 
-  width: ${pixelToRemUnit(373)};
+  width: 20%;
   height: calc(100% - 100px);
 
   background-color: #fcfcfc;
@@ -85,12 +85,13 @@ const Wrapper = styled.div<{ isOpenChannel: boolean }>`
           transform: translateX(0);
         `
       : css`
-          transform: translateX(${pixelToRemUnit(-373)});
+          transform: translateX(-100%);
         `};
 `;
 
 const Inner = styled.div`
   width: 100%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;

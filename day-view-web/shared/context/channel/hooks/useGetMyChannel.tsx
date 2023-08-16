@@ -13,14 +13,16 @@ const useGetMyChannel = () => {
       .map((channel) => channel.channelId);
   }, []);
 
-  const data = useMemo(() => {
-    if (!manageData || !subscribeData) return [];
-    const manageChannelIds = selectChannelId(manageData?.data);
-    const subscribeChannelIds = selectChannelId(subscribeData?.data);
-
-    return [...manageChannelIds, ...subscribeChannelIds];
+  const myChannelRecodes = useMemo(() => {
+    if (!manageData?.data || !subscribeData?.data) return [];
+    return [...manageData?.data, ...subscribeData.data];
   }, [manageData, subscribeData]);
 
-  return { data };
+  const myActiveChannelIds = useMemo(() => {
+    if (!myChannelRecodes?.length) return [];
+    return selectChannelId(myChannelRecodes);
+  }, [myChannelRecodes]);
+
+  return { myChannelRecodes, myActiveChannelIds };
 };
 export default useGetMyChannel;

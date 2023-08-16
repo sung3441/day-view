@@ -42,6 +42,8 @@ export const useSubscribeChannel = () => {
   return useMutation(subscribeChannel, {
     onSuccess: async () => {
       await queryClient.invalidateQueries([QueryKeys.SEARCH]);
+      await queryClient.invalidateQueries([QueryKeys.DATE]);
+      await queryClient.invalidateQueries([QueryKeys.CHANNEL, 'SUBSCRIBE']);
     },
   });
 };
@@ -51,6 +53,8 @@ export const useUnsubscribeChannel = () => {
   return useMutation(unsubscribeChannel, {
     onSuccess: async () => {
       await queryClient.invalidateQueries([QueryKeys.SEARCH]);
+      await queryClient.invalidateQueries([QueryKeys.DATE]);
+      await queryClient.invalidateQueries([QueryKeys.CHANNEL, 'SUBSCRIBE']);
     },
   });
 };

@@ -48,7 +48,7 @@ const TabWrap = styled.div<{ isOpenChannel: boolean }>`
   ${({ isOpenChannel }) =>
     isOpenChannel &&
     css`
-      transform: translateX(${pixelToRemUnit(373)});
-      width: calc(100% - ${pixelToRemUnit(373)});
+      transform: translateX(25%);
+      width: 80%;
     `}
 `;
