@@ -118,13 +118,11 @@ export type MyChannelRecodeRes = {
 };
 
 export type SubscribeMembersRes = {
-  data: {
-    count: number;
-    subscribers: {
-      name: string;
-      email: string;
-      auth: 'MANAGE';
-      profileImageUrl: string;
-    }[];
-  };
+  count: number;
+  subscribers: {
+    name: string;
+    email: string;
+    auth: 'MANAGE';
+    profileImageUrl: string;
+  }[];
 };
