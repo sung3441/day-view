@@ -12,6 +12,7 @@ import {
   RecordInSubscribeParam,
   SearchChannelParamType,
   SearchChannelRes,
+  SubscribeMembersRes,
   Token,
   UserRes,
 } from '@/shared/types/api';
@@ -59,6 +60,14 @@ export const subscribeChannel = async (channelId: number) => {
 
 export const unsubscribeChannel = async (subscribeId: number) => {
   const res = await new Client(`/api/subscribes/${subscribeId}`).delete();
+  return res;
+};
+
+// 채널의 구독자 목록 조회
+export const getSubscribers = async (channelId: number) => {
+  const res = await new Client(`/api/channels/${channelId}/members`).get<{
+    data: SubscribeMembersRes;
+  }>();
   return res;
 };
 
