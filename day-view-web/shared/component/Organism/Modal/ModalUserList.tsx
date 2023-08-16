@@ -4,13 +4,15 @@ import { Button, UserImage } from '../../Atom';
 import { SubscribeMembersRes } from '@/shared/types/api';
 
 interface Props {
-  members: SubscribeMembersRes;
+  members: SubscribeMembersRes | undefined;
 }
 
 const ModalUserList = ({ members }: Props) => {
+  if (members === undefined) return null;
+
   return (
     <S.UserList>
-      {members.data.subscribers.map((member) => (
+      {members?.subscribers.map((member) => (
         <S.UserItem key={''}>
           <UserImage src={member.profileImageUrl} width={57} height={57} />
           <div>

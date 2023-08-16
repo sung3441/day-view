@@ -7,52 +7,7 @@ import { getStyledThemProperty } from '@/shared/styles/util';
 
 import useModalState from '@/shared/hooks/useModalState';
 import { SearchBar } from '@/shared/component/Molecule';
-
-// ! TEST
-import { SubscribeMembersRes } from '@/shared/types/api';
-const members = {
-  data: {
-    count: 2,
-    subscribers: [
-      {
-        name: '김시온',
-        email: 'st@gmail.com',
-        auth: 'MANAGE',
-        profileImageUrl: '',
-      },
-      {
-        name: '김싱온',
-        email: 'tldhs@gmail.com',
-        auth: 'MANAGE',
-        profileImageUrl: '',
-      },
-      {
-        name: '김시온',
-        email: 'st@gmail.com',
-        auth: 'MANAGE',
-        profileImageUrl: '',
-      },
-      {
-        name: '김싱온',
-        email: 'tldhs@gmail.com',
-        auth: 'MANAGE',
-        profileImageUrl: '',
-      },
-      {
-        name: '김시온',
-        email: 'st@gmail.com',
-        auth: 'MANAGE',
-        profileImageUrl: '',
-      },
-      {
-        name: '김싱온',
-        email: 'tldhs@gmail.com',
-        auth: 'MANAGE',
-        profileImageUrl: '',
-      },
-    ],
-  },
-} as SubscribeMembersRes;
+import useGetSubscribers from './hooks/useGetSubscribers';
 
 const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
   const {
@@ -63,14 +18,17 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
 
   const { channelId, name = '' } = useModalState('ManageSubscriber');
   const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
+
+  const { data, status } = useGetSubscribers(channelId as number);
+
   const [searchValue, setSearchValue] = useState<string>('');
 
+  // TODO UserList subscribers만 넘기기
   return (
     <Modal ref={ref} isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <S.Title>{name}</S.Title>
       <S.TabBox>
-        <S.Tap>구독자 99+</S.Tap>
-        <S.Tap>멤버 99+</S.Tap>
+        <S.Tap>{`구독자 ${data?.data.count}`}</S.Tap>
       </S.TabBox>
       <S.Description>
         구독자에게 편집 권한을 설정하거나 해제할 수 있습니다.
@@ -81,7 +39,7 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
         placeholder="이름을 입력하세요."
       />
       <UserListWrapper>
-        <Modal.UserList members={members} />
+        <Modal.UserList members={data?.data} />
       </UserListWrapper>
       <Modal.Dim />
     </Modal>
@@ -92,10 +50,6 @@ export default memo(ModalManageSubscriber);
 
 const UserListWrapper = styled.div`
   margin-top: 30px;
-`;
-
-const Header = styled.div`
-  width: 488px;
 `;
 
 const Title = styled.div`
@@ -134,7 +88,6 @@ const Description = styled.div`
 `;
 
 const S = {
-  Header,
   Title,
   TabBox,
   Tap,
