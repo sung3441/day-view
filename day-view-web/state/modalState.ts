@@ -1,5 +1,6 @@
 import { DefaultValue, atom, atomFamily, selectorFamily } from 'recoil';
 import { ModalType } from '@/component/modal/ModalRenderer';
+import { Dayjs } from 'dayjs';
 
 export type ModalParams = Readonly<{
   clientX?: number;
@@ -22,8 +23,8 @@ export type ModalParams = Readonly<{
   // 일정
   recordId?: number;
   complete?: boolean;
-  startDate?: Date;
-  endDate?: Date;
+  startDate?: Date | Dayjs;
+  endDate?: Date | Dayjs;
   recordImageUrl?: string;
 }>;
 
