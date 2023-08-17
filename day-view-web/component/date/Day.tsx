@@ -4,6 +4,8 @@ import { RecordRes } from '@/shared/types/api';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useRecoilValue } from 'recoil';
 import { dayHeightAtom } from '@/shared/context/date/state';
+import dayjs from 'dayjs';
+import { useModal } from '@/shared/hooks';
 
 interface Props {
   date: number;
@@ -26,6 +28,7 @@ const Day = ({
   handleSelectDay,
 }: Props) => {
   const innerHeight = useRecoilValue(dayHeightAtom);
+  const { openModal } = useModal();
 
   const { availableCount, restCount } = useMemo(() => {
     if (record === undefined || !innerHeight)
@@ -73,6 +76,22 @@ const Day = ({
             key={item.recordId + idx.toString()}
             isAllday={item.allDay}
             color={item.color}
+            onClick={(e: React.MouseEvent) => {
+              const { clientX, clientY } = e;
+              const { title, content, recordImageUrl, startDate, endDate } =
+                item;
+
+              e.stopPropagation();
+              openModal('ScheduleDetail', {
+                clientX,
+                clientY,
+                title,
+                startDate: dayjs(startDate),
+                endDate: dayjs(endDate),
+                content,
+                recordImageUrl,
+              });
+            }}
           >
             <p>{item.title}</p>
           </Record>
