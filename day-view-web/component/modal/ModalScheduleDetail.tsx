@@ -15,7 +15,15 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
     handleOnAnimationEnd,
   } = useAnimationHandler(() => closeModal('ScheduleDetail'));
 
-  const { clientX, clientY } = useModalState('ScheduleDetail');
+  const {
+    clientX,
+    clientY,
+    title,
+    content,
+    recordImageUrl,
+    startDate,
+    endDate,
+  } = useModalState('ScheduleDetail');
 
   const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
 
@@ -42,7 +50,7 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
         <Modal.Section gap={78}>
           <Modal.SubTitle>제목</Modal.SubTitle>
           <Modal.Wrapper>
-            <Modal.Input name="title" disabled={!isEditMode} />
+            <Modal.Input name="title" value={title} disabled={!isEditMode} />
           </Modal.Wrapper>
         </Modal.Section>
         <Modal.Section>
@@ -77,7 +85,11 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
         </Modal.Section>
         <Modal.Section>
           <Modal.SubTitle>메모(선택)</Modal.SubTitle>
-          <Modal.Textarea name="content" disabled={!isEditMode} />
+          <Modal.Textarea
+            name="content"
+            value={content}
+            disabled={!isEditMode}
+          />
         </Modal.Section>
       </Modal.Body>
       <Modal.Control>
