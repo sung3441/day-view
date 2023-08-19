@@ -24,11 +24,11 @@ const Section = styled.section<{ gap?: number }>`
   place-items: center start;
 `;
 
-const Control = styled.section`
+const Control = styled.section<{ gap?: number }>`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 17px;
+  gap: ${({ gap }) => (gap ? `${gap}px` : '17px')};
 
   width: 100%;
 `;
@@ -43,7 +43,7 @@ const SubTitle = styled.div`
   color: ${({ theme }) => theme.colors.G_700};
 `;
 
-const Divider = styled.div`
+const Divider = styled.hr`
   position: absolute;
   transform: translate(-50%, -50%);
   width: 100%;
