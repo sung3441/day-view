@@ -37,7 +37,7 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
       clientX={clientX}
       clientY={clientY}
     >
-      <Modal.Control>
+      <Modal.Control gap={12}>
         <IconButton
           type="write"
           size="small"
@@ -46,7 +46,7 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
         <IconButton type="sm_trash" size="small" />
         <IconButton type="close" size="small" onClick={modalClose} />
       </Modal.Control>
-      <Modal.Body>
+      <Modal.Body style={{ marginTop: '22px' }}>
         <Modal.Section gap={78}>
           <Modal.SubTitle>제목</Modal.SubTitle>
           <Modal.Wrapper>
@@ -67,39 +67,40 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
         <Modal.Section>
           <Modal.SubTitle>카테고리</Modal.SubTitle>
           <Modal.Wrapper>
-            {/* <Select
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                const channelId = parseInt(e.target.value);
-                setValue((prev) => ({ ...prev, channelId }));
-              }}
-            >
-              {channelStatus === 'success'
-                ? channels?.data.map(({ channelId, name }) => (
-                    <option key={channelId} value={channelId}>
-                      {name}
-                    </option>
-                  ))
-                : undefined}
-            </Select> */}
+            <Select>
+              <option></option>
+              <option></option>
+            </Select>
           </Modal.Wrapper>
         </Modal.Section>
-        <Modal.Section>
-          <Modal.SubTitle>메모(선택)</Modal.SubTitle>
-          <Modal.Textarea
-            name="content"
-            value={content}
-            disabled={!isEditMode}
-          />
-        </Modal.Section>
-      </Modal.Body>
-      <Modal.Control>
-        {!isEditMode ? (
-          <button>미완료로 표시</button>
-        ) : (
-          <Modal.Button variant="accent">완료</Modal.Button>
+        {content && (
+          <Modal.Section style={{ alignItems: 'start' }}>
+            <Modal.SubTitle>메모(선택)</Modal.SubTitle>
+            <Modal.Textarea
+              name="content"
+              value={content}
+              disabled={!isEditMode}
+            />
+          </Modal.Section>
         )}
-        <Modal.Divider />
-      </Modal.Control>
+      </Modal.Body>
+
+      {!isEditMode ? (
+        <Modal.Control
+          style={{ flexDirection: 'column', alignItems: 'flex-end' }}
+        >
+          <div>
+            <Modal.Divider />
+          </div>
+          <Modal.Button width={150} font="body3">
+            미완료로 표시
+          </Modal.Button>
+        </Modal.Control>
+      ) : (
+        <Modal.Control>
+          <Modal.Button variant="accent">완료</Modal.Button>
+        </Modal.Control>
+      )}
     </Modal>
   );
 };

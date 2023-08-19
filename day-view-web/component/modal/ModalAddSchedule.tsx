@@ -51,7 +51,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
       channelId: channels.data?.at(0)?.channelId ?? 1,
     }));
   }, [channelStatus, channels]);
-  
+
   const handleChangeValue = (e: React.SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
     const { name, value } = target;
@@ -201,6 +201,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
             <CheckBox
               id="allDay"
               label="종일"
+              color="rgb(255, 131, 109)"
               defaultChecked={isChecked}
               onClick={() => {
                 setIsChecked(!isChecked);
