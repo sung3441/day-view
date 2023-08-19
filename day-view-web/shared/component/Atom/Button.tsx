@@ -1,32 +1,49 @@
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { ComponentPropsWithoutRef, memo } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { DefaultTheme, css } from 'styled-components';
 
 type ButtonType = ComponentPropsWithoutRef<'button'>;
 type Variant = 'accent' | 'primary' | 'secondary' | 'negative';
+type FontType = keyof DefaultTheme['fonts'];
+
 interface Props extends ButtonType {
   isActiveFnc?: boolean;
   variant?: Variant;
+  font?: FontType;
+  width?: number;
+  height?: number;
 }
 
-const Button = ({ children, isActiveFnc, ...props }: Props) => {
+const Button = ({
+  children,
+  isActiveFnc,
+  font = 'caption1',
+  ...props
+}: Props) => {
   return (
-    <ButtonStyle isActiveFnc={isActiveFnc} {...props}>
+    <ButtonStyle font={font} isActiveFnc={isActiveFnc} {...props}>
       {children}
     </ButtonStyle>
   );
 };
 
-const ButtonStyle = styled.button<{ isActiveFnc?: boolean; variant?: Variant }>`
+const ButtonStyle = styled.button<{
+  isActiveFnc?: boolean;
+  variant?: Variant;
+  font?: FontType;
+  width?: number;
+  height?: number;
+}>`
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: ${pixelToRemUnit(90)};
-  height: ${pixelToRemUnit(40)};
+  width: ${({ width }) => (width ? pixelToRemUnit(width) : pixelToRemUnit(90))};
+  height: ${({ height }) =>
+    height ? pixelToRemUnit(height) : pixelToRemUnit(40)};
 
   background: #ffffff;
-  ${getStyledThemProperty('fonts', 'caption1')};
+  ${({ font }) => font && getStyledThemProperty('fonts', font)};
 
   border: none;
   border-radius: 7px;
