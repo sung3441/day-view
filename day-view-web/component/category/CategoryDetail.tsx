@@ -1,14 +1,15 @@
-import { Fragment, memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { selectedCategoryIdAtom } from '@/shared/context/category/state';
 import useGetRecord from '@/shared/context/record/hooks/useGetRecord';
 import { selectedYYMMAtom } from '@/state/calendar';
 import { selectedYYMMRecords } from '@/component/category/util';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Spinner from '@/shared/component/Atom/Spinner';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { RecordRes } from '@/shared/types/api';
 import { createDateInfo } from '@/shared/context/date/util';
+import { Icon } from '@/shared/component/Atom';
 
 type Props = {};
 
@@ -56,15 +57,32 @@ const CategoryDetail = ({}: Props) => {
           <Dates key={key}>
             <Index>{index}</Index>
             <Day>
-              {month}월,{strDay}
+              {month}월, {strDay}
             </Day>
             <DayDate>
               {value!.map((record, idx) => {
                 const { startTime, endTime, allDay } = record;
                 return (
                   <DateRow key={idx}>
-                    <div>{allDay ? '종일' : `${startTime} ~ ${endTime}`}</div>
-                    <div key={idx}>{record.title}</div>
+                    <RowWrap>
+                      <Dot />
+                      <div>{allDay ? '종일' : `${startTime} ~ ${endTime}`}</div>
+                    </RowWrap>
+
+                    <RowWrap>
+                      <Icon
+                        type="sm_check"
+                        fill="white"
+                        width={12}
+                        height={12}
+                      />
+                      <div>as</div>
+                    </RowWrap>
+
+                    <RowWrap>
+                      <Icon type="sm_hamburgerMenu" />
+                      <div key={idx}>{record.title}</div>
+                    </RowWrap>
                   </DateRow>
                 );
               })}
@@ -89,37 +107,50 @@ const Center = styled.div`
 
 const Dates = styled.div`
   display: grid;
-  grid-template-columns: ${pixelToRemUnit([30, 54, 500])};
+  grid-template-columns: ${pixelToRemUnit([38, 54, 500])};
   grid-auto-rows: minmax(${pixelToRemUnit(30)}, auto);
   padding: ${pixelToRemUnit([16, 24])};
   place-items: flex-start;
+  align-items: center;
 
   gap: ${pixelToRemUnit(10)};
   border-bottom: 1px solid #dbdbdb;
-  color: #222;
+  color: ${getStyledThemProperty('colors', 'Black')};
 `;
 
 const Main = styled.section`
   padding: ${pixelToRemUnit([10, 0])};
 `;
 
-const Index = styled.div`
-  font-size: ${pixelToRemUnit(24)};
-  font-weight: 700;
-  width: 100%;
-  height: 40px;
+const Index = styled.div<{ isSelect?: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${getStyledThemProperty('fonts', 'title2')}
+
+  width:38px;
+  height: 38px;
+
+  ${({ isSelect }) =>
+    isSelect &&
+    css`
+     color: #fff;
+      background-color: ${getStyledThemProperty('colors', 'main')}
+      border-radius: 50%;
+    `}
 `;
 
 const Day = styled.div`
-  font-size: ${pixelToRemUnit(12)};
-  font-weight: 500;
+  ${getStyledThemProperty('fonts', 'caption3')}
+  align-self: center;
   width: 100%;
-  height: 40px;
   display: flex;
   justify-content: center;
 `;
 
 const DayDate = styled.div`
+  ${getStyledThemProperty('fonts', 'caption2')}
   width: 100%;
   margin-left: 100px;
   display: flex;
@@ -132,9 +163,17 @@ const DateRow = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  div {
-    font-size: 16px;
-    font-weight: 400;
-    width: 50%;
-  }
+  justify-content: space-between;
+`;
+
+const RowWrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Dot = styled.span`
+  width: 12px;
+  height: 12px;
+  background-color: ${getStyledThemProperty('colors', 'main')};
+  border-radius: 50%;
 `;

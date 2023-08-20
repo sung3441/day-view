@@ -24,6 +24,7 @@ import {
   IconSmLetter,
   IconSmSearch,
   IconSmUser,
+  IconSmCheck,
 } from '@/public/images/icon';
 import { CSSProperties, ElementType, memo } from 'react';
 
@@ -60,6 +61,7 @@ const iconComponents = {
   sm_letter: IconSmLetter,
   sm_search: IconSmSearch,
   sm_user: IconSmUser,
+  sm_check: IconSmCheck,
 } satisfies Record<string, ElementType>;
 
 type IconType = keyof typeof iconComponents;
