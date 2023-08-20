@@ -13,6 +13,7 @@ import { useAnimationHandler } from '@/shared/hooks';
 import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
 import useValidation from '@/shared/hooks/useValidation';
 import { AddScheduleParamType } from '@/shared/types/api';
+import ImageUploader from '@/shared/component/Atom/ImageUploader';
 
 const BODY_GAP = 22;
 const SECTION_GAP = 34;
@@ -210,7 +211,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
           </Modal.Wrapper>
         </Modal.Section>
         <Modal.Section gap={SECTION_GAP}>
-          <Modal.SubTitle>카테고리</Modal.SubTitle>
+          <Modal.SubTitle>채널</Modal.SubTitle>
           <Modal.Wrapper>
             <Select
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -238,6 +239,9 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
             onChange={handleChangeValue}
             placeholder="메모를 입력하세요."
           />
+        </Modal.Section>
+        <Modal.Section>
+          <ImageUploader style={{ gridColumn: 2 }} />
         </Modal.Section>
       </Modal.Body>
       <Modal.Control>
