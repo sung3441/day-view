@@ -23,3 +23,4 @@ export { default as IconSmHamburgerMenu } from './sm_hamburgerMenu.svg';
 export { default as IconSmLetter } from './sm_letter.svg';
 export { default as IconSmSearch } from './sm_search.svg';
 export { default as IconSmUser } from './sm_user.svg';
+export { default as IconSmCheck } from './sm_check.svg';
