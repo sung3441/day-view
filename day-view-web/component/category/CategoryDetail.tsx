@@ -65,23 +65,33 @@ const CategoryDetail = ({}: Props) => {
                 return (
                   <DateRow key={idx}>
                     <RowWrap>
-                      <Dot />
+                      <Dot style={{ marginRight: '12px' }} />
                       <div>{allDay ? '종일' : `${startTime} ~ ${endTime}`}</div>
                     </RowWrap>
 
                     <RowWrap>
-                      <Icon
-                        type="sm_check"
-                        fill="white"
-                        width={12}
-                        height={12}
-                      />
-                      <div>as</div>
+                      {record.channelId === 1 && (
+                        <Icon
+                          type="sm_check"
+                          fill="white"
+                          width={12}
+                          height={12}
+                          style={{ marginRight: '6px' }}
+                        />
+                      )}
+                      <Scehdule complete={record.complete}>
+                        {record.title}
+                      </Scehdule>
                     </RowWrap>
 
                     <RowWrap>
                       <Icon type="sm_hamburgerMenu" />
-                      <div key={idx}>{record.title}</div>
+                      <div
+                        key={idx}
+                        onClick={() => console.log(record.channelName)}
+                      >
+                        {record.channelName}
+                      </div>
                     </RowWrap>
                   </DateRow>
                 );
@@ -164,6 +174,11 @@ const DateRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  & div {
+    ${getStyledThemProperty('fonts', 'caption2')}
+    color: ${getStyledThemProperty('colors', 'Black')};
+  }
 `;
 
 const RowWrap = styled.div`
@@ -176,4 +191,8 @@ const Dot = styled.span`
   height: 12px;
   background-color: ${getStyledThemProperty('colors', 'main')};
   border-radius: 50%;
+`;
+
+const Scehdule = styled.div<{ complete?: boolean }>`
+  text-decoration: ${({ complete }) => complete && 'line-through'};
 `;
