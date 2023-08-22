@@ -4,16 +4,23 @@ import Labels from '@/shared/component/Organism/CommonCalendar/label';
 import styled from 'styled-components';
 import Dates from '@/shared/component/Organism/CommonCalendar/Dates';
 import { getTodayYYMM } from '@/shared/context/date/util';
+import useOuterClick from '../../../hooks/useOuterClick';
 
 type Props = {
-  onSelectDay?: (sDate: string, endDate: string) => void;
+  onlyStart?: boolean;
+  onSelectDay?: (startDate: string, endDate?: string) => void;
+  closeCalendar: () => void;
 };
 
 const toNumber = (date: string) => +date.split('-').join('');
-const Calendar = ({ onSelectDay }: Props) => {
+const Calendar = ({ onlyStart, onSelectDay, closeCalendar }: Props) => {
   const [selectedYYMM, setSelectedYYMM] = useState(getTodayYYMM());
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+
+  const targetRef = useOuterClick<HTMLDivElement>({
+    callback: () => closeCalendar(),
+  });
 
   const handleMoveMonth = (flag: 'prev' | 'next') => {
     let { year, month } = selectedYYMM;
@@ -28,6 +35,7 @@ const Calendar = ({ onSelectDay }: Props) => {
   };
 
   const handleSelectDay = (date: string) => {
+    console.log('handleSelectDay');
     if (startDate === '') {
       setStartDate(date);
       return;
@@ -46,9 +54,6 @@ const Calendar = ({ onSelectDay }: Props) => {
     setEndDate('');
   };
 
-  useEffect(() => {
-    onSelectDay && onSelectDay(startDate, endDate);
-  }, [startDate, endDate, onSelectDay]);
   const isRangeDay = (date: string) => {
     if (startDate === '' || endDate === '') {
       return false;
@@ -60,8 +65,17 @@ const Calendar = ({ onSelectDay }: Props) => {
     return startDateNum <= currDate && currDate <= endDateNum;
   };
 
+  useEffect(() => {
+    onSelectDay && onSelectDay(startDate, endDate);
+  }, [startDate, endDate]);
+
+  useEffect(() => {
+    if (onlyStart && startDate) closeCalendar();
+    if (!onlyStart && startDate && endDate) closeCalendar();
+  }, [onlyStart, startDate, endDate]);
+
   return (
-    <Wrapper>
+    <Wrapper ref={targetRef}>
       <Header handleMoveMonth={handleMoveMonth} {...selectedYYMM} />
       <DateWrapper>
         <Labels />
@@ -81,10 +95,10 @@ const Calendar = ({ onSelectDay }: Props) => {
 export default memo(Calendar);
 
 const Wrapper = styled.div`
-  z-index: 1;
+  z-index: 99;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  left: 0;
+  top: 0;
   width: auto !important;
   height: auto;
   overflow: hidden;

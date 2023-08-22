@@ -18,7 +18,6 @@ const useOuterClick = <T extends HTMLElement>({
 }: Props) => {
   const { current: stableCallback } = useRef(callback);
   const targetRef = useRef<T | null>(null); //
-
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (!targetRef?.current) return;

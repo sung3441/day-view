@@ -14,6 +14,7 @@ import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
 import useValidation from '@/shared/hooks/useValidation';
 import { AddScheduleParamType } from '@/shared/types/api';
 import ImageUploader from '@/shared/component/Atom/ImageUploader';
+import SelectDate from '@/component/date/SelectDate';
 
 const BODY_GAP = 22;
 const SECTION_GAP = 34;
@@ -129,7 +130,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
     mutate({ ...value, allDay: isChecked });
     modalClose();
   };
-
+  console.log(value);
   return (
     <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <Modal.Body gap={BODY_GAP}>
@@ -152,64 +153,70 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
           <Modal.SubTitle style={{ alignSelf: 'flex-start' }}>
             날짜
           </Modal.SubTitle>
-          <Modal.Wrapper style={{ gap: '6px' }}>
-            {isChecked ? (
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <DateInput
-                  value={dateToDayjs(value.startDate)}
-                  onChange={(newValue) =>
-                    handleChangeDate(newValue, 'startDate')
-                  }
-                />
-                <Icon type="sm_up" style={{ transform: 'rotate(90deg)' }} />
-                <DateInput
-                  value={dateToDayjs(value.endDate)}
-                  onChange={(newValue) => handleChangeDate(newValue, 'endDate')}
-                />
-              </div>
-            ) : (
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <DateInput
-                  style={{ marginRight: '18px' }}
-                  value={dateToDayjs(value.startDate)}
-                  onChange={(newValue) => {
-                    setValue((prev) => ({
-                      ...prev,
-                      startDate: dayjsToDate(newValue as dayjs.Dayjs),
-                      endDate: dayjsToDate(newValue as dayjs.Dayjs),
-                    }));
-                  }}
-                />
-                <TimeInput
-                  format="HH:mm"
-                  value={dateToDayjs(value.startDate)}
-                  onChange={(newValue, context) => {
-                    context.validationError !== 'invalidDate' &&
-                      handleChangeTime(newValue, 'startDate');
-                  }}
-                />
-                <Icon type="sm_up" style={{ transform: 'rotate(90deg)' }} />
-                <TimeInput
-                  format="HH:mm"
-                  value={dateToDayjs(value.endDate)}
-                  onChange={(newValue, context) => {
-                    context.validationError !== 'invalidDate' &&
-                      handleChangeTime(newValue, 'endDate');
-                  }}
-                />
-              </div>
-            )}
-            <CheckBox
-              id="allDay"
-              label="종일"
-              color="rgb(255, 131, 109)"
-              defaultChecked={isChecked}
-              onClick={() => {
-                setIsChecked(!isChecked);
-              }}
-            />
-          </Modal.Wrapper>
+          <SelectDate allDay={isChecked} />
+
+          {/*<Modal.Wrapper style={{ gap: '6px' }}>*/}
+          {/*  {isChecked ? (*/}
+          {/*    <div style={{ display: 'flex', alignItems: 'center' }}>*/}
+          {/*      <DateInput*/}
+          {/*        value={dateToDayjs(value.startDate)}*/}
+          {/*        onChange={(newValue) =>*/}
+          {/*          handleChangeDate(newValue, 'startDate')*/}
+          {/*        }*/}
+          {/*      />*/}
+          {/*      <Icon type="sm_up" style={{ transform: 'rotate(90deg)' }} />*/}
+          {/*      <DateInput*/}
+          {/*        value={dateToDayjs(value.endDate)}*/}
+          {/*        onChange={(newValue) => handleChangeDate(newValue, 'endDate')}*/}
+          {/*      />*/}
+          {/*    </div>*/}
+          {/*  ) : (*/}
+          {/*    <div style={{ display: 'flex', alignItems: 'center' }}>*/}
+          {/*      <DateInput*/}
+          {/*        style={{ marginRight: '18px' }}*/}
+          {/*        value={dateToDayjs(value.startDate)}*/}
+          {/*        onChange={(newValue) => {*/}
+          {/*          setValue((prev) => ({*/}
+          {/*            ...prev,*/}
+          {/*            startDate: dayjsToDate(newValue as dayjs.Dayjs),*/}
+          {/*            endDate: dayjsToDate(newValue as dayjs.Dayjs),*/}
+          {/*          }));*/}
+          {/*        }}*/}
+          {/*      />*/}
+          {/*      <TimeInput*/}
+          {/*        format="HH:mm"*/}
+          {/*        value={dateToDayjs(value.startDate)}*/}
+          {/*        onChange={(newValue, context) => {*/}
+          {/*          context.validationError !== 'invalidDate' &&*/}
+          {/*            handleChangeTime(newValue, 'startDate');*/}
+          {/*        }}*/}
+          {/*      />*/}
+          {/*      <Icon type="sm_up" style={{ transform: 'rotate(90deg)' }} />*/}
+          {/*      <TimeInput*/}
+          {/*        format="HH:mm"*/}
+          {/*        value={dateToDayjs(value.endDate)}*/}
+          {/*        onChange={(newValue, context) => {*/}
+          {/*          context.validationError !== 'invalidDate' &&*/}
+          {/*            handleChangeTime(newValue, 'endDate');*/}
+          {/*        }}*/}
+          {/*      />*/}
+          {/*    </div>*/}
+          {/*  )}*/}
+          {/*</Modal.Wrapper>*/}
         </Modal.Section>
+        <Modal.Section>
+          <div />
+          <CheckBox
+            id="allDay"
+            label="종일"
+            color="rgb(255, 131, 109)"
+            defaultChecked={isChecked}
+            onClick={() => {
+              setIsChecked(!isChecked);
+            }}
+          />
+        </Modal.Section>
+
         <Modal.Section gap={SECTION_GAP}>
           <Modal.SubTitle>채널</Modal.SubTitle>
           <Modal.Wrapper>
