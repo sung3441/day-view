@@ -42,10 +42,6 @@ const ModalCreateChannel = ({ closeModal }: ModalProps) => {
     }
   };
 
-  // TODO status 상태에 따른 다음 동작필요
-  // 1. 성공시 모달 닫기
-  // 2. 실패시 에러메세지 띄우기 -> 제가 할게요
-  // 3. 로딩시 버튼 disabled
   const handleCreateChannel = () => {
     mutate({ name: value.categoryName, secretYn: value.isPrivate });
     modalClose();

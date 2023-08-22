@@ -40,7 +40,7 @@ const useGetDateRecord = ({ startDate, endDate }: RecordInSubscribeParam) => {
       })
       .forEach((record) => {
         const { startDate, endDate, allDay } = record;
-        if (!allDay) setDateInHash(endDate, record, res);
+        // if (!allDay) setDateInHash(endDate, record, res);
         setDateInHash(startDate, record, res);
       });
     return res;

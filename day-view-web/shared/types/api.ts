@@ -48,8 +48,8 @@ export type PutChannelParamType = {
 export type AddScheduleParamType = {
   channelId: number;
   title: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   content?: string;
   recordImageUrl?: string;
   allDay: boolean;

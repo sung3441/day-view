@@ -14,6 +14,7 @@ type CovertDateParamProps = {
   month: number;
   day?: number;
   isLastDay?: boolean;
+  isRequiredTime?: boolean;
 };
 
 export const covertDateParam = ({
@@ -21,6 +22,7 @@ export const covertDateParam = ({
   month,
   day,
   isLastDay,
+  isRequiredTime = true,
 }: CovertDateParamProps) => {
   const setDay = () => {
     day = day || 1;
@@ -31,12 +33,22 @@ export const covertDateParam = ({
   const strMonth = addZeroPad(month);
   const strDay = addZeroPad(setDay());
 
-  return `${year}-${strMonth}-${strDay}T00:00:00`;
+  return `${year}-${strMonth}-${strDay}${isRequiredTime ? 'T00:00:00' : ''}`;
 };
 
-export function getTodayYYMM(): YYMMType {
-  const today = new Date();
-  return { year: today.getFullYear(), month: today.getMonth() + 1 };
+export const convertTimeParam = (time: string) => {
+  // time = addZeroPad(time).toString();
+  return `T${addZeroPad(time.slice(0, 2))}:${addZeroPad(time.slice(2, 4))}:00`;
+};
+
+export function getTodayYYMM(d?: string): YYMMType {
+  // const today = new Date().set;
+  const today = d ? new Date(d) : new Date();
+  return {
+    year: today.getFullYear(),
+    month: today.getMonth() + 1,
+    date: today.getDate(),
+  };
 }
 
 export function getStrToday() {
