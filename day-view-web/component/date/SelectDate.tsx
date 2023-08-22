@@ -2,12 +2,14 @@ import { memo, SyntheticEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CommonCalendar from '@/shared/component/Organism/CommonCalendar';
 import { pixelToRemUnit } from '@/shared/styles/util';
+import { number } from 'prop-types';
 
 type Props = {
   allDay: boolean;
+  handelTimeChange: (data: any) => void;
 };
 
-const SelectDate = ({ allDay }: Props) => {
+const SelectDate = ({ allDay, handelTimeChange }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [date, setDate] = useState({
     startDate: '',
@@ -33,6 +35,19 @@ const SelectDate = ({ allDay }: Props) => {
     setDate({ ...date, [name]: valueAsNumber });
   };
 
+  const dateToString = (date: number) => {
+    let str = String(date);
+    if (str.length < 3) return str;
+    // if (str.length === 1) str = `000${str}`;
+    // if (str.length === 2) str = `00${str}`;
+    // if (str.length === 3) str = `0${str}`;
+
+    const [f, e] = [str.slice(0, 2), str.slice(2, 4)];
+    // if (f > 23) str = '2359';
+    if (Number.parseInt(e) > 59) return `${f}-59`;
+    return `${f}-${e}`;
+  };
+
   useEffect(() => {
     setDate({
       startDate: '',
@@ -41,6 +56,10 @@ const SelectDate = ({ allDay }: Props) => {
       endTime: 2359,
     });
   }, [allDay]);
+
+  useEffect(() => {
+    handelTimeChange({ ...date });
+  }, [date]);
 
   return (
     <Wrapper>
@@ -57,15 +76,17 @@ const SelectDate = ({ allDay }: Props) => {
       </DayLabel>
       {!allDay && (
         <>
-          <DateLabel
-            type="number"
+          <TimeLabel
             minLength={4}
             name="startTime"
             value={date.startTime}
+            // value={dateToString(date.startTime)}
             onChange={onChangeFn}
+            type="number"
+            // pattern="[0-9]*"
           />
           <span>-</span>
-          <DateLabel
+          <TimeLabel
             type="number"
             minLength={4}
             max={2359}
@@ -95,7 +116,7 @@ const DayLabel = styled.div`
   font-size: ${pixelToRemUnit(10)};
 `;
 
-const DateLabel = styled.input`
+const TimeLabel = styled.input`
   width: 35%;
   padding: 10px;
   border: 1px solid #ccc;

@@ -15,9 +15,21 @@ import useValidation from '@/shared/hooks/useValidation';
 import { AddScheduleParamType } from '@/shared/types/api';
 import ImageUploader from '@/shared/component/Atom/ImageUploader';
 import SelectDate from '@/component/date/SelectDate';
+import {
+  convertTimeParam,
+  covertDateParam,
+  getTodayYYMM,
+} from '@/shared/context/date/util';
 
 const BODY_GAP = 22;
 const SECTION_GAP = 34;
+
+type ScheduleType = AddScheduleParamType & {
+  startDate: string;
+  endDate: string;
+  startTime: number;
+  endTime: number;
+};
 
 const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   const {
@@ -29,14 +41,16 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   // 종일 값
   const [isChecked, setIsChecked] = useState(true);
 
-  const [value, setValue] = useState<AddScheduleParamType>({
+  const [value, setValue] = useState<ScheduleType>({
     channelId: 1,
     title: '',
     content: '',
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: '',
+    endDate: '',
     recordImageUrl: '',
     allDay: true,
+    startTime: 0,
+    endTime: 2359,
   });
 
   const { isValid, InvalidMessage, validate } = useValidation('empty');
@@ -44,15 +58,6 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
   const { data: channels, status: channelStatus } = useGetChannel({
     selectType: 'MANAGE',
   });
-
-  useEffect(() => {
-    // 초기 state값이 변경 되지 않아 초기 값 세팅
-    if (channelStatus !== 'success' || !channels?.data?.length) return;
-    setValue((prev) => ({
-      ...prev,
-      channelId: channels.data?.at(0)?.channelId ?? 1,
-    }));
-  }, [channelStatus, channels]);
 
   const handleChangeValue = (e: React.SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
@@ -72,65 +77,88 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
     }
   };
 
+  const handelTimeChange = (value: Partial<ScheduleType>) => {
+    setValue((prev) => ({ ...prev, ...value }));
+  };
+
+  useEffect(() => {
+    // 초기 state값이 변경 되지 않아 초기 값 세팅
+    if (channelStatus !== 'success' || !channels?.data?.length) return;
+    setValue((prev) => ({
+      ...prev,
+      channelId: channels.data?.at(0)?.channelId ?? 1,
+    }));
+  }, [channelStatus, channels]);
+
   /** hour, minute만 변경 */
-  const handleChangeTime = (
-    date: unknown,
-    field: keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
-  ) => {
-    const newDate = date as dayjs.Dayjs;
-    const hour = newDate.hour();
-    const minute = newDate.minute();
-
-    switch (
-      field as keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
-    ) {
-      case 'startDate':
-        setValue((prev) => ({
-          ...prev,
-          startDate: dayjsToDate(
-            dateToDayjs(prev.startDate).hour(hour).minute(minute)
-          ),
-        }));
-        break;
-      case 'endDate':
-        setValue((prev) => ({
-          ...prev,
-          endDate: dayjsToDate(
-            dateToDayjs(prev.endDate).hour(hour).minute(minute)
-          ),
-        }));
-        break;
-    }
-  };
-
-  /** date 전체 변경 */
-  const handleChangeDate = (
-    date: unknown,
-    field: keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
-  ) => {
-    switch (
-      field as keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
-    ) {
-      case 'startDate':
-        setValue((prev) => ({
-          ...prev,
-          startDate: dayjsToDate(date as dayjs.Dayjs),
-        }));
-        break;
-      case 'endDate':
-        setValue((prev) => ({
-          ...prev,
-          endDate: dayjsToDate(date as dayjs.Dayjs),
-        }));
-        break;
-    }
-  };
+  // const handleChangeTime = (name: string, date: unknown) => {
+  //   switch (
+  //     field as keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
+  //   ) {
+  //     case 'startDate':
+  //       setValue((prev) => ({
+  //         ...prev,
+  //         startDate: dayjsToDate(
+  //           dateToDayjs(prev.startDate).hour(hour).minute(minute)
+  //         ),
+  //       }));
+  //       break;
+  //     case 'endDate':
+  //       setValue((prev) => ({
+  //         ...prev,
+  //         endDate: dayjsToDate(
+  //           dateToDayjs(prev.endDate).hour(hour).minute(minute)
+  //         ),
+  //       }));
+  //       break;
+  //   }
+  // };
+  //
+  // /** date 전체 변경 */
+  // const handleChangeDate = (
+  //   date: unknown,
+  //   field: keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
+  // ) => {
+  //   switch (
+  //     field as keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
+  //   ) {
+  //     case 'startDate':
+  //       setValue((prev) => ({
+  //         ...prev,
+  //         startDate: dayjsToDate(date as dayjs.Dayjs),
+  //       }));
+  //       break;
+  //     case 'endDate':
+  //       setValue((prev) => ({
+  //         ...prev,
+  //         endDate: dayjsToDate(date as dayjs.Dayjs),
+  //       }));
+  //       break;
+  //   }
+  // };
 
   const handleAddSchedule = () => {
-    mutate({ ...value, allDay: isChecked });
+    const params = {
+      ...value,
+      allDay: isChecked,
+    };
+
+    if (isChecked) {
+      if (!value.startDate) return;
+      params.startDate =
+        value.startDate + convertTimeParam(value.startTime.toString());
+      params.endDate =
+        value.startDate + convertTimeParam(value.endTime.toString());
+    } else {
+      if (!value.startDate || !value.endDate) return;
+      params.startDate =
+        value.startDate + convertTimeParam(value.startTime.toString());
+      params.endDate =
+        value.endDate + convertTimeParam(value.endTime.toString());
+    }
+    mutate(params);
     modalClose();
   };
-  console.log(value);
   return (
     <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <Modal.Body gap={BODY_GAP}>
@@ -153,7 +181,7 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
           <Modal.SubTitle style={{ alignSelf: 'flex-start' }}>
             날짜
           </Modal.SubTitle>
-          <SelectDate allDay={isChecked} />
+          <SelectDate allDay={isChecked} handelTimeChange={handelTimeChange} />
 
           {/*<Modal.Wrapper style={{ gap: '6px' }}>*/}
           {/*  {isChecked ? (*/}
