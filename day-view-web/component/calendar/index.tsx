@@ -2,9 +2,7 @@ import styled, { css } from 'styled-components';
 import Channel from '../channel';
 import DateSection from '../date';
 import { useRecoilValue } from 'recoil';
-import { pixelToRemUnit } from '@/shared/styles/util';
 import { useMemo } from 'react';
-import ScheduleHeader from '../schedule/ScheduleHeader';
 import {
   G_isOpenChannelAtom,
   G_isSearchOpenAtom,
@@ -12,10 +10,11 @@ import {
 } from '@/shared/component/Organism/Gnb/state';
 import SearchResult from '../channelSearch';
 import Category from '../category';
+import Schedule from '../schedule';
 
 const tabList = {
   월: <DateSection />,
-  일정: <ScheduleHeader />,
+  일정: <Schedule />,
   카테고리: <Category />,
 };
 
