@@ -10,6 +10,7 @@ import { RecordRes } from '@/shared/types/api';
 import { createDateInfo } from '@/shared/context/date/util';
 import { Icon } from '@/shared/component/Atom';
 import * as S from '@/shared/styles/recordStyle';
+import { useModal } from '@/shared/hooks';
 
 type Props = {};
 
@@ -18,6 +19,8 @@ type CategoryDetailDateType = ReturnType<typeof createDateInfo> & RecordRes;
 const CategoryDetail = ({}: Props) => {
   const { year, month } = useRecoilValue(selectedYYMMAtom);
   const selectedCategoryId = useRecoilValue(selectedCategoryIdAtom);
+
+  const { openModal } = useModal();
 
   const select = useCallback(
     (data: any) => selectedYYMMRecords(data, year, month),
@@ -66,6 +69,29 @@ const CategoryDetail = ({}: Props) => {
                 return (
                   <S.DateRow
                     key={idx}
+                    onClick={(e) => {
+                      const { clientX, clientY } = e;
+                      const {
+                        recordId,
+                        title,
+                        content,
+                        recordImageUrl,
+                        startDate,
+                        endDate,
+                      } = record;
+
+                      e.stopPropagation();
+                      openModal('ScheduleDetail', {
+                        recordId,
+                        clientX,
+                        clientY,
+                        title,
+                        startDate: dayjs(startDate),
+                        endDate: dayjs(endDate),
+                        content,
+                        recordImageUrl,
+                      });
+                    }}
                   >
                     <S.RowWrap>
                       <S.Dot style={{ marginRight: '12px' }} />

@@ -78,11 +78,18 @@ const Day = ({
             color={item.color}
             onClick={(e: React.MouseEvent) => {
               const { clientX, clientY } = e;
-              const { title, content, recordImageUrl, startDate, endDate } =
-                item;
+              const {
+                recordId,
+                title,
+                content,
+                recordImageUrl,
+                startDate,
+                endDate,
+              } = item;
 
               e.stopPropagation();
               openModal('ScheduleDetail', {
+                recordId,
                 clientX,
                 clientY,
                 title,

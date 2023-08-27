@@ -7,6 +7,7 @@ import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import { IconButton } from '@/shared/component/Molecule';
 import useModalState from '@/shared/hooks/useModalState';
 import { DateInput, Icon, Select, TimeInput } from '@/shared/component/Atom';
+import useDeleteRecord from '@/shared/context/record/hooks/useDeleteRecord';
 
 const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
   const {
@@ -16,6 +17,7 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
   } = useAnimationHandler(() => closeModal('ScheduleDetail'));
 
   const {
+    recordId,
     clientX,
     clientY,
     title,
@@ -26,6 +28,8 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
   } = useModalState('ScheduleDetail');
 
   const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
+
+  const { mutate, status } = useDeleteRecord();
 
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -43,7 +47,15 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
           size="small"
           onClick={() => setIsEditMode(!isEditMode)}
         />
-        <IconButton type="sm_trash" size="small" />
+        <IconButton
+          type="sm_trash"
+          size="small"
+          onClick={() => {
+            if (!recordId) return;
+            mutate(recordId);
+            modalClose();
+          }}
+        />
         <IconButton type="close" size="small" onClick={modalClose} />
       </Modal.Control>
       <Modal.Body style={{ marginTop: '22px' }}>

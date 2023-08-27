@@ -7,7 +7,7 @@ import { ModalProps } from '@/component/modal/ModalRenderer';
 
 import { DateInput, Icon, Select, TimeInput } from '@/shared/component/Atom';
 import { dateToDayjs, dayjsToDate } from '@/shared/util/dateConversion';
-import useAddSchedule from './hooks/useAddSchedule';
+import useAddSchedule from '../../shared/context/record/hooks/useAddSchedule';
 
 import { useAnimationHandler } from '@/shared/hooks';
 import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';

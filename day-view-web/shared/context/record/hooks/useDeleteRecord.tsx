@@ -1,16 +1,16 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { QueryKeys } from '@/shared/queryClient';
-import { addSchedule } from '@/shared/api';
+import { deleteRecord } from '@/shared/api';
 
-const useAddSchedule = () => {
+const useDeleteRecord = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(addSchedule, {
+  return useMutation(deleteRecord, {
     onSuccess: async () => {
-      await queryClient.invalidateQueries([QueryKeys.RECORD]);
+      await queryClient.invalidateQueries([QueryKeys.RECORDS]);
       await queryClient.invalidateQueries([QueryKeys.DATE]);
     },
   });
 };
 
-export default useAddSchedule;
+export default useDeleteRecord;

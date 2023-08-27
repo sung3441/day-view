@@ -103,6 +103,16 @@ export type RecordRes = {
   allDay: boolean;
 };
 
+export type PatchRecordParamType = {
+  recordId: number;
+  title: string;
+  content: string;
+  complete: boolean;
+  startDate: string;
+  endDate: string;
+  recordImageUrl: string;
+};
+
 export type RecordInChannel = Omit<
   RecordRes,
   'color' | 'channelName' | 'subscribeId' | 'channelId'
