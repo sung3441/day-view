@@ -6,6 +6,7 @@ import {
   CreateChannelParamType,
   MyChannelRecodeRes,
   PatchChannelType,
+  PatchRecordParamType,
   PatchUserParams,
   PutChannelParamType,
   RecordInChannel,
@@ -122,5 +123,31 @@ export const getRecordInSubscribe = async (params: RecordInSubscribeParam) => {
   const res = await new Client(
     '/api/subscribe/me/records'
   ).get<MyChannelRecodeRes>(params);
+  return res;
+};
+
+export const patchRecord = async (patchRecordParams: PatchRecordParamType) => {
+  const {
+    recordId,
+    title,
+    content,
+    complete,
+    startDate,
+    endDate,
+    recordImageUrl,
+  } = patchRecordParams;
+  const res = await new Client(`/api/records/${recordId}`).patch({
+    title,
+    content,
+    complete,
+    startDate,
+    endDate,
+    recordImageUrl,
+  });
+  return res;
+};
+
+export const deleteRecord = async (recordId: number) => {
+  const res = await new Client(`/api/records/${recordId}`).delete();
   return res;
 };
