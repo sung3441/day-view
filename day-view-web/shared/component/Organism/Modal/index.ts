@@ -2,7 +2,7 @@ import ModalMain from './ModalMain';
 import ModalDim from './ModalDim';
 import ModalInput from './ModalInput';
 import ModalUserList from './ModalUserList';
-import * as S from './modalStyle';
+import * as S from '@/shared/styles/modalStyle';
 
 import { ToggleButton, Textarea, Button } from '@/shared/component/Atom';
 

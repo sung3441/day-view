@@ -1,15 +1,15 @@
 import { memo, useCallback, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
+import dayjs from 'dayjs';
 import { selectedCategoryIdAtom } from '@/shared/context/category/state';
 import useGetRecord from '@/shared/context/record/hooks/useGetRecord';
 import { selectedYYMMAtom } from '@/state/calendar';
 import { selectedYYMMRecords } from '@/component/category/util';
-import styled, { css } from 'styled-components';
 import Spinner from '@/shared/component/Atom/Spinner';
-import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { RecordRes } from '@/shared/types/api';
 import { createDateInfo } from '@/shared/context/date/util';
 import { Icon } from '@/shared/component/Atom';
+import * as S from '@/shared/styles/recordStyle';
 
 type Props = {};
 
@@ -42,35 +42,38 @@ const CategoryDetail = ({}: Props) => {
 
   if (status === 'loading')
     return (
-      <Center>
+      <S.Center>
         <Spinner />
-      </Center>
+      </S.Center>
     );
   if (data?.length === 0 || !hashData?.size)
-    return <Center>데이터가 없습니다.</Center>;
+    return <S.Center>데이터가 없습니다.</S.Center>;
 
   return (
-    <Main>
+    <S.Main>
       {Array.from(hashData).map(([key, value], index) => {
-        const { month, strDay } = value!.at(0) as CategoryDetailDateType;
+        const { month, strDay, date } = value!.at(0) as CategoryDetailDateType;
+        const today = dayjs().date();
         return (
-          <Dates key={key}>
-            <Index>{index}</Index>
-            <Day>
+          <S.Dates key={key}>
+            <S.Index isToday={today === date}>{date}</S.Index>
+            <S.Day>
               {month}월, {strDay}
-            </Day>
-            <DayDate>
+            </S.Day>
+            <S.DayDate>
               {value!.map((record, idx) => {
                 const { startTime, endTime, allDay } = record;
                 return (
-                  <DateRow key={idx}>
-                    <RowWrap>
-                      <Dot style={{ marginRight: '12px' }} />
+                  <S.DateRow
+                    key={idx}
+                  >
+                    <S.RowWrap>
+                      <S.Dot style={{ marginRight: '12px' }} />
                       <div>{allDay ? '종일' : `${startTime} ~ ${endTime}`}</div>
-                    </RowWrap>
+                    </S.RowWrap>
 
-                    <RowWrap>
-                      {record.channelId === 1 && (
+                    <S.RowWrap>
+                      {selectedCategoryId === 1 && (
                         <Icon
                           type="sm_check"
                           fill="white"
@@ -79,120 +82,19 @@ const CategoryDetail = ({}: Props) => {
                           style={{ marginRight: '6px' }}
                         />
                       )}
-                      <Scehdule complete={record.complete}>
+                      <S.Scehdule complete={record.complete}>
                         {record.title}
-                      </Scehdule>
-                    </RowWrap>
-
-                    <RowWrap>
-                      <Icon type="sm_hamburgerMenu" />
-                      <div
-                        key={idx}
-                        onClick={() => console.log(record.channelName)}
-                      >
-                        {record.channelName}
-                      </div>
-                    </RowWrap>
-                  </DateRow>
+                      </S.Scehdule>
+                    </S.RowWrap>
+                  </S.DateRow>
                 );
               })}
-            </DayDate>
-          </Dates>
+            </S.DayDate>
+          </S.Dates>
         );
       })}
-    </Main>
+    </S.Main>
   );
 };
 
 export default memo(CategoryDetail);
-
-const Center = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100% - 70px);
-  font-size: 1.2rem;
-  color: #999;
-`;
-
-const Dates = styled.div`
-  display: grid;
-  grid-template-columns: ${pixelToRemUnit([38, 54, 500])};
-  grid-auto-rows: minmax(${pixelToRemUnit(30)}, auto);
-  padding: ${pixelToRemUnit([16, 24])};
-  place-items: flex-start;
-  align-items: center;
-
-  gap: ${pixelToRemUnit(10)};
-  border-bottom: 1px solid #dbdbdb;
-  color: ${getStyledThemProperty('colors', 'Black')};
-`;
-
-const Main = styled.section`
-  padding: ${pixelToRemUnit([10, 0])};
-`;
-
-const Index = styled.div<{ isSelect?: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  ${getStyledThemProperty('fonts', 'title2')}
-
-  width:38px;
-  height: 38px;
-
-  ${({ isSelect }) =>
-    isSelect &&
-    css`
-     color: #fff;
-      background-color: ${getStyledThemProperty('colors', 'main')}
-      border-radius: 50%;
-    `}
-`;
-
-const Day = styled.div`
-  ${getStyledThemProperty('fonts', 'caption3')}
-  align-self: center;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-
-const DayDate = styled.div`
-  ${getStyledThemProperty('fonts', 'caption2')}
-  width: 100%;
-  margin-left: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const DateRow = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  & div {
-    ${getStyledThemProperty('fonts', 'caption2')}
-    color: ${getStyledThemProperty('colors', 'Black')};
-  }
-`;
-
-const RowWrap = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Dot = styled.span`
-  width: 12px;
-  height: 12px;
-  background-color: ${getStyledThemProperty('colors', 'main')};
-  border-radius: 50%;
-`;
-
-const Scehdule = styled.div<{ complete?: boolean }>`
-  text-decoration: ${({ complete }) => complete && 'line-through'};
-`;
