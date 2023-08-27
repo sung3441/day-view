@@ -7,7 +7,7 @@ const useAddSchedule = () => {
 
   return useMutation(addSchedule, {
     onSuccess: async () => {
-      await queryClient.invalidateQueries([QueryKeys.RECORD]);
+      await queryClient.invalidateQueries([QueryKeys.RECORDS]);
       await queryClient.invalidateQueries([QueryKeys.DATE]);
     },
   });

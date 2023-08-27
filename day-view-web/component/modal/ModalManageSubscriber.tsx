@@ -7,7 +7,7 @@ import { getStyledThemProperty } from '@/shared/styles/util';
 
 import useModalState from '@/shared/hooks/useModalState';
 import { SearchBar } from '@/shared/component/Molecule';
-import useGetSubscribers from './hooks/useGetSubscribers';
+import useGetSubscribers from '../../shared/context/user/hooks/useGetSubscribers';
 
 const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
   const {
