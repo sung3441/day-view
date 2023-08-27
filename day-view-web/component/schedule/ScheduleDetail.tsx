@@ -1,13 +1,22 @@
 import { memo } from 'react';
 import { Icon } from '@/shared/component/Atom';
 import * as S from '@/shared/styles/recordStyle';
+import Spinner from '@/shared/component/Atom/Spinner';
 
 const ScheduleDetail = () => {
+  // if (status === 'loading')
+  //   return (
+  //     <S.Center>
+  //       <Spinner />
+  //     </S.Center>
+  //   );
+  // if (data?.length === 0) return <S.Center>데이터가 없습니다.</S.Center>;
+
   return (
     <S.Main>
       <S.Dates>
         <S.Index isToday={false}>날짜</S.Index>
-        <S.Day>8월, 목</S.Day>
+        <S.Day>월, 요일</S.Day>
         <S.DayDate>
           <S.DateRow>
             <S.RowWrap>
@@ -28,7 +37,7 @@ const ScheduleDetail = () => {
             </S.RowWrap>
 
             <S.RowWrap>
-              <Icon type="sm_hamburgerMenu" />
+              <Icon type="sm_hamburgerMenu" style={{ marginRight: '12px' }} />
               <div>채널명</div>
             </S.RowWrap>
           </S.DateRow>
