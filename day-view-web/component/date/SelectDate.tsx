@@ -3,24 +3,32 @@ import styled from 'styled-components';
 import CommonCalendar from '@/shared/component/Organism/CommonCalendar';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { number } from 'prop-types';
+import { addZeroPad, currentTime } from '@/shared/context/date/util';
 
 type Props = {
   allDay: boolean;
   handelTimeChange: (data: any) => void;
 };
 
+const initDateValues = {
+  startDate: '',
+  endDate: '',
+  startTime: currentTime(),
+  endTime: '2359',
+};
+
+const splitYear = (date: string) => {
+  console.log('date', date);
+  const [year, month, day] = date.split('-');
+  return `${month}월 ${day}일`;
+};
+
 const SelectDate = ({ allDay, handelTimeChange }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [date, setDate] = useState({
-    startDate: '',
-    endDate: '',
-    startTime: 0,
-    endTime: 2359,
-  });
+  const [date, setDate] = useState(initDateValues);
 
   const openCalendar = (e: SyntheticEvent) => {
     e.stopPropagation();
-    e.cancelable = true;
     setIsOpen(true);
   };
 
@@ -30,31 +38,35 @@ const SelectDate = ({ allDay, handelTimeChange }: Props) => {
 
   const onChangeFn = (e: SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
-    let { name, valueAsNumber } = target;
-    if (valueAsNumber > 2359) valueAsNumber = 2359;
-    setDate({ ...date, [name]: valueAsNumber });
+    let { name, valueAsNumber, value } = target;
+    const numericValue = value.replace(/\D/g, '');
+    setDate({ ...date, [name]: numericValue });
   };
 
-  const dateToString = (date: number) => {
-    let str = String(date);
-    if (str.length < 3) return str;
-    // if (str.length === 1) str = `000${str}`;
-    // if (str.length === 2) str = `00${str}`;
-    // if (str.length === 3) str = `0${str}`;
+  const onBlur = (e: SyntheticEvent) => {
+    const target = e.target as HTMLInputElement;
+    let value = target.value;
+    if (!value) return;
 
-    const [f, e] = [str.slice(0, 2), str.slice(2, 4)];
-    // if (f > 23) str = '2359';
-    if (Number.parseInt(e) > 59) return `${f}-59`;
-    return `${f}-${e}`;
+    switch (value.length) {
+      case 1:
+        value = addZeroPad(value, 1, true);
+        value = `0${value}`;
+        break;
+      case 2:
+        value = addZeroPad(value, 2, true);
+        break;
+      case 3:
+        value = addZeroPad(value, 1, true);
+        break;
+      default:
+    }
+    if (Number.parseInt(value) > 2359) value = '2359';
+    setDate({ ...date, [target.name]: value });
   };
 
   useEffect(() => {
-    setDate({
-      startDate: '',
-      endDate: '',
-      startTime: 0,
-      endTime: 2359,
-    });
+    setDate(initDateValues);
   }, [allDay]);
 
   useEffect(() => {
@@ -64,8 +76,8 @@ const SelectDate = ({ allDay, handelTimeChange }: Props) => {
   return (
     <Wrapper>
       <DayLabel onClick={(e) => openCalendar(e)}>
-        {date.startDate ? date.startDate : '날짜선택'}
-        {date.endDate && `~${date.endDate}`}
+        <p> {date.startDate ? splitYear(date.startDate) : '날짜선택'}</p>
+        <p> {date.endDate && `~ ${splitYear(date.endDate)}`}</p>
         {isOpen && (
           <CommonCalendar
             onlyStart={allDay}
@@ -77,22 +89,23 @@ const SelectDate = ({ allDay, handelTimeChange }: Props) => {
       {!allDay && (
         <>
           <TimeLabel
-            minLength={4}
+            type="string"
             name="startTime"
             value={date.startTime}
-            // value={dateToString(date.startTime)}
             onChange={onChangeFn}
-            type="number"
-            // pattern="[0-9]*"
+            onBlur={onBlur}
+            minLength={4}
+            pattern="[0-9]*"
           />
           <span>-</span>
           <TimeLabel
             type="number"
-            minLength={4}
-            max={2359}
             name="endTime"
             value={date.endTime}
             onChange={onChangeFn}
+            onBlur={onBlur}
+            minLength={4}
+            pattern="[0-9]*"
           />
         </>
       )}
@@ -112,12 +125,14 @@ const Wrapper = styled.div`
 
 const DayLabel = styled.div`
   position: relative;
-  width: 35%;
-  font-size: ${pixelToRemUnit(10)};
+  width: 40%;
+  font-size: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const TimeLabel = styled.input`
-  width: 35%;
+  width: 30%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;

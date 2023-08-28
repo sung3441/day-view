@@ -1,8 +1,15 @@
 import { YYMMType } from '@/shared/types/calendar';
 
-export const addZeroPad = (num: number | string) => {
+export const addZeroPad = (
+  num: number | string,
+  cnt: number = 0,
+  isReverse: boolean = false
+): string => {
   num = Number(num);
-  return num < 10 ? `0${num}` : num;
+  cnt = num < 10 ? cnt + 1 : cnt;
+  const zeroPad = '0'.repeat(cnt);
+  if (isReverse) return zeroPad ? `${num}${zeroPad}` : num.toString() + zeroPad;
+  return zeroPad ? `${zeroPad}${num}` : zeroPad + num.toString();
 };
 
 const getLastDayOfMonth = (year: number, month: number) => {
@@ -37,12 +44,10 @@ export const covertDateParam = ({
 };
 
 export const convertTimeParam = (time: string) => {
-  // time = addZeroPad(time).toString();
   return `T${addZeroPad(time.slice(0, 2))}:${addZeroPad(time.slice(2, 4))}:00`;
 };
 
 export function getTodayYYMM(d?: string): YYMMType {
-  // const today = new Date().set;
   const today = d ? new Date(d) : new Date();
   return {
     year: today.getFullYear(),
@@ -84,4 +89,11 @@ export const createDateInfo = (startDate: string, endDate?: string) => {
 
   const key = `${year}-${addZeroPad(month)}-${addZeroPad(date)}`;
   return { key, month, date, startTime, endTime, strDay: days[dayOfWeek] };
+};
+
+export const currentTime = () => {
+  const d = new Date();
+  const hours = d.getHours();
+  const minutes = d.getMinutes();
+  return `${addZeroPad(hours)}${addZeroPad(minutes)}`;
 };
