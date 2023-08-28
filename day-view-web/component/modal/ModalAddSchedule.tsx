@@ -1,12 +1,10 @@
 import React, { memo, useEffect, useState } from 'react';
-import dayjs from 'dayjs';
 
 import Modal from '../../shared/component/Organism/Modal';
 import { CheckBox } from '@/shared/component/Molecule';
 import { ModalProps } from '@/component/modal/ModalRenderer';
 
-import { DateInput, Icon, Select, TimeInput } from '@/shared/component/Atom';
-import { dateToDayjs, dayjsToDate } from '@/shared/util/dateConversion';
+import { Select } from '@/shared/component/Atom';
 import useAddSchedule from '../../shared/context/record/hooks/useAddSchedule';
 
 import { useAnimationHandler } from '@/shared/hooks';
@@ -15,11 +13,7 @@ import useValidation from '@/shared/hooks/useValidation';
 import { AddScheduleParamType } from '@/shared/types/api';
 import ImageUploader from '@/shared/component/Atom/ImageUploader';
 import SelectDate from '@/component/date/SelectDate';
-import {
-  convertTimeParam,
-  covertDateParam,
-  getTodayYYMM,
-} from '@/shared/context/date/util';
+import { convertTimeParam, currentTime } from '@/shared/context/date/util';
 
 const BODY_GAP = 22;
 const SECTION_GAP = 34;
@@ -27,8 +21,15 @@ const SECTION_GAP = 34;
 type ScheduleType = AddScheduleParamType & {
   startDate: string;
   endDate: string;
-  startTime: number;
-  endTime: number;
+  startTime: string;
+  endTime: string;
+};
+
+const covertTimeTable = (sTime: string, eTime: string) => {
+  if (Number(sTime) > Number(eTime)) {
+    return { startTime: eTime, endTime: sTime };
+  }
+  return { startTime: sTime, endTime: eTime };
 };
 
 const ModalAddSchedule = ({ closeModal }: ModalProps) => {
@@ -49,8 +50,8 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
     endDate: '',
     recordImageUrl: '',
     allDay: true,
-    startTime: 0,
-    endTime: 2359,
+    startTime: currentTime(),
+    endTime: '2359',
   });
 
   const { isValid, InvalidMessage, validate } = useValidation('empty');
@@ -81,62 +82,6 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
     setValue((prev) => ({ ...prev, ...value }));
   };
 
-  useEffect(() => {
-    // 초기 state값이 변경 되지 않아 초기 값 세팅
-    if (channelStatus !== 'success' || !channels?.data?.length) return;
-    setValue((prev) => ({
-      ...prev,
-      channelId: channels.data?.at(0)?.channelId ?? 1,
-    }));
-  }, [channelStatus, channels]);
-
-  /** hour, minute만 변경 */
-  // const handleChangeTime = (name: string, date: unknown) => {
-  //   switch (
-  //     field as keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
-  //   ) {
-  //     case 'startDate':
-  //       setValue((prev) => ({
-  //         ...prev,
-  //         startDate: dayjsToDate(
-  //           dateToDayjs(prev.startDate).hour(hour).minute(minute)
-  //         ),
-  //       }));
-  //       break;
-  //     case 'endDate':
-  //       setValue((prev) => ({
-  //         ...prev,
-  //         endDate: dayjsToDate(
-  //           dateToDayjs(prev.endDate).hour(hour).minute(minute)
-  //         ),
-  //       }));
-  //       break;
-  //   }
-  // };
-  //
-  // /** date 전체 변경 */
-  // const handleChangeDate = (
-  //   date: unknown,
-  //   field: keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
-  // ) => {
-  //   switch (
-  //     field as keyof Pick<AddScheduleParamType, 'startDate' | 'endDate'>
-  //   ) {
-  //     case 'startDate':
-  //       setValue((prev) => ({
-  //         ...prev,
-  //         startDate: dayjsToDate(date as dayjs.Dayjs),
-  //       }));
-  //       break;
-  //     case 'endDate':
-  //       setValue((prev) => ({
-  //         ...prev,
-  //         endDate: dayjsToDate(date as dayjs.Dayjs),
-  //       }));
-  //       break;
-  //   }
-  // };
-
   const handleAddSchedule = () => {
     const params = {
       ...value,
@@ -145,20 +90,33 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
 
     if (isChecked) {
       if (!value.startDate) return;
-      params.startDate =
-        value.startDate + convertTimeParam(value.startTime.toString());
-      params.endDate =
-        value.startDate + convertTimeParam(value.endTime.toString());
+      const { startTime, endTime } = covertTimeTable(
+        value.startTime,
+        value.endTime
+      );
+      params.startDate = value.startDate + convertTimeParam(startTime);
+      params.endDate = value.startDate + convertTimeParam(endTime);
     } else {
       if (!value.startDate || !value.endDate) return;
-      params.startDate =
-        value.startDate + convertTimeParam(value.startTime.toString());
-      params.endDate =
-        value.endDate + convertTimeParam(value.endTime.toString());
+      const { startTime, endTime } = covertTimeTable(
+        value.startTime,
+        value.endTime
+      );
+      params.startDate = value.startDate + convertTimeParam(startTime);
+      params.endDate = value.endDate + convertTimeParam(endTime);
     }
+
     mutate(params);
     modalClose();
   };
+
+  useEffect(() => {
+    if (channelStatus !== 'success' || !channels?.data?.length) return;
+    setValue((prev) => ({
+      ...prev,
+      channelId: channels.data?.at(0)?.channelId ?? 1,
+    }));
+  }, [channelStatus, channels]);
   return (
     <Modal isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <Modal.Body gap={BODY_GAP}>
@@ -182,55 +140,6 @@ const ModalAddSchedule = ({ closeModal }: ModalProps) => {
             날짜
           </Modal.SubTitle>
           <SelectDate allDay={isChecked} handelTimeChange={handelTimeChange} />
-
-          {/*<Modal.Wrapper style={{ gap: '6px' }}>*/}
-          {/*  {isChecked ? (*/}
-          {/*    <div style={{ display: 'flex', alignItems: 'center' }}>*/}
-          {/*      <DateInput*/}
-          {/*        value={dateToDayjs(value.startDate)}*/}
-          {/*        onChange={(newValue) =>*/}
-          {/*          handleChangeDate(newValue, 'startDate')*/}
-          {/*        }*/}
-          {/*      />*/}
-          {/*      <Icon type="sm_up" style={{ transform: 'rotate(90deg)' }} />*/}
-          {/*      <DateInput*/}
-          {/*        value={dateToDayjs(value.endDate)}*/}
-          {/*        onChange={(newValue) => handleChangeDate(newValue, 'endDate')}*/}
-          {/*      />*/}
-          {/*    </div>*/}
-          {/*  ) : (*/}
-          {/*    <div style={{ display: 'flex', alignItems: 'center' }}>*/}
-          {/*      <DateInput*/}
-          {/*        style={{ marginRight: '18px' }}*/}
-          {/*        value={dateToDayjs(value.startDate)}*/}
-          {/*        onChange={(newValue) => {*/}
-          {/*          setValue((prev) => ({*/}
-          {/*            ...prev,*/}
-          {/*            startDate: dayjsToDate(newValue as dayjs.Dayjs),*/}
-          {/*            endDate: dayjsToDate(newValue as dayjs.Dayjs),*/}
-          {/*          }));*/}
-          {/*        }}*/}
-          {/*      />*/}
-          {/*      <TimeInput*/}
-          {/*        format="HH:mm"*/}
-          {/*        value={dateToDayjs(value.startDate)}*/}
-          {/*        onChange={(newValue, context) => {*/}
-          {/*          context.validationError !== 'invalidDate' &&*/}
-          {/*            handleChangeTime(newValue, 'startDate');*/}
-          {/*        }}*/}
-          {/*      />*/}
-          {/*      <Icon type="sm_up" style={{ transform: 'rotate(90deg)' }} />*/}
-          {/*      <TimeInput*/}
-          {/*        format="HH:mm"*/}
-          {/*        value={dateToDayjs(value.endDate)}*/}
-          {/*        onChange={(newValue, context) => {*/}
-          {/*          context.validationError !== 'invalidDate' &&*/}
-          {/*            handleChangeTime(newValue, 'endDate');*/}
-          {/*        }}*/}
-          {/*      />*/}
-          {/*    </div>*/}
-          {/*  )}*/}
-          {/*</Modal.Wrapper>*/}
         </Modal.Section>
         <Modal.Section>
           <div />
