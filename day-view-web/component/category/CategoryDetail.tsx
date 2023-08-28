@@ -30,8 +30,9 @@ const CategoryDetail = ({}: Props) => {
   const { data, status } = useGetRecord(selectedCategoryId, select);
 
   const hashData = useMemo(() => {
+    if (!data) return [];
     const hash = new Map<string, CategoryDetailDateType[]>();
-    if (!data) return;
+
     data.forEach((record: RecordRes) => {
       const { startDate, endDate } = record;
       const dataInfo = createDateInfo(startDate, endDate);
@@ -40,7 +41,12 @@ const CategoryDetail = ({}: Props) => {
         : hash.set(dataInfo.key, [{ ...record, ...dataInfo }]);
       return hash;
     });
-    return hash;
+
+    return Array.from(hash).sort((a, b) => {
+      const aDate = a[1][0].date;
+      const bDate = b[1][0].date;
+      return aDate - bDate;
+    });
   }, [data]);
 
   if (status === 'loading')
@@ -49,12 +55,13 @@ const CategoryDetail = ({}: Props) => {
         <Spinner />
       </S.Center>
     );
-  if (data?.length === 0 || !hashData?.size)
+
+  if (data?.length === 0 || !hashData?.length)
     return <S.Center>데이터가 없습니다.</S.Center>;
 
   return (
     <S.Main>
-      {Array.from(hashData).map(([key, value], index) => {
+      {hashData.map(([key, value], index) => {
         const { month, strDay, date } = value!.at(0) as CategoryDetailDateType;
         const today = dayjs().date();
         return (
