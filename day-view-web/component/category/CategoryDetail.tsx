@@ -47,7 +47,7 @@ const CategoryDetail = ({}: Props) => {
       const bDate = b[1][0].date;
       return aDate - bDate;
     });
-  }, [data]);
+  }, [data, status]);
 
   if (status === 'loading')
     return (

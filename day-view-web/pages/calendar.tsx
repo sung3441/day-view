@@ -6,7 +6,11 @@ import { getChannel, getRecordInSubscribe, getUser } from '@/shared/api';
 import { dehydrate, QueryClient } from 'react-query';
 import { isSetAccessToken } from '@/shared/util/auth';
 import { QueryKeys } from '@/shared/queryClient';
-import { covertDateParam, getTodayYYMM } from '@/shared/context/date/util';
+import {
+  addZeroPad,
+  covertDateParam,
+  getTodayYYMM,
+} from '@/shared/context/date/util';
 import { ChannelSelectType } from '@/shared/types/api';
 
 const ModalRenderer = dynamic(() => import('@/component/modal/ModalRenderer'), {
@@ -52,8 +56,9 @@ export const getServerSideProps = async ({
       isLastDay: true,
     });
 
-    await queryClient.prefetchQuery([QueryKeys.DATE, startDate, endDate], () =>
-      getRecordInSubscribe({ startDate, endDate })
+    await queryClient.prefetchQuery(
+      [QueryKeys.DATE, year.toString(), addZeroPad(month)],
+      () => getRecordInSubscribe({ startDate, endDate })
     );
 
     const channels: ChannelSelectType[] = ['MANAGE', 'SUBSCRIBE', 'GOOGLE'];

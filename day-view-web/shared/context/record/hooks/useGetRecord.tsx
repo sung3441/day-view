@@ -10,6 +10,7 @@ const useGetRecord = (channelId: number, select?: selectType) => {
     () => getRecordInChannel({ channelId }),
     {
       enabled: !!channelId,
+      refetchOnMount: true,
       select: (data) => {
         return select ? select(data) : data!.data;
       },

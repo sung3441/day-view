@@ -38,8 +38,7 @@ export class Client {
         status,
       };
     } catch (e) {
-      const error = e as AxiosError<ErrorResponse>;
-      if (error) throw error;
+      this.handleError(e);
     }
   }
 
@@ -53,8 +52,7 @@ export class Client {
         status,
       };
     } catch (e) {
-      const error = e as AxiosError<ErrorResponse>;
-      if (error) throw error;
+      this.handleError(e);
     }
   }
 
@@ -68,8 +66,7 @@ export class Client {
         status,
       };
     } catch (e) {
-      const error = e as AxiosError<ErrorResponse>;
-      if (error) throw error;
+      this.handleError(e);
     }
   }
 
@@ -83,8 +80,7 @@ export class Client {
         status,
       };
     } catch (e) {
-      const error = e as AxiosError<ErrorResponse>;
-      if (error) throw error;
+      this.handleError(e);
     }
   }
 
@@ -98,8 +94,7 @@ export class Client {
         status,
       };
     } catch (e) {
-      const error = e as AxiosError<ErrorResponse>;
-      if (error) throw error;
+      this.handleError(e);
     }
   }
 
@@ -114,4 +109,10 @@ export class Client {
 
     return params;
   }
+
+  private handleError = (e: unknown) => {
+    const error = e as AxiosError<ErrorResponse>;
+    if (error) throw error;
+    throw new Error('error');
+  };
 }
