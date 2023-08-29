@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { memo } from 'react';
 import { IconButton } from '@/shared/component/Molecule';
 import { pixelToRemUnit } from '@/shared/styles/util';
-import { ChannelSelectType } from '@/shared/types/api';
+import { ChannelRes, ChannelSelectType } from '@/shared/types/api';
 import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
 import ChannelItem from '@/component/channel/ChannelItem';
 import { useRecoilValue } from 'recoil';
@@ -31,7 +31,7 @@ const Channel = ({ label, selectType, onClickPlus }: Props) => {
         <IconButton type="sm_plus" size="small" onClick={onClickPlus} />
       </Label>
       <List>
-        {data?.data?.map((channel) => (
+        {data?.data?.map((channel: ChannelRes) => (
           <ChannelItem
             key={channel.channelId}
             selectType={selectType}
