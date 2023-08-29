@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import Modal from '../../shared/component/Organism/Modal';
 import { ModalProps } from '@/component/modal/ModalRenderer';
@@ -8,6 +8,9 @@ import { IconButton } from '@/shared/component/Molecule';
 import useModalState from '@/shared/hooks/useModalState';
 import { DateInput, Icon, Select, TimeInput } from '@/shared/component/Atom';
 import useDeleteRecord from '@/shared/context/record/hooks/useDeleteRecord';
+import useValidation from '@/shared/hooks/useValidation';
+import { AddScheduleParamType } from '@/shared/types/api';
+import usePatchRecord from '@/shared/context/record/hooks/usePatchRecord';
 
 const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
   const {
@@ -20,9 +23,9 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
     recordId,
     clientX,
     clientY,
-    title,
-    content,
-    recordImageUrl,
+    title = '',
+    content = '',
+    recordImageUrl = '',
     startDate,
     endDate,
   } = useModalState('ScheduleDetail');
@@ -30,8 +33,30 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
   const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
 
   const { mutate, status } = useDeleteRecord();
+  const { mutate: patchRecord, status: patchStatus } = usePatchRecord();
 
   const [isEditMode, setIsEditMode] = useState(false);
+
+  const { isValid, InvalidMessage, validate } = useValidation('empty');
+
+  const handleChangeValue = (e: React.SyntheticEvent) => {
+    const target = e.target as HTMLInputElement;
+
+    // TODO setState
+    switch (target.name as keyof AddScheduleParamType) {
+      case 'title':
+        validate(target.value);
+        break;
+      case 'content':
+        break;
+      case 'recordImageUrl':
+        break;
+    }
+  };
+
+  useEffect(() => {
+    validate(title);
+  }, [title, validate]);
 
   return (
     <Modal
@@ -62,7 +87,16 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
         <Modal.Section gap={78}>
           <Modal.SubTitle>제목</Modal.SubTitle>
           <Modal.Wrapper>
-            <Modal.Input name="title" value={title} disabled={!isEditMode} />
+            <Modal.Input
+              name="title"
+              value={title}
+              onChange={handleChangeValue}
+              disabled={!isEditMode}
+              isValid={isValid}
+            />
+            {!isValid && (
+              <Modal.InvalidText>{InvalidMessage}</Modal.InvalidText>
+            )}
           </Modal.Wrapper>
         </Modal.Section>
         <Modal.Section>
@@ -91,6 +125,7 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
             <Modal.Textarea
               name="content"
               value={content}
+              onChange={handleChangeValue}
               disabled={!isEditMode}
             />
           </Modal.Section>
@@ -110,7 +145,9 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
         </Modal.Control>
       ) : (
         <Modal.Control>
-          <Modal.Button variant="accent">완료</Modal.Button>
+          <Modal.Button variant="accent" disabled={!isValid}>
+            완료
+          </Modal.Button>
         </Modal.Control>
       )}
     </Modal>
