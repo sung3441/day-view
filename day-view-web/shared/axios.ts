@@ -9,7 +9,7 @@ type ErrorResponse = {
   statusText: string;
 };
 
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const Auth = axios.create({
   baseURL: BASE_URL,
@@ -37,12 +37,8 @@ export class Client {
         data,
         status,
       };
-    } catch (error) {
-      // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
-      if (axios?.isAxiosError<ErrorResponse, any>(error)) {
-        console.log('error', error);
-        throw new Error(error?.response?.status.toString());
-      }
+    } catch (e) {
+      this.handleError(e);
     }
   }
 
@@ -55,12 +51,8 @@ export class Client {
         data: data,
         status,
       };
-    } catch (error) {
-      // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
-      if (axios?.isAxiosError<ErrorResponse, any>(error)) {
-        console.log('error', error);
-        throw new Error(error?.response?.status.toString());
-      }
+    } catch (e) {
+      this.handleError(e);
     }
   }
 
@@ -73,12 +65,8 @@ export class Client {
         data: data,
         status,
       };
-    } catch (error) {
-      // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
-      if (axios.isAxiosError<ErrorResponse, any>(error)) {
-        console.log('error', error);
-        throw new Error(error?.response?.status.toString());
-      }
+    } catch (e) {
+      this.handleError(e);
     }
   }
 
@@ -91,12 +79,8 @@ export class Client {
         data: data,
         status,
       };
-    } catch (error) {
-      // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
-      if (axios.isAxiosError<ErrorResponse, any>(error)) {
-        console.log('error', error);
-        throw new Error(error?.response?.status.toString());
-      }
+    } catch (e) {
+      this.handleError(e);
     }
   }
 
@@ -109,12 +93,8 @@ export class Client {
         data: data,
         status,
       };
-    } catch (error) {
-      // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
-      if (axios.isAxiosError<ErrorResponse, any>(error)) {
-        console.log('error', error);
-        throw new Error(error?.response?.status.toString());
-      }
+    } catch (e) {
+      this.handleError(e);
     }
   }
 
@@ -129,4 +109,10 @@ export class Client {
 
     return params;
   }
+
+  private handleError = (e: unknown) => {
+    const error = e as AxiosError<ErrorResponse>;
+    if (error) throw error;
+    throw new Error('error');
+  };
 }

@@ -2,7 +2,7 @@
 export type YYMMType = {
   year: number;
   month: number;
-  date: number;
+  date?: number;
 };
 
 export type DateType = {

@@ -2,12 +2,12 @@ import { memo, useEffect, useState } from 'react';
 import Day from '@/component/date/Day';
 import { useDate, useDateParam } from '@/shared/context/date/hooks/useDate';
 import useGetDateRecord from '@/shared/context/date/hooks/useGetDateRecord';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { dayHeightAtom } from '@/shared/context/date/state';
+import { selectedYYMMAtom } from '@/state/calendar';
 
 const Dates = () => {
   const setInnerHeight = useSetRecoilState(dayHeightAtom);
-
   const { generatedDays, handleSelectDay, selectedDay } = useDate();
   const { startDate, endDate } = useDateParam();
   const data = useGetDateRecord({ startDate, endDate });
