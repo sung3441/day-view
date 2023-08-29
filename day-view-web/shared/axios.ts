@@ -9,7 +9,7 @@ type ErrorResponse = {
   statusText: string;
 };
 
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const Auth = axios.create({
   baseURL: BASE_URL,
@@ -41,7 +41,7 @@ export class Client {
       // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
       if (axios?.isAxiosError<ErrorResponse, any>(error)) {
         console.log('error', error);
-        throw new Error(error?.response?.status.toString());
+        return error?.response?.status?.toString() || '';
       }
     }
   }
@@ -59,7 +59,7 @@ export class Client {
       // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
       if (axios?.isAxiosError<ErrorResponse, any>(error)) {
         console.log('error', error);
-        throw new Error(error?.response?.status.toString());
+        return error?.response?.status?.toString() || '';
       }
     }
   }
@@ -77,7 +77,7 @@ export class Client {
       // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
       if (axios.isAxiosError<ErrorResponse, any>(error)) {
         console.log('error', error);
-        throw new Error(error?.response?.status.toString());
+        throw new Error(error?.response?.status?.toString() || '');
       }
     }
   }
@@ -95,7 +95,8 @@ export class Client {
       // TODO 에러 타입 정의 및 에러 상태에 따른 라우터 처리
       if (axios.isAxiosError<ErrorResponse, any>(error)) {
         console.log('error', error);
-        throw new Error(error?.response?.status.toString());
+        return error?.response?.status?.toString() || '';
+        // throw new Error(error?.response?.status?.toString() || '');
       }
     }
   }
