@@ -25,28 +25,20 @@ const useGetDateRecord = ({ startDate, endDate }: RecordInSubscribeParam) => {
     }
   );
 
-  const setDateInHash = (
-    date: string,
-    recode: RecordRes,
-    hash: Map<string, RecordRes[]>
-  ) => {
-    const key = date.slice(0, 10);
-    hash.has(key) ? hash.get(key)?.push(recode) : hash.set(key, [recode]);
-  };
-
   return useMemo(() => {
-    const res = new Map<string, RecordRes[]>();
-    if (!myRecodes || !myActiveChannelIds) return res;
+    const hashMapData = new Map<string, RecordRes[]>();
+    if (!myRecodes || !myActiveChannelIds) return hashMapData;
 
     myRecodes.data
-      .filter((record) => {
-        return myActiveChannelIds?.includes(record.channelId);
-      })
+      .filter((record) => myActiveChannelIds?.includes(record.channelId))
       .forEach((record) => {
-        const { startDate, endDate, allDay } = record;
-        setDateInHash(startDate, record, res);
+        const { startDate } = record;
+        const key = startDate.slice(0, 10);
+        hashMapData.has(key)
+          ? hashMapData.get(key)?.push(record)
+          : hashMapData.set(key, [record]);
       });
-    return res;
+    return hashMapData;
   }, [myRecodes, myActiveChannelIds]);
 };
 

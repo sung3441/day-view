@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import { Inter } from 'next/font/google';
 import { GetServerSidePropsContext } from 'next';
 import Main from '../component/mainPage';
 import styled from 'styled-components';
 import { getStyledThemProperty } from '@/shared/styles/util';
 import { isSetAccessToken } from '@/shared/util/auth';
+import axios from 'axios';
 
 export default function Home() {
   return (
@@ -17,6 +17,17 @@ export default function Home() {
       </Head>
       <MainWrap>
         <Main />
+        <button
+          onClick={() => {
+            axios
+              .get('http://43.200.181.39:8081/api/v1/auth/refresh')
+              .then((res) => {
+                console.log(res);
+              });
+          }}
+        >
+          tttt
+        </button>
       </MainWrap>
     </>
   );
