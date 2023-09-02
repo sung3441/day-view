@@ -15,7 +15,7 @@ const Auth = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
   headers: {
-    'Content-Security-Policy': `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' ${process.env.NEXT_PUBLIC_API_URL} }`,
+    'Content-Security-Policy': `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' ${process.env.NEXT_PUBLIC_API_URL}`,
   },
 });
 
