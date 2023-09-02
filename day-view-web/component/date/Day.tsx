@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 import { dayHeightAtom } from '@/shared/context/date/state';
 import dayjs from 'dayjs';
 import { useModal } from '@/shared/hooks';
+import { Icon } from '@/shared/component/Atom';
 
 interface Props {
   date: number;
@@ -82,9 +83,11 @@ const Day = ({
                 recordId,
                 title,
                 content,
+                complete,
                 recordImageUrl,
                 startDate,
                 endDate,
+                channelName,
               } = item;
 
               e.stopPropagation();
@@ -93,10 +96,12 @@ const Day = ({
                 clientX,
                 clientY,
                 title,
-                startDate: dayjs(startDate),
-                endDate: dayjs(endDate),
+                startDate,
+                endDate,
                 content,
+                complete,
                 recordImageUrl,
+                channelName,
               });
             }}
           >

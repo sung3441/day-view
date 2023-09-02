@@ -6,10 +6,10 @@ import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 
 import { IconButton } from '@/shared/component/Molecule';
 import useModalState from '@/shared/hooks/useModalState';
-import { DateInput, Icon, Select, TimeInput } from '@/shared/component/Atom';
+import { DateInput, Icon, TimeInput } from '@/shared/component/Atom';
 import useDeleteRecord from '@/shared/context/record/hooks/useDeleteRecord';
 import useValidation from '@/shared/hooks/useValidation';
-import { AddScheduleParamType } from '@/shared/types/api';
+import { PatchRecordParamType } from '@/shared/types/api';
 import usePatchRecord from '@/shared/context/record/hooks/usePatchRecord';
 
 const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
@@ -20,15 +20,27 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
   } = useAnimationHandler(() => closeModal('ScheduleDetail'));
 
   const {
-    recordId,
     clientX,
     clientY,
+    recordId = -1,
     title = '',
     content = '',
+    complete = false,
+    startDate = '',
+    endDate = '',
     recordImageUrl = '',
+    channelName = '',
+  } = useModalState('ScheduleDetail');
+
+  const [value, setValue] = useState<PatchRecordParamType>({
+    recordId,
+    title,
+    content,
+    complete,
     startDate,
     endDate,
-  } = useModalState('ScheduleDetail');
+    recordImageUrl,
+  });
 
   const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
 
@@ -39,24 +51,30 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
 
   const { isValid, InvalidMessage, validate } = useValidation('empty');
 
-  const handleChangeValue = (e: React.SyntheticEvent) => {
-    const target = e.target as HTMLInputElement;
-
-    // TODO setState
-    switch (target.name as keyof AddScheduleParamType) {
-      case 'title':
-        validate(target.value);
-        break;
-      case 'content':
-        break;
-      case 'recordImageUrl':
-        break;
-    }
-  };
-
   useEffect(() => {
     validate(title);
   }, [title, validate]);
+
+  const handleChangeValue = (e: React.SyntheticEvent) => {
+    const target = e.target as HTMLInputElement;
+
+    setValue((prevValue) => ({
+      ...prevValue,
+      [target.name]: target.value,
+    }));
+  };
+
+  const handleChangeComplete = () => {
+    const isComplete = !value.complete;
+    patchRecord({ ...value, complete: isComplete });
+
+    setValue((prev) => ({ ...prev, complete: isComplete }));
+  };
+
+  const handlePatchRecord = () => {
+    patchRecord(value);
+    modalClose();
+  };
 
   return (
     <Modal
@@ -89,7 +107,7 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
           <Modal.Wrapper>
             <Modal.Input
               name="title"
-              value={title}
+              value={value.title}
               onChange={handleChangeValue}
               disabled={!isEditMode}
               isValid={isValid}
@@ -113,10 +131,7 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
         <Modal.Section>
           <Modal.SubTitle>카테고리</Modal.SubTitle>
           <Modal.Wrapper>
-            <Select>
-              <option></option>
-              <option></option>
-            </Select>
+            <div>{channelName}</div>
           </Modal.Wrapper>
         </Modal.Section>
         {content && (
@@ -124,7 +139,7 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
             <Modal.SubTitle>메모(선택)</Modal.SubTitle>
             <Modal.Textarea
               name="content"
-              value={content}
+              value={value.content}
               onChange={handleChangeValue}
               disabled={!isEditMode}
             />
@@ -139,13 +154,31 @@ const ModalScheduleDetail = ({ closeModal }: ModalProps) => {
           <div>
             <Modal.Divider />
           </div>
-          <Modal.Button width={150} font="body3">
-            미완료로 표시
-          </Modal.Button>
+          {value.complete ? (
+            <Modal.Button
+              width={150}
+              font="body3"
+              onClick={handleChangeComplete}
+            >
+              미완료로 표시
+            </Modal.Button>
+          ) : (
+            <Modal.Button
+              width={150}
+              font="body3"
+              onClick={handleChangeComplete}
+            >
+              완료로 표시
+            </Modal.Button>
+          )}
         </Modal.Control>
       ) : (
         <Modal.Control>
-          <Modal.Button variant="accent" disabled={!isValid}>
+          <Modal.Button
+            variant="accent"
+            onClick={handlePatchRecord}
+            disabled={!isValid}
+          >
             완료
           </Modal.Button>
         </Modal.Control>
