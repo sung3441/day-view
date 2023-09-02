@@ -12,6 +12,7 @@ export type ModalParams = Readonly<{
 
   // 채널
   channelId?: number;
+  channelName?: string;
   name?: string;
 
   // 내정보
@@ -23,8 +24,8 @@ export type ModalParams = Readonly<{
   // 일정
   recordId?: number;
   complete?: boolean;
-  startDate?: Date | Dayjs;
-  endDate?: Date | Dayjs;
+  startDate?: string;
+  endDate?: string;
   recordImageUrl?: string;
 }>;
 

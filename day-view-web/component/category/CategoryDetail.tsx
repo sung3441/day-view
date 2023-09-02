@@ -85,6 +85,8 @@ const CategoryDetail = ({}: Props) => {
                         recordImageUrl,
                         startDate,
                         endDate,
+                        complete,
+                        channelName,
                       } = record;
 
                       e.stopPropagation();
@@ -93,10 +95,12 @@ const CategoryDetail = ({}: Props) => {
                         clientX,
                         clientY,
                         title,
-                        startDate: dayjs(startDate),
-                        endDate: dayjs(endDate),
+                        startDate,
+                        endDate,
                         content,
                         recordImageUrl,
+                        complete,
+                        channelName,
                       });
                     }}
                   >
