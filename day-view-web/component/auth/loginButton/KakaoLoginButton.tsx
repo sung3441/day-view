@@ -6,8 +6,8 @@ import { Icon } from '@/shared/component/Atom';
 
 const KakaoLoginButton = () => {
   const params = new URLSearchParams();
-  params.append('redirect_uri', 'http://localhost:3000/auth');
-  const url = `${process.env.NEXT_PUBLIC_KAKAO_URL}${params.toString()}`;
+  params.append('redirect_uri', `${process.env.NEXT_PUBLIC_WEB_URL}/auth`);
+  const url = `${process.env.NEXT_PUBLIC_KAKAO_URL}?${params.toString()}`;
 
   return (
     <a href={url}>
