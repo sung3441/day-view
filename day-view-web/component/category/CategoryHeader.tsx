@@ -11,6 +11,7 @@ import {
 } from 'react';
 import { useRecoilState } from 'recoil';
 import { selectedCategoryIdAtom } from '@/shared/context/category/state';
+import useGetMyChannel from '@/shared/context/channel/hooks/useGetMyChannel';
 
 interface Props {
   categories: ChannelRes[];
@@ -29,17 +30,18 @@ const moveCenterFromParent = (parent: HTMLElement, target: HTMLElement) => {
 };
 
 // '카테고리' 탭 누르면 실행
-const CategoryHeader = ({ categories }: Props) => {
+const CategoryHeader = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [selectedCategoryId, setSelectedCategoryId] = useRecoilState(
     selectedCategoryIdAtom
   );
   const [isInitSelected, setIsInitSelected] = useState(false);
 
+  const { myChannelRecodes: categories } = useGetMyChannel();
+
   const toggleHandler = useCallback(
     (e: SyntheticEvent<HTMLButtonElement>, channelId: number) => {
       setSelectedCategoryId(channelId);
-
       if (!wrapperRef.current) return;
       moveCenterFromParent(wrapperRef.current, e.currentTarget);
     },
@@ -58,10 +60,9 @@ const CategoryHeader = ({ categories }: Props) => {
         <CategoryButton
           key={channel.channelId}
           isSelected={channel.channelId === selectedCategoryId}
-          name={channel.name}
           id={channel.channelId}
-          color={channel.color}
           toggleHandler={toggleHandler}
+          {...channel}
         />
       ))}
     </Wrapper>
