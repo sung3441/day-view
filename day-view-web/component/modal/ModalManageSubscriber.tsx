@@ -17,9 +17,9 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
   } = useAnimationHandler(() => closeModal('ManageSubscriber'));
 
   const { channelId, name = '' } = useModalState('ManageSubscriber');
-  const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
-
   const { data, status } = useGetSubscribers(channelId as number);
+
+  const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
 
   const [searchValue, setSearchValue] = useState<string>('');
 
@@ -28,7 +28,7 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
     <Modal ref={ref} isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <S.Title>{name}</S.Title>
       <S.TabBox>
-        <S.Tap>{`구독자 ${data?.data.count}`}</S.Tap>
+        <S.Tap>{`구독자 ${data?.count}`}</S.Tap>
       </S.TabBox>
       <S.Description>
         구독자에게 편집 권한을 설정하거나 해제할 수 있습니다.
@@ -39,7 +39,7 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
         placeholder="이름을 입력하세요."
       />
       <UserListWrapper>
-        <Modal.UserList members={data?.data} />
+        <Modal.UserList members={data?.subscribers} />
       </UserListWrapper>
       <Modal.Dim />
     </Modal>
