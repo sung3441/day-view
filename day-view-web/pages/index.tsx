@@ -20,7 +20,7 @@ export default function Home() {
         <button
           onClick={() => {
             axios
-              .get('http://43.200.181.39:8081/api/members/me')
+              .get('http://43.200.181.39:8081/api/v1/auth/refresh')
               .then((res) => {
                 console.log(res);
               });
