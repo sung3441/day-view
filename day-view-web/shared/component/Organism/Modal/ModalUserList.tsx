@@ -4,7 +4,7 @@ import { Button, UserImage } from '../../Atom';
 import { SubscribeMembersRes } from '@/shared/types/api';
 
 interface Props {
-  members: SubscribeMembersRes | undefined;
+  members: SubscribeMembersRes['subscribers'] | undefined;
 }
 
 const ModalUserList = ({ members }: Props) => {
@@ -12,7 +12,7 @@ const ModalUserList = ({ members }: Props) => {
 
   return (
     <S.UserList>
-      {members?.subscribers.map((member) => (
+      {members?.map((member) => (
         <S.UserItem key={''}>
           <UserImage src={member.profileImageUrl} width={57} height={57} />
           <div>

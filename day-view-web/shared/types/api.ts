@@ -132,7 +132,7 @@ export type SubscribeMembersRes = {
   subscribers: {
     name: string;
     email: string;
-    auth: 'MANAGE';
+    auth: string;
     profileImageUrl: string;
   }[];
 };

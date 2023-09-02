@@ -4,10 +4,13 @@ import { getSubscribers } from '@/shared/api';
 
 const useGetSubscribers = (channelId: number) => {
   return useQuery(
-    [QueryKeys.CHANNEL, channelId],
+    [QueryKeys.SUBSCRIBERS, channelId],
     () => getSubscribers(channelId),
     {
-      select: (data) => data!.data,
+      select: (data) => ({
+        count: data!.data.data.count,
+        subscribers: data!.data.data.subscribers,
+      }),
     }
   );
 };
