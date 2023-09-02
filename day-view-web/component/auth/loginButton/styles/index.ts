@@ -7,6 +7,7 @@ export const StyleLoginButton = styled.button<{ name: 'google' | 'kakao' }>`
   height: 60px;
   width: 100%;
   border-radius: 7px;
+  color: #fff;
 
   ${getStyledThemProperty('fonts', 'body3')};
   ${getStyledThemProperty('box', 'flexCenterBox')};
