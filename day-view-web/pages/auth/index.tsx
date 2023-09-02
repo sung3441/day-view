@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import Auth from '@/shared/axios';
 import Spinner from '@/shared/component/Atom/Spinner';
 import styled from 'styled-components';
-import { getAccessToken } from '@/shared/api';
 
 const AuthPage = () => {
   const router = useRouter();
@@ -11,10 +10,11 @@ const AuthPage = () => {
 
   useEffect(() => {
     if (!token) return;
+    console.log('token', token);
     Auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     (async () => {
-      await getAccessToken();
-      await window.location.replace('/calendar');
+      // await getAccessToken();
+      // await window.location.replace('/calendar');
     })();
   }, [token, router]);
 
