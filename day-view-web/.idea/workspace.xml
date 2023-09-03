@@ -5,31 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d7640da-7f49-4b5a-932f-82af975bf380" name="변경" comment="feat(shared): 일정 상세 데이터 전처리 작업중">
-      <change afterPath="$PROJECT_DIR$/shared/context/date/hooks/useGetRecordInSubscribe.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shared/context/date/hooks/useGetSchedule.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shared/context/date/type/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../day-view-api/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../day-view-api/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/channel/Channel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/channel/Channel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/channel/ChannelItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/channel/ChannelItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/channel/ColorBoard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/channel/ColorBoard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/date/Dates.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/date/Dates.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/schedule/ScheduleDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/schedule/ScheduleDetail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/schedule/ScheduleDetailItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/schedule/ScheduleDetailItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/schedule/ScheduleHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/schedule/ScheduleHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/component/Organism/CommonCalendar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/component/Organism/CommonCalendar/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/context/channel/hooks/useColorBoxControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/channel/hooks/useColorBoxControl.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/context/date/hooks/useDate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/date/hooks/useDate.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/context/date/hooks/useGetDateRecord.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/date/hooks/useGetDateRecord.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/context/date/state/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/date/state/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/context/date/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/date/util.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/queryClient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/queryClient.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/styles/recordStyle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/styles/recordStyle.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/styles/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/styles/theme.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/state/calendar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/state/calendar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/state/channel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/channel/state/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +14,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
@@ -53,24 +30,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "prettierjs.PrettierConfiguration.Package": "/Users/khg/Desktop/workspace/day-view/day-view-web/node_modules/prettier",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "ts.external.directory.path": "/Users/khg/Desktop/workspace/day-view/day-view-web/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/khg/Desktop/workspace/day-view/day-view-web/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/khg/Desktop/workspace/day-view/day-view-web/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/shared/context/channel/state" />
