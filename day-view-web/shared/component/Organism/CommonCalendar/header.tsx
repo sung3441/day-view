@@ -37,7 +37,7 @@ const Wrapper = styled.div`
 `;
 
 const CalendarLabel = styled.div`
-  font-size: 16px;
+  ${getStyledThemProperty('fonts', 'title1')}
 `;
 
 const RightBox = styled.div`

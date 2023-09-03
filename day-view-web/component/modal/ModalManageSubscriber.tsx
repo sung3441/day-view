@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import Modal from '../../shared/component/Organism/Modal';
 import { ModalProps } from './ModalRenderer';
 import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
-import { getStyledThemProperty } from '@/shared/styles/util';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 
 import useModalState from '@/shared/hooks/useModalState';
 import { SearchBar } from '@/shared/component/Molecule';
@@ -49,7 +49,7 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
 export default memo(ModalManageSubscriber);
 
 const UserListWrapper = styled.div`
-  margin-top: 30px;
+  margin-top: ${pixelToRemUnit(30)};
 `;
 
 const Title = styled.div`
@@ -58,7 +58,7 @@ const Title = styled.div`
 `;
 
 const TabBox = styled.ul`
-  margin-top: 14px;
+  margin-top: ${pixelToRemUnit(14)};
   border-bottom: 1px solid #d9d9d9;
 `;
 
@@ -69,7 +69,7 @@ const Tap = styled.button<{ isActive?: boolean }>`
   border: none;
   border-bottom: 2px solid ${getStyledThemProperty('colors', 'White')};
   background-color: ${getStyledThemProperty('colors', 'White')};
-  padding: 4px 8px;
+  padding: ${pixelToRemUnit([4, 8])};
 
   ${({ isActive }) =>
     isActive &&
@@ -83,8 +83,8 @@ const Description = styled.div`
   color: ${getStyledThemProperty('colors', 'G_700')};
   ${getStyledThemProperty('fonts', 'caption2')};
 
-  margin-top: 22px;
-  margin-bottom: 12px;
+  margin-top: ${pixelToRemUnit(22)};
+  margin-bottom: ${pixelToRemUnit(12)};
 `;
 
 const S = {

@@ -2,7 +2,7 @@ import { memo, SyntheticEvent, useCallback, useState } from 'react';
 import { IconButton } from '@/shared/component/Molecule';
 import GnbTab from '@/shared/component/Organism/Gnb/GnbTab';
 import styled from 'styled-components';
-import { getStyledThemProperty } from '@/shared/styles/util';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
   G_isOpenChannelAtom,
@@ -33,7 +33,7 @@ const CalendarGnb = () => {
           <IconButton
             type="menu"
             onClick={handleClickMenu}
-            customStyle={{ marginRight: '20px' }}
+            customStyle={{ marginRight: pixelToRemUnit(20) }}
           />
           <IconButton
             type="logo"
@@ -43,7 +43,7 @@ const CalendarGnb = () => {
             customStyle={{
               width: '96px',
               height: '40px',
-              marginLeft: '20px',
+              marginLeft: pixelToRemUnit(20),
             }}
           />
         </LeftBox>

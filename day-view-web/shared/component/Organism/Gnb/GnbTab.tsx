@@ -2,6 +2,7 @@ import { useRecoilState } from 'recoil';
 import styled, { css } from 'styled-components';
 import { memo } from 'react';
 import { G_tabAtom, TabType } from '@/shared/component/Organism/Gnb/state';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 
 const tabList: TabType[] = ['월', '일정', '카테고리'];
 
@@ -40,18 +41,17 @@ const TabStyle = styled.div`
 
 const TabLabel = styled.button<{ isActive?: boolean }>`
   background: #f3f3f3;
-  width: 91px;
-  height: 40px;
+  width: ${pixelToRemUnit(91)};
+  height: ${pixelToRemUnit(40)};
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-weight: 400;
-  font-size: 16px;
-  color: #767676;
+  ${getStyledThemProperty('fonts', 'caption1')};
+  color: ${getStyledThemProperty('colors', 'G_700')};
 
-  border: 1px solid #dbdbdb;
+  border: 1px solid ${getStyledThemProperty('colors', 'G_300')};
   transition: all 0.1s ease-out 0.02s;
 
   ${({ isActive }) =>

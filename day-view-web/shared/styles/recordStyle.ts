@@ -40,8 +40,8 @@ const Index = styled.div<{ isToday?: boolean }>`
 
   ${getStyledThemProperty('fonts', 'title2')}
 
-  width:38px;
-  height: 38px;
+  width: ${pixelToRemUnit(38)};
+  height: ${pixelToRemUnit(38)};
 
   ${({ isToday }) =>
     isToday &&
@@ -63,7 +63,7 @@ const Day = styled.div`
 const DayDate = styled.div`
   ${getStyledThemProperty('fonts', 'caption2')}
   width: 100%;
-  margin-left: 100px;
+  margin-left: ${pixelToRemUnit(100)};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,8 +88,8 @@ const RowWrap = styled.div`
 `;
 
 const Dot = styled.span`
-  width: 12px;
-  height: 12px;
+  width: ${pixelToRemUnit(12)};
+  height: ${pixelToRemUnit(12)};
   background-color: ${getStyledThemProperty('colors', 'main')};
   border-radius: 50%;
 `;

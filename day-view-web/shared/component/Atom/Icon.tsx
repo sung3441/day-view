@@ -26,6 +26,7 @@ import {
   IconSmUser,
   IconSmCheck,
 } from '@/public/images/icon';
+import { pixelToRemUnit } from '@/shared/styles/util';
 import { CSSProperties, ElementType, memo } from 'react';
 
 export type IconSizeType = keyof typeof defaultIconSizes;
@@ -69,8 +70,8 @@ type IconType = keyof typeof iconComponents;
 export interface Props {
   type: IconType;
   size?: IconSizeType;
-  width?: number | string;
-  height?: number | string;
+  width?: number;
+  height?: number;
   fill?: string;
   color?: string;
   style?: CSSProperties;
@@ -90,8 +91,16 @@ const Icon = ({
   return (
     IconComponent && (
       <IconComponent
-        width={width ? width : defaultIconSizes[size].width}
-        height={height ? height : defaultIconSizes[size].height}
+        width={
+          width
+            ? pixelToRemUnit(width)
+            : pixelToRemUnit(defaultIconSizes[size].width)
+        }
+        height={
+          height
+            ? pixelToRemUnit(height)
+            : pixelToRemUnit(defaultIconSizes[size].height)
+        }
         fill={fill}
         color={color}
         style={style}
