@@ -177,6 +177,12 @@ const S = {
     top: ${({ clientY }) => clientY && `${clientY}px`};
     left: ${({ clientX }) => clientX && `${clientX}px`};
     transform: translate(-50%, -50%);
+
+    @media (width <= 600px) {
+      width: 100%;
+      justify-content: center;
+      border-radius: 0;
+    }
   `,
 };
 

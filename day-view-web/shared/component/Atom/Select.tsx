@@ -14,7 +14,7 @@ const SelectBox = styled.select`
   width: ${pixelToRemUnit(128)};
   height: 40px;
 
-  padding: 10px;
+  padding: ${pixelToRemUnit(10)};
 
   background: ${getStyledThemProperty('colors', 'White')};
   border: 1px solid ${getStyledThemProperty('colors', 'G_500')};
@@ -26,7 +26,7 @@ const SelectBox = styled.select`
   }
 
   background: url('/images/icon/sm_down.svg') calc(100% - 5px) center no-repeat;
-  background-size: 18px;
+  background-size: ${pixelToRemUnit(18)};
 `;
 
 export default memo(Select);

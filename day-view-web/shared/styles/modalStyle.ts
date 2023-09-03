@@ -5,7 +5,7 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: ${pixelToRemUnit(40)};
 
   width: 100%;
 `;
@@ -13,14 +13,16 @@ const Header = styled.div`
 const Body = styled.div<{ gap?: number }>`
   display: flex;
   flex-direction: column;
-  gap: ${({ gap }) => (gap ? `${gap}px` : '22px')};
-  margin-bottom: 40px;
+  gap: ${({ gap }) => (gap ? pixelToRemUnit(gap) : pixelToRemUnit(17))};
+
+  margin-bottom: ${pixelToRemUnit(40)};
 `;
 
 const Section = styled.section<{ gap?: number }>`
   display: grid;
   grid-template-columns: 1fr ${pixelToRemUnit(380)};
-  grid-column-gap: ${({ gap }) => (gap ? `${gap}px` : '16px')};
+  grid-column-gap: ${({ gap }) =>
+    gap ? pixelToRemUnit(gap) : pixelToRemUnit(16)};
   place-items: center start;
 `;
 
@@ -28,7 +30,7 @@ const Control = styled.section<{ gap?: number }>`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: ${({ gap }) => (gap ? `${gap}px` : '17px')};
+  gap: ${({ gap }) => (gap ? pixelToRemUnit(gap) : pixelToRemUnit(17))};
 
   width: 100%;
 `;
@@ -61,7 +63,7 @@ const Wrapper = styled.div<{ gap?: number }>`
   display: flex;
   flex-direction: column;
   width: ${pixelToRemUnit(380)};
-  gap: ${({ gap }) => gap && `${gap}px`};
+  gap: ${({ gap }) => gap && pixelToRemUnit(gap)};
 `;
 
 export {
