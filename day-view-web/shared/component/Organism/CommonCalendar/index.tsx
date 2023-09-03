@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { CSSProperties, memo, useEffect, useState } from 'react';
 import Header from '@/shared/component/Organism/CommonCalendar/header';
 import Labels from '@/shared/component/Organism/CommonCalendar/label';
 import styled from 'styled-components';
@@ -10,10 +10,16 @@ type Props = {
   onlyStart?: boolean;
   onSelectDay?: (startDate: string, endDate?: string) => void;
   closeCalendar: () => void;
+  customStyle?: CSSProperties;
 };
 
 const toNumber = (date: string) => +date.split('-').join('');
-const Calendar = ({ onlyStart, onSelectDay, closeCalendar }: Props) => {
+const Calendar = ({
+  onlyStart,
+  onSelectDay,
+  closeCalendar,
+  customStyle,
+}: Props) => {
   const [selectedYYMM, setSelectedYYMM] = useState(getTodayYYMM());
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -75,7 +81,7 @@ const Calendar = ({ onlyStart, onSelectDay, closeCalendar }: Props) => {
   }, [onlyStart, startDate, endDate]);
 
   return (
-    <Wrapper ref={targetRef}>
+    <Wrapper ref={targetRef} style={customStyle}>
       <Header handleMoveMonth={handleMoveMonth} {...selectedYYMM} />
       <DateWrapper>
         <Labels />
@@ -112,4 +118,6 @@ const DateWrapper = styled.div`
   padding: 8px;
   grid-template-rows: repeat(7, 35px);
   grid-template-columns: repeat(7, 35px);
+  justify-content: center;
+  align-items: center;
 `;

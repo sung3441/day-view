@@ -1,14 +1,12 @@
-import { memo, SyntheticEvent, useMemo } from 'react';
+import { memo } from 'react';
 import styled, { css } from 'styled-components';
-import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { fadeIn, fadeOut } from '@/shared/styles/keyframes';
-import { useAnimationHandler, useModal, useOuterClick } from '@/shared/hooks';
+import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import { colorEntries } from '@/shared/util/colorInfo';
-import { Icon } from '@/shared/component/Atom';
 import { createPortal } from 'react-dom';
 import { COLOR_BOX_HEIGHT } from '@/shared/constant/calendar';
 import { ChannelSelectType } from '@/shared/types/api';
-import { ChannelColorInfoType } from '@/state/channel';
+import { ChannelColorInfoType } from '@/shared/context/channel/state';
 import ChannelConfigs from '@/component/channel/ChannelConfigs';
 
 interface Props {

@@ -6,7 +6,7 @@ import { ChannelRes, ChannelSelectType } from '@/shared/types/api';
 import useGetChannel from '@/shared/context/channel/hooks/useGetChannel';
 import ChannelItem from '@/component/channel/ChannelItem';
 import { useRecoilValue } from 'recoil';
-import { channelColorInfoAtom } from '@/state/channel';
+import { channelColorInfoAtom } from '@/shared/context/channel/state';
 import useColorBoxControl from '@/shared/context/channel/hooks/useColorBoxControl';
 import usePatchChannelInfo from '@/shared/context/channel/hooks/usePatchChannelInfo';
 

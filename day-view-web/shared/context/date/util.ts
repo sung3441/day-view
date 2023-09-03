@@ -16,10 +16,14 @@ const getLastDayOfMonth = (year: number, month: number) => {
   return new Date(year, month, 0).getDate();
 };
 
+const getFirstDayOfMonth = (year: number, month: number) => {
+  return new Date(year, month - 1, 1).getDay();
+};
+
 type CovertDateParamProps = {
   year: number;
   month: number;
-  day?: number;
+  date?: number;
   isLastDay?: boolean;
   isRequiredTime?: boolean;
 };
@@ -27,14 +31,14 @@ type CovertDateParamProps = {
 export const covertDateParam = ({
   year,
   month,
-  day,
+  date,
   isLastDay,
   isRequiredTime = true,
 }: CovertDateParamProps) => {
   const setDay = () => {
-    day = day || 1;
-    if (isLastDay) day = getLastDayOfMonth(year, month);
-    return day;
+    date = date || 1;
+    if (isLastDay) date = getLastDayOfMonth(year, month);
+    return date;
   };
 
   const strMonth = addZeroPad(month);
@@ -56,12 +60,12 @@ export function getTodayYYMM(d?: string): YYMMType {
   };
 }
 
-export function getStrToday() {
+export function getStrDate() {
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
   const date = today.getDate();
-  return `${year.toString()}-${month.toString()}-${date.toString()}`;
+  return `${year.toString()}-${addZeroPad(month)}-${addZeroPad(date)}`;
 }
 
 export function getDateAndDay(year: number, month: number, date: number = 0) {
@@ -96,4 +100,11 @@ export const currentTime = () => {
   const hours = d.getHours();
   const minutes = d.getMinutes();
   return `${addZeroPad(hours)}${addZeroPad(minutes)}`;
+};
+
+export const getStrYYMM = (yymm: string) => {
+  const yy = yymm.slice(0, 4);
+  const mm = yymm.slice(5, 7);
+  const dd = yymm.slice(8, 10);
+  return `${yy}년 ${mm}월 ${dd}일`;
 };

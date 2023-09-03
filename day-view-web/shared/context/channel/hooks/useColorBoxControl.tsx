@@ -1,5 +1,5 @@
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { channelColorInfoAtom } from '@/state/channel';
+import { useRecoilState } from 'recoil';
+import { channelColorInfoAtom } from '@/shared/context/channel/state';
 import { SyntheticEvent, useCallback, useEffect } from 'react';
 import { COLOR_BOX_HEIGHT } from '@/shared/constant/calendar';
 

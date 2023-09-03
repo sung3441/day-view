@@ -56,6 +56,8 @@ const APPWithConfig = ({ children }: { children: any }) => {
   const router = useRouter();
 
   useEffect(() => {
+    if (router.pathname === '/auth') return;
+
     const setToken = async () => {
       const token = await getAccessToken();
       if (!token) throw new Error('token');
