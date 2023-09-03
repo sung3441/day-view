@@ -18,7 +18,6 @@ const DateHeader = ({ handleMoveMonth }: Props) => {
     resetYYMM();
     resetDay();
   };
-
   return (
     <Wrapper>
       <CalendarLabel>
