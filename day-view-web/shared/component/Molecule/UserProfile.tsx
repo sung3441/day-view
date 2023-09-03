@@ -111,14 +111,14 @@ const S = {
   Body: styled.div`
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    margin-bottom: 30px;
+    gap: ${pixelToRemUnit(30)};
+    margin-bottom: ${pixelToRemUnit(30)};
   `,
   Section: styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 38px;
+    gap: ${pixelToRemUnit(38)};
   `,
   SubTitle: styled.div`
     ${getStyledThemProperty('fonts', 'caption2')};
@@ -132,7 +132,7 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 17px;
+    gap: ${pixelToRemUnit(17)};
 
     width: 100%;
   `,

@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, memo } from 'react';
 import styled, { css } from 'styled-components';
 import { fadeIn } from '@/shared/styles/keyframes';
 import { toRGBA } from '@/shared/util/colorInfo';
+import { pixelToRemUnit } from '@/shared/styles/util';
 
 type InputType = ComponentPropsWithoutRef<'input'>;
 
@@ -55,8 +56,8 @@ export const CheckBoxInput = styled.input<{
     top: 0;
     left: 0;
 
-    width: 28px;
-    height: 28px;
+    width: ${pixelToRemUnit(28)};
+    height: ${pixelToRemUnit(28)};
 
     border-radius: 7px;
     background-color: #fff;
@@ -76,15 +77,15 @@ export const CheckBoxInput = styled.input<{
     content: '';
     position: absolute;
     transform: rotate(45deg);
-    top: 7px;
-    left: 10px;
-    width: 3px;
-    height: 10px;
+    top: ${pixelToRemUnit(7)};
+    left: ${pixelToRemUnit(10)};
+    width: ${pixelToRemUnit(3)};
+    height: ${pixelToRemUnit(10)};
     box-sizing: content-box;
 
     border-style: solid;
     border-image: initial;
-    border-width: 0 4px 4px 0;
+    border-width: 0 ${pixelToRemUnit(4)} ${pixelToRemUnit(4)} 0;
     border-color: ${({ mainColor }) => mainColor};
   }
 `;
@@ -93,7 +94,7 @@ export const CheckBoxLabel = styled.label`
   position: relative;
   cursor: pointer;
   z-index: 1;
-  padding-left: 36px;
+  padding-left: ${pixelToRemUnit(36)};
   ${({ theme }) =>
     css`
       ${theme.fonts.body3};

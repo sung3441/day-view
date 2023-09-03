@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getStyledThemProperty } from '@/shared/styles/util';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { Button, UserImage } from '../../Atom';
 import { SubscribeMembersRes } from '@/shared/types/api';
 
@@ -33,7 +33,7 @@ const UserList = styled.ul`
   flex-direction: column;
   max-height: 380px;
   overflow-y: scroll;
-  gap: 24px;
+  gap: ${pixelToRemUnit(24)};
 
   ::-webkit-scrollbar {
     width: 4px;

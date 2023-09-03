@@ -22,8 +22,8 @@ const S = {};
 const AddIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="80"
-    height="80"
+    width="currentValue"
+    height="currentValue"
     viewBox="0 0 80 80"
     fill="none"
   >

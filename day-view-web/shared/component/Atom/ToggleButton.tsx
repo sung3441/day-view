@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef, memo, useState } from 'react';
 import styled from 'styled-components';
-import { getStyledThemProperty } from '@/shared/styles/util';
+import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 
 type InputType = ComponentPropsWithRef<'input'>;
 
@@ -30,30 +30,30 @@ const ToggleButton = ({ id, checked = false, ...props }: Props) => {
 export default memo(ToggleButton);
 
 const Label = styled.label`
-  gap: 10px;
+  gap: ${pixelToRemUnit(10)};
   cursor: pointer;
-  width: 42px;
-  height: 22px;
+  width: ${pixelToRemUnit(42)};
+  height: ${pixelToRemUnit(22)};
 `;
 
 const Switch = styled.div`
   position: relative;
-  width: 42px;
-  height: 22px;
+  width: ${pixelToRemUnit(42)};
+  height: ${pixelToRemUnit(22)};
   background: ${getStyledThemProperty('colors', 'G_300')};
   border-radius: 32px;
-  padding: 4px;
+  padding: ${pixelToRemUnit(4)};
   transition: 250ms all;
 
   &:before {
     transition: 250ms all;
     content: '';
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: ${pixelToRemUnit(16)};
+    height: ${pixelToRemUnit(16)};
     border-radius: 35px;
     top: 50%;
-    left: 4px;
+    left: ${pixelToRemUnit(4)};
     background: white;
     transform: translate(0, -50%);
   }
@@ -67,7 +67,7 @@ const Input = styled.input`
     background: ${({ theme }) => theme.colors.main};
 
     &:before {
-      transform: translate(18px, -50%);
+      transform: translate(${pixelToRemUnit(18)}, -50%);
     }
   }
 `;

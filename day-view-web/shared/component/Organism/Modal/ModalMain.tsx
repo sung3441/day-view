@@ -32,6 +32,18 @@ const ModalMain = forwardRef<HTMLDivElement, Props>(
       if (!clientX || !clientY) return;
       const [x, y] = getAdjustPosition(clientX, clientY, containerRef);
       setPosition({ x, y });
+
+      // 화면 크기 변경 시 모달 위치 재조정
+      const handleResize = () => {
+        const [newX, newY] = getAdjustPosition(x, y, containerRef);
+        setPosition({ x: newX, y: newY });
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
     }, [clientX, clientY]);
 
     /** 컴포넌트 분리 */
@@ -165,6 +177,12 @@ const S = {
     top: ${({ clientY }) => clientY && `${clientY}px`};
     left: ${({ clientX }) => clientX && `${clientX}px`};
     transform: translate(-50%, -50%);
+
+    @media (width <= 600px) {
+      width: 100%;
+      justify-content: center;
+      border-radius: 0;
+    }
   `,
 };
 
