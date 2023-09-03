@@ -24,7 +24,7 @@ const LabelDay = styled.div`
 
   ${({ theme }) =>
     css`
-      color: ${theme.color.textColor};
+      color: ${theme.colors.Black};
     `}
 
   &.red {

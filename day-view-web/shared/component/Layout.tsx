@@ -27,7 +27,7 @@ const Main = styled.main`
   height: calc(100% - 100px);
   ${({ theme }) =>
     css`
-      background-color: ${theme.color.bgColor};
+      background-color: ${theme.colors.White};
     `}
   & > div {
     width: 100%;
