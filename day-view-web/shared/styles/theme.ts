@@ -40,47 +40,47 @@ export const common = {
   fonts: {
     title1: {
       fontWeight: '700',
-      fontSize: pixelToRemUnit(32),
+      fontSize: `${pixelToRemUnit(32)}`,
       lineHeight: '120%',
     },
     title2: {
       fontWeight: '700',
-      fontSize: pixelToRemUnit(24),
+      fontSize: `${pixelToRemUnit(24)}`,
       lineHeight: '120%',
     },
     title3: {
       fontWeight: '400',
-      fontSize: pixelToRemUnit(24),
+      fontSize: `${pixelToRemUnit(24)}`,
       lineHeight: '120%',
     },
     body1: {
       fontWeight: '900',
-      fontSize: pixelToRemUnit(24),
+      fontSize: `${pixelToRemUnit(20)}`,
       lineHeight: '200%',
     },
     body2: {
       fontWeight: '700',
-      fontSize: pixelToRemUnit(20),
+      fontSize: `${pixelToRemUnit(20)}`,
       lineHeight: '200%',
     },
     body3: {
       fontWeight: '400',
-      fontSize: pixelToRemUnit(20),
+      fontSize: `${pixelToRemUnit(20)}`,
       lineHeight: '200%',
     },
     caption1: {
       fontWeight: '700',
-      fontSize: pixelToRemUnit(16),
+      fontSize: `${pixelToRemUnit(16)}`,
       lineHeight: '200%',
     },
     caption2: {
       fontWeight: '400',
-      fontSize: pixelToRemUnit(16),
+      fontSize: `${pixelToRemUnit(16)}`,
       lineHeight: '200%',
     },
     caption3: {
       fontWeight: '700',
-      fontSize: pixelToRemUnit(12),
+      fontSize: `${pixelToRemUnit(12)}`,
       lineHeight: '200%',
     },
   },
