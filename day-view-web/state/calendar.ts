@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { DatType, YYMMType } from '@/shared/types/calendar';
-import { getStrToday, getTodayYYMM } from '@/shared/context/date/util';
+import { getStrDate, getTodayYYMM } from '@/shared/context/date/util';
 
 // 캘린더 공용
 export const selectedYYMMAtom = atom<YYMMType>({
@@ -10,7 +10,7 @@ export const selectedYYMMAtom = atom<YYMMType>({
 
 export const selectedDayAtom = atom<string>({
   key: 'selectedDayAtom', // unique ID (with respect to other atoms/selectors)
-  default: getStrToday(), // default value (aka initial value)
+  default: getStrDate(), // default value (aka initial value)
 });
 
 // @ts-ignore

@@ -2,6 +2,7 @@ import { memo } from 'react';
 import styled from 'styled-components';
 import { getStyledThemProperty } from '@/shared/styles/util';
 import { IconButton } from '@/shared/component/Molecule';
+
 interface Props {
   year: number;
   month: number;
@@ -37,7 +38,7 @@ const Wrapper = styled.div`
 `;
 
 const CalendarLabel = styled.div`
-  ${getStyledThemProperty('fonts', 'title1')}
+  ${getStyledThemProperty('fonts', 'caption1')}
 `;
 
 const RightBox = styled.div`

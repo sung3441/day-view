@@ -118,4 +118,6 @@ const DateWrapper = styled.div`
   padding: 8px;
   grid-template-rows: repeat(7, 35px);
   grid-template-columns: repeat(7, 35px);
+  justify-content: center;
+  align-items: center;
 `;

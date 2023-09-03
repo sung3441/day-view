@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { getStyledThemProperty } from '@/shared/styles/util';
 import { scheduleYYMMAtom } from '@/shared/context/date/state';
-import { SyntheticEvent, useCallback, useState } from 'react';
+import { memo, SyntheticEvent, useCallback, useState } from 'react';
 import CommonCalendar from '@/shared/component/Organism/CommonCalendar';
 import { getStrYYMM } from '@/shared/context/date/util';
 
@@ -31,7 +31,7 @@ const ScheduleHeader = ({}: Props) => {
   }, []);
 
   return (
-    <Wrap onClick={(e) => handelIsOpenCalendar(true, e)}>
+    <Wrapper onClick={(e) => handelIsOpenCalendar(true, e)}>
       <div>{getStrYYMM(startDate)}</div>
       &nbsp; - &nbsp;
       <div>{getStrYYMM(endDate)}</div>
@@ -45,13 +45,13 @@ const ScheduleHeader = ({}: Props) => {
           }}
         />
       )}
-    </Wrap>
+    </Wrapper>
   );
 };
 
-export default ScheduleHeader;
+export default memo(ScheduleHeader);
 
-const Wrap = styled.div`
+const Wrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;

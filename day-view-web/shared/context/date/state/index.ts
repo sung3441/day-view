@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { getStrToday } from '@/shared/context/date/util';
+import { covertDateParam, getTodayYYMM } from '@/shared/context/date/util';
 
 export const dayHeightAtom = atom<number>({
   key: 'dayHeightAtom',
@@ -12,7 +12,15 @@ export const scheduleYYMMAtom = atom<{
 }>({
   key: 'selectedScheduleYYMMAtom',
   default: {
-    startDate: getStrToday(),
-    endDate: getStrToday(),
+    startDate: covertDateParam({
+      ...getTodayYYMM(),
+      date: 1,
+      isRequiredTime: false,
+    }),
+    endDate: covertDateParam({
+      ...getTodayYYMM(),
+      isLastDay: true,
+      isRequiredTime: false,
+    }),
   },
 });

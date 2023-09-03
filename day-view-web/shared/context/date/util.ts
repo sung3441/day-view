@@ -16,6 +16,10 @@ const getLastDayOfMonth = (year: number, month: number) => {
   return new Date(year, month, 0).getDate();
 };
 
+const getFirstDayOfMonth = (year: number, month: number) => {
+  return new Date(year, month - 1, 1).getDay();
+};
+
 type CovertDateParamProps = {
   year: number;
   month: number;
@@ -56,7 +60,7 @@ export function getTodayYYMM(d?: string): YYMMType {
   };
 }
 
-export function getStrToday() {
+export function getStrDate() {
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth() + 1;

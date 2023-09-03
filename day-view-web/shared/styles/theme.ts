@@ -40,7 +40,7 @@ export const common = {
   fonts: {
     title1: {
       fontWeight: '700',
-      fontSize: pixelToRemUnit(32),
+      fontSize: pixelToRemUnit(28),
       lineHeight: '120%',
     },
     title2: {
