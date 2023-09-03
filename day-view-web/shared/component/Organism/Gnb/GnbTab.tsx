@@ -48,7 +48,7 @@ const TabLabel = styled.button<{ isActive?: boolean }>`
   align-items: center;
   justify-content: center;
 
-  ${getStyledThemProperty('fonts', 'caption1')};
+  ${getStyledThemProperty('fonts', 'caption2')};
   color: ${getStyledThemProperty('colors', 'G_700')};
 
   border: 1px solid ${getStyledThemProperty('colors', 'G_300')};
@@ -57,6 +57,7 @@ const TabLabel = styled.button<{ isActive?: boolean }>`
   ${({ isActive }) =>
     isActive &&
     css`
+      ${getStyledThemProperty('fonts', 'caption1')};
       background: #000000;
       color: #ffffff;
       border: 1px solid #000000;
