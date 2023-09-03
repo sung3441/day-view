@@ -85,13 +85,6 @@ export const common = {
     },
   },
   box,
-  color: {
-    bgColor: '#fff',
-    textColor: '#000',
-    shadowColor: 'rgba(0, 0, 0, 0.5)',
-    borderColor: 'rgb(222, 226, 230)',
-    redColor: '#CF0F0F',
-  },
   name: 'light' as const,
 };
 

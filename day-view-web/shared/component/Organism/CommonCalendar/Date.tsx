@@ -55,12 +55,12 @@ const Wrap = styled.div<{
 
   ${({ theme }) =>
     css`
-      color: ${theme.color.textColor};
+      color: ${theme.colors.Black};
     `};
   ${({ theme, isRed }) =>
     isRed &&
     css`
-      color: ${theme.color.redColor};
+      color: ${theme.colors.Red};
     `};
   ${({ isNotThis }) =>
     isNotThis &&
@@ -98,7 +98,7 @@ const SDate = styled.div<{ isSelectedDay: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   ${({ theme, isSelectedDay }) =>
     isSelectedDay &&
     css`
@@ -106,5 +106,4 @@ const SDate = styled.div<{ isSelectedDay: boolean }>`
       background-color: #ff7f69;
       opacity: 1;
     `}
-  }
 `;
