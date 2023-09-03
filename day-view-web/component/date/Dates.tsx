@@ -1,16 +1,24 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect } from 'react';
 import Day from '@/component/date/Day';
 import { useDate, useDateParam } from '@/shared/context/date/hooks/useDate';
 import useGetDateRecord from '@/shared/context/date/hooks/useGetDateRecord';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { dayHeightAtom } from '@/shared/context/date/state';
 import { selectedYYMMAtom } from '@/state/calendar';
+import useGetRecordInSubscribe from '@/shared/context/date/hooks/useGetRecordInSubscribe';
 
 const Dates = () => {
+  const { year, month } = useRecoilValue(selectedYYMMAtom);
   const setInnerHeight = useSetRecoilState(dayHeightAtom);
   const { generatedDays, handleSelectDay, selectedDay } = useDate();
   const { startDate, endDate } = useDateParam();
-  const data = useGetDateRecord({ startDate, endDate });
+  const { data } = useGetRecordInSubscribe({
+    year,
+    month,
+    startDate,
+    endDate,
+  });
+  const recode = useGetDateRecord({ data: data?.data ?? [] });
 
   useEffect(() => {
     const calcInnerHeight = () => {
@@ -30,7 +38,7 @@ const Dates = () => {
           key={info.strDate}
           isSelectedDay={info.strDate === selectedDay}
           handleSelectDay={handleSelectDay}
-          record={data.get(info.strDate)}
+          record={recode.get(info.strDate)}
           {...info}
         />
       ))}

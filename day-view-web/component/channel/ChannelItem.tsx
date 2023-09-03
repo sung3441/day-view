@@ -3,7 +3,7 @@ import ColorBoard from '@/component/channel/ColorBoard';
 import { ChangeEvent, memo, SyntheticEvent } from 'react';
 import styled, { css } from 'styled-components';
 import { ChannelRes, ChannelSelectType } from '@/shared/types/api';
-import { ChannelColorInfoType } from '@/state/channel';
+import { ChannelColorInfoType } from '@/shared/context/channel/state';
 
 interface Props extends ChannelRes {
   isOpen: boolean;

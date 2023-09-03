@@ -40,47 +40,47 @@ export const common = {
   fonts: {
     title1: {
       fontWeight: '700',
-      fontSize: '32px',
+      fontSize: pixelToRemUnit(32),
       lineHeight: '120%',
     },
     title2: {
       fontWeight: '700',
-      fontSize: '24px',
+      fontSize: pixelToRemUnit(24),
       lineHeight: '120%',
     },
     title3: {
       fontWeight: '400',
-      fontSize: '24px',
+      fontSize: pixelToRemUnit(24),
       lineHeight: '120%',
     },
     body1: {
       fontWeight: '900',
-      fontSize: '20px',
+      fontSize: pixelToRemUnit(24),
       lineHeight: '200%',
     },
     body2: {
       fontWeight: '700',
-      fontSize: '20px',
+      fontSize: pixelToRemUnit(20),
       lineHeight: '200%',
     },
     body3: {
       fontWeight: '400',
-      fontSize: '20px',
+      fontSize: pixelToRemUnit(20),
       lineHeight: '200%',
     },
     caption1: {
       fontWeight: '700',
-      fontSize: '16px',
+      fontSize: pixelToRemUnit(16),
       lineHeight: '200%',
     },
     caption2: {
       fontWeight: '400',
-      fontSize: '16px',
+      fontSize: pixelToRemUnit(16),
       lineHeight: '200%',
     },
     caption3: {
       fontWeight: '700',
-      fontSize: '12px',
+      fontSize: pixelToRemUnit(12),
       lineHeight: '200%',
     },
   },

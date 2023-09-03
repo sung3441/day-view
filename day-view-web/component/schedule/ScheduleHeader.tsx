@@ -1,22 +1,50 @@
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
-import { selectedYYMMAtom } from '@/state/calendar';
-import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
+import { useRecoilState } from 'recoil';
+import { getStyledThemProperty } from '@/shared/styles/util';
+import { scheduleYYMMAtom } from '@/shared/context/date/state';
+import { SyntheticEvent, useCallback, useState } from 'react';
+import CommonCalendar from '@/shared/component/Organism/CommonCalendar';
+import { getStrYYMM } from '@/shared/context/date/util';
 
 interface Props {}
 
 const ScheduleHeader = ({}: Props) => {
-  const selectedYYMM = useRecoilValue(selectedYYMMAtom);
+  const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+  const [{ startDate, endDate }, setscheduleYYMM] =
+    useRecoilState(scheduleYYMMAtom);
+
+  const handelIsOpenCalendar = useCallback(
+    (isOpen: boolean, e?: SyntheticEvent) => {
+      e?.stopPropagation();
+      setIsOpenCalendar(isOpen);
+    },
+    []
+  );
+
+  const onSelectDay = useCallback((sDate: string, eDate?: string) => {
+    if (!sDate) return;
+    setscheduleYYMM((prev) => ({
+      ...prev,
+      startDate: sDate || prev.startDate,
+      endDate: eDate || prev.endDate,
+    }));
+  }, []);
 
   return (
-    <Wrap>
-      <div>
-        {selectedYYMM.year}년 {selectedYYMM.month}월
-      </div>
+    <Wrap onClick={(e) => handelIsOpenCalendar(true, e)}>
+      <div>{getStrYYMM(startDate)}</div>
       &nbsp; - &nbsp;
-      <div>
-        {selectedYYMM.year}년 {selectedYYMM.month}월
-      </div>
+      <div>{getStrYYMM(endDate)}</div>
+      {isOpenCalendar && (
+        <CommonCalendar
+          closeCalendar={() => handelIsOpenCalendar(false)}
+          onSelectDay={onSelectDay}
+          customStyle={{
+            top: '60px',
+            left: '3vw',
+          }}
+        />
+      )}
     </Wrap>
   );
 };
@@ -24,6 +52,7 @@ const ScheduleHeader = ({}: Props) => {
 export default ScheduleHeader;
 
 const Wrap = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   ${getStyledThemProperty('layout', 'pageHeader')};

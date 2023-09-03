@@ -35,10 +35,10 @@ export const useDate = () => {
 };
 
 export const useDateParam = () => {
-  const { year, month } = useRecoilValue(selectedYYMMAtom);
+  const { year, month, date } = useRecoilValue(selectedYYMMAtom);
 
   return useMemo(() => {
-    const startDate = covertDateParam({ year, month, day: 1 });
+    const startDate = covertDateParam({ year, month, date: 1 });
     const endDate = covertDateParam({
       year,
       month,

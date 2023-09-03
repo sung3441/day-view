@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { pixelToRemUnit, getStyledThemProperty } from './util';
+import { getStyledThemProperty, pixelToRemUnit } from './util';
 
 /**
  * 일정 & 카테고리 탭 공용 스타일
@@ -16,7 +16,7 @@ const Center = styled.div`
 
 const Dates = styled.div`
   display: grid;
-  grid-template-columns: ${pixelToRemUnit([38, 54, 500])};
+  grid-template-columns: ${pixelToRemUnit([38, 54])} 1fr;
   grid-auto-rows: minmax(${pixelToRemUnit(30)}, auto);
   padding: ${pixelToRemUnit([16, 24])};
   place-items: flex-start;
@@ -29,6 +29,8 @@ const Dates = styled.div`
 
 const Main = styled.section`
   padding: ${pixelToRemUnit([10, 0])};
+  width: 100%;
+  height: 100%;
 `;
 
 const Index = styled.div<{ isToday?: boolean }>`
@@ -96,6 +98,16 @@ const Scehdule = styled.div<{ complete?: boolean }>`
   text-decoration: ${({ complete }) => complete && 'line-through'};
 `;
 
+const NoData = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #999;
+`;
+
 export {
   Center,
   Dates,
@@ -107,4 +119,5 @@ export {
   RowWrap,
   Dot,
   Scehdule,
+  NoData,
 };

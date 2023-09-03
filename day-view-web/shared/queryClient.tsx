@@ -32,6 +32,7 @@ type QueryKeysType = {
   RECORDS: string;
   SUBSCRIBERS: string;
   DATE: string;
+  SCHEDULE: string;
 };
 
 // ex 쿼리키를 중앙에서 관리
@@ -45,4 +46,5 @@ export const QueryKeys: Readonly<QueryKeysType> = {
   SUBSCRIBERS: 'SUBSCRIBERS',
   DATE: 'DATE',
   MY_CHANNEL: 'MY_CHANNEL',
+  SCHEDULE: 'SCHEDULE',
 };

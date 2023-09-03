@@ -4,9 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d7640da-7f49-4b5a-932f-82af975bf380" name="변경" comment="feat(shared): 카테고리 채널 데이터 바인딩">
+    <list default="true" id="1d7640da-7f49-4b5a-932f-82af975bf380" name="변경" comment="feat(shared): 일정 상세 데이터 전처리 작업중">
+      <change afterPath="$PROJECT_DIR$/shared/context/date/hooks/useGetRecordInSubscribe.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/context/date/hooks/useGetSchedule.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/context/date/type/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../day-view-api/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../day-view-api/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/types/calendar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/types/calendar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/channel/Channel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/channel/Channel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/channel/ChannelItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/channel/ChannelItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/channel/ColorBoard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/channel/ColorBoard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/date/Dates.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/date/Dates.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/schedule/ScheduleDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/schedule/ScheduleDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/schedule/ScheduleDetailItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/schedule/ScheduleDetailItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/schedule/ScheduleHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/component/schedule/ScheduleHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/component/Organism/CommonCalendar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/component/Organism/CommonCalendar/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/context/channel/hooks/useColorBoxControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/channel/hooks/useColorBoxControl.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/context/date/hooks/useDate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/date/hooks/useDate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/context/date/hooks/useGetDateRecord.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/date/hooks/useGetDateRecord.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/context/date/state/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/date/state/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/context/date/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/date/util.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/queryClient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/queryClient.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/styles/recordStyle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/styles/recordStyle.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/styles/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/styles/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/state/calendar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/state/calendar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/state/channel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shared/context/channel/state/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +45,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="ProjectId" id="2OYZkT1z07v39O1TFQ3K7EoaIHX" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -31,16 +57,25 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "code.cleanup.on.save": "true",
     "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "yarn",
     "prettierjs.PrettierConfiguration.Package": "/Users/khg/Desktop/workspace/day-view/day-view-web/node_modules/prettier",
+    "settings.editor.selected.configurable": "actions.on.save",
     "ts.external.directory.path": "/Users/khg/Desktop/workspace/day-view/day-view-web/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/shared/context/channel/state" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
@@ -52,6 +87,7 @@
       <workItem from="1681739619891" duration="6000" />
       <workItem from="1686034004667" duration="4592000" />
       <workItem from="1686462209255" duration="6761000" />
+      <workItem from="1693719138672" duration="9318000" />
     </task>
     <task id="LOCAL-00001" summary="feat(shared): axios 클래스 생성 및 테스트">
       <created>1685960220642</created>
@@ -117,5 +153,9 @@
     <MESSAGE value="feat(shared): axios 클래스 개발" />
     <MESSAGE value="feat(shared): 카테고리 채널 데이터 바인딩" />
     <option name="LAST_COMMIT_MESSAGE" value="feat(shared): 카테고리 채널 데이터 바인딩" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
