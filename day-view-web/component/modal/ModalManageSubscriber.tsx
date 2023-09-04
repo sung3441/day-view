@@ -28,7 +28,7 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
     <Modal ref={ref} isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <S.Title>{name}</S.Title>
       <S.TabBox>
-        <S.Tap>{`구독자 ${data?.count}`}</S.Tap>
+        <S.Tap isActive={true}>{`구독자 ${data?.count}`}</S.Tap>
       </S.TabBox>
       <S.Description>
         구독자에게 편집 권한을 설정하거나 해제할 수 있습니다.

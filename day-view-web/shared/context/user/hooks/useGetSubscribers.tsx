@@ -7,6 +7,7 @@ const useGetSubscribers = (channelId: number) => {
     [QueryKeys.SUBSCRIBERS, channelId],
     () => getSubscribers(channelId),
     {
+      enabled: true,
       select: (data) => ({
         count: data!.data.data.count,
         subscribers: data!.data.data.subscribers,
