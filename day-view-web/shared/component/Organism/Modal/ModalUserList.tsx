@@ -12,16 +12,24 @@ const ModalUserList = ({ members }: Props) => {
 
   return (
     <S.UserList>
-      {members?.map((member) => (
-        <S.UserItem key={''}>
-          <UserImage src={member.profileImageUrl} width={57} height={57} />
-          <div>
-            <S.Name>{member.name}</S.Name>
-            <S.Email>{member.email}</S.Email>
-          </div>
-          <Button variant={member.auth ? 'accent' : 'primary'}>설정</Button>
-        </S.UserItem>
-      ))}
+      {members?.map((member) => {
+        const isManage = member.auth === 'MANAGE';
+        return (
+          <S.UserItem key={member.email}>
+            <UserImage src={member.profileImageUrl} width={57} height={57} />
+            <div>
+              <S.Name>{member.name}</S.Name>
+              <S.Email>{member.email}</S.Email>
+            </div>
+            <Button
+              variant={isManage ? 'accent' : 'primary'}
+              font={isManage ? 'caption1' : 'caption2'}
+            >
+              {isManage ? '설정' : '해제'}
+            </Button>
+          </S.UserItem>
+        );
+      })}
     </S.UserList>
   );
 };
