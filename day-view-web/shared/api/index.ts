@@ -7,6 +7,7 @@ import {
   MyChannelRecodeRes,
   PatchChannelType,
   PatchRecordParamType,
+  PatchSubscribeInfoParamType,
   PatchUserParams,
   PutChannelParamType,
   RecordInChannel,
@@ -71,6 +72,16 @@ export const getSubscribers = async (channelId: number) => {
   const res = await new Client(`/api/channels/${channelId}/members`).get<{
     data: SubscribeMembersRes;
   }>();
+  return res;
+};
+
+export const patchSubscribeInfo = async (
+  params: PatchSubscribeInfoParamType
+) => {
+  const { subscribeId, auth } = params;
+  const res = await new Client(`/api/subscribes/${subscribeId}`).patch({
+    auth,
+  });
   return res;
 };
 

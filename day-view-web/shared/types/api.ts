@@ -136,3 +136,8 @@ export type SubscribeMembersRes = {
     profileImageUrl: string;
   }[];
 };
+
+export type PatchSubscribeInfoParamType = {
+  subscribeId: number;
+  auth: 'MANAGE' | 'SUBSCRIBE';
+};

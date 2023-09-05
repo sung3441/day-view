@@ -1,13 +1,16 @@
 import { memo, useState } from 'react';
 import styled, { css } from 'styled-components';
-import Modal from '../../shared/component/Organism/Modal';
+import Modal from '@/shared/component/Organism/Modal';
 import { ModalProps } from './ModalRenderer';
 import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 
 import useModalState from '@/shared/hooks/useModalState';
 import { SearchBar } from '@/shared/component/Molecule';
-import useGetSubscribers from '../../shared/context/user/hooks/useGetSubscribers';
+import { UserImage } from '@/shared/component/Atom';
+import useGetSubscribers from '@/shared/context/subscribe/hooks/useGetSubscribers';
+import usePatchSubscribeInfo from '@/shared/context/subscribe/hooks/usePatchSubscribeInfo';
+import { PatchSubscribeInfoParamType } from '@/shared/types/api';
 
 const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
   const {
@@ -16,19 +19,27 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
     handleOnAnimationEnd,
   } = useAnimationHandler(() => closeModal('ManageSubscriber'));
 
-  const { channelId, name = '' } = useModalState('ManageSubscriber');
-  const { data, status } = useGetSubscribers(channelId as number);
+  const { channelId = -1, name = '' } = useModalState('ManageSubscriber');
+  const { data: members, status } = useGetSubscribers(channelId as number);
+
+  const { mutate } = usePatchSubscribeInfo(channelId);
 
   const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
 
+  // TODO : API 나오면 수정
+  const handleSubscribeInfo = (param: PatchSubscribeInfoParamType) => {
+    console.log(param);
+    return;
+    mutate({ subscribeId: param.subscribeId, auth: 'SUBSCRIBE' });
+  };
+
   const [searchValue, setSearchValue] = useState<string>('');
 
-  // TODO UserList subscribers만 넘기기
   return (
     <Modal ref={ref} isShow={isShow} onAnimationEnd={handleOnAnimationEnd}>
       <S.Title>{name}</S.Title>
       <S.TabBox>
-        <S.Tap isActive={true}>{`구독자 ${data?.count}`}</S.Tap>
+        <S.Tap isActive={true}>{`구독자 ${members?.count}`}</S.Tap>
       </S.TabBox>
       <S.Description>
         구독자에게 편집 권한을 설정하거나 해제할 수 있습니다.
@@ -39,7 +50,36 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
         placeholder="이름을 입력하세요."
       />
       <UserListWrapper>
-        <Modal.UserList members={data?.subscribers} />
+        <S.UserList>
+          {members?.subscribers?.map((member) => {
+            const isManage = member.auth === 'MANAGE';
+            return (
+              <S.UserItem key={member.email}>
+                <UserImage
+                  src={member.profileImageUrl}
+                  width={57}
+                  height={57}
+                />
+                <div>
+                  <S.Name>{member.name}</S.Name>
+                  <S.Email>{member.email}</S.Email>
+                </div>
+                <Modal.Button
+                  variant={isManage ? 'accent' : 'primary'}
+                  font={isManage ? 'caption1' : 'caption2'}
+                  onClick={() =>
+                    handleSubscribeInfo({
+                      subscribeId: 1552,
+                      auth: member.auth,
+                    })
+                  }
+                >
+                  {isManage ? '설정' : '해제'}
+                </Modal.Button>
+              </S.UserItem>
+            );
+          })}
+        </S.UserList>
       </UserListWrapper>
       <Modal.Dim />
     </Modal>
@@ -87,9 +127,54 @@ const Description = styled.div`
   margin-bottom: ${pixelToRemUnit(12)};
 `;
 
+const UserList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  max-height: 380px;
+  overflow-y: scroll;
+  gap: ${pixelToRemUnit(24)};
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: #d9d9d9;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #eaeaea;
+  }
+`;
+
+const UserItem = styled.li`
+  display: grid;
+  width: 100%;
+  grid-template-columns: 57px 1fr 90px;
+  align-items: center;
+  grid-column-gap: 21px;
+`;
+
+const Name = styled.div`
+  color: ${getStyledThemProperty('colors', 'Black')};
+  ${getStyledThemProperty('fonts', 'caption1')};
+  line-height: 150%;
+`;
+
+const Email = styled.div`
+  color: ${getStyledThemProperty('colors', 'G_700')};
+  ${getStyledThemProperty('fonts', 'caption3')};
+  line-height: 150%;
+`;
+
 const S = {
   Title,
   TabBox,
   Tap,
   Description,
+  UserList,
+  UserItem,
+  Name,
+  Email,
 };
