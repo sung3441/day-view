@@ -130,6 +130,7 @@ export type MyChannelRecodeRes = {
 export type SubscribeMembersRes = {
   count: number;
   subscribers: {
+    subscribeId: number;
     name: string;
     email: string;
     auth: 'MANAGE' | 'SUBSCRIBE';

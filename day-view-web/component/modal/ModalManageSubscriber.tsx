@@ -26,11 +26,17 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
 
   const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
 
-  // TODO : API 나오면 수정
   const handleSubscribeInfo = (param: PatchSubscribeInfoParamType) => {
     console.log(param);
-    return;
-    mutate({ subscribeId: param.subscribeId, auth: 'SUBSCRIBE' });
+    // mutate({ subscribeId: param.subscribeId, auth: 'MANAGE' });
+  };
+
+  // TODO : 권한이 있는 경우만 설정 가능하게
+  // TODO : 권한 없는 경우 error 처리
+  const checkAuth = (
+    type: Pick<PatchSubscribeInfoParamType, 'auth'>['auth']
+  ) => {
+    return true;
   };
 
   const [searchValue, setSearchValue] = useState<string>('');
@@ -67,12 +73,13 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
                 <Modal.Button
                   variant={isManage ? 'accent' : 'primary'}
                   font={isManage ? 'caption1' : 'caption2'}
-                  onClick={() =>
-                    handleSubscribeInfo({
-                      subscribeId: 1552,
-                      auth: member.auth,
-                    })
-                  }
+                  onClick={() => {
+                    checkAuth(member.auth) &&
+                      handleSubscribeInfo({
+                        subscribeId: member.subscribeId,
+                        auth: member.auth,
+                      });
+                  }}
                 >
                   {isManage ? '설정' : '해제'}
                 </Modal.Button>
