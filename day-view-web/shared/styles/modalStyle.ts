@@ -43,6 +43,7 @@ const Title = styled.h2`
 const SubTitle = styled.div`
   ${({ theme }) => theme.fonts.caption2};
   color: ${({ theme }) => theme.colors.G_700};
+  white-space: nowrap;
 `;
 
 const Divider = styled.hr`
