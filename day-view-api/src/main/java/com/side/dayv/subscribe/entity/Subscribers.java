@@ -25,7 +25,7 @@ public class Subscribers {
         return subscribeList.stream()
                 .map(s -> {
                     Member m = s.getMember();
-                    return new ResponseSubscriberDTO(m.getNickname(), m.getEmail(), s.getAuth(), m.getProfileImageUrl());
+                    return new ResponseSubscriberDTO(s.getId(), m.getNickname(), m.getEmail(), s.getAuth(), m.getProfileImageUrl());
                 }).collect(Collectors.toList());
     }
 

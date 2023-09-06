@@ -59,6 +59,10 @@ public class Subscribe {
         this.auth = SubscribeAuth.SUBSCRIBE;
     }
 
+    public void changeAuth(final SubscribeAuth auth){
+        this.auth = auth;
+    }
+
     public void changeColor(final String color) {
         if (color != null) {
             this.color = color;
@@ -97,9 +101,10 @@ public class Subscribe {
         return this.member.getId() == memberId;
     }
 
-    public void update(final String color, final boolean showYn) {
+    public void update(final String color, final boolean showYn, final SubscribeAuth auth) {
         changeColor(color);
         changeShowYn(showYn);
+        changeAuth(auth);
     }
 
     public static Subscribe createManageChannelSubscribe(final Member member, final Channel channel) {
