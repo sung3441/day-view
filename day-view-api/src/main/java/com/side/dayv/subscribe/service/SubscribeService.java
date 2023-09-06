@@ -74,7 +74,7 @@ public class SubscribeService {
             throw new BadRequestException(BAD_REQUEST_PERMISSION);
         }
 
-        subscribe.update(request.getColor(), request.isShowYn());
+        subscribe.update(request.getColor(), request.isShowYn(), request.getAuth());
 
         return new ResponseSubscribeDTO(subscribe);
     }

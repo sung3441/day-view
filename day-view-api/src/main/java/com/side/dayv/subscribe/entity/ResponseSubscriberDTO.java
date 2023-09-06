@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ResponseSubscriberDTO {
+    private Long subscribeId;
     private String name;
     private String email;
     private SubscribeAuth auth;

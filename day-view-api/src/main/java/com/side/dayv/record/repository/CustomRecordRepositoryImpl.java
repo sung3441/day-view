@@ -38,6 +38,7 @@ public class CustomRecordRepositoryImpl implements CustomRecordRepository {
                                 .or(recordEntity.startDate.before(searchRecordDTO.getStartDate()).and(recordEntity.endDate.after(searchRecordDTO.getEndDate())))
                         )
                 )
+                .orderBy(QRecord.record.startDate.asc())
                 .fetch();
     }
 }
