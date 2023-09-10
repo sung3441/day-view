@@ -5,11 +5,11 @@ import { useAnimationHandler, useOuterClick } from '@/shared/hooks';
 import { colorEntries } from '@/shared/util/colorInfo';
 import { createPortal } from 'react-dom';
 import { COLOR_BOX_HEIGHT } from '@/shared/constant/calendar';
-import { ChannelSelectType } from '@/shared/types/api';
+import { ChannelRes, ChannelSelectType } from '@/shared/types/api';
 import { ChannelColorInfoType } from '@/shared/context/channel/state';
 import ChannelConfigs from '@/component/channel/ChannelConfigs';
 
-interface Props {
+interface Props extends Pick<ChannelRes, 'subscribeAuth' | 'channelType'> {
   channelId: number;
   subscribeId: number;
   selectType: ChannelSelectType;
@@ -28,6 +28,8 @@ const ColorBoard = ({
   channelId,
   selectType,
   subscribeId,
+  subscribeAuth,
+  channelType,
   name,
   showYn,
   channelColorInfo: { x, y },
@@ -56,6 +58,8 @@ const ColorBoard = ({
       <ChannelConfigs
         channelId={channelId}
         subscribeId={subscribeId}
+        subscribeAuth={subscribeAuth}
+        channelType={channelType}
         selectType={selectType}
         name={name}
         handleIsShow={handleIsShow}

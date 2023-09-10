@@ -13,6 +13,8 @@ export type ModalParams = Readonly<{
   channelId?: number;
   channelName?: string;
   name?: string;
+  subscribeAuth?: string;
+  channelType?: string;
 
   // 내정보
   memberId?: number;

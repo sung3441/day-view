@@ -19,7 +19,12 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
     handleOnAnimationEnd,
   } = useAnimationHandler(() => closeModal('ManageSubscriber'));
 
-  const { channelId = -1, name = '' } = useModalState('ManageSubscriber');
+  const {
+    channelId = -1,
+    name = '',
+    subscribeAuth = '',
+    channelType = '',
+  } = useModalState('ManageSubscriber');
   const { data: members, status } = useGetSubscribers(channelId as number);
 
   const { mutate } = usePatchSubscribeInfo(channelId);
@@ -27,16 +32,7 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
   const ref = useOuterClick<HTMLDivElement>({ callback: modalClose });
 
   const handleSubscribeInfo = (param: PatchSubscribeInfoParamType) => {
-    console.log(param);
-    // mutate({ subscribeId: param.subscribeId, auth: 'MANAGE' });
-  };
-
-  // TODO : 권한이 있는 경우만 설정 가능하게
-  // TODO : 권한 없는 경우 error 처리
-  const checkAuth = (
-    type: Pick<PatchSubscribeInfoParamType, 'auth'>['auth']
-  ) => {
-    return true;
+    mutate({ subscribeId: param.subscribeId, auth: param.auth });
   };
 
   const [searchValue, setSearchValue] = useState<string>('');
@@ -74,10 +70,11 @@ const ModalManageSubscriber = ({ closeModal }: ModalProps) => {
                   variant={isManage ? 'accent' : 'primary'}
                   font={isManage ? 'caption1' : 'caption2'}
                   onClick={() => {
-                    checkAuth(member.auth) &&
+                    subscribeAuth === 'MANAGE' &&
+                      channelType !== 'MY' &&
                       handleSubscribeInfo({
                         subscribeId: member.subscribeId,
-                        auth: member.auth,
+                        auth: isManage ? 'SUBSCRIBE' : 'MANAGE',
                       });
                   }}
                 >
