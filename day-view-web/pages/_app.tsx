@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
-import { RecoilEnv, RecoilRoot, useSetRecoilState } from 'recoil';
+import { RecoilEnv, RecoilRoot } from 'recoil';
 import { Hydrate, QueryClientProvider } from 'react-query';
 import { ThemeProvider } from 'styled-components';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -10,13 +9,10 @@ import { StyledEngineProvider } from '@mui/styled-engine';
 import Layout from '@/shared/component/Layout';
 import GlobalStyle from '@/shared/styles/globalStyle';
 import { commonTheme } from '@/shared/styles/theme';
-import { setAccessToken } from '@/shared/util/auth';
-import { getAccessToken } from '@/shared/api';
-import { isLoginAtom } from '@/shared/atom/global';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import getClient, { QueryKeys } from '@/shared/queryClient';
-import { UserRes } from '@/shared/types/api';
-import { useRouter } from 'next/router';
+import getClient from '@/shared/queryClient';
+import usePageSetting from '@/shared/context/app/hooks/usePageSetting';
+import useViewWidth from '@/shared/context/app/hooks/useViewWidth';
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
@@ -51,37 +47,8 @@ function App({ Component, pageProps }: AppProps) {
 }
 
 const APPWithConfig = ({ children }: { children: any }) => {
-  const setIsLogin = useSetRecoilState(isLoginAtom);
-  const queryClient = getClient();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (router.pathname === '/auth') return;
-
-    const setToken = async () => {
-      const token = await getAccessToken();
-      if (!token) throw new Error('token');
-      setAccessToken(token!.data.token);
-    };
-
-    const setUser = async () => {
-      const user = await queryClient.getQueryData<HttpResType<UserRes>>([
-        QueryKeys.USER,
-      ]);
-      if (user?.status === 200) setIsLogin(true);
-    };
-
-    (async () => {
-      try {
-        await setToken();
-        await setUser();
-        queryClient.defaultQueryOptions().enabled = true;
-      } catch (e) {
-        await router.replace('/');
-      }
-    })();
-  }, []);
-
+  usePageSetting();
+  useViewWidth();
   return <Layout>{children}</Layout>;
 };
 

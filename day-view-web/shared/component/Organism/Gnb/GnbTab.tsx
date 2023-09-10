@@ -1,25 +1,35 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 import { memo } from 'react';
 import { G_tabAtom, TabType } from '@/shared/component/Organism/Gnb/state';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
+import { isMobileViewAtom } from '@/shared/atom/global';
+import DropDown from '@/shared/component/Molecule/DropDown';
 
 const tabList: TabType[] = ['월', '일정', '카테고리'];
 
 const Tab = () => {
+  const isMobileView = useRecoilValue(isMobileViewAtom);
   const [tab, setTab] = useRecoilState(G_tabAtom);
+
   return (
-    <TabStyle>
-      {tabList.map((label) => (
-        <TabLabel
-          key={label}
-          isActive={label === tab}
-          onClick={() => setTab(label)}
-        >
-          {label}
-        </TabLabel>
-      ))}
-    </TabStyle>
+    <>
+      {isMobileView ? (
+        <DropDown selectedItem={tab} />
+      ) : (
+        <TabStyle>
+          {tabList.map((label) => (
+            <TabLabel
+              key={label}
+              isActive={label === tab}
+              onClick={() => setTab(label)}
+            >
+              {label}
+            </TabLabel>
+          ))}
+        </TabStyle>
+      )}
+    </>
   );
 };
 

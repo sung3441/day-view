@@ -1,6 +1,7 @@
 import {
   IconBell,
   IconClose,
+  IconDown,
   IconGoogle,
   IconKakao,
   IconLeft,
@@ -14,6 +15,7 @@ import {
   IconSmCheck,
   IconSmClose,
   IconSmConfig,
+  IconSmDown,
   IconSmHamburgerMenu,
   IconSmLetter,
   IconSmMore,
@@ -30,11 +32,6 @@ import { pixelToRemUnit } from '@/shared/styles/util';
 import { CSSProperties, ElementType, memo } from 'react';
 
 export type IconSizeType = keyof typeof defaultIconSizes;
-
-export const defaultIconSizes = {
-  small: { width: 28, height: 28 },
-  mid: { width: 40, height: 40 },
-};
 
 const iconComponents = {
   close: IconClose,
@@ -63,9 +60,16 @@ const iconComponents = {
   sm_search: IconSmSearch,
   sm_user: IconSmUser,
   sm_check: IconSmCheck,
+  sm_down: IconSmDown,
+  down: IconDown,
 } satisfies Record<string, ElementType>;
 
 type IconType = keyof typeof iconComponents;
+
+export const defaultIconSizes = {
+  small: { width: 28, height: 28 },
+  mid: { width: 40, height: 40 },
+};
 
 const covertRem = (value: number | string) => {
   if (typeof value === 'string') return value;
@@ -92,7 +96,6 @@ const Icon = ({
   size = 'small',
 }: Props) => {
   const IconComponent = type ? iconComponents[type] : null;
-
   return (
     IconComponent && (
       <IconComponent

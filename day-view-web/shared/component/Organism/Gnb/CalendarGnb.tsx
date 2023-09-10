@@ -43,7 +43,6 @@ const CalendarGnb = () => {
             customStyle={{
               width: '96px',
               height: '40px',
-              marginLeft: pixelToRemUnit(20),
             }}
           />
         </LeftBox>
