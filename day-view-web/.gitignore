@@ -47,3 +47,5 @@ next-env.d.ts
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+.idea/workspace.xml
+
