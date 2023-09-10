@@ -1,4 +1,4 @@
-import { CSSProperties, memo, useEffect, useMemo } from 'react';
+import { CSSProperties, memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Channel from '@/component/channel/Channel';
@@ -24,7 +24,6 @@ const buttonStyle: CSSProperties = {
 const ChannelSection = () => {
   const isOpenChannel = useRecoilValue(G_isOpenChannelAtom);
   const setISearchOpen = useSetRecoilState(G_isSearchOpenAtom);
-
   const { openModal } = useModal();
   const { closeColorBox } = useColorBoxControl({ isRequiredEffect: true });
 

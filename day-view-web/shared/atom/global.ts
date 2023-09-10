@@ -1,5 +1,4 @@
 import { atom } from 'recoil';
-import { UserRes } from '@/shared/types/api';
 
 type MswStatusType = null | 'server' | 'browser';
 

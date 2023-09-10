@@ -1,14 +1,11 @@
-import button from '@/shared/component/Atom/Button';
 import { memo } from 'react';
-import axios from 'axios';
 import { StyleLoginButton } from '@/component/auth/loginButton/styles';
 import { Icon } from '@/shared/component/Atom';
 
 const GoogleLoginButton = () => {
   const params = new URLSearchParams();
-  params.append('redirect_uri', 'http://localhost:3000/auth');
+  params.append('redirect_uri', `${process.env.NEXT_PUBLIC_WEB_URL}/auth`);
   const url = `http://localhost:8080/oauth2/authorization/google?${params.toString()}`;
-
   return (
     <a href={url}>
       <StyleLoginButton name="google">

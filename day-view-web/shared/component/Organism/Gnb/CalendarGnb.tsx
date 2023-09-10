@@ -50,7 +50,12 @@ const CalendarGnb = () => {
       )}
       <RightBox>
         {isSearchOpen ? <SearchSortBox /> : <GnbTab />}
-        <IconButton type="search" />
+        <IconButton
+          type="search"
+          customStyle={{
+            marginLeft: pixelToRemUnit(28),
+          }}
+        />
         <IconButton
           type="user"
           onClick={(e?: SyntheticEvent) => {
@@ -76,7 +81,4 @@ const RightBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  > * {
-    margin-left: 28px;
-  }
 `;

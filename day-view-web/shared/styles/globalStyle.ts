@@ -37,16 +37,18 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
-  @media ( width <= 400px ){
+  @media ( max-width: 400px ){
     html{
-      font-size:65% ;
+      font-size: 12px
     }
   }
-  @media (400px < width <= 720px){
+
+  @media (min-width: 401px) and (max-width: 700px) {
     html{
-      font-size:70% ;
-    }
+      font-size: 14px
+    }  
   }
+
   
 
   /* http://meyerweb.com/eric/tools/css/reset/
