@@ -1,12 +1,10 @@
-import { memo, useMemo, useState } from 'react';
+import { memo, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { RecordRes } from '@/shared/types/api';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { useRecoilValue } from 'recoil';
 import { dayHeightAtom } from '@/shared/context/date/state';
-import dayjs from 'dayjs';
 import { useModal } from '@/shared/hooks';
-import { Icon } from '@/shared/component/Atom';
 
 interface Props {
   date: number;

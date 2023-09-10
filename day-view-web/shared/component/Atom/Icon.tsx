@@ -1,40 +1,37 @@
 import {
+  IconBell,
   IconClose,
+  IconDown,
+  IconGoogle,
+  IconKakao,
   IconLeft,
+  IconLock,
   IconLogo,
   IconMainLogo,
   IconMenu,
   IconRight,
   IconSearch,
   IconSelect,
+  IconSmCheck,
   IconSmClose,
   IconSmConfig,
+  IconSmDown,
+  IconSmHamburgerMenu,
+  IconSmLetter,
   IconSmMore,
   IconSmPlus,
+  IconSmSearch,
   IconSmTrash,
   IconSmUp,
+  IconSmUser,
   IconTrash,
   IconUser,
   IconWrite,
-  IconGoogle,
-  IconKakao,
-  IconBell,
-  IconLock,
-  IconSmHamburgerMenu,
-  IconSmLetter,
-  IconSmSearch,
-  IconSmUser,
-  IconSmCheck,
 } from '@/public/images/icon';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { CSSProperties, ElementType, memo } from 'react';
 
 export type IconSizeType = keyof typeof defaultIconSizes;
-
-export const defaultIconSizes = {
-  small: { width: 28, height: 28 },
-  mid: { width: 40, height: 40 },
-};
 
 const iconComponents = {
   close: IconClose,
@@ -63,15 +60,27 @@ const iconComponents = {
   sm_search: IconSmSearch,
   sm_user: IconSmUser,
   sm_check: IconSmCheck,
+  sm_down: IconSmDown,
+  down: IconDown,
 } satisfies Record<string, ElementType>;
 
 type IconType = keyof typeof iconComponents;
 
+export const defaultIconSizes = {
+  small: { width: 28, height: 28 },
+  mid: { width: 40, height: 40 },
+};
+
+const covertRem = (value: number | string) => {
+  if (typeof value === 'string') return value;
+  return pixelToRemUnit(value);
+};
+
 export interface Props {
   type: IconType;
   size?: IconSizeType;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
   fill?: string;
   color?: string;
   style?: CSSProperties;
@@ -87,18 +96,17 @@ const Icon = ({
   size = 'small',
 }: Props) => {
   const IconComponent = type ? iconComponents[type] : null;
-
   return (
     IconComponent && (
       <IconComponent
         width={
           width
-            ? pixelToRemUnit(width)
+            ? covertRem(width)
             : pixelToRemUnit(defaultIconSizes[size].width)
         }
         height={
           height
-            ? pixelToRemUnit(height)
+            ? covertRem(height)
             : pixelToRemUnit(defaultIconSizes[size].height)
         }
         fill={fill}

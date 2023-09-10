@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { UserRes } from '@/shared/types/api';
+import { IS_NODE } from '@/shared/constant';
 
 type MswStatusType = null | 'server' | 'browser';
 
@@ -9,5 +9,15 @@ export const mswStatusAtom = atom<MswStatusType>({
 });
 export const isLoginAtom = atom<boolean>({
   key: 'isLoginAtom',
+  default: false,
+});
+
+export const viewWidthAtom = atom<number>({
+  key: 'viewWidthAtom',
+  default: IS_NODE ? 0 : window.innerWidth,
+});
+
+export const isMobileViewAtom = atom<boolean>({
+  key: 'isMobileViewAtom',
   default: false,
 });

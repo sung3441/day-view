@@ -49,7 +49,7 @@ export const getServerSideProps = async ({
     await queryClient.prefetchQuery([QueryKeys.USER], getUser);
 
     const { year, month } = getTodayYYMM();
-    const startDate = covertDateParam({ year, month, day: 1 });
+    const startDate = covertDateParam({ year, month, date: 1 });
     const endDate = covertDateParam({
       year,
       month,

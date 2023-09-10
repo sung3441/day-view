@@ -11,7 +11,6 @@ const AuthPage = () => {
 
   useEffect(() => {
     if (!token) return;
-    console.log('token', token);
     Auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     (async () => {
       await getAccessToken();

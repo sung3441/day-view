@@ -24,3 +24,5 @@ export { default as IconSmLetter } from './sm_letter.svg';
 export { default as IconSmSearch } from './sm_search.svg';
 export { default as IconSmUser } from './sm_user.svg';
 export { default as IconSmCheck } from './sm_check.svg';
+export { default as IconSmDown } from './sm_down.svg';
+export { default as IconDown } from './down.svg';

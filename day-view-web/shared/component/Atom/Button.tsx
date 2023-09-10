@@ -1,6 +1,6 @@
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { ComponentPropsWithoutRef, memo } from 'react';
-import styled, { DefaultTheme, css } from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 
 type ButtonType = ComponentPropsWithoutRef<'button'>;
 type Variant = 'accent' | 'primary' | 'secondary' | 'negative';
@@ -37,26 +37,20 @@ const ButtonStyle = styled.button<{
   display: flex;
   justify-content: center;
   align-items: center;
-
-  width: ${({ width }) => (width ? pixelToRemUnit(width) : pixelToRemUnit(90))};
-  height: ${({ height }) =>
-    height ? pixelToRemUnit(height) : pixelToRemUnit(40)};
-
   background: #ffffff;
+
+  width: ${({ width }) => pixelToRemUnit(width ?? 90)};
+  height: ${({ height }) => pixelToRemUnit(height ?? 40)};
   ${({ font }) => font && getStyledThemProperty('fonts', font)};
 
   border: none;
-  border-radius: 7px;
   transition: all 0.1s ease-out 0.02s;
-
-  &:disabled {
-    color: ${getStyledThemProperty('colors', 'G_300')};
-    background-color: ${getStyledThemProperty('colors', 'main')};
-  }
+  border-radius: 7px;
 
   ${({ isActiveFnc }) =>
     isActiveFnc &&
     css`
+      border-radius: 50%;
       :active,
       :hover {
         border: 1px solid #dbdbdb;
@@ -65,7 +59,7 @@ const ButtonStyle = styled.button<{
         opacity: 0.8;
         filter: saturate(210%);
       }
-    `}
+    `};
 
   ${({ variant }) => {
     switch (variant) {
@@ -91,7 +85,12 @@ const ButtonStyle = styled.button<{
           background-color: ${getStyledThemProperty('colors', 'White')};
         `;
     }
-  }}
+  }};
+
+  &:disabled {
+    color: ${getStyledThemProperty('colors', 'G_300')};
+    background-color: ${getStyledThemProperty('colors', 'main')};
+  }
 `;
 
 export default memo(Button);

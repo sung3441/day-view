@@ -1,5 +1,5 @@
 import { Icon } from '@/shared/component/Atom';
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import KakaoLoginButton from '@/component/auth/loginButton/KakaoLoginButton';
