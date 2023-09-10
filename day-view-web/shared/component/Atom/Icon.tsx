@@ -1,30 +1,30 @@
 import {
+  IconBell,
   IconClose,
+  IconGoogle,
+  IconKakao,
   IconLeft,
+  IconLock,
   IconLogo,
   IconMainLogo,
   IconMenu,
   IconRight,
   IconSearch,
   IconSelect,
+  IconSmCheck,
   IconSmClose,
   IconSmConfig,
+  IconSmHamburgerMenu,
+  IconSmLetter,
   IconSmMore,
   IconSmPlus,
+  IconSmSearch,
   IconSmTrash,
   IconSmUp,
+  IconSmUser,
   IconTrash,
   IconUser,
   IconWrite,
-  IconGoogle,
-  IconKakao,
-  IconBell,
-  IconLock,
-  IconSmHamburgerMenu,
-  IconSmLetter,
-  IconSmSearch,
-  IconSmUser,
-  IconSmCheck,
 } from '@/public/images/icon';
 import { pixelToRemUnit } from '@/shared/styles/util';
 import { CSSProperties, ElementType, memo } from 'react';
@@ -67,11 +67,16 @@ const iconComponents = {
 
 type IconType = keyof typeof iconComponents;
 
+const covertRem = (value: number | string) => {
+  if (typeof value === 'string') return value;
+  return pixelToRemUnit(value);
+};
+
 export interface Props {
   type: IconType;
   size?: IconSizeType;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
   fill?: string;
   color?: string;
   style?: CSSProperties;
@@ -93,12 +98,12 @@ const Icon = ({
       <IconComponent
         width={
           width
-            ? pixelToRemUnit(width)
+            ? covertRem(width)
             : pixelToRemUnit(defaultIconSizes[size].width)
         }
         height={
           height
-            ? pixelToRemUnit(height)
+            ? covertRem(height)
             : pixelToRemUnit(defaultIconSizes[size].height)
         }
         fill={fill}

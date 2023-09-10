@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d7640da-7f49-4b5a-932f-82af975bf380" name="변경" comment="feat(shared): 일정 상세 데이터 전처리 작업중">
+    <list default="true" id="1d7640da-7f49-4b5a-932f-82af975bf380" name="변경" comment="feat(shared): env파일 수정">
       <change beforePath="$PROJECT_DIR$/../day-view-api/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../day-view-api/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/component/Atom/Icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/shared/component/Atom/Icon.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +67,7 @@
       <workItem from="1686034004667" duration="4592000" />
       <workItem from="1686462209255" duration="6761000" />
       <workItem from="1693719138672" duration="9318000" />
-      <workItem from="1694324011891" duration="344000" />
+      <workItem from="1694324011891" duration="833000" />
     </task>
     <task id="LOCAL-00001" summary="feat(shared): axios 클래스 생성 및 테스트">
       <created>1685960220642</created>
@@ -117,7 +118,21 @@
       <option name="project" value="LOCAL" />
       <updated>1694324061261</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="feat(shared): 일정 상세 데이터 전처리 작업중">
+      <created>1694324366660</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1694324366660</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat(shared): env파일 수정">
+      <created>1694324378766</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1694324378766</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,7 +154,8 @@
     <MESSAGE value="feat(shared): axios 클래스 개발" />
     <MESSAGE value="feat(shared): 카테고리 채널 데이터 바인딩" />
     <MESSAGE value="feat(shared): 일정 상세 데이터 전처리 작업중" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(shared): 일정 상세 데이터 전처리 작업중" />
+    <MESSAGE value="feat(shared): env파일 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(shared): env파일 수정" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
