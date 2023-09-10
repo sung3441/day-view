@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d7640da-7f49-4b5a-932f-82af975bf380" name="변경" comment="feat(shared): 일정 상세 데이터 전처리 작업중">
+      <change beforePath="$PROJECT_DIR$/../day-view-api/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../day-view-api/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,6 +66,7 @@
       <workItem from="1686034004667" duration="4592000" />
       <workItem from="1686462209255" duration="6761000" />
       <workItem from="1693719138672" duration="9318000" />
+      <workItem from="1694324011891" duration="44000" />
     </task>
     <task id="LOCAL-00001" summary="feat(shared): axios 클래스 생성 및 테스트">
       <created>1685960220642</created>
