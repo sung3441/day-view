@@ -2,11 +2,11 @@ import { memo, SyntheticEvent, useMemo } from 'react';
 import { Icon } from '@/shared/component/Atom';
 import styled from 'styled-components';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
-import { ChannelSelectType } from '@/shared/types/api';
+import { ChannelRes, ChannelSelectType } from '@/shared/types/api';
 import { useModal } from '@/shared/hooks';
 import { useUnsubscribeChannel } from '@/shared/context/channel/hooks/usePostChannel';
 
-interface Props {
+interface Props extends Pick<ChannelRes, 'subscribeAuth' | 'channelType'> {
   channelId: number;
   subscribeId: number;
   selectType: ChannelSelectType;
@@ -17,6 +17,8 @@ interface Props {
 const ChannelConfigs = ({
   channelId,
   subscribeId,
+  subscribeAuth,
+  channelType,
   selectType,
   name,
   handleIsShow,
@@ -33,7 +35,12 @@ const ChannelConfigs = ({
   const openManageSubscriberModal = (e: SyntheticEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     handleIsShow();
-    openModal('ManageSubscriber', { channelId: channelId, name: name });
+    openModal('ManageSubscriber', {
+      channelId: channelId,
+      name: name,
+      subscribeAuth,
+      channelType,
+    });
   };
 
   const handleUnsubscribeChannel = (e: SyntheticEvent<HTMLButtonElement>) => {
