@@ -66,7 +66,7 @@
       <workItem from="1686034004667" duration="4592000" />
       <workItem from="1686462209255" duration="6761000" />
       <workItem from="1693719138672" duration="9318000" />
-      <workItem from="1694324011891" duration="44000" />
+      <workItem from="1694324011891" duration="344000" />
     </task>
     <task id="LOCAL-00001" summary="feat(shared): axios 클래스 생성 및 테스트">
       <created>1685960220642</created>
@@ -110,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693308414766</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat(shared): 일정 상세 데이터 전처리 작업중">
+      <created>1694324061261</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1694324061261</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,7 +138,8 @@
     <MESSAGE value="feat(shared): axios 클래스 생성 및 테스트" />
     <MESSAGE value="feat(shared): axios 클래스 개발" />
     <MESSAGE value="feat(shared): 카테고리 채널 데이터 바인딩" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(shared): 카테고리 채널 데이터 바인딩" />
+    <MESSAGE value="feat(shared): 일정 상세 데이터 전처리 작업중" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(shared): 일정 상세 데이터 전처리 작업중" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
