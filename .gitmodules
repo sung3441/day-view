@@ -1,0 +1,3 @@
+[submodule "day-view-api/private-config"]
+	path = day-view-api/private-config
+	url = git@github.com:sung3441/dayv-private.git
