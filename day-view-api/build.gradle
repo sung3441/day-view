@@ -5,15 +5,7 @@ plugins {
 	id 'org.asciidoctor.jvm.convert' version '2.4.0'
 }
 
-tasks.register('copyPrivate', Copy) {
-	copy {
-		from './private-config'
-		include '*.yml'
-		into 'src/main/resources'
-	}
-}
-
-group = 'com.side'
+group = 'com.side.dayv'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
@@ -29,6 +21,13 @@ repositories {
 
 ext {
 	set('snippetsDir', file("build/generated-snippets"))
+}
+
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'Gradle Quickstart',
+					'Main-Class': 'com.side.dayv.DayViewApiApplication'
+	}
 }
 
 dependencies {
