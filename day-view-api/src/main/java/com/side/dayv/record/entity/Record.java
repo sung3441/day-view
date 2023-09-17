@@ -17,7 +17,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Record {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "record_id")
     private Long id;
 

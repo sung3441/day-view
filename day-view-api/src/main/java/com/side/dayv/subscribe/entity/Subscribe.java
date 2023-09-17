@@ -19,7 +19,8 @@ import static com.side.dayv.global.util.ErrorMessage.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Subscribe {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subscribe_id")
     private Long id;
 

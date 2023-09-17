@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Channel {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "channel_id")
     private Long id;
 
