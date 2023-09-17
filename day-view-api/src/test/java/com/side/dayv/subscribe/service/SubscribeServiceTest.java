@@ -150,7 +150,7 @@ class SubscribeServiceTest {
         Subscribe subscribe = subscribeRepository.findById(responseSubscribeDTO.getId())
                 .orElse(null);
 
-        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(Subscribe.DEFAULT_COLOR, false);
+        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(Subscribe.DEFAULT_COLOR, false, null);
 
         subscribeService.update(subscribe.getId(), MEMBER.getId(), subscribeUpdateDto);
 
@@ -162,7 +162,7 @@ class SubscribeServiceTest {
 
     @Test
     void 구독_수정_실패_구독_없음() {
-        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(Subscribe.DEFAULT_COLOR, false);
+        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(Subscribe.DEFAULT_COLOR, false, null);
 
         assertThatThrownBy(() -> subscribeService.update(99L, MEMBER.getId(), subscribeUpdateDto))
                 .isInstanceOf(NotFoundException.class)
@@ -173,7 +173,7 @@ class SubscribeServiceTest {
     void 구독_수정_실패_권한_없음() {
         ResponseSubscribeDTO responseSubscribeDTO = subscribeService.subscribe(MEMBER.getId(), CHANNEL.getId());
 
-        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(Subscribe.DEFAULT_COLOR, false);
+        SubscribeUpdateDto subscribeUpdateDto = new SubscribeUpdateDto(Subscribe.DEFAULT_COLOR, false, null);
 
         assertThatThrownBy(() -> subscribeService.update(responseSubscribeDTO.getId(), 99L, subscribeUpdateDto))
                 .isInstanceOf(BadRequestException.class)
