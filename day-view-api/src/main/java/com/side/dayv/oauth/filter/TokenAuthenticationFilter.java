@@ -61,6 +61,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
         log.info("[TokenAuthenticationFilter] path: {}, method: {}", requestPath, requestMethod);
 
-        return requestPath.matches("/api/v1/auth.*");
+        return requestPath.matches("/api/v1/auth.*|/health-check");
     }
 }

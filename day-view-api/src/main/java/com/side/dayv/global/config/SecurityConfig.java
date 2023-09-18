@@ -12,7 +12,6 @@ import com.side.dayv.oauth.repository.OAuth2AuthorizationRequestBasedOnCookieRep
 import com.side.dayv.oauth.service.CustomOAuth2UserService;
 import com.side.dayv.oauth.token.AuthTokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -56,8 +55,7 @@ public class SecurityConfig {
                 .and()
                     .authorizeHttpRequests()
                     .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                    .requestMatchers("/api/v1/auth/**").permitAll()
-                    .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                    .requestMatchers("/api/v1/auth/**", "/health-check").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .oauth2Login()

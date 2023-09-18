@@ -1,17 +1,13 @@
 package com.side.dayv.oauth.controller;
 
 import com.side.dayv.global.exception.NotFoundException;
-import com.side.dayv.global.response.ApiResponse;
 import com.side.dayv.global.util.CookieUtil;
-import com.side.dayv.global.util.HeaderUtil;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.member.service.MemberService;
 import com.side.dayv.oauth.TokenResponse;
 import com.side.dayv.oauth.config.properties.AppProperties;
-import com.side.dayv.oauth.entity.AuthReqModel;
 import com.side.dayv.oauth.entity.CustomUser;
-import com.side.dayv.oauth.entity.MemberPrincipal;
 import com.side.dayv.oauth.token.AuthToken;
 import com.side.dayv.oauth.token.AuthTokenProvider;
 import io.jsonwebtoken.Claims;
@@ -19,17 +15,10 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.Date;
 
 @RestController
@@ -103,10 +92,5 @@ public class AuthController {
         }
 
         return ResponseEntity.ok(new TokenResponse(newAccessToken.getToken()));
-    }
-
-    @GetMapping("/health-check")
-    public void healthCheck(HttpServletResponse response) {
-        response.setStatus(HttpStatus.OK.value());
     }
 }
