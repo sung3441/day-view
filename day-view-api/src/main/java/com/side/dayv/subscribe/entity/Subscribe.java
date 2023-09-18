@@ -105,7 +105,9 @@ public class Subscribe {
     public void update(final String color, final boolean showYn, final SubscribeAuth auth) {
         changeColor(color);
         changeShowYn(showYn);
-        changeAuth(auth);
+        if( auth != null ){
+            changeAuth(auth);
+        }
     }
 
     public static Subscribe createManageChannelSubscribe(final Member member, final Channel channel) {

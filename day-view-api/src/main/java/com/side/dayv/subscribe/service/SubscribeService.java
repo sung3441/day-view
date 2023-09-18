@@ -69,10 +69,11 @@ public class SubscribeService {
 
         Subscribe subscribe = subscribeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(SUBSCRIBE_NOT_FOUND));
-
+/*
         if (!subscribe.isSameMember(memberId)) {
             throw new BadRequestException(BAD_REQUEST_PERMISSION);
         }
+*/
 
         subscribe.update(request.getColor(), request.isShowYn(), request.getAuth());
 
