@@ -10,9 +10,9 @@ import com.side.dayv.oauth.handler.OAuth2AuthenticationSuccessHandler;
 import com.side.dayv.oauth.handler.TokenAccessDeniedHandler;
 import com.side.dayv.oauth.repository.OAuth2AuthorizationRequestBasedOnCookieRepository;
 import com.side.dayv.oauth.service.CustomOAuth2UserService;
-import com.side.dayv.oauth.service.CustomUserDetailService;
 import com.side.dayv.oauth.token.AuthTokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,7 +35,6 @@ public class SecurityConfig {
     private final CorsProperties corsProperties;
     private final AppProperties appProperties;
     private final AuthTokenProvider tokenProvider;
-    private final CustomUserDetailService userDetailsService;
     private final CustomOAuth2UserService oAuth2UserService;
     private final TokenAccessDeniedHandler tokenAccessDeniedHandler;
     private final MemberRepository memberRepository;
@@ -58,6 +57,7 @@ public class SecurityConfig {
                     .authorizeHttpRequests()
                     .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                     .requestMatchers("/api/v1/auth/**").permitAll()
+                    .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .oauth2Login()

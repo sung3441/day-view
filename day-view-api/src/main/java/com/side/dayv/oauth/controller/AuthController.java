@@ -19,6 +19,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,7 +39,6 @@ public class AuthController {
 
     private final AppProperties appProperties;
     private final AuthTokenProvider tokenProvider;
-    private final AuthenticationManager authenticationManager;
     private final MemberRepository memberRepository;
     private final MemberService memberService;
 
@@ -103,5 +103,10 @@ public class AuthController {
         }
 
         return ResponseEntity.ok(new TokenResponse(newAccessToken.getToken()));
+    }
+
+    @GetMapping("/health-check")
+    public void healthCheck(HttpServletResponse response) {
+        response.setStatus(HttpStatus.OK.value());
     }
 }
