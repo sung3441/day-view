@@ -13,10 +13,9 @@ const AuthPage = () => {
     if (!token) return;
     Auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     (async () => {
-      // axios.get("")
       await testGetAccessToken();
       // await getAccessToken();
-      // await window.location.replace('/calendar');
+      await window.location.replace('/calendar');
     })();
   }, [router, token]);
 

@@ -33,6 +33,7 @@ export const getServerSideProps = async ({
   res,
   ...rest
 }: GetServerSidePropsContext) => {
+  console.log('reqreqreqreq', req);
   const queryClient = new QueryClient();
   try {
     const isAllowLogin = await isSetAccessToken(req?.headers?.cookie || '');
