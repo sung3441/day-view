@@ -11,6 +11,8 @@ import java.util.Optional;
 
 public class CookieUtil {
 
+    public final static String REFRESH_TOKEN = "refresh_token";
+
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
 
