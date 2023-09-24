@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Spinner from '@/shared/component/Atom/Spinner';
 import styled from 'styled-components';
-import { getAccessToken } from '@/shared/api';
+import { testGetAccessToken } from '@/shared/api';
 import Auth from '@/shared/axios';
 
 const AuthPage = () => {
@@ -13,10 +13,12 @@ const AuthPage = () => {
     if (!token) return;
     Auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     (async () => {
-      await getAccessToken();
-      await window.location.replace('/calendar');
+      // axios.get("")
+      await testGetAccessToken();
+      // await getAccessToken();
+      // await window.location.replace('/calendar');
     })();
-  }, [token, router]);
+  }, [router, token]);
 
   return (
     <Wrapper>

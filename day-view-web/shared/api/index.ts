@@ -19,6 +19,12 @@ import {
   UserRes,
 } from '@/shared/types/api';
 
+export const testGetAccessToken = async () => {
+  const res = await new Client('/api/members/refresh/token').get();
+  console.log('res', res);
+  return res;
+};
+
 export const getAccessToken = async () => {
   const res = await new Client('/api/v1/auth/refresh').get<Token>();
   return res;
