@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 
-import static com.side.dayv.oauth.repository.OAuth2AuthorizationRequestBasedOnCookieRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+import static com.side.dayv.global.util.CookieUtil.*;
 
 @Component
 @RequiredArgsConstructor
@@ -24,7 +24,7 @@ public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationF
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException{
-        String targetUrl = CookieUtil.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
+        String targetUrl = getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
                 .map(Cookie::getValue)
                 .orElse(("/"));
 
