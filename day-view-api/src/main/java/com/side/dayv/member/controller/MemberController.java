@@ -9,6 +9,7 @@ import com.side.dayv.member.dto.ResponseMemberDTO;
 import com.side.dayv.member.entity.Member;
 import com.side.dayv.member.repository.MemberRepository;
 import com.side.dayv.member.service.MemberService;
+import com.side.dayv.oauth.config.properties.AppProperties;
 import com.side.dayv.oauth.entity.CustomUser;
 import com.side.dayv.oauth.token.AuthToken;
 import com.side.dayv.oauth.token.AuthTokenProvider;
@@ -19,11 +20,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 @RequestMapping("/api/members")
 @RequiredArgsConstructor
 public class MemberController {
 
+    private final AppProperties appProperties;
     private final AuthTokenProvider authTokenProvider;
     private final MemberRepository memberRepository;
     private final MemberService memberService;
@@ -58,11 +62,9 @@ public class MemberController {
 
         AuthToken refreshToken = authTokenProvider.convertAuthToken(refreshTokenStr);
 
-        long refreshTokenExpiry = refreshToken.getExpiredTokenClaims()
-                .getExpiration()
-                .getTime();
+        long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
 
-        int cookieMaxAge = (int) refreshTokenExpiry / 60;
+        int cookieMaxAge = (int) (new Date().getTime() + refreshTokenExpiry) / 60;
 
         CookieUtil.deleteCookie(request, response, CookieUtil.REFRESH_TOKEN);
         CookieUtil.addCookie(response, CookieUtil.REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
