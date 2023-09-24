@@ -16,6 +16,7 @@ export function removeAccessToken() {
 
 export async function isSetAccessToken(cookie: string) {
   try {
+    // todo 페이지 쿠키 -> 쿠키 저장(리플레쉬) -> 토큰 저장
     setCookie(cookie);
     const token = await getAccessToken();
     setAccessToken(token!.data.token);
