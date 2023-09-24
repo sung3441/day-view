@@ -20,7 +20,7 @@ import {
 } from '@/shared/types/api';
 
 export const testGetAccessToken = async () => {
-  const res = await new Client('/api/members/refresh/token').get();
+  const res = await new Client('/api/members/refresh/token').post();
   console.log('res', res);
   return res;
 };
