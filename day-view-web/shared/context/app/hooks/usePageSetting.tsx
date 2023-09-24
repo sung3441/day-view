@@ -17,6 +17,7 @@ const usePageSetting = () => {
 
     const setToken = async () => {
       const token = await getAccessToken();
+      console.log('token', token);
       if (!token) throw new Error('token');
       setAccessToken(token!.data.token);
     };
