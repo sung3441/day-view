@@ -19,7 +19,7 @@ import {
   UserRes,
 } from '@/shared/types/api';
 
-export const testGetAccessToken = async () => {
+export const setCookieApi = async () => {
   const res = await new Client('/api/members/refresh/token').post();
   console.log('res', res);
   return res;
