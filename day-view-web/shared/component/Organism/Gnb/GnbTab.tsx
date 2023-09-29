@@ -4,7 +4,6 @@ import { memo } from 'react';
 import { G_tabAtom, TabType } from '@/shared/component/Organism/Gnb/state';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { isMobileViewAtom } from '@/shared/atom/global';
-import DropDown from '@/shared/component/Molecule/DropDown';
 
 const tabList: TabType[] = ['월', '일정', '카테고리'];
 
@@ -14,9 +13,10 @@ const Tab = () => {
 
   return (
     <>
-      {isMobileView ? (
-        <DropDown selectedItem={tab} />
-      ) : (
+      {isMobileView ? null : (
+        // <DropDown selectedItem={tab}>
+        //   <DropDown.Display />
+        // </DropDown>
         <TabStyle>
           {tabList.map((label) => (
             <TabLabel

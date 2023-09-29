@@ -1,7 +1,7 @@
-import { KeyboardEvent, CSSProperties, useRef, memo } from 'react';
+import { CSSProperties, KeyboardEvent, memo, useRef } from 'react';
 import styled from 'styled-components';
 
-import { Inputbox, Icon } from '@/shared/component/Atom';
+import { Inputbox } from '@/shared/component/Atom';
 import { IconButton } from '@/shared/component/Molecule';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import { SetterOrUpdater } from 'recoil';

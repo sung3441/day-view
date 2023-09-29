@@ -1,6 +1,6 @@
 import { CSSProperties, memo, useEffect, useState } from 'react';
-import Header from '@/shared/component/Organism/CommonCalendar/header';
-import Labels from '@/shared/component/Organism/CommonCalendar/label';
+import Header from '@/shared/component/Organism/CommonCalendar/Header';
+import Labels from '@/shared/component/Organism/CommonCalendar/Label';
 import styled from 'styled-components';
 import Dates from '@/shared/component/Organism/CommonCalendar/Dates';
 import { getTodayYYMM } from '@/shared/context/date/util';

@@ -1,15 +1,16 @@
-import React, { memo } from 'react';
+import React, { memo, ReactNode } from 'react';
 import { getStyledThemProperty, pixelToRemUnit } from '@/shared/styles/util';
 import styled from 'styled-components';
 import { Icon } from '@/shared/component/Atom';
 
 type Props = {
   selectedItem: any;
+  children?: ReactNode;
   displayWidth?: number | string;
   displayHeight?: number | string;
 };
 
-const DropDown = ({ selectedItem }: Props) => {
+const DropDown = ({ children, selectedItem }: Props) => {
   return (
     <Display>
       <span>{selectedItem}</span>
