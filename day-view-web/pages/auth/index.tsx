@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Spinner from '@/shared/component/Atom/Spinner';
 import styled from 'styled-components';
-import { testGetAccessToken } from '@/shared/api';
 import Auth from '@/shared/axios';
+import { getAccessToken, setCookieApi } from '@/shared/api';
 
 const AuthPage = () => {
   const router = useRouter();
@@ -11,10 +11,10 @@ const AuthPage = () => {
 
   useEffect(() => {
     if (!token) return;
-    Auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     (async () => {
-      await testGetAccessToken();
-      // await getAccessToken();
+      Auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      await setCookieApi();
+      await getAccessToken();
       await window.location.replace('/calendar');
     })();
   }, [router, token]);
