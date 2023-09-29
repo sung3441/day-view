@@ -21,7 +21,6 @@ import {
 
 export const setCookieApi = async () => {
   const res = await new Client('/api/members/refresh/token').post();
-  console.log('res', res);
   return res;
 };
 
