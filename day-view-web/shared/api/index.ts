@@ -19,12 +19,15 @@ import {
   UserRes,
 } from '@/shared/types/api';
 
+// 쿠키 저장 api
+// 검증 헤더 필요
 export const setCookieApi = async () => {
   const res = await new Client('/api/members/refresh/token').post();
   console.log('res', res);
   return res;
 };
 
+// 쿠키의 리플레쉬 토큰을 통해 AccessToken 토큰을 받아옴
 export const getAccessToken = async () => {
   const res = await new Client('/api/v1/auth/refresh').get<Token>();
   return res;
