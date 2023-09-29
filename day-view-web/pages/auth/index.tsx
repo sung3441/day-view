@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Spinner from '@/shared/component/Atom/Spinner';
 import styled from 'styled-components';
 import Auth from '@/shared/axios';
-import { setCookieApi } from '@/shared/api';
+import { getAccessToken, setCookieApi } from '@/shared/api';
 
 const AuthPage = () => {
   const router = useRouter();
@@ -14,7 +14,7 @@ const AuthPage = () => {
     (async () => {
       Auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       await setCookieApi();
-      // await getAccessToken();
+      await getAccessToken();
       await window.location.replace('/calendar');
     })();
   }, [router, token]);
