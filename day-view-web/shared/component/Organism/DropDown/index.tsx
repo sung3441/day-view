@@ -1,5 +1,9 @@
-import { createContext, memo, ReactNode, useContext, useMemo } from 'react';
+import { memo, ReactNode, useCallback, useMemo, useState } from 'react';
 import Display from '@/shared/component/Organism/DropDown/Display';
+import { DropDownContext } from '@/shared/component/Organism/DropDown/hooks/useDropDownContext';
+import List from '@/shared/component/Organism/DropDown/List';
+import ListItem from '@/shared/component/Organism/DropDown/ListItem';
+import styled from 'styled-components';
 
 type props = {
   children: ReactNode;
@@ -7,39 +11,37 @@ type props = {
 };
 
 const Main = memo(({ children, selectedItem }: props) => {
-  const a = '';
+  const [isOpen, setIsOPen] = useState(false);
+
+  const toggleDropDown = useCallback(() => {
+    setIsOPen((prev) => !prev);
+  }, []);
 
   const value = useMemo(() => {
-    return { selectedItem };
-  }, [selectedItem]);
+    return {
+      selectedItem,
+      isOpen,
+      toggleDropDown,
+    };
+  }, [selectedItem, isOpen, toggleDropDown]);
 
   return (
     <DropDownContext.Provider value={value}>
-      {children}
+      <Wrapper>{children}</Wrapper>
     </DropDownContext.Provider>
   );
 });
-업;
 
 Main.displayName = 'DropDown';
 
-type TDropDownContext = {
-  selectedItem: string;
-};
-
-const DropDownContext = createContext<TDropDownContext>({
-  selectedItem: '',
-});
-export const useDropDown = () => {
-  const context = useContext(DropDownContext);
-  if (context === undefined) {
-    throw new Error('useDropDown must be used within a <Toggle />');
-  }
-  return context;
-};
+const Wrapper = styled.div`
+  position: relative;
+`;
 
 const DropDown = Object.assign(Main, {
   Display: Display,
+  List: List,
+  ListItem: ListItem,
 });
 
 export default DropDown;

@@ -10,7 +10,7 @@ type Props = {
   displayHeight?: number | string;
 };
 
-const DropDown = ({ children, selectedItem }: Props) => {
+const DropDownTT = ({ children, selectedItem }: Props) => {
   return (
     <Display>
       <span>{selectedItem}</span>
@@ -32,7 +32,7 @@ const Display = styled.div`
   ${getStyledThemProperty('fonts', 'caption2')};
 `;
 
-export default memo(DropDown);
+export default memo(DropDownTT);
 
 type ItemProps = {
   items: any[];
