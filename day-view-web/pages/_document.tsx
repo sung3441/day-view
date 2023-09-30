@@ -52,6 +52,7 @@ class MyDocument extends Document {
           <Main />
           <div id="portal" />
           <div id="box" />
+          <div id="snackbar-root" />
           <NextScript />
         </body>
       </Html>
