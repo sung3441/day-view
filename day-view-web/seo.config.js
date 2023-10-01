@@ -10,6 +10,10 @@ export default {
       rel: 'shortcut icon',
       href: '/favicon.ico',
     },
+    {
+      rel: 'canonical',
+      href: 'https://www.il1110.site',
+    },
   ],
   additionalMetaTags: [
     {

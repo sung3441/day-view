@@ -22,21 +22,8 @@ const getClient = (() => {
 })();
 export default getClient;
 
-type QueryKeysType = {
-  MAIN: string;
-  USER: string;
-  CHANNEL: string;
-  MY_CHANNEL: string;
-  RECORD: string;
-  SEARCH: string;
-  RECORDS: string;
-  SUBSCRIBERS: string;
-  DATE: string;
-  SCHEDULE: string;
-};
-
 // ex 쿼리키를 중앙에서 관리
-export const QueryKeys: Readonly<QueryKeysType> = {
+export const QueryKeys = {
   MAIN: 'MAIN',
   USER: 'USER',
   CHANNEL: 'CHANNEL',
@@ -47,4 +34,4 @@ export const QueryKeys: Readonly<QueryKeysType> = {
   DATE: 'DATE',
   MY_CHANNEL: 'MY_CHANNEL',
   SCHEDULE: 'SCHEDULE',
-};
+} as const;
