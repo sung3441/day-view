@@ -1,8 +1,6 @@
 import { memo, SyntheticEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CommonCalendar from '@/shared/component/Organism/CommonCalendar';
-import { pixelToRemUnit } from '@/shared/styles/util';
-import { number } from 'prop-types';
 import { addZeroPad, currentTime } from '@/shared/context/date/util';
 
 type Props = {
@@ -18,7 +16,6 @@ const initDateValues = {
 };
 
 const splitYear = (date: string) => {
-  console.log('date', date);
   const [year, month, day] = date.split('-');
   return `${month}월 ${day}일`;
 };

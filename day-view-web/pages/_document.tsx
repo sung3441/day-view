@@ -38,16 +38,8 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta name="description" content="this is main" />
-          <meta
-            http-equiv="Content-Security-Policy"
-            content="upgrade-insecure-requests"
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+      <Html lang="ko">
+        <Head />
         <body>
           <Main />
           <div id="portal" />
