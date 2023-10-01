@@ -33,7 +33,6 @@ type props = {
 };
 
 const SnackbarUI = ({ messages, handleClose }: props) => {
-  console.log(handleClose);
   if (!messages?.length) return null;
   return (
     <Wrapper>
@@ -88,6 +87,12 @@ const Item = styled.li`
   justify-content: space-between;
 
   transition: all 0.15s ease-out;
+
+  & + .hide {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+
   > p {
     width: calc(100% - ${pixelToRemUnit(30)});
     overflow-wrap: break-word;

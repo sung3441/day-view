@@ -35,10 +35,7 @@ class Snackbar {
 
   private hideElement(id: string) {
     const target = document.getElementById(id);
-    if (target) {
-      target.style.transform = 'translatex(100vw)';
-      target.style.opacity = '0';
-    }
+    if (target) target.classList.add('hide');
   }
 
   private close(id: string) {
