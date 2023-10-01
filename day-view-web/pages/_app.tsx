@@ -13,6 +13,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import getClient from '@/shared/queryClient';
 import usePageSetting from '@/shared/context/app/hooks/usePageSetting';
 import useViewWidth from '@/shared/context/app/hooks/useViewWidth';
+import { DefaultSeo } from 'next-seo';
+import SEO from '../seo.config';
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
@@ -32,6 +34,7 @@ function App({ Component, pageProps }: AppProps) {
               <GlobalStyle />
               <APPWithConfig>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DefaultSeo {...SEO} />
                   <Component {...pageProps} />
                 </LocalizationProvider>
               </APPWithConfig>

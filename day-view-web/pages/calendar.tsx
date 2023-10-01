@@ -12,6 +12,7 @@ import {
   getTodayYYMM,
 } from '@/shared/context/date/util';
 import { ChannelSelectType } from '@/shared/types/api';
+import { NextSeo } from 'next-seo';
 
 const ModalRenderer = dynamic(() => import('@/component/modal/ModalRenderer'), {
   ssr: false,
@@ -20,8 +21,11 @@ const ModalRenderer = dynamic(() => import('@/component/modal/ModalRenderer'), {
 function CalendarPage() {
   return (
     <>
-      <Calendar />
-      <ModalRenderer />
+      <NextSeo title="캘린더" description="day-view 공유캘린더" />
+      <>
+        <Calendar />
+        <ModalRenderer />
+      </>
     </>
   );
 }
@@ -61,7 +65,9 @@ export const getServerSideProps = async ({
       () => getRecordInSubscribe({ startDate, endDate })
     );
 
-    const channels: ChannelSelectType[] = ['MANAGE', 'SUBSCRIBE', 'GOOGLE'];
+    // TODO: 구글 로그인에 대한 분기 작업
+    // const channels: ChannelSelectType[] = ['MANAGE', 'SUBSCRIBE', 'GOOGLE'];
+    const channels: ChannelSelectType[] = ['MANAGE', 'SUBSCRIBE'];
 
     await Promise.all(
       channels.map(async (channel) => {
